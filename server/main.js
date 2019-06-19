@@ -40,13 +40,13 @@ server.use('/auth', new AuthController().router)
 
 
 //YOUR ROUTES HERE!!!!!!
-import BoardController from './controllers/BoardController'
-import ListController from "./controllers/ListController"
-import TaskController from "./controllers/TaskController"
+import MasterIngredientController from './controllers/MasterIngredientController'
+import RecipeController from "./controllers/RecipeController"
+import SiteController from "./controllers/SiteController"
 
-server.use('/api/boards', new BoardController().router)
-server.use('/api/lists', new ListController().router)
-server.use('/api/tasks', new TaskController().router)
+server.use('/api/ingredients', new MasterIngredientController().router)
+server.use('/api/recipes', new RecipeController().router)
+server.use('/api/site', new SiteController().router)
 
 
 

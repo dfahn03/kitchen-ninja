@@ -1,14 +1,14 @@
-import IngredientService from '../services/IngredientService'
+import MasterIngredientService from '../services/MasterIngredientService'
 import express from 'express'
 import { Authorize } from '../middlewear/authorize'
 
 //import service and create an instance
-let _service = new IngredientService()
+let _service = new MasterIngredientService()
 let _ingredientRepo = _service.repository
 
 
 //PUBLIC
-export default class IngredientController {
+export default class MasterIngredientController {
   constructor() {
     this.router = express.Router()
       .use(Authorize.authenticated)
