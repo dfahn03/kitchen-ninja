@@ -9,3 +9,10 @@
 // packageCost: { type: String },
 // otherOrderList: { type: ObjectId, ref: 'Inventory', required: true },
 // mainOrderList: { type: ObjectId, ref: 'Inventory', required: true }
+export default class InventoryService {
+
+  get repository() {
+    return {}
+  }
+
+}
