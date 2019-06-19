@@ -8,7 +8,8 @@ let _schema = new Schema({
   portions: { type: Number, required: true },
   portionSize: { type: Number },
   ingredients: [],
-  costPerRecipe: { type: Number }
+  costPerRecipe: { type: Number, required: true }
+  siteId: { type: ObjectId, ref: 'Site', }
 })
 
 
