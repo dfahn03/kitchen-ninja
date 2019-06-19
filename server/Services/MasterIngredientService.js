@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 const Schema = mongoose.Schema
 
-
 let _schema = new Schema({
   itemName: { type: String, required: true },
   category: { type: String, enum: ['Bakery', 'Dairy', 'Frozen', 'Meat', 'Produce', 'Storeroom'], required: true },
@@ -10,6 +9,7 @@ let _schema = new Schema({
   unit: { type: String, required: true },
   packageSize: { type: String },
   packageCost: { type: String }
+
 })
 
 
