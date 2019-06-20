@@ -4,6 +4,28 @@
       <div class="row">
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <p>
+
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+              aria-expanded="false" aria-controls="collapseExample">
+              directory
+            </button>
+          </p>
+          <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+              <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action active">
+                  Cras justo odio
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+                <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+                <a href="#" class="list-group-item list-group-item-action">Porta ac consectetur ac</a>
+                <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1"
+                  aria-disabled="true">Vestibulum at
+                  eros</a>
+              </div>
+            </div>
+          </div>
           <a class="navbar-brand" href="#">Navbar</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,5 +98,9 @@
     display: flex;
     justify-content: center;
     align-content: space-between;
+  }
+
+  body {
+    background-color: antiquewhite;
   }
 </style>
