@@ -11,6 +11,22 @@ export default new Vuex.Store({
 
   },
   actions: {
+    //#region -- Auth Stuff --
+
+    //#endregion
+    //#region --  Dashboard Stuff --
+
+    //#endregion
+    //#region --  Costing Stuff --
+
+    //#endregion
+    //#region --  Recipes Stuff --
+
+    //#endregion
+
+    //#region --  Stuff --
+
+    //#endregion
 
   }
 })
