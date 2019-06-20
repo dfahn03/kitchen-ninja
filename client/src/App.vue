@@ -1,5 +1,19 @@
 <template>
   <div id="app">
+    <div class="container-fluid" id="nav">
+      <div class="row" id="navbar">
+        <div class="col"></div>
+        <div class="col"></div>
+      </div>
+      <div class="row" id="main-body">
+        <div class="col" id="sidebar"></div>
+        <div class="col">
+
+        </div>
+      </div>
+      <router-link to="/">Home</router-link> |
+
+    </div>
     <router-view />
   </div>
 </template>
