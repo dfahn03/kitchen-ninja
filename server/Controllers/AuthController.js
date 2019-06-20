@@ -32,7 +32,7 @@ export default class AuthController {
             return res.status(400).send({
                 error: 'Password must be at least 6 characters'
             })
-        }
+        } //TODO change password requirement to 10 characters
         let site = await _siteRepo.findById(req.body.siteId)
         if (!site || req.body.sitePasscode !== site.passcode) {
             return res.status(400).send({
