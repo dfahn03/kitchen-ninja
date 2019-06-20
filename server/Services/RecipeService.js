@@ -18,11 +18,14 @@ let _ingredientSchema = new Schema({
 
 let _schema = new Schema({
   station: { type: String, enum: ['Global', 'Grill', 'Salad Bar', 'Hot Entree', 'Deli', 'Soup', 'Breakfast Bar', 'Sushi', 'Southwest', 'Pizza', 'Chef\'s Choice'], required: true },
+  side: { type: String, enum: ['Yes', 'No'] },
   name: { type: String, required: true },
   portions: { type: Number, required: true },
   portionSize: { type: Number },
   ingredients: [_ingredientSchema],
   costPerRecipe: { type: Number, required: true },
+  calories: [],
+  allergens: [],
   siteId: { type: ObjectId, ref: 'Site', required: true }
 })
 
