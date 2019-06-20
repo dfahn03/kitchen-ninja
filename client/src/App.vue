@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="container-fluid" id="nav">
+    <div class="container-fluid" id="home-nav">
       <div class="row">
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -15,7 +15,7 @@
                 <router-link to="/">Home |<span class="sr-only">(current)</span></router-link>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Features</a>
+                <router-link to="/">Costing</router-link> |
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">Pricing</a>
@@ -42,7 +42,6 @@
         </div>
       </div>
 
-      <router-link to="/">Costing</router-link> |
 
     </div>
     <router-view />
@@ -69,5 +68,13 @@
 
   #nav a.router-link-exact-active {
     color: #42b983;
+  }
+
+  #home-nav {
+    background-color: rgb(85, 72, 72);
+    padding: -10px;
+    display: flex;
+    justify-content: center;
+    align-content: space-between;
   }
 </style>
