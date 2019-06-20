@@ -12,7 +12,7 @@ let _schema = new Schema({
   //every email must be unique on the database
   email: { type: String, required: true, unique: true },
   hash: { type: String, required: true },
-  siteId: { type: ObjectId, ref: 'site', required: true }
+  siteId: { type: ObjectId, ref: 'Site', required: true }
 }, { timestamps: true })
 
 //schema.methods are used to add a method to a Model instance

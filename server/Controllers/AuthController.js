@@ -1,9 +1,12 @@
 import express from 'express'
 import UserService from '../services/UserService';
+import SiteService from '../services/SiteService'
 import { Authorize } from '../middlewear/authorize'
 
 let _us = new UserService()
+let _siteService = new SiteService()
 let _repo = _us.repository
+let _siteRepo = _siteService.repository
 
 //PUBLIC
 export default class AuthController {
@@ -16,17 +19,26 @@ export default class AuthController {
             .get('/:id', this.getUserByName)
             .delete('/logout', this.logout)
             .use(this.defaultRoute)
-    }
+    } //TODO if changing site make put route
 
     defaultRoute(req, res, next) {
         next({ status: 404, message: 'No Such Route' })
     }
     async register(req, res, next) {
         //VALIDATE PASSWORD LENGTH
+
         if (req.body.password.length < 6) {
+
             return res.status(400).send({
                 error: 'Password must be at least 6 characters'
             })
+        }
+        let site = await _siteRepo.findById(req.body.siteId)
+        if (!site || req.body.sitePasscode !== site.passcode) {
+            return res.status(400).send({
+                error: 'Incorrect Passcode or Site ID'
+            })
+
         }
         try {
             //CHANGE THE PASSWORD TO A HASHED PASSWORD
