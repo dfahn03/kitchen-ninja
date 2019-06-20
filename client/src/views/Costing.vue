@@ -1,6 +1,9 @@
 <template>
   <div class="costing">
     <div class="row">
+      <div class="col-12">
+        <button type="button" class="btn btn-secondary float-right" @click="">Converter</button>
+      </div>
       <div class="col">
         <form @submit.prevent="">
           <div class="form-row">
@@ -28,10 +31,10 @@
                 <option>Pizza</option>
                 <option>Chef's Choice</option>
               </select>
-
             </div>
           </div>
         </form>
+      <!--TODO multiple forms with one submit button and the initial add ingredient isn't apart of any form -->
       </div>
     </div>
   </div>
