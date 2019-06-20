@@ -16,7 +16,7 @@ export default new Router({
     },
     {
       path: '/costing',
-      name: 'costing',
+      name: 'Costing',
       component: Costing
     },
   ]
