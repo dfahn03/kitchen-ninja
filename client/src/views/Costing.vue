@@ -1,19 +1,25 @@
 <template>
-  <div class="costing-tool">
+  <div class="costing">
 
   </div>
 </template>
 
 <script>
+  import Recipe from '@/components/Recipe'
 
   export default {
-    name: "",
+    name: "Costing",
+    mounted: {
+
+    },
     props: [],
     data() {
       return {}
     },
     computed: {},
     methods: {},
-    components: {}
+    components: {
+      Recipe
+    }
   }
 </script>

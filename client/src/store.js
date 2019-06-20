@@ -14,12 +14,19 @@ export default new Vuex.Store({
     //#region -- Auth Stuff --
 
     //#endregion
+
+    //#region -- MasterIngredient Stuff --
+
+    //#endregion
+
     //#region --  Dashboard Stuff --
 
     //#endregion
+
     //#region --  Costing Stuff --
 
     //#endregion
+
     //#region --  Recipes Stuff --
 
     //#endregion
