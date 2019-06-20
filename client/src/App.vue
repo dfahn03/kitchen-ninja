@@ -12,6 +12,7 @@
         </div>
       </div>
       <router-link to="/">Home</router-link> |
+      <router-link to="/">Costing</router-link> |
 
     </div>
     <router-view />
