@@ -15,8 +15,8 @@ export default new Router({
       component: Dashboard
     },
     {
-      path: '/',
-      name: 'costing-tool',
+      path: '/costing',
+      name: 'costing',
       component: Costing
     },
   ]
