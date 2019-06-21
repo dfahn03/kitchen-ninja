@@ -42,7 +42,7 @@
               </select>
             </div>
             <div class="col-12">
-              <button type="button" class="btn addIng-btn text-white mt-2" @click="showForm = !showForm">Add
+              <button type="button" class="btn addIng-btn text-white my-2" @click="showForm = !showForm">Add
                 Ingredient <img src="../assets/icons8-plus-20.png" alt="Plus Icon"></button>
               <!-- TODO re-color icon/button to make same bg color  -->
             </div>
