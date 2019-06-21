@@ -9,7 +9,7 @@ let _ingredientSchema = new Schema({
   productNumber: { type: Number, required: true },
   quantity: { type: Number },
   unit: { type: String, required: true },
-  newItemCost: { type: Number },
+  itemCost: { type: Number },
   packageSize: { type: String },
   packageCost: { type: String },
   distributor: []
@@ -27,7 +27,8 @@ let _schema = new Schema({
   costPerRecipe: { type: Number, required: true },
   calories: [],
   allergens: [],
-  siteId: { type: ObjectId, ref: 'Site', required: true }
+  siteId: { type: ObjectId, ref: 'Site', required: true },
+  salesPrice: { type: Number, required: true }
 })
 
 

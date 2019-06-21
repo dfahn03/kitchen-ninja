@@ -66,7 +66,31 @@
                 <recipe-ingredient v-for="recipeIngredient in recipeIngredients"
                   :recipeIngredient="recipeIngredient.itemName" />
               </table>
-
+            </div>
+            <div class="col">
+              <div class="row">
+                <div class="col-6">
+                  <ul>
+                    <li>Storeroom PL ({{}}) </li>
+                    <li>Meat PL ()</li>
+                    <li>Diary PL ()</li>
+                    <li>Produce PL ()</li>
+                    <li>Bakery PL ()</li>
+                    <li>Frozen PL ()</li>
+                    <li>Total: </li>
+                  </ul>
+                </div>
+                <div class="col-6">
+                  <ul>
+                    <li>Total Cost: </li>
+                    <li>Sale Price: </li>
+                    <li>Food Cost: </li>
+                    <li>Profit: </li>
+                    <li>Profit Margin: </li>
+                    <li>Markup: </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
 

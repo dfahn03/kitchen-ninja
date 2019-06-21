@@ -11,7 +11,9 @@
       <td><input type="text" placeholder="Package Cost" v-model="{{recipeIngredient.packageCost}}"></td>
       <td><input type="text" placeholder="Quantity" v-model="{{recipeIngredient.quantity}}"></td>
       <td><input type="text" placeholder="Unit" v-model="{{recipeIngredient.unit}}"></td>
-      <td><input type="text" placeholder="Ingredient Cost" :v-model="if(!ingredientCostCalc) {return }"></td>
+      <td><input type="text" placeholder="Ingredient Cost" v-if="ingredientCostCalc"
+          v-model="itemCost">{{ingredientCostCalc()}}</td>
+      <td><input type="text" placeholder="Ingredient Cost" v-else="!ingredientCostCalc" v-model="itemCost"></td>
       <!-- TODO finish v-model conditional to show calculator cost or empty if user needs to enter it -->
     </tr>
   </tbody>
