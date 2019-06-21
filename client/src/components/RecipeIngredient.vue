@@ -1,20 +1,19 @@
 <template>
-  <tbody class="recipe-ingredient" v-for="ingredient in recipeIngredients">
+  <tbody class="recipe-ingredient">
     <tr>
       <th scope="row">1</th>
-      <td><input type="text" placeholder="Distributor" v-model="{{recipeIngredient.distributor}}"></td>
-      <td><input type="text" placeholder="Product Number" v-model="{{recipeIngredient.productNumber}}"></td>
-      <td><input type="text" placeholder="Category" v-model="{{recipeIngredient.category}}"></td>
-      <td><input type="text" placeholder="Ingredient Name" v-model="{{recipeIngredient.itemName}}"></td>
-      <td><input type="text" placeholder="Brand" v-model="{{recipeIngredient.brand}}"></td>
-      <td><input type="text" placeholder="Package Size" v-model="{{recipeIngredient.packageSize}}"></td>
-      <td><input type="text" placeholder="Package Cost" v-model="{{recipeIngredient.packageCost}}"></td>
-      <td><input type="text" placeholder="Quantity" v-model="{{recipeIngredient.quantity}}"></td>
-      <td><input type="text" placeholder="Unit" v-model="{{recipeIngredient.unit}}"></td>
-      <td><input type="text" placeholder="Ingredient Cost" v-if="ingredientCostCalc"
+      <td><input type="text" placeholder="Distributor" v-model="actualIngrediant.distributor"></td>
+      <td><input type="text" placeholder="Product Number" v-model="actualIngrediant.productNumber"></td>
+      <td><input type="text" placeholder="Category" v-model="actualIngrediant.category"></td>
+      <td><input type="text" placeholder="Ingredient Name" v-model="actualIngrediant.itemName"></td>
+      <td><input type="text" placeholder="Brand" v-model="actualIngrediant.brand"></td>
+      <td><input type="text" placeholder="Package Size" v-model="actualIngrediant.packageSize"></td>
+      <td><input type="text" placeholder="Package Cost" v-model="actualIngrediant.packageCost"></td>
+      <td><input type="text" placeholder="Quantity" v-model="actualIngrediant.quantity"></td>
+      <td><input type="text" placeholder="Unit" v-model="actualIngrediant.unit"></td>
+      <td v-if="ingredientCostCalc"><input type="text" placeholder="Ingredient Cost"
           v-model="itemCost">{{ingredientCostCalc()}}</td>
-      <td><input type="text" placeholder="Ingredient Cost" v-else="!ingredientCostCalc" v-model="itemCost"></td>
-      <!-- TODO finish v-model conditional to show calculator cost or empty if user needs to enter it -->
+      <td v-else><input type="text" placeholder="Ingredient Cost" v-model="itemCost"></td>
     </tr>
   </tbody>
 </template>
@@ -22,15 +21,22 @@
 <script>
   export default {
     name: "RecipeIngredient",
-    props: ['recipeIngredient'],
+    props: ['recipeIngredient'], // use this object if already exists
     data() {
       return {
+        itemCost: 0,
+        ingredient: { //use this object if creating
 
+        }
       }
     },
     computed: {
       ingredientCostCalc() {
         //TODO finish filling this out so it will auto populate ingredient cost
+        //return size/cost * qquantity 
+      },
+      actualIngrediant() { // returns appropriate ingredient object
+        return this.recipeIngredient ? this.recipeIngredient : this.ingredient
       }
     },
     methods: {},

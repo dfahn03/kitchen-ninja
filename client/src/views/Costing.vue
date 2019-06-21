@@ -42,8 +42,8 @@
               </select>
             </div>
             <div class="col-12">
-              <button type="button" class="btn addIng-btn text-white mt-2" @click="">Add Ingredient <img
-                  src="../assets/icons8-plus-20.png" alt="Plus Icon"></button>
+              <button type="button" class="btn addIng-btn text-white mt-2" @click="showForm = !showForm">Add
+                Ingredient <img src="../assets/icons8-plus-20.png" alt="Plus Icon"></button>
               <!-- TODO re-color icon/button to make same bg color  -->
             </div>
             <div class="col">
@@ -63,11 +63,12 @@
                     <th scope="col">Ingredient Cost</th>
                   </tr>
                 </thead>
-                <recipe-ingredient v-for="recipeIngredient in recipeIngredients"
-                  :recipeIngredient="recipeIngredient.itemName" />
+                <recipe-ingredient v-if="showForm" />
+                <recipe-ingredient v-for="recipeIngredient in recipeIngredients" :key="recipeIngredient._id"
+                  :recipeIngredient="recipeIngredient" />
               </table>
             </div>
-            <div class="col">
+            <div class="col-12">
               <div class="row">
                 <div class="col-6">
                   <ul>
@@ -77,16 +78,18 @@
                     <li>Produce PL ()</li>
                     <li>Bakery PL ()</li>
                     <li>Frozen PL ()</li>
-                    <li>Total: </li>
                   </ul>
+                  <!--run a for each on each  category using ingcostcalc
+                  total is all added-->
                 </div>
                 <div class="col-6">
                   <ul>
-                    <li>Total Cost: </li>
-                    <li>Sale Price: </li>
+                    <li>Total Cost:</li>
                     <li>Food Cost: </li>
+                    <li v-if="salesPrice">Sales Price: $<input type="number" placeholder="0">{{this.salesPrice}}</li>
+                    <li v-else>Sales Price: $<input type="number" placeholder="0"></li>
                     <li>Profit: </li>
-                    <li>Profit Margin: </li>
+                    <li>Profit Margin: {{this.profitMargin}}</li>
                     <li>Markup: </li>
                   </ul>
                 </div>
@@ -104,24 +107,42 @@
 </template>
 
 <script>
-  import Recipe from '@/components/Recipe'
+  import RecipeIngredient from '@/components/RecipeIngredient'
 
   export default {
     name: "Costing",
-    mounted() {
-
-    },
+    mounted() { },
     props: [],
     data() {
       return {
+        showForm: false,
         side: '',
         station: '',
         recipeIngredients: [], //how does add ingredient know to add object with specific props and their values empty
+        // use emits
       }
     },
     computed: {
       recipeIngredient() {
         return this.data.recipeIngredient
+      },
+      totalCost() {
+
+      },
+      foodCost() {
+
+      },
+      salesPrice() {
+
+      },
+      profit() {
+
+      },
+      profitMargin() {
+
+      },
+      markup() {
+
       }
     },
     methods: {
@@ -130,12 +151,18 @@
         //TODO Fill this out to what the empty object is going to be in recipeIngredients
       }
     },
-    components: {}
+    components: {
+      RecipeIngredient
+    }
   }
 </script>
 
 <style>
   .addIng-btn {
     background-color: rgb(5, 38, 45);
+  }
+
+  ul {
+    list-style: none;
   }
 </style>
