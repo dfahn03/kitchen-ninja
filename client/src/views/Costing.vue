@@ -2,8 +2,10 @@
   <div class="costing">
     <div class="row">
       <div class="col-12">
-        <button type="button" class="btn btn-secondary float-right" @click="">Converter</button>
+        <button type="button" class="btn btn-secondary float-right my-2" @click="">Converter</button>
       </div>
+    </div>
+    <div class="row">
       <div class="col">
         <form @submit.prevent="">
           <div class="form-row">
@@ -17,26 +19,63 @@
               <input type="text" class="form-control" placeholder="Portion Size">
             </div>
             <div class="col">
-              <select class="form-control" placeholder="Station">
-                <option selected>Choose Station</option>
-                <option>Global</option>
-                <option>Grill</option>
-                <option>Salad Bar</option>
-                <option>Hot Entree</option>
-                <option>Deli</option>
-                <option>Soup</option>
-                <option>Breakfast Bar</option>
-                <option>Sushi</option>
-                <option>Southwest</option>
-                <option>Pizza</option>
-                <option>Chef's Choice</option>
+              <select class="form-control" placeholder="Side" v-model="side">
+                <option disabled value="">Side</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
               </select>
             </div>
+            <div class="col">
+              <select class="form-control" placeholder="Station" v-model="station">
+                <option disabled value="">Choose Station</option>
+                <option value="Global">Global</option>
+                <option value="Grill">Grill</option>
+                <option value="Salad Bar">Salad Bar</option>
+                <option value="Hot Entree">Hot Entree</option>
+                <option value="Deli">Deli</option>
+                <option value="Soup">Soup</option>
+                <option value="Breakfast Bar">Breakfast Bar</option>
+                <option value="Sushi">Sushi</option>
+                <option value="Southwest">Southwest</option>
+                <option value="Pizza">Pizza</option>
+                <option value="Chef's Choice">Chef's Choice</option>
+              </select>
+            </div>
+            <div class="col-12">
+              <button type="button" class="btn addIng-btn text-white mt-2" @click="">Add Ingredient <img
+                  src="../assets/icons8-plus-20.png" alt="Plus Icon"></button>
+              <!-- TODO re-color icon/button to make same bg color  -->
+            </div>
+            <div class="col">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Distributor</th>
+                    <th scope="col">Product #</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Ingredient Name</th>
+                    <th scope="col">Brand</th>
+                    <th scope="col">Package Size</th>
+                    <th scope="col">Package Cost</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Ingredient Cost</th>
+                  </tr>
+                </thead>
+                <recipe-ingredient v-for="recipeIngredient in recipeIngredients"
+                  :recipeIngredient="recipeIngredient.itemName" />
+              </table>
+
+            </div>
           </div>
+
+
+
         </form>
-      <!--TODO multiple forms with one submit button and the initial add ingredient isn't apart of any form -->
       </div>
     </div>
+
   </div>
 </template>
 
@@ -45,17 +84,34 @@
 
   export default {
     name: "Costing",
-    mounted: {
+    mounted() {
 
     },
     props: [],
     data() {
-      return {}
+      return {
+        side: '',
+        station: '',
+        recipeIngredients: [], //how does add ingredient know to add object with specific props and their values empty
+      }
     },
-    computed: {},
-    methods: {},
-    components: {
-      Recipe
-    }
+    computed: {
+      recipeIngredient() {
+        return this.data.recipeIngredient
+      }
+    },
+    methods: {
+      addIngredient() {
+        itemName: recipeIngredient.name
+        //TODO Fill this out to what the empty object is going to be in recipeIngredients
+      }
+    },
+    components: {}
   }
 </script>
+
+<style>
+  .addIng-btn {
+    background-color: rgb(5, 38, 45);
+  }
+</style>
