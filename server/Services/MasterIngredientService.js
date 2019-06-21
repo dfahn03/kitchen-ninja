@@ -8,7 +8,8 @@ let _schema = new Schema({
   productNumber: { type: String },
   unit: { type: String },
   packageSize: { type: String },
-  packageCost: { type: String }
+  packageCost: { type: String },
+  distributor: []
 })
 
 

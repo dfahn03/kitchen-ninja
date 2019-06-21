@@ -11,7 +11,8 @@ let _ingredientSchema = new Schema({
   unit: { type: String, required: true },
   newItemCost: { type: Number },
   packageSize: { type: String },
-  packageCost: { type: String }
+  packageCost: { type: String },
+  distributor: []
   // otherOrderList: { type: ObjectId, ref: 'Inventory', required: true },
   // mainOrderList: { type: ObjectId, ref: 'Inventory', required: true }
 })
