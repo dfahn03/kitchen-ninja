@@ -42,8 +42,8 @@
               </select>
             </div>
             <div class="col-12">
-              <button type="button" class="btn addIng-btn text-white my-2" @click="showForm = !showForm">Add
-                Ingredient <img src="../assets/icons8-plus-20.png" alt="Plus Icon"></button>
+              <button type="button" class="btn addIng-btn text-white my-" @click="showForm = !showForm">Add
+                Ingredient <img src="../assets/icons8-plus-25.png" alt="Plus Icon" class="ml-1"></button>
               <!-- TODO re-color icon/button to make same bg color  -->
             </div>
             <div class="col">
@@ -87,7 +87,7 @@
                     <li>Total Cost:</li>
                     <li>Food Cost: </li>
                     <li v-if="salesPrice">Sales Price: $<input type="number" placeholder="0">{{this.salesPrice}}</li>
-                    <li v-else>Sales Price: $<input type="number" placeholder="0"></li>
+                    <li v-else>Sales Price: $<input type="text" placeholder="0"></li>
                     <li>Profit: </li>
                     <li>Profit Margin: {{this.profitMargin}}</li>
                     <li>Markup: </li>
@@ -96,9 +96,6 @@
               </div>
             </div>
           </div>
-
-
-
         </form>
       </div>
     </div>
