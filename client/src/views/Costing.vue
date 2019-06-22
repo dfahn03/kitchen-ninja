@@ -42,7 +42,7 @@
               </select>
             </div>
             <div class="col-12">
-              <button type="button" class="btn addIng-btn text-white my-" @click="showForm = !showForm">Add
+              <button type="button" class="btn addIng-btn text-white my-2" @click="addIngredient">Add
                 Ingredient <img src="../assets/icons8-plus-25.png" alt="Plus Icon" class="ml-1"></button>
               <!-- TODO re-color icon/button to make same bg color  -->
             </div>
@@ -51,6 +51,7 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Remove</th>
                     <th scope="col">Distributor</th>
                     <th scope="col">Product #</th>
                     <th scope="col">Category</th>
@@ -63,9 +64,9 @@
                     <th scope="col">Ingredient Cost</th>
                   </tr>
                 </thead>
-                <recipe-ingredient v-if="showForm" />
-                <recipe-ingredient v-for="recipeIngredient in recipeIngredients" :key="recipeIngredient._id"
-                  :recipeIngredient="recipeIngredient" />
+                <!-- <recipe-ingredient v-if="showForm" /> -->
+                <recipe-ingredient v-for="recipeIngredient in recipeIngredients" :recipeIngredient="recipeIngredient"
+                  :recipeIngredients="recipeIngredients" />
               </table>
             </div>
             <div class="col-12">
@@ -112,7 +113,7 @@
     props: [],
     data() {
       return {
-        showForm: false,
+        // showForm: false,
         side: '',
         station: '',
         recipeIngredients: [], //how does add ingredient know to add object with specific props and their values empty
@@ -144,7 +145,20 @@
     },
     methods: {
       addIngredient() {
-        itemName: recipeIngredient.name
+        let newIngredient = {
+          itemName: "",
+          category: "",
+          brand: "",
+          productNumber: "",
+          quantity: 0,
+          unit: "",
+          itemCost: "",
+          packageSize: "",
+          packageCost: "",
+          distributor: "",
+          id: Math.floor(Math.random() * 5)
+        }
+        this.recipeIngredients.push(newIngredient)
         //TODO Fill this out to what the empty object is going to be in recipeIngredients
       }
     },
@@ -155,6 +169,10 @@
 </script>
 
 <style>
+  table {
+    max-width: 100vw;
+  }
+
   .addIng-btn {
     background-color: rgb(5, 38, 45);
   }
