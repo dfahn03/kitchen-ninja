@@ -1,11 +1,13 @@
 <template>
   <div id="app">
     <!-- Navbar -->
-    <div id="navbar">
+    <div class="container-fluid" id="navbar">
       <ul class="navbar">
-        <li class="d-flex justify-content:flex-start;"><a href="#" class="btn btn-outline-secondary"
-            id="menu-toggle"><img src="../src/assets/iconFinalLeaf.png"></a></li>
+        <li class="d-flex justify-content:flex-start;"><a href="#sidebar-wrapper" role="button" aria-expanded="false"
+            class="btn btn-outline-secondary" data-toggle="#wrapper" aria-controls="wrapper" id="menu-toggle"><img
+              src="../src/assets/iconFinalLeaf.png"></a></li>
         <!-- https://img.icons8.com/office/16/000000/leaf.png -->
+
         <li>
           <router-link to='/'><img src="../src/assets/finalLogo2.png"></router-link>
         </li>
@@ -55,6 +57,7 @@
       <!-- Sidebar -->
       <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
+          <h4><b>Directory</b></h4>
           <li>
             <router-link to='/'><a href="#">Dashboard</a></router-link>
           </li>
@@ -80,9 +83,9 @@
         </ul>
       </div>
       <!-- Page Content -->
-      <div id="page-content-wrapper">
-        <router-view />
-      </div>
+    </div>
+    <div class='container-fluid' id="page-content-wrapper">
+      <router-view />
     </div>
   </div>
 </template>
@@ -94,9 +97,9 @@
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
   });
-  $('#myModal').on('shown.bs.modal', function () {
-    $('#myInput').trigger('focus')
-  })
+  // $('#myModal').on('shown.bs.modal', function () {
+  //   $('#myInput').trigger('focus')
+  // })
 </script>
 <style>
   #app {
@@ -140,12 +143,17 @@
     background-color: #fff;
     border: 5px #42b983;
     opacity: .9;
-    padding-top: 120px;
+    margin-top: 80px;
+    margin-bottom: -80px;
+    padding-top: 20px;
   }
 
   /* Page */
   #page-content-wrapper {
     position: absolute;
+    margin-top: 80px;
+    margin-left: 250px;
+    margin-right: -250px;
     width: 100%;
     padding: 15px;
     border: 5px #fff;
