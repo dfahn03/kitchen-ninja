@@ -5,10 +5,9 @@ import Axios from 'axios'
 
 Vue.use(Vuex)
 let base = window.location.host.includes('localhost:8080') ? '//localhost:3000/' : '/'
-let foodApi = Axios.create({
-  baseURL: "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/",
-  // apiKey: '526b119c5amsh6ca0e9efb7065d9p14f001jsn5f03879042dd'
-})
+
+
+
 let auth = Axios.create({
   baseURL: base + "auth/",
   timeout: 3000,
@@ -29,6 +28,7 @@ export default new Vuex.Store({
 
   },
   actions: {
+
     //#region -- Auth Stuff --
 
     //#endregion

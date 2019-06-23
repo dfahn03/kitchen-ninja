@@ -1,107 +1,103 @@
 <template>
   <div id="app">
-    <div class="container-fluid" id="home-nav">
-      <div class="row">
+    <!-- Navbar -->
+    <div id="navbar">
+      <ul class="navbar">
+        <li class="d-flex justify-content:flex-start;"><a href="#" class="btn btn-outline-secondary"
+            id="menu-toggle"><img src="../src/assets/iconFinalLeaf.png"></a></li>
+        <!-- https://img.icons8.com/office/16/000000/leaf.png -->
+        <li>
+          <router-link to='/'><img src="../src/assets/finalLogo2.png"></router-link>
+        </li>
+        <li>
+          <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">Login</button>
+        </li>
+        <li><a href="#" class="btn btn-outline-secondary"><img src="../src/assets/menuButton2.png" alt="" srcset=""></a>
+        </li>
+      </ul>
+      <!-- Modal -->
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <p>
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
-              aria-expanded="false" aria-controls="collapseExample">
-              directory
-            </button>
-          </p>
-
-          <a class="navbar-brand" href="#">Navbar</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item active">
-                <p>
-                  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseLogin"
-                    aria-expanded="false" aria-controls="collapseExample">
-                    Login
-                  </button>
-                </p>
-                <form class="form-inline" id="collapseLogin">
-                  <div class="form-group mb-2">
-                    <label for="staticEmail2" class="sr-only">Email</label>
-                    <input type="text" readonly class="form-control-plaintext" id="staticEmail2"
-                      value="email@example.com">
-                  </div>
-                  <div class="form-group mx-sm-3 mb-2">
-                    <label for="inputPassword2" class="sr-only">Password</label>
-                    <input type="password" class="form-control" id="inputPassword2" placeholder="Password">
-                  </div>
-                  <button type="submit" class="btn btn-primary mb-2">Login</button>
-                </form>
-              </li>
-              <li class="nav-item active">
-                <router-link to="/">Home |<span class="sr-only">(current)</span></router-link>
-              </li>
-              <li class="nav-item">
-                <router-link to="/costing">Costing</router-link> |
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Dropdown link
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Action</a>
-                  <a class="dropdown-item" href="#">Another action</a>
-                  <a class="dropdown-item" href="#">Something else here</a>
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="modalform-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                    placeholder="Enter email">
+                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                    else.</small>
                 </div>
-              </li>
-            </ul>
+                <div class="modal-form-group">
+                  <label for="exampleInputPassword1">Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
           </div>
-        </nav>
+        </div>
+      </div>
+      <!-- Login Form -->
+    </div>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li>
+            <router-link to='/'><a href="#">Dashboard</a></router-link>
+          </li>
+          <li>
+            <router-link to='/recipes'><a href="#">Recipes</a></router-link>
+          </li>
+          <li>
+            <router-link to='/costing'><a href="#">Costing</a></router-link>
+          </li>
+          <li>
+            <router-link to='/menu'><a href="#">Menu</a></router-link>
+          </li>
+          <li>
+            <router-link to='/menus'><a href="#">Weekly Menus</a></router-link>
+          </li>
+          <li>
+            <router-link to='/inventory'><a href="#">Inventory</a></router-link>
+          </li>
+          <li>
+            <a href="#">Calculator</a>
+            <slot></slot>
+          </li>
+        </ul>
+      </div>
+      <!-- Page Content -->
+      <div id="page-content-wrapper">
+        <router-view />
       </div>
     </div>
-    <header class="container-fluid side-bar">
-      <div class="row" id="main-body">
-        <div class="col">
-
-          <nav id="sidebar">
-            <div class="collapse navbar-collapse navbar-expand-lg flex-column" id="collapseExample">
-              <div class="card card-body">
-                <div class="list-group">
-                  <h1><b><u>Directory</u></b></h1>
-                  <a href="#" class="list-group-item list-group-item-action active">
-                    Recipes
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action nav-link">Menu</a>
-                  <a href="#" class="list-group-item list-group-item-action nav-link">Cost Recipe</a>
-                  <a href="#" class="list-group-item list-group-item-action nav-link">Inventory</a>
-                  <a href="#" class="list-group-item list-group-item-action nav-link">
-                    <!--TODO Calculator Goes here -->
-                    <slot></slot>
-                  </a>
-                  <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1"
-                    aria-disabled="true">Production
-                  </a>
-                </div>
-              </div>
-            </div>
-          </nav>
-        </div>
-
-        <div class="col">
-
-        </div>
-      </div>
-    </header>
-
-
-    <router-view />
   </div>
 </template>
 
+
+
+<script>
+  $("#menu-toggle").click(function (e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+  });
+  $('#myModal').on('shown.bs.modal', function () {
+    $('#myInput').trigger('focus')
+  })
+</script>
 <style>
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -111,21 +107,8 @@
     color: #2c3e50;
   }
 
-  #nav {
-    padding: 30px;
-  }
-
-  #nav a {
-    font-weight: bold;
-    color: #2c3e50;
-  }
-
-  #nav a.router-link-exact-active {
-    color: #42b983;
-  }
-
   #home-nav {
-    background-color: rgb(85, 72, 72);
+    background-color: rgb(109, 197, 154);
     padding: -10px;
     display: flex;
     justify-content: center;
@@ -133,6 +116,71 @@
   }
 
   body {
-    background-color: antiquewhite;
+    background-color: rgb(5, 38, 45);
+  }
+
+  #navbar {
+    position: absolute;
+    z-index: 1;
+    height: 80px;
+    width: 100%;
+    background-color: #fff;
+    border: 5px #42b98385;
+    color: rgb(5, 38, 45);
+
+  }
+
+  /* wrapper */
+  #sidebar-wrapper {
+    position: absolute;
+    z-index: 1;
+    width: 250px;
+    height: 100%;
+    overflow-y: hidden;
+    background-color: #fff;
+    border: 5px #42b983;
+    opacity: .9;
+    padding-top: 120px;
+  }
+
+  /* Page */
+  #page-content-wrapper {
+    position: absolute;
+    width: 100%;
+    padding: 15px;
+    border: 5px #fff;
+  }
+
+  /* Displayed */
+  #wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+  }
+
+  #wrapper.toggled #page-content-wrapper {
+    padding-left: 250px;
+  }
+
+  .modal {
+    z-index: 2;
+  }
+
+  .sidebar-nav {
+    padding: 0;
+    list-style: none;
+  }
+
+  .sidebar-nav li {
+    text-indent: 20px;
+    line-height: 40px;
+  }
+
+  .sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: rgb(5, 38, 45);
+  }
+
+  .sidebar-nav li a:hover {
+    background: rgb(109, 197, 154);
   }
 </style>

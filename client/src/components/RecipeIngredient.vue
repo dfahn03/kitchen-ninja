@@ -43,6 +43,35 @@
       }
     },
     computed: {
+      seperatePackage(string) {
+        let dict = {}
+        if (string.includes('/') && string.includes(' ')) {
+          let array = string.split('/').join(" ").split(" ")
+          dict["fullCase"] = array[0]
+          dict["package"] = array[1]
+          dict["unit"] = array[2]
+        } else if (!string.includes(' ')) {
+          let arr = string.split('/').join(" ").split(" ")
+          dict['fullCase'] = arr[0]
+          dict["package"] = arr[1].split(/[a-z]/gi).shift()
+          dict["unit"] = arr[1].split(/[0-9]/gi).pop()
+        }
+        else {
+          let array = string.split(" ")
+          dict['fullCase'] = array[0]
+          dict['unit'] = array[1]
+        }
+        return dict
+      },
+      totalCost(str) {
+        let pkgCost = str.split("$").join('')
+        return pkgCost
+      },
+      costPer(seperatePackage, totalCost) {
+        let fullPkg = dict[Case] * dict[Package]
+        let costEA = pkgCost / fullPkg
+      },
+
       ingredientCostCalc() {
         //TODO finish filling this out so it will auto populate ingredient cost
         //return size/cost * qquantity 
