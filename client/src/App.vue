@@ -6,10 +6,10 @@
         <li class="d-flex justify-content:flex-start;"><a href="#sidebar-wrapper" role="button" aria-expanded="false"
             class="btn btn-outline-secondary" data-toggle="#wrapper" aria-controls="wrapper" id="menu-toggle"><img
               src="../src/assets/iconFinalLeaf.png"></a></li>
+        <router-link to='/'><img src="../src/assets/finalLogo2.png"></router-link>
         <!-- https://img.icons8.com/office/16/000000/leaf.png -->
 
         <li>
-          <router-link to='/'><img src="../src/assets/finalLogo2.png"></router-link>
         </li>
         <li>
           <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">Login</button>
@@ -78,7 +78,7 @@
           </li>
           <li>
             <a href="#">Calculator</a>
-            <slot></slot>
+            <slot name='Calculator'></slot>
           </li>
         </ul>
       </div>
@@ -115,7 +115,7 @@
     padding: -10px;
     display: flex;
     justify-content: center;
-    align-content: space-between;
+    align-content: flex-start;
   }
 
   body {
@@ -124,7 +124,6 @@
 
   #navbar {
     position: absolute;
-    z-index: 1;
     height: 80px;
     width: 100%;
     background-color: #fff;
@@ -136,7 +135,6 @@
   /* wrapper */
   #sidebar-wrapper {
     position: absolute;
-    z-index: 1;
     width: 250px;
     height: 100%;
     overflow-y: hidden;
@@ -168,9 +166,7 @@
     padding-left: 250px;
   }
 
-  .modal {
-    z-index: 2;
-  }
+  .modal {}
 
   .sidebar-nav {
     padding: 0;

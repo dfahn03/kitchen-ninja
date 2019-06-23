@@ -1,5 +1,5 @@
 <template>
-  <div class="card calculate d-inline-flex p-6">
+  <div name='Calculator' class="card calculate d-inline-flex p-6">
     <input v-model.number="amount" type="number">
 
     <select v-model="from">
