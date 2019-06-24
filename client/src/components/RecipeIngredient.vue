@@ -3,7 +3,7 @@
     <tr>
       <th scope="row">1</th>
       <td><button type="button" class="btn btn-danger btn-sm"
-          @click="deleteIngredient(recipeIngredient.tempId)">Delete</button>
+          @click="deleteIngredient(recipeIngredient)">Delete</button>
       </td>
       <td><input type="text" placeholder="Distributor" v-model="recipeIngredient.distributor" class="dist-input"
           required></td>
@@ -33,7 +33,7 @@
           class="quan-input" required></td>
       <!-- <td><input type="text" placeholder="Unit" v-model="recipeIngredient.unit" class="unit-input" required></td> -->
       <td><select class="form-control unit-input" placeholder="Unit" v-model="recipeIngredient.unit" required>
-          <option disabled value="">Choose Unit</option>
+          <option disabled value="">Unit</option>
           <option value="Oz">Oz</option>
           <option value="Ea">Ea</option>
         </select></td>
@@ -102,11 +102,11 @@
       // }
     },
     methods: {
-      deleteIngredient(id) {
-        debugger
-        // let index = this.recipeIngredients.indexOf(id)
-        // return this.recipeIngredients.splice(index, 1)
-        return this.recipeIngredients.filter(recipeIngredient => this.recipeIngredient.id !== id)
+      deleteIngredient(ingredient) {
+        let index = this.recipeIngredients.indexOf(ingredient)
+        this.recipeIngredients.splice(index, 1)
+        //return this.recipeIngredients.filter(recipeIngredient => this.recipeIngredient.tempId !== id)
+        //TODO Be able to delete the specific ingredient in the array with the specific tempId
       }
     },
     components: {}
@@ -116,7 +116,7 @@
 <style>
   .dist-input {
     text-align: center;
-    max-width: 6rem;
+    max-width: 9rem;
   }
 
   .prod-input {

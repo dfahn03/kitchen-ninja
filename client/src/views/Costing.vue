@@ -64,7 +64,7 @@
             </div>
             <div class="col-12">
               <div class="row">
-                <div class="col-6 text-white">
+                <div class="col-6 text-white text-left d-flex justify-content-center">
                   <ul>
                     <li>Storeroom PL ({{}}) </li>
                     <li>Meat PL ()</li>
@@ -76,7 +76,7 @@
                   <!--run a for each on each  category using ingcostcalc
                   total is all added-->
                 </div>
-                <div class="col-6 text-white">
+                <div class="col-6 text-white d-flex justify-content-center text-left">
                   <ul>
                     <li>Total Cost:</li>
                     <li>Food Cost: </li>
@@ -150,7 +150,6 @@
           packageSize: "",
           packageCost: "",
           distributor: "",
-          tempId: Math.floor(Math.random() * 100) //TODO make the id unique
         }
         this.recipeIngredients.push(newIngredient)
         //TODO Fill this out to what the empty object is going to be in recipeIngredients
