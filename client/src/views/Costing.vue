@@ -177,6 +177,7 @@
   .totalP-input {
     max-width: 5rem;
     text-align: center;
+    height: 1.5rem;
   }
 
   .station-input {
