@@ -13,6 +13,7 @@ export default class MasterIngredientController {
     this.router = express.Router()
       .use(Authorize.authenticated)
       .get('', this.getAll)
+      .get('/:category', this.getByCategory)
       // .post('', this.create)
       // .put('/:id', this.edit)
       // .delete('/:id', this.delete)
@@ -31,7 +32,15 @@ export default class MasterIngredientController {
     } catch (err) { next(err) }
   }
 
+  async getByCategory(req, res, next) {
+    try {
+      let data = await _ingredientRepo.find({ category: req.params.category })
+      return res.send(data)
+    } catch (error) {
+      next(error)
 
+    }
+  }
   // async create(req, res, next) {
   //   try {
   //     req.body.authorId = req.session.uid
