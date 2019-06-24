@@ -88,11 +88,12 @@
                 </div>
                 <div class="col-6 text-white d-flex justify-content-center text-left">
                   <ul>
-                    <li>Total Cost:</li>
+                    <li>Total Cost: $<input type="number" placeholder="0.00" class="totalC-input ml-1"
+                        v-model="costPerRecipe" min="0" step=".01" required></li>
                     <li>Food Cost: </li>
-                    <li v-if="salesPrice">Sales Price: $<input type="number" placeholder="0" class="totalP-input ml-1"
-                        v-model="salesPrice" required>{{this.salesPrice}}</li>
-                    <li v-else>Sales Price: $<input type="text" placeholder="0" class="totalP-input ml-1"
+                    <li v-if="salesPrice">Sales Price: $<input type="number" placeholder="0.00"
+                        class="totalP-input ml-1" v-model="salesPrice" required>{{this.salesPrice}}</li>
+                    <li v-else>Sales Price: $<input type="text" placeholder="0.00" class="totalP-input ml-1"
                         v-model="salesPrice" required></li>
                     <li>Profit: </li>
                     <li>Profit Margin: {{this.profitMargin}}</li>
@@ -121,6 +122,16 @@
         side: '',
         station: '',
         recipeIngredients: [],
+        station: "",
+        side: "",
+        name: "",
+        portions: "",
+        portionSize: "",
+        portionUnit: "",
+        costPerRecipe: "",
+        calories: "",
+        allergens: [],
+        salesPrice: ""
 
 
 
@@ -193,6 +204,12 @@
   }
 
   .totalP-input {
+    max-width: 5rem;
+    text-align: center;
+    height: 1.5rem;
+  }
+
+  .totalC-input {
     max-width: 5rem;
     text-align: center;
     height: 1.5rem;
