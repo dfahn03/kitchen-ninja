@@ -10,7 +10,18 @@
       <td><input type="text" placeholder="Product #" v-model="recipeIngredient.productNumber" class="prod-input"
           required>
       </td>
-      <td><input type="text" placeholder="Category" v-model="recipeIngredient.category" class="cat-input" required></td>
+      <!-- <td><input type="text" placeholder="Category" v-model="recipeIngredient.category" class="cat-input" required></td> -->
+      <td><select class="form-control cat-input" placeholder="Category" v-model="category">
+          <option disabled value="">Choose Category</option>
+          <option value="Bakery">Bakery</option>
+          <option value="Dairy">Dairy</option>
+          <option value="Frozen">Frozen</option>
+          <option value="Produce">Produce</option>
+          <option value="Meat">Meat</option>
+          <option value="Storeroom">Storeroom</option>
+        </select></td>
+
+
       <td><input type="text" placeholder="Ingredient Name" v-model="recipeIngredient.itemName" class="ingName-input"
           required>
       </td>
@@ -24,7 +35,8 @@
       <td><input type="text" placeholder="Unit" v-model="recipeIngredient.unit" class="unit-input" required></td>
       <td v-if="ingredientCostCalc"><input type="text" placeholder="Ingredient Cost" v-model="itemCost"
           class="ingC-input" required>{{ingredientCostCalc()}}</td>
-      <td v-else><input type="text" placeholder="Ingredient Cost" v-model="itemCost" class="ingC2-input" required></td>
+      <td v-else><input type="text" placeholder="Ingredient Cost" v-model="itemCost" class="ingC2-input" required>
+      </td>
     </tr>
   </tbody>
 </template>

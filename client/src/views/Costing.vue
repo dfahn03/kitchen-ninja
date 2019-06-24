@@ -10,16 +10,16 @@
         <form @submit.prevent="">
           <div class="form-row">
             <div class="col-12 d-flex justify-content-center">
-              <input type="text" class="form-control recipeName-input" placeholder="Recipe Name">
-              <input type="text" class="form-control portions-input ml-1" placeholder="Portions">
-              <input type="text" class="form-control portionS-input ml-1" placeholder="Portion Size">
-              <input type="text" class="form-control portionU-input ml-1" placeholder="Portion Unit">
-              <select class="form-control side-input ml-1" placeholder="Side" v-model="side">
+              <input type="text" class="form-control recipeName-input" placeholder="Recipe Name" required>
+              <input type="text" class="form-control portions-input ml-1" placeholder="Portions" required>
+              <input type="text" class="form-control portionS-input ml-1" placeholder="Portion Size" required>
+              <input type="text" class="form-control portionU-input ml-1" placeholder="Portion Unit" required>
+              <select class="form-control side-input ml-1" placeholder="Side" v-model="side" required>
                 <option disabled value="">Side</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
-              <select class="form-control station-input ml-1" placeholder="Station" v-model="station">
+              <select class="form-control station-input ml-1" placeholder="Station" v-model="station" required>
                 <option disabled value="">Choose Station</option>
                 <option value="Global">Global</option>
                 <option value="Grill">Grill</option>
