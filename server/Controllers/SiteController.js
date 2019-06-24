@@ -9,12 +9,15 @@ let _serviceRepo = _service.repository
 
 //PUBLIC
 export default class SiteController {
+
   constructor() {
     this.router = express.Router()
+      .use(Authorize.authenticated) //move back to top after admin
       .get('', this.getAll)
       .post('', this.create)
-      .use(Authorize.authenticated) //move back to top after admin
       .put('/:id', this.edit)
+      .post("/:id/users", this.addSiteUser)
+      .get("/:id/users", this.getSiteUsers)
       // .delete('/:id', this.delete)
       .use(this.defaultRoute)
   }
@@ -25,7 +28,7 @@ export default class SiteController {
 
   async getAll(req, res, next) {
     try {
-      let data = await _serviceRepo.find()
+      let data = await _service.findUserSites(req.session.uid)
       return res.send(data)
     } catch (err) { next(err) }
   }
@@ -41,6 +44,8 @@ export default class SiteController {
 
   async edit(req, res, next) {
     try {
+      let siteReq = await _service._findUserSite(req.params.id, req.session.uid)
+
       let data = await _serviceRepo.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
       if (data) {
         return res.send(data)
@@ -55,5 +60,20 @@ export default class SiteController {
   //     return res.send("Successfully Deleted")
   //   } catch (error) { next(error) }
   // }
+
+  async addSiteUser(req, res, next) {
+    try {
+      let siteUser = await _service.addSiteUser(req.params.id, req.session.uid, req.body)
+      res.send(siteUser)
+    } catch (err) { next(err) }
+  }
+  async getSiteUsers(req, res, next) {
+    try {
+      let siteReq = await _service._findUserSite(req.params.id, req.session.uid)
+      if (siteReq.siteUser.role != "admin") { throw new Error("Invalid Access") }
+      let users = await _service.findAllSiteUsers(req.params.id)
+      res.send(users)
+    } catch (err) { next(err) }
+  }
 }
 
