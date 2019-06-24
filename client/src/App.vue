@@ -77,8 +77,12 @@
             <router-link to='/inventory'><a href="#">Inventory</a></router-link>
           </li>
           <li>
-            <a href="#">Calculator</a>
-            <slot name='Calculator'></slot>
+            <a href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false"
+              aria-controls="collapseOne">Calculator</a>
+            <div id="collapseOne" class="collapse">
+              <calculator />
+            </div>
+            <!-- <slot name='Calculator' v-slot:Calculator></slot> -->
           </li>
         </ul>
       </div>
@@ -93,13 +97,22 @@
 
 
 <script>
-  $("#menu-toggle").click(function (e) {
-    e.preventDefault();
-    $("#wrapper").toggleClass("toggled");
-  });
+  import Calculator from '@/components/Calculator.vue'
+
   // $('#myModal').on('shown.bs.modal', function () {
   //   $('#myInput').trigger('focus')
   // })
+  export default {
+    mounted() {
+      $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+      });
+    },
+    components: {
+      Calculator
+    }
+  }
 </script>
 <style>
   #app {
@@ -135,7 +148,7 @@
   /* wrapper */
   #sidebar-wrapper {
     position: absolute;
-    width: 250px;
+    width: 0px;
     height: 100%;
     overflow-y: hidden;
     background-color: #fff;
@@ -150,8 +163,8 @@
   #page-content-wrapper {
     position: absolute;
     margin-top: 80px;
-    margin-left: 250px;
-    margin-right: -250px;
+    /* margin-left: 250px;
+    margin-right: -250px; */
     width: 100%;
     padding: 15px;
     border: 5px #fff;
@@ -163,7 +176,7 @@
   }
 
   #wrapper.toggled #page-content-wrapper {
-    padding-left: 250px;
+    margin-left: 250px;
   }
 
   .modal {}
