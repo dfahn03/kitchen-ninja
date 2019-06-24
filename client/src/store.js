@@ -89,7 +89,7 @@ export default new Vuex.Store({
         console.error(error)
 
       }
-    }
+    },
     //#endregion
 
     //#region --  Dashboard Stuff --
@@ -101,7 +101,40 @@ export default new Vuex.Store({
     //#endregion
 
     //#region --  Recipes Stuff --
+    getRecipes({ commit, dispatch }) {
+      api.get('recipes')
+        .then(res => {
+          commit('setRecipes', res.data)
+        })
+    },
+    // async getRecipeById({ commit, dispatch }, recipeId) {
+    //   try {
+    //     let res = await api.get('recipes/' + recipeId)
+    //     commit('setActiveBoard', res.data)
+    //   } catch (error) { console.error(error) }
+    // },
+    // TODO this works differently, so set up when modal idea developed
 
+    // addRecipe({ commit, dispatch }, recipeData) {
+    //   api.post('recipes', recipeData)
+    //     .then(serverRecipe => {
+    //       dispatch('getRecipes')
+    //     })
+    // TODO this works differently, so set up when modal idea developed
+    // },
+    deleteRecipe({ commit, dispatch }, recipeId) {
+      api.delete('recipes/' + recipeId)
+        .then(res => {
+          dispatch('getRecipes')
+        })
+    },
+
+    async editRecipe({ commit, dispatch }, payload) {
+      try {
+        await api.put('recipes/' + payload._id, payload)
+        dispatch('getRecipes')
+      } catch (error) { console.error(error) }
+    },
     //#endregion
 
     //#region --  Stuff --
