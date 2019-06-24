@@ -7,11 +7,12 @@
       </td>
       <td><input type="text" placeholder="Distributor" v-model="recipeIngredient.distributor" class="dist-input"
           required></td>
+      <!-- TODO get a input select with a custom input field included -->
       <td><input type="text" placeholder="Product #" v-model="recipeIngredient.productNumber" class="prod-input"
           required>
       </td>
-      <!-- <td><input type="text" placeholder="Category" v-model="recipeIngredient.category" class="cat-input" required></td> -->
-      <td><select class="form-control cat-input" placeholder="Category" v-model="category">
+      <td><select class="form-control category-input" placeholder="Category" v-model="recipeIngredient.category"
+          required>
           <option disabled value="">Choose Category</option>
           <option value="Bakery">Bakery</option>
           <option value="Dairy">Dairy</option>
@@ -20,22 +21,26 @@
           <option value="Meat">Meat</option>
           <option value="Storeroom">Storeroom</option>
         </select></td>
-
-
       <td><input type="text" placeholder="Ingredient Name" v-model="recipeIngredient.itemName" class="ingName-input"
           required>
       </td>
       <td><input type="text" placeholder="Brand" v-model="recipeIngredient.brand" class="brand-input" required></td>
-      <td><input type="text" placeholder="Package Size" v-model="recipeIngredient.packageSize"
-          class="pack requiredS-input" required></td>
+      <td><input type="text" placeholder="Package Size" v-model="recipeIngredient.packageSize" class="packS-input"
+          required></td>
       <td><input type="text" placeholder="Package Cost" v-model="recipeIngredient.packageCost" class="packC-input"
           required></td>
       <td><input type="number" placeholder="Quantity" min="0" step=".5" v-model="recipeIngredient.quantity"
           class="quan-input" required></td>
-      <td><input type="text" placeholder="Unit" v-model="recipeIngredient.unit" class="unit-input" required></td>
-      <td v-if="ingredientCostCalc"><input type="text" placeholder="Ingredient Cost" v-model="itemCost"
+      <!-- <td><input type="text" placeholder="Unit" v-model="recipeIngredient.unit" class="unit-input" required></td> -->
+      <td><select class="form-control unit-input" placeholder="Unit" v-model="recipeIngredient.unit" required>
+          <option disabled value="">Choose Unit</option>
+          <option value="Oz">Oz</option>
+          <option value="Ea">Ea</option>
+        </select></td>
+      <td v-if="ingredientCostCalc"><input type="text" placeholder="Ingredient Cost" v-model="recipeIngredient.itemCost"
           class="ingC-input" required>{{ingredientCostCalc()}}</td>
-      <td v-else><input type="text" placeholder="Ingredient Cost" v-model="itemCost" class="ingC2-input" required>
+      <td v-else><input type="text" placeholder="Ingredient Cost" v-model="recipeIngredient.itemCost"
+          class="ingC2-input" required>
       </td>
     </tr>
   </tbody>
@@ -119,9 +124,10 @@
     max-width: 6rem;
   }
 
-  .cat-input {
+  .category-input {
     text-align: center;
-    max-width: 6rem;
+    min-width: 8rem;
+    height: 2rem;
   }
 
   .ingName-input {
@@ -136,7 +142,8 @@
 
   .unit-input {
     text-align: center;
-    max-width: 3rem;
+    min-width: 5rem;
+    height: 2rem;
   }
 
   .packS-input {
@@ -152,5 +159,15 @@
   .quan-input {
 
     max-width: 3rem;
+  }
+
+  .ingC-input {
+    text-align: center;
+    max-width: 5rem;
+  }
+
+  .ingC2-input {
+    text-align: center;
+    max-width: 5rem;
   }
 </style>
