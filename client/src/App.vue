@@ -176,7 +176,7 @@
   }
 
   #wrapper.toggled #page-content-wrapper {
-    margin-left: 250px;
+    padding-left: 250px;
   }
 
   .modal {}

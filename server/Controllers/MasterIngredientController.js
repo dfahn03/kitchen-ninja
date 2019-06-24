@@ -13,7 +13,7 @@ export default class MasterIngredientController {
     this.router = express.Router()
       .use(Authorize.authenticated)
       .get('', this.getAll)
-      .get('/category', this.getByCategory)
+      .get('/:category', this.getByCategory)
       // .post('', this.create)
       // .put('/:id', this.edit)
       // .delete('/:id', this.delete)
