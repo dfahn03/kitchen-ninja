@@ -30,7 +30,7 @@
               </button>
             </div>
             <div class="modal-body">
-              <form v-if="loginForm" @submit.prevent="loginUser">
+              <form @submit.prevent="loginUser">
                 <div class="modalform-group">
                   <label for="exampleInputEmail1">Email address</label>
                   <input v-model="creds.email" type="email" class="form-control" id="exampleInputEmail1"
@@ -42,6 +42,11 @@
                   <label for="exampleInputPassword1">Password</label>
                   <input v-model="creds.password" type="password" class="form-control" id="exampleInputPassword1"
                     placeholder="Password">
+                </div>
+                <div class="modal-form-group">
+                  <label for="exampleInputPassword1">Site Code</label>
+                  <input v-model="creds.passcode" type="password" class="form-control" id="exampleInputPassword1"
+                    placeholder="Site Code">
                 </div>
               </form>
             </div>
@@ -106,7 +111,12 @@
   export default {
     data() {
       return {
-
+        loginForm: true,
+        creds: {
+          email: "",
+          password: "",
+          passcode: "",
+        }
       }
     },
     methods: {
