@@ -1,4 +1,4 @@
-<template>
+<template v-slot:Calculator>
   <div name='Calculator' class="card calculate d-inline-flex p-6">
     <input v-model.number="amount" type="number">
 
