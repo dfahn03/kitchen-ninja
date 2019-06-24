@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
+import router from './router'
 
 
 Vue.use(Vuex)
@@ -30,7 +31,38 @@ export default new Vuex.Store({
   actions: {
 
     //#region -- Auth Stuff --
+    register({ commit, dispatch }, newUser) {
+      auth.post('register', newUser)
+        .then(res => {
+          commit('setUser', res.data)
+          router.push({ name: 'dashboard' })
+        })
+    },
+    authenticate({ commit, dispatch }) {
+      auth.get('authenticate')
+        .then(res => {
+          commit('setUser', res.data)
+          if (router.currentRoute.name !== '') {
+            router.push({ name: 'dashboard' })
+          }
+        })
+        .catch(res => {
+          router.push({ name: 'dashboard' })
+        })
+    },
+    login({ commit, dispatch }, creds) {
+      auth.post('login', creds)
+        .then(res => {
+          commit('setUser', res.data)
+          router.push({ name: 'dashboard' })
+        })
+    },
 
+    async logout({ commit, dispatch }) {
+      await auth.delete('logout')
+      commit('setUser', {})
+      router.push({ name: 'dashboard' })
+    },
     //#endregion
 
     //#region -- MasterIngredient Stuff --
