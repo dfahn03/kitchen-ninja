@@ -156,7 +156,7 @@
           packageSize: "",
           packageCost: "",
           distributor: "",
-          id: Math.floor(Math.random() * 5)
+          id: Math.floor(Math.random() * 20)
         }
         this.recipeIngredients.push(newIngredient)
         //TODO Fill this out to what the empty object is going to be in recipeIngredients
