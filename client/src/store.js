@@ -4,6 +4,7 @@ import Axios from 'axios'
 import router from './router'
 
 
+
 Vue.use(Vuex)
 let base = window.location.host.includes('localhost:8080') ? '//localhost:3000/' : '/'
 
@@ -23,10 +24,24 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
-
+    ingredient: {},
+    ingredients: [],
+    recipe: {},
+    recipes: []
   },
   mutations: {
-
+    setIngredients(state, ingredients) {
+      state.ingredients = ingredients
+    },
+    setIngredient(state, ingredient) {
+      state.ingredient = ingredient
+    },
+    setRecipe(state, recipe) {
+      state.recipe = recipe
+    },
+    setRecipes(state, recipes) {
+      state.recipes = recipes
+    }
   },
   actions: {
 
@@ -66,7 +81,15 @@ export default new Vuex.Store({
     //#endregion
 
     //#region -- MasterIngredient Stuff --
+    async getIngredients({ commit, dispatch }) {
+      try {
+        let res = await api.get("ingredients")
+        commit('setIngredients')
+      } catch (error) {
+        console.error(error)
 
+      }
+    }
     //#endregion
 
     //#region --  Dashboard Stuff --
