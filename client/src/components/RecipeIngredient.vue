@@ -5,12 +5,6 @@
       <td><button type="button" class="btn btn-danger btn-sm"
           @click="deleteIngredient(recipeIngredient)">Delete</button>
       </td>
-      <td><input type="text" placeholder="Distributor" v-model="recipeIngredient.distributor" class="dist-input"
-          required></td>
-      <!-- TODO get a input select with a custom input field included -->
-      <td><input type="text" placeholder="Product #" v-model="recipeIngredient.productNumber" class="prod-input"
-          required>
-      </td>
       <td><select class="form-control category-input" placeholder="Category" v-model="recipeIngredient.category"
           required>
           <option disabled value="">Choose Category</option>
@@ -22,6 +16,12 @@
           <option value="Storeroom">Storeroom</option>
         </select></td>
       <td><input type="text" placeholder="Ingredient Name" v-model="recipeIngredient.itemName" class="ingName-input"
+          required>
+      </td>
+      <td><input type="text" placeholder="Distributor" v-model="recipeIngredient.distributor" class="dist-input"
+          required></td>
+      <!-- TODO get a input select with a custom input field included -->
+      <td><input type="text" placeholder="Product #" v-model="recipeIngredient.productNumber" class="prod-input"
           required>
       </td>
       <td><input type="text" placeholder="Brand" v-model="recipeIngredient.brand" class="brand-input" required></td>
@@ -37,10 +37,9 @@
           <option value="Oz">Oz</option>
           <option value="Ea">Ea</option>
         </select></td>
-      <td v-if="ingredientCostCalc"><input type="text" placeholder="Ingredient Cost" v-model="recipeIngredient.itemCost"
+      <td v-if="ingredientCostCalc"><input type="text" placeholder="Cost" v-model="recipeIngredient.itemCost"
           class="ingC-input" required>{{ingredientCostCalc()}}</td>
-      <td v-else><input type="text" placeholder="Ingredient Cost" v-model="recipeIngredient.itemCost"
-          class="ingC2-input" required>
+      <td v-else><input type="text" placeholder="Cost" v-model="recipeIngredient.itemCost" class="ingC2-input" required>
       </td>
     </tr>
   </tbody>

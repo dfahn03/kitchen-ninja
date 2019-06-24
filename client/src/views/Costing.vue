@@ -45,10 +45,10 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Remove</th>
-                    <th scope="col">Distributor</th>
-                    <th scope="col">Product #</th>
                     <th scope="col">Category</th>
                     <th scope="col">Ingredient Name</th>
+                    <th scope="col">Distributor</th>
+                    <th scope="col">Product #</th>
                     <th scope="col">Brand</th>
                     <th scope="col">Package Size</th>
                     <th scope="col">Package Cost</th>
