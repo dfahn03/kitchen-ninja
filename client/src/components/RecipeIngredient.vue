@@ -34,8 +34,8 @@
       <!-- <td><input type="text" placeholder="Unit" v-model="recipeIngredient.unit" class="unit-input" required></td> -->
       <td><select class="form-control unit-input" placeholder="Unit" v-model="recipeIngredient.unit" required>
           <option disabled value="">Unit</option>
-          <option value="Oz">Oz</option>
-          <option value="Ea">Ea</option>
+          <option value="Oz">OZ</option>
+          <option value="Ea">EA</option>
         </select></td>
       <td v-if="ingredientCostCalc"><input type="text" placeholder="Cost" v-model="recipeIngredient.itemCost"
           class="ingC-input" required>{{ingredientCostCalc()}}</td>
