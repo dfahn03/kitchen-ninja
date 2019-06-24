@@ -7,13 +7,23 @@
     </div>
     <div class="row">
       <div class="col">
-        <form @submit.prevent="">
+        <form @submit.prevent="saveRecippe">
           <div class="form-row">
             <div class="col-12 d-flex justify-content-center">
-              <input type="text" class="form-control recipeName-input" placeholder="Recipe Name" required>
-              <input type="text" class="form-control portions-input ml-1" placeholder="Portions" required>
-              <input type="text" class="form-control portionS-input ml-1" placeholder="Portion Size" required>
-              <input type="text" class="form-control portionU-input ml-1" placeholder="Portion Unit" required>
+              <input type="text" class="form-control recipeName-input" placeholder="Recipe Name" v-model="name"
+                required>
+              <input type="text" class="form-control portions-input ml-1" placeholder="Portions" v-model="portions"
+                required>
+              <input type="text" class="form-control portionS-input ml-1" placeholder="Portion Size"
+                v-model="portionSize" required>
+              <!-- <input type="text" class="form-control portionU-input ml-1" placeholder="Portion Unit"
+                v-model="PortionUnit" required> -->
+              <select class="form-control portionU-input ml-1" placeholder="Portion Unit" v-model="portionUnit"
+                required>
+                <option disabled value="">Unit</option>
+                <option value="Yes">OZ</option>
+                <option value="No">EA</option>
+              </select>
               <select class="form-control side-input ml-1" placeholder="Side" v-model="side" required>
                 <option disabled value="">Side</option>
                 <option value="Yes">Yes</option>
@@ -45,10 +55,10 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Remove</th>
-                    <th scope="col">Distributor</th>
-                    <th scope="col">Product #</th>
                     <th scope="col">Category</th>
                     <th scope="col">Ingredient Name</th>
+                    <th scope="col">Distributor</th>
+                    <th scope="col">Product #</th>
                     <th scope="col">Brand</th>
                     <th scope="col">Package Size</th>
                     <th scope="col">Package Cost</th>
@@ -78,11 +88,13 @@
                 </div>
                 <div class="col-6 text-white d-flex justify-content-center text-left">
                   <ul>
-                    <li>Total Cost:</li>
+                    <li>Total Cost: $<input type="number" placeholder="0.00" class="totalC-input ml-1"
+                        v-model="costPerRecipe" min="0" step=".01" required></li>
                     <li>Food Cost: </li>
-                    <li v-if="salesPrice">Sales Price: $<input type="number" placeholder="0"
-                        class="totalP-input ml-1">{{this.salesPrice}}</li>
-                    <li v-else>Sales Price: $<input type="text" placeholder="0" class="totalP-input ml-1"></li>
+                    <li v-if="salesPrice">Sales Price: $<input type="number" placeholder="0.00"
+                        class="totalP-input ml-1" v-model="salesPrice" required>{{this.salesPrice}}</li>
+                    <li v-else>Sales Price: $<input type="text" placeholder="0.00" class="totalP-input ml-1"
+                        v-model="salesPrice" required></li>
                     <li>Profit: </li>
                     <li>Profit Margin: {{this.profitMargin}}</li>
                     <li>Markup: </li>
@@ -107,10 +119,22 @@
     props: [],
     data() {
       return {
-        // showForm: false,
         side: '',
         station: '',
         recipeIngredients: [],
+        station: "",
+        side: "",
+        name: "",
+        portions: "",
+        portionSize: "",
+        portionUnit: "",
+        costPerRecipe: "",
+        calories: "",
+        allergens: [],
+        salesPrice: ""
+
+
+
         // use emits
       }
     },
@@ -153,6 +177,11 @@
         }
         this.recipeIngredients.push(newIngredient)
         //TODO Fill this out to what the empty object is going to be in recipeIngredients
+      },
+      saveRecippe() {
+        let newRecipe = {
+          name: this.name
+        }
       }
     },
     components: {
@@ -175,6 +204,12 @@
   }
 
   .totalP-input {
+    max-width: 5rem;
+    text-align: center;
+    height: 1.5rem;
+  }
+
+  .totalC-input {
     max-width: 5rem;
     text-align: center;
     height: 1.5rem;
