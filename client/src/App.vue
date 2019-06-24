@@ -17,7 +17,7 @@
         <li><a href="#" class="btn btn-outline-secondary"><img src="../src/assets/menuButton2.png" alt="" srcset=""></a>
         </li>
       </ul>
-      <!-- Modal -->
+      <!-- Login Modal -->
 
       <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
@@ -30,17 +30,18 @@
               </button>
             </div>
             <div class="modal-body">
-              <form>
+              <form v-if="loginForm" @submit.prevent="loginUser">
                 <div class="modalform-group">
                   <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                    placeholder="Enter email">
+                  <input v-model="creds.email" type="email" class="form-control" id="exampleInputEmail1"
+                    aria-describedby="emailHelp" placeholder="Enter email">
                   <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
                     else.</small>
                 </div>
                 <div class="modal-form-group">
                   <label for="exampleInputPassword1">Password</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                  <input v-model="creds.password" type="password" class="form-control" id="exampleInputPassword1"
+                    placeholder="Password">
                 </div>
               </form>
             </div>
@@ -103,6 +104,16 @@
   //   $('#myInput').trigger('focus')
   // })
   export default {
+    data() {
+      return {
+
+      }
+    },
+    methods: {
+      loginUser() {
+        this.$store.dispatch("login", this.creds);
+      }
+    },
     mounted() {
       $("#menu-toggle").click(function (e) {
         e.preventDefault();
