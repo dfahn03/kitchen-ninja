@@ -3,7 +3,7 @@
     <tr>
       <th scope="row">1</th>
       <td><button type="button" class="btn btn-danger btn-sm"
-          @click="deleteIngredient(recipeIngredient.id)">Delete</button>
+          @click="deleteIngredient(recipeIngredient.tempId)">Delete</button>
       </td>
       <td><input type="text" placeholder="Distributor" v-model="recipeIngredient.distributor" class="dist-input"
           required></td>
