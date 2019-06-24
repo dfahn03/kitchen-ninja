@@ -9,6 +9,7 @@ let _ingredientSchema = new Schema({
   productNumber: { type: Number, required: true },
   quantity: { type: Number },
   unit: { type: String, enum: ['OZ', 'EA'], required: true },
+  portionUnit: { type: String },
   itemCost: { type: Number },
   packageSize: { type: String },
   packageCost: { type: String },
