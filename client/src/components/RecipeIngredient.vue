@@ -86,7 +86,9 @@
     methods: {
       deleteIngredient(id) {
         debugger
-        return this.recipeIngredients.splice(id)
+        // let index = this.recipeIngredients.indexOf(id)
+        // return this.recipeIngredients.splice(index, 1)
+        return this.recipeIngredients.filter(recipeIngredient => this.recipeIngredient.id !== id)
       }
     },
     components: {}

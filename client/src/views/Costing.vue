@@ -9,24 +9,17 @@
       <div class="col">
         <form @submit.prevent="">
           <div class="form-row">
-            <div class="col">
-              <input type="text" class="form-control" placeholder="Recipe Name">
-            </div>
-            <div class="col">
-              <input type="text" class="form-control" placeholder="Portions">
-            </div>
-            <div class="col">
-              <input type="text" class="form-control" placeholder="Portion Size">
-            </div>
-            <div class="col">
-              <select class="form-control" placeholder="Side" v-model="side">
+            <div class="col-12 d-flex justify-content-center">
+              <input type="text" class="form-control recipeName-input" placeholder="Recipe Name">
+              <input type="text" class="form-control portions-input ml-1" placeholder="Portions">
+              <input type="text" class="form-control portionS-input ml-1" placeholder="Portion Size">
+              <input type="text" class="form-control portionU-input ml-1" placeholder="Portion Unit">
+              <select class="form-control side-input ml-1" placeholder="Side" v-model="side">
                 <option disabled value="">Side</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
-            </div>
-            <div class="col">
-              <select class="form-control" placeholder="Station" v-model="station">
+              <select class="form-control station-input ml-1" placeholder="Station" v-model="station">
                 <option disabled value="">Choose Station</option>
                 <option value="Global">Global</option>
                 <option value="Grill">Grill</option>
@@ -47,7 +40,7 @@
               <!-- TODO re-color icon/button to make same bg color  -->
             </div>
             <div class="col">
-              <table class="table table-hover">
+              <table class="table table-hover text-white">
                 <thead>
                   <tr>
                     <th scope="col">#</th>
@@ -71,7 +64,7 @@
             </div>
             <div class="col-12">
               <div class="row">
-                <div class="col-6">
+                <div class="col-6 text-white">
                   <ul>
                     <li>Storeroom PL ({{}}) </li>
                     <li>Meat PL ()</li>
@@ -83,12 +76,13 @@
                   <!--run a for each on each  category using ingcostcalc
                   total is all added-->
                 </div>
-                <div class="col-6">
+                <div class="col-6 text-white">
                   <ul>
                     <li>Total Cost:</li>
                     <li>Food Cost: </li>
-                    <li v-if="salesPrice">Sales Price: $<input type="number" placeholder="0">{{this.salesPrice}}</li>
-                    <li v-else>Sales Price: $<input type="text" placeholder="0"></li>
+                    <li v-if="salesPrice">Sales Price: $<input type="number" placeholder="0"
+                        class="totalP-input ml-1">{{this.salesPrice}}</li>
+                    <li v-else>Sales Price: $<input type="text" placeholder="0" class="totalP-input ml-1"></li>
                     <li>Profit: </li>
                     <li>Profit Margin: {{this.profitMargin}}</li>
                     <li>Markup: </li>
@@ -116,7 +110,7 @@
         // showForm: false,
         side: '',
         station: '',
-        recipeIngredients: [], //how does add ingredient know to add object with specific props and their values empty
+        recipeIngredients: [],
         // use emits
       }
     },
@@ -156,7 +150,7 @@
           packageSize: "",
           packageCost: "",
           distributor: "",
-          id: Math.floor(Math.random() * 20)
+          tempId: Math.floor(Math.random() * 100) //TODO make the id unique
         }
         this.recipeIngredients.push(newIngredient)
         //TODO Fill this out to what the empty object is going to be in recipeIngredients
@@ -179,5 +173,40 @@
 
   ul {
     list-style: none;
+  }
+
+  .totalP-input {
+    max-width: 5rem;
+    text-align: center;
+  }
+
+  .station-input {
+    max-width: 10rem;
+    text-align: center
+  }
+
+  .side-input {
+    max-width: 5rem;
+    text-align: center
+  }
+
+  .portionS-input {
+    max-width: 8rem;
+    text-align: center
+  }
+
+  .portionU-input {
+    max-width: 7rem;
+    text-align: center
+  }
+
+  .portions-input {
+    max-width: 6rem;
+    text-align: center
+  }
+
+  .recipeName-input {
+    max-width: 20rem;
+    text-align: center
   }
 </style>
