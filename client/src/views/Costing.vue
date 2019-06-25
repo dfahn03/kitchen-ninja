@@ -204,7 +204,6 @@
         //   this.newRecipe.salesPrice = this.salesPrice
         // }
         this.$store.dispatch('saveRecipe', this.newRecipe)
-        this.$router.push('Recipes')
       }
     },
     components: {

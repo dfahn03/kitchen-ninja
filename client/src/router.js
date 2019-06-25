@@ -6,6 +6,7 @@ import Dashboard from './views/Dashboard.vue'
 import Costing from './views/Costing.vue'
 // @ts-ignore
 import Login from './views/Login.vue'
+import Recipes from './views/Recipes.vue'
 
 
 Vue.use(Router)
@@ -33,5 +34,10 @@ export default new Router({
       props: true,
       component: Costing
     },
+    {
+      path: '/recipes',
+      name: 'Recipes',
+      component: Recipes
+    }
   ]
 })
