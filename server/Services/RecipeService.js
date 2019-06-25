@@ -26,7 +26,7 @@ let _schema = new Schema({
   portionUnit: { type: String, enum: ['OZ', 'EA'] },
   ingredients: [_ingredientSchema],
   costPerRecipe: { type: Number, required: true },
-  calories: [],
+  calories: { type: Number },
   allergens: [],
   siteId: { type: ObjectId, ref: 'Site', required: true },
   salesPrice: { type: Number, required: true }

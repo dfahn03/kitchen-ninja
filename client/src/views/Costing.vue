@@ -7,17 +7,15 @@
     </div>
     <div class="row">
       <div class="col">
-        <form @submit.prevent="saveRecippe">
+        <form @submit.prevent="saveRecipe">
           <div class="form-row">
-            <div class="col-12 d-flex justify-content-center">
+            <div class="col-lg-12 d-flex justify-content-center">
               <input type="text" class="form-control recipeName-input" placeholder="Recipe Name" v-model="name"
                 required>
-              <input type="text" class="form-control portions-input ml-1" placeholder="Portions" v-model="portions"
-                required>
-              <input type="text" class="form-control portionS-input ml-1" placeholder="Portion Size"
-                v-model="portionSize" required>
-              <!-- <input type="text" class="form-control portionU-input ml-1" placeholder="Portion Unit"
-                v-model="PortionUnit" required> -->
+              <input type="number" class="form-control portions-input ml-1" placeholder="Portions" v-model="portions"
+                min="0" required>
+              <input type="number" class="form-control portionS-input ml-1" placeholder="Portion Size"
+                v-model="portionSize" min="0" step=".5" required>
               <select class="form-control portionU-input ml-1" placeholder="Portion Unit" v-model="portionUnit"
                 required>
                 <option disabled value="">Unit</option>
@@ -43,13 +41,18 @@
                 <option value="Pizza">Pizza</option>
                 <option value="Chef's Choice">Chef's Choice</option>
               </select>
+              <input type="number" class="form-control calories-input ml-1" placeholder="Calories" v-model="calories"
+                min="0" required>
+              <input type="text" class="form-control allergens-input ml-1" placeholder="Allergens" v-model="allergens"
+                min="0" required>
             </div>
+            <!-- TODO Make allergens a button to add and then show checkboxes below to select all the allergens -->
             <div class="col-12">
               <button type="button" class="btn addIng-btn text-white my-2" @click="addIngredient">Add
                 Ingredient <img src="../assets/icons8-plus-25.png" alt="Plus Icon" class="ml-1"></button>
               <!-- TODO re-color icon/button to make same bg color  -->
             </div>
-            <div class="col">
+            <div class="col d-inline-flex">
               <table class="table table-hover text-white">
                 <thead>
                   <tr>
@@ -76,28 +79,29 @@
               <div class="row">
                 <div class="col-6 text-white text-left d-flex justify-content-center">
                   <ul>
-                    <li>Storeroom PL ({{}}) </li>
-                    <li>Meat PL ()</li>
-                    <li>Diary PL ()</li>
-                    <li>Produce PL ()</li>
-                    <li>Bakery PL ()</li>
-                    <li>Frozen PL ()</li>
+                    <li class="">Cost Per Category:</li>
+                    <li class="mt-2">Storeroom PL ($) </li>
+                    <li class="mt-2">Meat PL ($)</li>
+                    <li class="mt-2">Diary PL ($)</li>
+                    <li class="mt-2">Produce PL ($)</li>
+                    <li class="mt-2">Bakery PL ($)</li>
+                    <li class="mt-2">Frozen PL ($)</li>
                   </ul>
                   <!--run a for each on each  category using ingcostcalc
                   total is all added-->
                 </div>
                 <div class="col-6 text-white d-flex justify-content-center text-left">
                   <ul>
-                    <li>Total Cost: $<input type="number" placeholder="0.00" class="totalC-input ml-1"
+                    <li>Total Cost: $<input type="number" placeholder="0.00" class="totalC-input ml-1 mt-2"
                         v-model="costPerRecipe" min="0" step=".01" required></li>
-                    <li>Food Cost: </li>
+                    <li class="mt-2">Food Cost: $ </li>
                     <li v-if="salesPrice">Sales Price: $<input type="number" placeholder="0.00"
-                        class="totalP-input ml-1" v-model="salesPrice" required>{{this.salesPrice}}</li>
-                    <li v-else>Sales Price: $<input type="text" placeholder="0.00" class="totalP-input ml-1"
-                        v-model="salesPrice" required></li>
-                    <li>Profit: </li>
-                    <li>Profit Margin: {{this.profitMargin}}</li>
-                    <li>Markup: </li>
+                        class="totalP-input ml-1 mt-2" v-model="salesPriceA" required>{{this.salesPrice}}</li>
+                    <li v-else>Sales Price: $<input type="text" placeholder="0.00" class="totalP-input ml-1 mt-2"
+                        v-model="salesPriceB" required></li>
+                    <li class="mt-2">Profit: $</li>
+                    <li class="mt-2">Profit Margin: ${{this.profitMargin}}</li>
+                    <li class="mt-2">Markup: %</li>
                   </ul>
                 </div>
               </div>
@@ -119,8 +123,6 @@
     props: [],
     data() {
       return {
-        side: '',
-        station: '',
         recipeIngredients: [],
         station: "",
         side: "",
@@ -131,7 +133,8 @@
         costPerRecipe: "",
         calories: "",
         allergens: [],
-        salesPrice: ""
+        salesPriceA: "",
+        salesPriceB: "",
 
 
 
@@ -167,10 +170,10 @@
           itemName: "",
           category: "",
           brand: "",
-          productNumber: "",
+          productNumber: 0,
           quantity: 0,
           unit: "",
-          itemCost: "",
+          itemCost: 0,
           packageSize: "",
           packageCost: "",
           distributor: "",
@@ -178,9 +181,34 @@
         this.recipeIngredients.push(newIngredient)
         //TODO Fill this out to what the empty object is going to be in recipeIngredients
       },
-      saveRecippe() {
-        let newRecipe = {
-          name: this.name
+      //TODO Find a better way to write this function below
+      saveRecipe() {
+        if (!salesPriceA) {
+          let newRecipe = {
+            name: this.name,
+            station: this.station,
+            side: this.side,
+            portions: this.portions,
+            portionSize: this.portionSize,
+            portionUnit: this.portionUnit,
+            costPerRecipe: this.costPerRecipe,
+            calories: this.calories,
+            allergens: this.allergens,
+            salesPriceB: this.salesPriceB
+          }
+        } else {
+          let newRecipe = {
+            name: this.name,
+            station: this.station,
+            side: this.side,
+            portions: this.portions,
+            portionSize: this.portionSize,
+            portionUnit: this.portionUnit,
+            costPerRecipe: this.costPerRecipe,
+            calories: this.calories,
+            allergens: this.allergens,
+            salesPriceB: this.salesPriceA
+          }
         }
       }
     },
@@ -197,6 +225,8 @@
 
   .addIng-btn {
     background-color: rgb(5, 38, 45);
+    /* border-color: rgb(109, 197, 154);
+    border: 1px; */
   }
 
   ul {
@@ -236,11 +266,21 @@
   }
 
   .portions-input {
-    max-width: 6rem;
+    max-width: 7rem;
     text-align: center
   }
 
   .recipeName-input {
+    max-width: 20rem;
+    text-align: center
+  }
+
+  .calories-input {
+    max-width: 7rem;
+    text-align: center
+  }
+
+  .allergens-input {
     max-width: 20rem;
     text-align: center
   }
