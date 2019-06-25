@@ -125,8 +125,11 @@
     name: "Costing",
     mounted() {
       this.$store.dispatch('getIngredients')
+      if (this.id) {
+        this.newRecipe = this.$store.state.recipes.find(r => r._id == this.id)
+      }
     },
-    props: [],
+    props: ["id"],
     data() {
       return {
         newRecipe: {
