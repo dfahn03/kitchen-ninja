@@ -31,7 +31,8 @@ export default new Vuex.Store({
     ingredient: {},
     ingredients: [],
     recipe: {},
-    recipes: []
+    recipes: [],
+    blogs: []
   },
   mutations: {
     setSites(state, sites) {
@@ -54,6 +55,9 @@ export default new Vuex.Store({
     },
     setRecipes(state, recipes) {
       state.recipes = recipes
+    },
+    setBlogs(state, blogs) {
+      state.blogs = blogs
     }
   },
   actions: {
@@ -128,7 +132,34 @@ export default new Vuex.Store({
     //#endregion
 
     //#region --  Dashboard Stuff --
-
+    async getBlogs({ commit }) {
+      try {
+        let res = await api.get('')
+        commit('setBlogs', res.data.data)
+      } catch (error) {
+        console.error('Blog was not created')
+      }
+    },
+    async createBlog({ commit, dispatch }, payload) {
+      try {
+        let res = await api.post('', payload)
+        dispatch('getBlogs', res.data.data)
+      } catch (error) {
+        console.error('Blog was not created')
+      }
+    },
+    async editBlog({ commit, dispatch }, payload) {
+      try {
+        await api.put('blogs/' + payload._id, payload)
+        dispatch('getBlogs')
+      } catch (error) { console.error(error) }
+    },
+    deleteBlog({ commit, dispatch }, blogId) {
+      api.delete('blogs/' + blogId)
+        .then(res => {
+          dispatch('getBlogs')
+        })
+    },
     //#endregion
 
     //#region --  Costing Stuff --
