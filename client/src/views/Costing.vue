@@ -95,22 +95,20 @@
                   <ul>
                     <li>Total Cost: $ {{newRecipe.costPerRecipe}}</li>
                     <li class="mt-2">Food Cost: $ </li>
-                    <!-- possibly recommended sales price -->
+                    <!-- TODO possibly recommended sales price -->
                     <li>Sales Price: $<input type="number" placeholder="0.00" class="totalP-input ml-1 mt-2"
                         v-model="newRecipe.salesPrice" required>
                     </li>
-                    <!-- <li>Sales Price: $<input type="text" placeholder="0.00" class="totalP-input ml-1 mt-2"
-                        v-model="salesPriceB" required></li> -->
                     <li class="mt-2">Profit: $</li>
-                    <li class="mt-2">Profit Margin: ${{this.profitMargin}}</li>
+                    <li class="mt-2">Profit Margin: $</li>
                     <li class="mt-2">Markup: %</li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-success">Save Recipe</button>
-          <button type="button" class="btn btn-warning ml-1" @click="">Update Recipe</button>
+          <button v-if="!req.params.id" type="submit" class="btn btn-success">Save Recipe</button>
+          <button v-else type="submit" class="btn btn-warning ml-1">Update Recipe</button>
         </form>
       </div>
     </div>
