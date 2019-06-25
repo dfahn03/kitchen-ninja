@@ -1,5 +1,6 @@
 <template>
-  <div class="container-fluid recipes" v-for="recipe in recipes" :key="recipe._id">
+  <div class="container-fluid recipes">
+    <!-- v-for="recipe in recipes" :key="recipe._id" -->
     <div class="row">
       <div class="col">
         <div class="card text-center">

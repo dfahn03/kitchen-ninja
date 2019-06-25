@@ -62,6 +62,20 @@
       return this.$store.dispatch("getIngredients")
     },
     computed: {
+      ingredients() {
+        this.$store.state.ingredients
+      },
+
+
+
+    },
+    methods: {
+      deleteIngredient(ingredient) {
+        let index = this.recipeIngredients.indexOf(ingredient)
+        this.recipeIngredients.splice(index, 1)
+        //return this.recipeIngredients.filter(recipeIngredient => this.recipeIngredient.tempId !== id)
+        //TODO Be able to delete the specific ingredient in the array with the specific tempId
+      },
       seperatePackage(string) {
         let dict = {}
         if (string.includes('/') && string.includes(' ')) {
@@ -93,23 +107,12 @@
         let costEA = pCost / fullPkg
         return costEA
       },
-
       ingredientCostCalc() {
-        // this.$store.dispatch(costPer, payload)
+        this.$store.dispatch(costPer, payload)
         //TODO finish filling this out so it will auto populate ingredient cost
-        //return size/cost * qquantity 
+        return size / cost * qquantity
       },
-      // actualIngredient() { // returns appropriate ingredient object
-      //   return this.recipeIngredient ? this.recipeIngredient : this.ingredient
-      // }
-    },
-    methods: {
-      deleteIngredient(ingredient) {
-        let index = this.recipeIngredients.indexOf(ingredient)
-        this.recipeIngredients.splice(index, 1)
-        //return this.recipeIngredients.filter(recipeIngredient => this.recipeIngredient.tempId !== id)
-        //TODO Be able to delete the specific ingredient in the array with the specific tempId
-      }
+
     },
     components: {}
   }
