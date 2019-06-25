@@ -12,14 +12,30 @@
             </button>
           </div>
           <div v-if="user._id && !site._id" class="modal-body">
-            <select class="form-control mySite-input" placeholder="Owner" required>
+            <label for="#owned">Owned Sites</label>
+            <select v-model="siteId" @change="selectSite($event)" id="owned" class="form-control mySite-input"
+              placeholder="Owner" required>
               <option disabled value="">Choose Site</option>
               <option v-for="mySite in mySites">{{mySite.name}}</option>
             </select>
-            <select class="form-control myMember-input  mt-1" placeholder="Team Member" required>
+            <label class="mt-2" for="#member">Team Member</label>
+            <select v-model="siteId" id="member" @change="selectSite($event)" class="form-control myMember-input"
+              placeholder="Team Member" required>
               <option disabled value="">Choose Site</option>
-              <option v-for="memberSite in memberSites">{{memberSite.name}}</option>
+              <option v-for="memberSite in memberSites" :value="memberSite.name">{{memberSite.name}}</option>
             </select>
+            <!-- <div class="dropdown">
+  <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+    aria-haspopup="true" aria-expanded="false">
+    Owned Site
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <a class="dropdown-item" v-for="mySite in mySites" href="#">{{mySite.name}}</a>
+    
+  </div>
+</div> -->
+
           </div>
           <div v-else class="modal-body">
             <form @submit.prevent="loginUser">
@@ -92,8 +108,10 @@
           name: "",
           email: "",
           password: ""
-        }
+        },
+        siteId: ''
       }
+
     },
     methods: {
       loginUser() {
@@ -103,12 +121,12 @@
       registerUser() {
         this.$store.dispatch("register", this.registerUser);
       },
-      selectSite() {
+      selectSite(e) {
+        let site = e.target.value
         this.$store.dispatch("selectSite")
-        // if (site._id) {
-        //   $("#exampleModal").modal("hide");
-        //   $(".modal-backdrop").remove();
-        // }
+        $("#exampleModal").modal("hide");
+        $(".modal-backdrop").remove();
+
       }
     },
     computed: {
