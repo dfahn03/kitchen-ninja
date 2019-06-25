@@ -107,8 +107,10 @@
               </div>
             </div>
           </div>
-          <button v-if="!req.params.id" type="submit" class="btn btn-success">Save Recipe</button>
-          <button v-else type="submit" class="btn btn-warning ml-1">Update Recipe</button>
+          <!-- v-if="!req.params.id" -->
+          <!-- v-else -->
+          <button type="submit" class="btn btn-success">Save Recipe</button>
+          <button type="submit" class="btn btn-warning ml-1">Update Recipe</button>
         </form>
       </div>
     </div>
@@ -151,7 +153,14 @@
       recipeIngredient() {
         return this.data.recipeIngredient
       },
-      totalCost() {
+      totalCost(recipeIngredients) {
+        let recipe = {}
+        for (let i = 0; i < recipeIngredients.length; i++) {
+          let ingredient = recipeIngredients[i]
+          if (!ingredient == recipe[ingredient]) {
+            recipe[ingredient]
+          }
+        }
 
       },
       foodCost() {
@@ -187,7 +196,7 @@
         this.newRecipe.recipeIngredients.push(newIngredient)
         //TODO Fill this out to what the empty object is going to be in recipeIngredients
       },
-      //TODO Find a better way to write this function below
+
       saveRecipe() {
         // if (salesPrice == "") {
         //   this.newRecipe.salesPrice = this.salesPriceB
@@ -202,6 +211,7 @@
       RecipeIngredient
     }
   }
+
 </script>
 
 <style>

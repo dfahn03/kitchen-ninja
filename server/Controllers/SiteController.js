@@ -18,6 +18,7 @@ export default class SiteController {
       .put('/:id', this.edit)
       .post("/:id/users", this.addSiteUser)
       .get("/:id/users", this.getSiteUsers)
+      .get("/:id", this.getSitesForUser)
       // .delete('/:id', this.delete)
       .use(this.defaultRoute)
   }
@@ -75,5 +76,14 @@ export default class SiteController {
       res.send(users)
     } catch (err) { next(err) }
   }
+  async getSitesForUser(req, res, next) {
+    try {
+      let sites = await _service.findUserSites(req.session.uid)
+      // if (user) { throw new Error("Invalid Access") }
+      // let siteReq = await _service._findUserSite(req.params.id, req.session.uid)
+      res.send(sites)
+    } catch (err) { next(err) }
+  }
+
 }
 

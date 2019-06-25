@@ -11,7 +11,17 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
+          <div v-if="user._id && !site._id" class="modal-body">
+            <select class="form-control mySite-input" placeholder="Owner" required>
+              <option disabled value="">Choose Site</option>
+              <option v-for="mySite in mySites">{{mySite.name}}</option>
+            </select>
+            <select class="form-control myMember-input  mt-1" placeholder="Team Member" required>
+              <option disabled value="">Choose Site</option>
+              <option v-for="memberSite in memberSites">{{memberSite.name}}</option>
+            </select>
+          </div>
+          <div v-else class="modal-body">
             <form @submit.prevent="loginUser">
               <div class="modalform-group">
                 <label for="loginInputEmail1">Email address</label>
@@ -28,6 +38,7 @@
               <button type="submit" class="btn btn-primary">Login</button>
             </form>
           </div>
+
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
@@ -39,17 +50,18 @@
       <form @submit.prevent="registerUser">
         <div class="form-group">
           <label for="userNameInput">User Name</label>
-          <input v-model="creds.name" type="name" class="form-control" id="userNameInput" placeholder="User Name">
+          <input v-model="registerForm.name" type="name" class="form-control" id="userNameInput"
+            placeholder="User Name">
         </div>
         <div class="form-group">
           <label for="registerInputEmail1">Email address</label>
-          <input v-model="creds.email" type="email" class="form-control" id="registerInputEmail1"
+          <input v-model="registerForm.email" type="email" class="form-control" id="registerInputEmail1"
             aria-describedby="emailHelp" placeholder="Enter email">
           <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
           <label for="registerInputPassword1">Password</label>
-          <input v-model="creds.password" type="password" class="form-control" id="registerInputPassword1"
+          <input v-model="registerForm.password" type="password" class="form-control" id="registerInputPassword1"
             placeholder="Password">
           <small id="emailHelp" class="form-text text-muted">Password Must be at least 6 Characters</small>
         </div>
@@ -76,8 +88,7 @@
           email: "",
           password: "",
         },
-        registerForm: true,
-        creds: {
+        registerForm: {
           name: "",
           email: "",
           password: ""
@@ -87,9 +98,32 @@
     methods: {
       loginUser() {
         this.$store.dispatch("login", this.creds);
+
       },
       registerUser() {
         this.$store.dispatch("register", this.registerUser);
+      },
+      selectSite() {
+        this.$store.dispatch("selectSite")
+        // if (site._id) {
+        //   $("#exampleModal").modal("hide");
+        //   $(".modal-backdrop").remove();
+        // }
+      }
+    },
+    computed: {
+      user() {
+        return this.$store.state.user
+      },
+      site() {
+        return this.$store.state.site
+      },
+      mySites() {
+        return this.$store.state.sites.mySites
+      },
+      memberSites() {
+        return this.$store.state.sites.memberSites
+
       }
     },
     components: {

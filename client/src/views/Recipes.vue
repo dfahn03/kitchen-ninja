@@ -26,7 +26,7 @@
 
 <script>
   export default {
-    name: "recipes",
+    name: "Recipes",
     mounted() {
       this.$store.dispatch("getRecipes");
     },

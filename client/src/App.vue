@@ -98,6 +98,7 @@
         $("#wrapper").toggleClass("toggled");
         $("#page-content-wrapper").toggleClass("toggled")
       });
+      this.$store.authenticate
     },
     components: {
       Calculator

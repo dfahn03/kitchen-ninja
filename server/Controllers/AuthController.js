@@ -17,6 +17,7 @@ export default class AuthController {
             .use(Authorize.authenticated)
             .get('/authenticate', this.authenticate)
             .get('/:id', this.getUserByName)
+            // .get('/:id', this.getSitesForUser)
             .delete('/logout', this.logout)
             .use(this.defaultRoute)
     } //TODO if changing site make put route
@@ -109,6 +110,15 @@ export default class AuthController {
             next(error)
         }
     }
+    // Do we do this on Auth or On Site Controller
+    // async getSitesForUser(req, res, next) {
+    //     try {
+    //         let sites = await _siteService.findUserSites(req.session.uid)
+    //         // if (user) { throw new Error("Invalid Access") }
+    //         // let siteReq = await _service._findUserSite(req.params.id, req.session.uid)
+    //         res.send(sites)
+    //     } catch (err) { next(err) }
+    // }
     // async getUserSites(req, res, next) {
     //     try {
     //         let site = await _siteRepo.find({ userId: req.params.id })

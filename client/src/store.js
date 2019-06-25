@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
 import router from './router'
+import { runInNewContext } from 'vm';
 
 
 
@@ -24,6 +25,7 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
+    sites: {},
     site: {},
     user: {},
     ingredient: {},
@@ -32,6 +34,9 @@ export default new Vuex.Store({
     recipes: []
   },
   mutations: {
+    setSites(state, sites) {
+      state.sites = sites
+    },
     setSite(state, site) {
       state.site = site
     },
@@ -58,31 +63,41 @@ export default new Vuex.Store({
       auth.post('register', newUser)
         .then(res => {
           commit('setUser', res.data)
-          router.push({ name: 'dashboard' })
+          router.push({ name: 'Login' })
         })
     },
     authenticate({ commit, dispatch }) {
       auth.get('authenticate')
         .then(res => {
           commit('setUser', res.data)
-          if (router.currentRoute.name !== '') {
-            router.push({ name: 'dashboard' })
-          }
+          dispatch('selectSite', res.data._id)
+          // if (router.currentRoute.name !== 'cositng') {
+          //   router.push({ name: 'dashboard' })
+          // }
         })
         .catch(res => {
-          router.push({ name: 'dashboard' })
+          router.push({ name: 'Login' })
         })
     },
     login({ commit, dispatch }, creds) {
       auth.post('login', creds)
         .then(res => {
           commit('setUser', res.data)
-          router.push({ name: 'dashboard' })
+          dispatch('selectSite', res.data._id)
+          // router.push({ name: 'dashboard' })
         })
     },
-    // async selectSite({ commit, dispatch }, userId) {
-    //   let res = auth.
-    // },
+    async selectSite({ commit, dispatch }, userId) {
+      try {
+        let res = await api.get('sites/' + userId)
+        commit('setSite', res.data)
+        // router.push({ name: 'dashboard' })
+        console.log(res)
+      } catch (error) {
+        console.error(error)
+
+      }
+    },
     logout({ commit, dispatch }, creds) {
       auth.delete('logout', creds)
         .then(res => {
@@ -122,6 +137,7 @@ export default new Vuex.Store({
     async saveRecipe({ commit, dispatch }, newRecipe) {
       try {
         let res = api.post('recipes', newRecipe)
+        router.push({ name: 'Recipes' })
       } catch (err) { console.error(err) }
     },
 
