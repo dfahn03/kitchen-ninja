@@ -96,7 +96,7 @@
                         v-model="costPerRecipe" min="0" step=".01" required></li>
                     <li class="mt-2">Food Cost: $ </li>
                     <li v-if="salesPrice">Sales Price: $<input type="number" placeholder="0.00"
-                        class="totalP-input ml-1 mt-2" v-model="salesPriceA" required>{{this.salesPrice}}</li>
+                        class="totalP-input ml-1 mt-2" v-model="salesPriceA" required>{{this.salesPriceA}}</li>
                     <li v-else>Sales Price: $<input type="text" placeholder="0.00" class="totalP-input ml-1 mt-2"
                         v-model="salesPriceB" required></li>
                     <li class="mt-2">Profit: $</li>
@@ -107,6 +107,7 @@
               </div>
             </div>
           </div>
+          <button type="submit" class="btn btn-success">Save Recipe</button>
         </form>
       </div>
     </div>
