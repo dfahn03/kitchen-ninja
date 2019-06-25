@@ -109,6 +109,15 @@ export default class AuthController {
             next(error)
         }
     }
+    // async getUserSites(req, res, next) {
+    //     try {
+    //         let site = await _siteRepo.find({ userId: req.params.id })
+    //         return res.send(site)
+    //     } catch (error) {
+    //         next(error)
+
+    //     }
+    // }
 
     async logout(req, res, next) {
         try {
