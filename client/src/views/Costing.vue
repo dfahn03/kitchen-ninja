@@ -73,7 +73,7 @@
                 </thead>
                 <!-- <recipe-ingredient v-if="showForm" /> -->
                 <recipe-ingredient v-for="recipeIngredient in newRecipe.recipeIngredients"
-                  :recipeIngredient="recipeIngredient" :recipeIngredients="recipeIngredients" />
+                  :recipeIngredient="recipeIngredient" :recipeIngredients="newRecipe.recipeIngredients" />
               </table>
             </div>
             <div class="col-12">
@@ -93,24 +93,22 @@
                 </div>
                 <div class="col-6 text-white d-flex justify-content-center text-left">
                   <ul>
-                    <li>Total Cost: $<input type="number" placeholder="0.00" class="totalC-input ml-1 mt-2"
-                        v-model="newRecipe.costPerRecipe" min="0" step=".01" required></li>
+                    <li>Total Cost: $ {{newRecipe.costPerRecipe}}</li>
                     <li class="mt-2">Food Cost: $ </li>
-                    <li v-if="newRecipe.salesPriceA">Sales Price: $<input type="number" placeholder="0.00"
-                        class="totalP-input ml-1 mt-2" v-model="newRecipe.salesPriceA" required>
+                    <!-- TODO possibly recommended sales price -->
+                    <li>Sales Price: $<input type="number" placeholder="0.00" class="totalP-input ml-1 mt-2"
+                        v-model="newRecipe.salesPrice" required>
                     </li>
-                    <li v-else>Sales Price: $<input type="text" placeholder="0.00" class="totalP-input ml-1 mt-2"
-                        v-model="newRecipe.salesPriceB" required></li>
                     <li class="mt-2">Profit: $</li>
-                    <li class="mt-2">Profit Margin: ${{this.profitMargin}}</li>
+                    <li class="mt-2">Profit Margin: $</li>
                     <li class="mt-2">Markup: %</li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-success">Save Recipe</button>
-          <button type="button" class="btn btn-warning ml-1" @click="">Update Recipe</button>
+          <button v-if="!req.params.id" type="submit" class="btn btn-success">Save Recipe</button>
+          <button v-else type="submit" class="btn btn-warning ml-1">Update Recipe</button>
         </form>
       </div>
     </div>
@@ -125,8 +123,11 @@
     name: "Costing",
     mounted() {
       this.$store.dispatch('getIngredients')
+      if (this.id) {
+        this.newRecipe = this.$store.state.recipes.find(r => r._id == this.id)
+      }
     },
-    props: [],
+    props: ["id"],
     data() {
       return {
         newRecipe: {
@@ -140,9 +141,9 @@
           costPerRecipe: "",
           calories: "",
           allergens: [],
-          salesPriceA: "",
-          salesPriceB: ""
-        }
+          salesPrice: ""
+        },
+        salesPriceB: ""
         // use emits
       }
     },
@@ -183,17 +184,17 @@
           packageCost: "",
           distributor: "",
         }
-        this.recipeIngredients.push(newIngredient)
+        this.newRecipe.recipeIngredients.push(newIngredient)
         //TODO Fill this out to what the empty object is going to be in recipeIngredients
       },
       //TODO Find a better way to write this function below
       saveRecipe() {
-        if (!salesPriceA) {
-          this.newRecipe.salesPrice = this.salesPriceB
-        } else {
-          this.newRecipe.salesPrice = this.salesPriceA
-        }
-        this.$store.dispatch('saveRecipe', newRecipe)
+        // if (salesPrice == "") {
+        //   this.newRecipe.salesPrice = this.salesPriceB
+        // } else {
+        //   this.newRecipe.salesPrice = this.salesPrice
+        // }
+        this.$store.dispatch('saveRecipe', this.newRecipe)
         this.$router.push('Recipes')
       }
     },

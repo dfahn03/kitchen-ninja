@@ -27,5 +27,11 @@ export default new Router({
       name: 'Costing',
       component: Costing
     },
+    {
+      path: '/costing/:id',
+      name: 'CostingEdit',
+      props: true,
+      component: Costing
+    },
   ]
 })
