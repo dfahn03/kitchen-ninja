@@ -10,24 +10,25 @@
         <form @submit.prevent="saveRecipe">
           <div class="form-row">
             <div class="col-lg-12 d-flex justify-content-center">
-              <input type="text" class="form-control recipeName-input" placeholder="Recipe Name" v-model="name"
-                required>
-              <input type="number" class="form-control portions-input ml-1" placeholder="Portions" v-model="portions"
-                min="0" required>
+              <input type="text" class="form-control recipeName-input" placeholder="Recipe Name"
+                v-model="newRecipe.name" required>
+              <input type="number" class="form-control portions-input ml-1" placeholder="Portions"
+                v-model="newRecipe.portions" min="0" required>
               <input type="number" class="form-control portionS-input ml-1" placeholder="Portion Size"
-                v-model="portionSize" min="0" step=".5" required>
-              <select class="form-control portionU-input ml-1" placeholder="Portion Unit" v-model="portionUnit"
-                required>
+                v-model="newRecipe.portionSize" min="0" step=".5" required>
+              <select class="form-control portionU-input ml-1" placeholder="Portion Unit"
+                v-model="newRecipe.portionUnit" required>
                 <option disabled value="">Unit</option>
                 <option value="Yes">OZ</option>
                 <option value="No">EA</option>
               </select>
-              <select class="form-control side-input ml-1" placeholder="Side" v-model="side" required>
+              <select class="form-control side-input ml-1" placeholder="Side" v-model="newRecipie.side" required>
                 <option disabled value="">Side</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
-              <select class="form-control station-input ml-1" placeholder="Station" v-model="station" required>
+              <select class="form-control station-input ml-1" placeholder="Station" v-model="newRecipie.station"
+                required>
                 <option disabled value="">Choose Station</option>
                 <option value="Global">Global</option>
                 <option value="Grill">Grill</option>
@@ -41,10 +42,10 @@
                 <option value="Pizza">Pizza</option>
                 <option value="Chef's Choice">Chef's Choice</option>
               </select>
-              <input type="number" class="form-control calories-input ml-1" placeholder="Calories" v-model="calories"
-                min="0" required>
-              <input type="text" class="form-control allergens-input ml-1" placeholder="Allergens" v-model="allergens"
-                min="0" required>
+              <input type="number" class="form-control calories-input ml-1" placeholder="Calories"
+                v-model="newRecipe.calories" min="0" required>
+              <input type="text" class="form-control allergens-input ml-1" placeholder="Allergens"
+                v-model="newRecipe.allergens" min="0" required>
             </div>
             <!-- TODO Make allergens a button to add and then show checkboxes below to select all the allergens -->
             <div class="col-12">
@@ -71,8 +72,8 @@
                   </tr>
                 </thead>
                 <!-- <recipe-ingredient v-if="showForm" /> -->
-                <recipe-ingredient v-for="recipeIngredient in recipeIngredients" :recipeIngredient="recipeIngredient"
-                  :recipeIngredients="recipeIngredients" />
+                <recipe-ingredient v-for="recipeIngredient in newRecipe.recipeIngredients"
+                  :recipeIngredient="recipeIngredient" :recipeIngredients="recipeIngredients" />
               </table>
             </div>
             <div class="col-12">
@@ -93,12 +94,13 @@
                 <div class="col-6 text-white d-flex justify-content-center text-left">
                   <ul>
                     <li>Total Cost: $<input type="number" placeholder="0.00" class="totalC-input ml-1 mt-2"
-                        v-model="costPerRecipe" min="0" step=".01" required></li>
+                        v-model="newRecipe.costPerRecipe" min="0" step=".01" required></li>
                     <li class="mt-2">Food Cost: $ </li>
-                    <li v-if="salesPrice">Sales Price: $<input type="number" placeholder="0.00"
-                        class="totalP-input ml-1 mt-2" v-model="salesPriceA" required>{{this.salesPriceA}}</li>
+                    <li v-if="salesPriceA">Sales Price: $<input type="number" placeholder="0.00"
+                        class="totalP-input ml-1 mt-2" v-model="newRecipe.salesPriceA" required>{{this.salesPriceA}}
+                    </li>
                     <li v-else>Sales Price: $<input type="text" placeholder="0.00" class="totalP-input ml-1 mt-2"
-                        v-model="salesPriceB" required></li>
+                        v-model="newRecipe.salesPriceB" required></li>
                     <li class="mt-2">Profit: $</li>
                     <li class="mt-2">Profit Margin: ${{this.profitMargin}}</li>
                     <li class="mt-2">Markup: %</li>
@@ -108,6 +110,7 @@
             </div>
           </div>
           <button type="submit" class="btn btn-success">Save Recipe</button>
+          <button type="button" class="btn btn-warning ml-1" @click="">Update Recipe</button>
         </form>
       </div>
     </div>
@@ -126,18 +129,20 @@
     props: [],
     data() {
       return {
-        recipeIngredients: [],
-        station: "",
-        side: "",
-        name: "",
-        portions: "",
-        portionSize: "",
-        portionUnit: "",
-        costPerRecipe: "",
-        calories: "",
-        allergens: [],
-        salesPriceA: "",
-        salesPriceB: "",
+        newRecipe: {
+          recipeIngredients: [],
+          station: "",
+          side: "",
+          name: "",
+          portions: "",
+          portionSize: "",
+          portionUnit: "",
+          costPerRecipe: "",
+          calories: "",
+          allergens: [],
+          salesPriceA: "",
+          salesPriceB: ""
+        }
         // use emits
       }
     },
@@ -184,37 +189,9 @@
       //TODO Find a better way to write this function below
       saveRecipe() {
         if (!salesPriceA) {
-          let newRecipe = {
-            name: this.name,
-            station: this.station,
-            side: this.side,
-            portions: this.portions,
-            portionSize: this.portionSize,
-            portionUnit: this.portionUnit,
-            costPerRecipe: this.costPerRecipe,
-            calories: this.calories,
-            allergens: this.allergens,
-            salesPriceB: this.salesPriceB,
-            ingredients: this.recipeIngredients,
-            // siteId: id,
-            //TODO get the ID to work and make it the actual site id
-          }
+          this.newRecipe.salesPrice = this.salesPriceB
         } else {
-          let newRecipe = {
-            name: this.name,
-            station: this.station,
-            side: this.side,
-            portions: this.portions,
-            portionSize: this.portionSize,
-            portionUnit: this.portionUnit,
-            costPerRecipe: this.costPerRecipe,
-            calories: this.calories,
-            allergens: this.allergens,
-            salesPriceB: this.salesPriceA,
-            ingredients: this.recipeIngredients,
-            // siteId: id,
-            //TODO get the ID to work and make it the actual site id
-          }
+          this.newRecipe.salesPrice = this.salesPriceA
         }
         this.$store.dispatch('saveRecipe', newRecipe)
         this.$router.push('Recipes')
