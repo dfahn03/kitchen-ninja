@@ -22,12 +22,12 @@
                 <option value="Yes">OZ</option>
                 <option value="No">EA</option>
               </select>
-              <select class="form-control side-input ml-1" placeholder="Side" v-model="newRecipie.side" required>
+              <select class="form-control side-input ml-1" placeholder="Side" v-model="newRecipe.side" required>
                 <option disabled value="">Side</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
-              <select class="form-control station-input ml-1" placeholder="Station" v-model="newRecipie.station"
+              <select class="form-control station-input ml-1" placeholder="Station" v-model="newRecipe.station"
                 required>
                 <option disabled value="">Choose Station</option>
                 <option value="Global">Global</option>
