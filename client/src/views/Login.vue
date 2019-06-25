@@ -84,7 +84,6 @@
     },
     methods: {
       loginUser() {
-        debugger
         this.$store.dispatch("login", this.creds);
       },
       registerUser() {

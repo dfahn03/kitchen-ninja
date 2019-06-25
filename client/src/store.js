@@ -81,7 +81,7 @@ export default new Vuex.Store({
       auth.delete('logout', creds)
         .then(res => {
           commit('setUser', {})
-          router.push({ name: 'dashboard' })
+          router.push({ name: 'Login' })
         })
     },
     //#endregion

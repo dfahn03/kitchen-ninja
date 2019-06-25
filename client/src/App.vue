@@ -4,7 +4,8 @@
     <div class="container-fluid" id="navbar">
       <ul class="navbar">
         <li class="d-flex justify-content:flex-start;"><a href="#sidebar-wrapper" role="button" aria-expanded="false"
-            class="btn btn-outline-secondary" data-toggle="#wrapper" aria-controls="wrapper" id="menu-toggle"><img
+            class="btn btn-outline-secondary" data-toggle="#wrapper #page-content-wrapper"
+            aria-controls="wrapper page-content-wrapper" id="menu-toggle"><img
               src="../src/assets/iconFinalLeaf.png"></a></li>
         <router-link to='/'><img src="../src/assets/finalLogo2.png"></router-link>
         <!-- https://img.icons8.com/office/16/000000/leaf.png -->
@@ -22,20 +23,10 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a @click='logout' class="dropdown-item" href="#">Logout</a>
-              <a class="dropdown-item" href="#">Admin Options</a>
+              <a v-if='role = Admin' class="dropdown-item" href="#">Admin Options</a>
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </div>
-          <!-- User Account Options -->
-          <!-- <div class="dropdown">
-            <a href="#" class="btn btn-outline-secondary dropdown-toggle" role="button" id="dropdownMenuLink"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a href="#" class="dropdown-menu">Logout</a>
-              <a href="#" class="dropdown-menu">Adim Options</a>
-              <a href="#" class="dropdown-menu"></a> -->
-          <!-- </div>
-          </div> -->
         </li>
       </ul>
       <!-- Login Modal -->
@@ -78,8 +69,10 @@
       </div>
       <!-- Page Content -->
     </div>
-    <div class='container-fluid' id="page-content-wrapper">
-      <router-view />
+    <div id="page-content-wrapper">
+      <div class="container">
+        <router-view />
+      </div>
     </div>
   </div>
 </template>
@@ -103,6 +96,7 @@
       $("#menu-toggle").click(function (e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
+        $("#page-content-wrapper").toggleClass("toggled")
       });
     },
     components: {
@@ -159,8 +153,9 @@
   #page-content-wrapper {
     position: absolute;
     margin-top: 80px;
-    /* margin-left: 250px;
-    margin-right: -250px; */
+    /* padding-left: 250px; */
+    /* margin-left: 250px; */
+    /* margin-right: -250px; */
     width: 100%;
     padding: 15px;
     border: 5px #fff;
