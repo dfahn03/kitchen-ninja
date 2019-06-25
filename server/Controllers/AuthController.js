@@ -106,7 +106,7 @@ export default class AuthController {
             let user = await _repo.find({ name: req.params.id })
             return res.send(user)
         } catch (error) {
-            console.error(error)
+            next(error)
         }
     }
 

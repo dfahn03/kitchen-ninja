@@ -15,8 +15,27 @@
 
         </li>
         <li>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="../src/assets/menuButton2.png" alt="" srcset="">
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a @click='logout' class="dropdown-item" href="#">Logout</a>
+              <a class="dropdown-item" href="#">Admin Options</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
           <!-- User Account Options -->
-          <a href="#" class="btn btn-outline-secondary"><img src="../src/assets/menuButton2.png" alt="" srcset=""></a>
+          <!-- <div class="dropdown">
+            <a href="#" class="btn btn-outline-secondary dropdown-toggle" role="button" id="dropdownMenuLink"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a href="#" class="dropdown-menu">Logout</a>
+              <a href="#" class="dropdown-menu">Adim Options</a>
+              <a href="#" class="dropdown-menu"></a> -->
+          <!-- </div>
+          </div> -->
         </li>
       </ul>
       <!-- Login Modal -->
@@ -75,7 +94,11 @@
   // })
   export default {
 
-
+    methods: {
+      logout() {
+        this.$store.dispatch('logout', this.creds)
+      }
+    },
     mounted() {
       $("#menu-toggle").click(function (e) {
         e.preventDefault();
@@ -151,8 +174,6 @@
   #wrapper.toggled #page-content-wrapper {
     padding-left: 250px;
   }
-
-  .modal {}
 
   .sidebar-nav {
     padding: 0;

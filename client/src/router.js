@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+// @ts-ignore
 import Dashboard from './views/Dashboard.vue'
+// @ts-ignore
 import Costing from './views/Costing.vue'
+// @ts-ignore
 import Login from './views/Login.vue'
 
 
