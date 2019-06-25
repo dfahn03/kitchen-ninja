@@ -9,7 +9,7 @@ new Vue({
   router,
   store,
   render: function (h) { return h(App) },
-  mounted() {
-    store.dispatch('getFoodTest')
-  }
+  // mounted() {
+  //   store.dispatch('getFoodTest')
+  //
 }).$mount('#app')
