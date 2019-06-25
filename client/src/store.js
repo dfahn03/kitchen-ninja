@@ -80,9 +80,9 @@ export default new Vuex.Store({
           router.push({ name: 'dashboard' })
         })
     },
-    async selectSite({ commit, dispatch }, userId) {
-      let res = auth.
-    },
+    // async selectSite({ commit, dispatch }, userId) {
+    //   let res = auth.
+    // },
     logout({ commit, dispatch }, creds) {
       auth.delete('logout', creds)
         .then(res => {
