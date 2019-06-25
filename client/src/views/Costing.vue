@@ -93,9 +93,9 @@
                 </div>
                 <div class="col-6 text-white d-flex justify-content-center text-left">
                   <ul>
-                    <li>Total Cost: $<input type="number" placeholder="0.00" class="totalC-input ml-1 mt-2"
-                        v-model="newRecipe.costPerRecipe" min="0" step=".01" required></li>
+                    <li>Total Cost: $ {{newRecipe.costPerRecipe}}</li>
                     <li class="mt-2">Food Cost: $ </li>
+                    <!-- possibly recommended sales price -->
                     <li>Sales Price: $<input type="number" placeholder="0.00" class="totalP-input ml-1 mt-2"
                         v-model="newRecipe.salesPrice" required>
                     </li>
@@ -125,7 +125,6 @@
     name: "Costing",
     mounted() {
       this.$store.dispatch('getIngredients')
-      this.newRecipe
     },
     props: [],
     data() {
