@@ -96,8 +96,8 @@
                     <li>Total Cost: $<input type="number" placeholder="0.00" class="totalC-input ml-1 mt-2"
                         v-model="newRecipe.costPerRecipe" min="0" step=".01" required></li>
                     <li class="mt-2">Food Cost: $ </li>
-                    <li v-if="salesPriceA">Sales Price: $<input type="number" placeholder="0.00"
-                        class="totalP-input ml-1 mt-2" v-model="newRecipe.salesPriceA" required>{{this.salesPriceA}}
+                    <li v-if="newRecipe.salesPriceA">Sales Price: $<input type="number" placeholder="0.00"
+                        class="totalP-input ml-1 mt-2" v-model="newRecipe.salesPriceA" required>
                     </li>
                     <li v-else>Sales Price: $<input type="text" placeholder="0.00" class="totalP-input ml-1 mt-2"
                         v-model="newRecipe.salesPriceB" required></li>
