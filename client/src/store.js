@@ -119,10 +119,9 @@ export default new Vuex.Store({
           commit('setRecipes', res.data)
         })
     },
-    async saveRecipe({ commit, dispatch }, recipeData) {
+    async saveRecipe({ commit, dispatch }, newRecipe) {
       try {
-        let res = api.post('recipes', recipeData)
-        dispatch('getRecipes')
+        let res = api.post('recipes', newRecipe)
       } catch (err) { console.error(err) }
     },
 
