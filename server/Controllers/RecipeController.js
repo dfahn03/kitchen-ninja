@@ -29,6 +29,7 @@ export default class RecipeController {
   async getAll(req, res, next) { //get YOUR Recipe
     try {
       //only gets Recipe by user who is logged in
+      let siteId = req.query.siteId
       let data = await _recipeRepo.find()
       return res.send(data)
     } catch (err) { next(err) }
