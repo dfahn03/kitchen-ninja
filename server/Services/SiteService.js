@@ -37,6 +37,7 @@ export default class SiteService {
 
 
   async findUserSites(userId) {
+    //Finds all sites that contains a specific usersID
     let mySites = await this.repository.find({ userId })
     let sitesThatIBelongTo = await _siteUserRepo.find({ userId })
     let memberSites = await Promise.all(sitesThatIBelongTo.map(s => this.repository.findById(s.siteId)))

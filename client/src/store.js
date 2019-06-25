@@ -24,6 +24,7 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
+    site: {},
     user: {},
     ingredient: {},
     ingredients: [],
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     recipes: []
   },
   mutations: {
+    setSite(state, site) {
+      state.site = site
+    },
     setUser(state, user) {
       state.user = user
     },
@@ -76,7 +80,9 @@ export default new Vuex.Store({
           router.push({ name: 'dashboard' })
         })
     },
-
+    async selectSite({ commit, dispatch }, userId) {
+      let res = auth.
+    },
     logout({ commit, dispatch }, creds) {
       auth.delete('logout', creds)
         .then(res => {
