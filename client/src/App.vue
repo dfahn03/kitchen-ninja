@@ -68,10 +68,11 @@
         </ul>
       </div>
       <!-- Page Content -->
-    </div>
-    <div id="page-content-wrapper">
-      <div class="container">
-        <router-view />
+
+      <div id="page-content-wrapper">
+        <div class="container">
+          <router-view />
+        </div>
       </div>
     </div>
   </div>
@@ -169,6 +170,7 @@
 
   #wrapper.toggled #page-content-wrapper {
     padding-left: 250px;
+    z-index: -1;
   }
 
   .sidebar-nav {

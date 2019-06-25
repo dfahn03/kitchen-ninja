@@ -54,7 +54,7 @@
     </div>
     <div class="row">
       <div class="col-12 mt-5">
-        <blog />
+        <blog-list />
       </div>
     </div>
   </div>
@@ -63,7 +63,7 @@
 
 
 <script>
-  import Blog from '@/components/Blog.vue'
+  import BlogList from '@/components/BlogList.vue'
 
   export default {
     name: "dashboard",
@@ -72,20 +72,20 @@
         content: '',
         title: '',
         author: '',
-        img: '',
+        image: '',
         showModal: false
       }
     },
     components: {
-      Blog
+      BlogList
     },
     methods: {
       enterBlog() {
         let data = {
           title: this.title,
-          body: this.body,
-          img: this.img,
-          user: this.user,
+          content: this.content,
+          image: this.image,
+          user: this.name
         }
         this.$store.dispatch('createBlog', data)
         this.blog = ''
@@ -95,11 +95,6 @@
 </script>
 
 <style>
-  .card {
-    background-color: whitesmoke;
-  }
 
-  .create-blog {
-    padding-top: 125px;
-  }
+
 </style>
