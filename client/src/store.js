@@ -83,20 +83,28 @@ export default new Vuex.Store({
       auth.post('login', creds)
         .then(res => {
           commit('setUser', res.data)
-          dispatch('selectSite', res.data._id)
+          dispatch('getUserSites', res.data._id)
           // router.push({ name: 'dashboard' })
         })
     },
-    async selectSite({ commit, dispatch }, userId) {
+    async getUserSites({ commit, dispatch }, userId) {
       try {
         let res = await api.get('sites/' + userId)
-        commit('setSite', res.data)
-        // router.push({ name: 'dashboard' })
+        commit('setSites', res.data)
         console.log(res)
       } catch (error) {
         console.error(error)
 
       }
+    },
+    async selectSite({ commit, dispatch }, siteId) {
+      try {
+        let res = await api.get('sites/' + siteId)
+        commit('setSite', res.data)
+        console.log(res)
+        router.push({ name: 'dashboard' })
+
+      } catch (error) { console.error(error) }
     },
     logout({ commit, dispatch }, creds) {
       auth.delete('logout', creds)
