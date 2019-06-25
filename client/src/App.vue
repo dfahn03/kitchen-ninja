@@ -23,7 +23,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a @click='logout' class="dropdown-item" href="#">Logout</a>
-              <a v-if='role = Admin' class="dropdown-item" href="#">Admin Options</a>
+              <a class="dropdown-item" href="#">Admin Options</a>
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </div>
