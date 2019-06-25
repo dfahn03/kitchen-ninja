@@ -7,7 +7,7 @@
       </td>
       <td><select class="form-control category-input" placeholder="Category" v-model="recipeIngredient.category"
           required>
-          <option disabled value="">Choose Category</option>
+          <option disabled value="">Category</option>
           <option value="Bakery">Bakery</option>
           <option value="Dairy">Dairy</option>
           <option value="Frozen">Frozen</option>
@@ -108,9 +108,9 @@
         return costEA
       },
       ingredientCostCalc() {
-        this.$store.dispatch(costPer, payload)
+        // this.$store.dispatch(costPer, payload)
         //TODO finish filling this out so it will auto populate ingredient cost
-        return size / cost * qquantity
+        // return size / cost * qquantity
       },
 
     },
