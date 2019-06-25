@@ -12,51 +12,14 @@
         <li>
         </li>
         <li>
-          <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">Login</button>
+
         </li>
         <li><a href="#" class="btn btn-outline-secondary"><img src="../src/assets/menuButton2.png" alt="" srcset=""></a>
         </li>
       </ul>
       <!-- Login Modal -->
 
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form @submit.prevent="loginUser">
-                <div class="modalform-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input v-model="creds.email" type="email" class="form-control" id="exampleInputEmail1"
-                    aria-describedby="emailHelp" placeholder="Enter email">
-                  <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                    else.</small>
-                </div>
-                <div class="modal-form-group">
-                  <label for="exampleInputPassword1">Password</label>
-                  <input v-model="creds.password" type="password" class="form-control" id="exampleInputPassword1"
-                    placeholder="Password">
-                </div>
-                <div class="modal-form-group">
-                  <label for="exampleInputPassword1">Site Code</label>
-                  <input v-model="creds.passcode" type="password" class="form-control" id="exampleInputPassword1"
-                    placeholder="Site Code">
-                </div>
-              </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Login</button>
-            </div>
-          </div>
-        </div>
-      </div>
+
       <!-- Login Form -->
     </div>
     <div id="wrapper">
@@ -109,21 +72,8 @@
   //   $('#myInput').trigger('focus')
   // })
   export default {
-    data() {
-      return {
-        loginForm: true,
-        creds: {
-          email: "",
-          password: "",
-          passcode: "",
-        }
-      }
-    },
-    methods: {
-      loginUser() {
-        this.$store.dispatch("login", this.creds);
-      }
-    },
+
+
     mounted() {
       $("#menu-toggle").click(function (e) {
         e.preventDefault();

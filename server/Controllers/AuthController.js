@@ -32,14 +32,15 @@ export default class AuthController {
             return res.status(400).send({
                 error: 'Password must be at least 6 characters'
             })
-        } //TODO change password requirement to 10 characters
-        let site = await _siteRepo.findById(req.body.siteId)
-        if (!site || req.body.sitePasscode !== site.passcode) {
-            return res.status(400).send({
-                error: 'Incorrect Passcode or Site ID'
-            })
-
         }
+        //TODO change password requirement to 10 characters
+        // let site = await _siteRepo.findById(req.body.siteId)
+        // if (!site || req.body.sitePasscode !== site.passcode) {
+        //     return res.status(400).send({
+        //         error: 'Incorrect Passcode or Site ID'
+        //     })
+
+        // }
         try {
             //CHANGE THE PASSWORD TO A HASHED PASSWORD
             req.body.hash = _us.generateHash(req.body.password)
@@ -68,6 +69,11 @@ export default class AuthController {
             if (!valid) {
                 return res.status(400).send("Invalid Username Or Password")
             }
+
+            // if (user.siteCode != req.body.passcode) {
+            //     return res.status(400).send("Invalid Username Or Password")
+            // }
+
             //ALWAYS REMOVE THE PASSWORD FROM THE USER OBJECT
             delete user._doc.hash
             req.session.uid = user._id
