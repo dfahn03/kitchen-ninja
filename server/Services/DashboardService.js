@@ -1,15 +1,16 @@
 import mongoose from "mongoose"
-import { stringify } from "querystring";
+// import { stringify } from "querystring";
 const Schema = mongoose.Schema
-const objectId = Schema.Types.ObjectId
+const ObjectId = Schema.Types.ObjectId
 
 let _schema = new Schema({
-  title: { type: stringify, required: true, default: "no desc" },
-  authorId: { type: objectId, ref: 'User', required: true },
-  content: { type: Text, required: true, default: "this post needs some content" },
-  image: { type: Image, required: false, default: "https://www.fairfaxcounty.gov/news2/wp-content/uploads/2016/05/meal.jpg" }
+  title: { type: String, required: true, default: "no desc" },
+  authorId: { type: ObjectId, ref: 'User', required: true },
+  content: { type: String, required: true, default: "this post needs some content" },
+  image: { type: ObjectId, required: false }
 })
-
+// TODO insert default image
+// default: "https://www.fairfaxcounty.gov/news2/wp-content/uploads/2016/05/meal.jpg"
 
 export default class DashboardService {
   get repository() {
