@@ -14,7 +14,9 @@
         <li>
 
         </li>
-        <li><a href="#" class="btn btn-outline-secondary"><img src="../src/assets/menuButton2.png" alt="" srcset=""></a>
+        <li>
+          <!-- User Account Options -->
+          <a href="#" class="btn btn-outline-secondary"><img src="../src/assets/menuButton2.png" alt="" srcset=""></a>
         </li>
       </ul>
       <!-- Login Modal -->

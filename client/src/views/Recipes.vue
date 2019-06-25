@@ -1,5 +1,5 @@
 <template>
-  <div class="container-fluid recipes">
+  <div class="container-fluid recipes" v-for="recipe in recipes" :key="recipe._id">
     <div class="row">
       <div class="col">
         <div class="card text-center">
@@ -7,11 +7,18 @@
           <div class="card-body">
             <h5 class="card-title">{{recipe.portionSize}}</h5>
             <p class="card-text">{{recipe.costPerPortion}}</p>
-            <!-- TODO check the above two routes for exact names -->
-            <button class="btn btn-primary">Go somewhere</button>
-            <button class="btn btn-primary">Go somewhere</button>
+            <!-- TODO check the above route for exact name/function -->
+            <button class="btn btn-secondary" @click="openRecipe(recipe._id)">Show Recipe</button>
+            <button class="btn btn-danger" @click="deleteRecipe(recipe._id)">Delete Recipe</button>
           </div>
         </div>
+      </div>
+    </div>
+    <slot></slot>
+    <!-- TODO slot for recipe modal -->
+    <div class="row">
+      <div class="col">
+        <button class="btn btn-warning" @click="addRecipe()">Add Recipe</button>
       </div>
     </div>
   </div>
@@ -25,11 +32,6 @@
     },
     data() {
       return {
-        // newBoard: {
-        //   title: "",
-        //   description: ""
-        // },
-        // showForm: false,
       };
     },
     created() {
@@ -44,15 +46,11 @@
       }
     },
     methods: {
-      // addBoard() {
-      //   this.$store.dispatch("addBoard", this.newBoard);
-      //   this.newBoard = { title: "", description: "" };
-      // },
-      deleteRecipe(boardId) {
-        this.$store.dispatch("deleteRecipe", recipeId);
+      addRecipe() {
+        this.$router.push({ name: 'Costing' })
       },
-      userLogOut() {
-        this.$store.dispatch('logout')
+      deleteRecipe(recipeId) {
+        this.$store.dispatch("deleteRecipe", recipeId);
       },
       openRecipe(recipeId) {
         this.$router.push({ name: 'recipe', params: { recipeId } })
