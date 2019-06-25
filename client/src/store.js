@@ -23,6 +23,8 @@ let api = Axios.create({
   withCredentials: true
 })
 
+let SID = "?siteId"
+
 export default new Vuex.Store({
   state: {
     sites: {},
@@ -39,6 +41,7 @@ export default new Vuex.Store({
       state.sites = sites
     },
     setSite(state, site) {
+      SID = "?siteId=" + site._id
       state.site = site
     },
     setUser(state, user) {
@@ -135,14 +138,14 @@ export default new Vuex.Store({
     async getBlogs({ commit }) {
       try {
         let res = await api.get('')
-        commit('setBlogs', res.data.data)
+        commit('setBlogs' + SID, res.data.data)
       } catch (error) {
         console.error('Blog was not created')
       }
     },
     async createBlog({ commit, dispatch }, payload) {
       try {
-        let res = await api.post('', payload)
+        let res = await api.post('' + SID, payload)
         dispatch('getBlogs', res.data.data)
       } catch (error) {
         console.error('Blog was not created')
@@ -150,12 +153,12 @@ export default new Vuex.Store({
     },
     async editBlog({ commit, dispatch }, payload) {
       try {
-        await api.put('blogs/' + payload._id, payload)
+        await api.put('blogs/' + SID + payload._id, payload)
         dispatch('getBlogs')
       } catch (error) { console.error(error) }
     },
     deleteBlog({ commit, dispatch }, blogId) {
-      api.delete('blogs/' + blogId)
+      api.delete('blogs/' + SID + blogId)
         .then(res => {
           dispatch('getBlogs')
         })
@@ -170,12 +173,12 @@ export default new Vuex.Store({
     getRecipes({ commit, dispatch }) {
       api.get('recipes')
         .then(res => {
-          commit('setRecipes', res.data)
+          commit('setRecipes' + SID, res.data)
         })
     },
     async saveRecipe({ commit, dispatch }, newRecipe) {
       try {
-        let res = api.post('recipes', newRecipe)
+        let res = api.post('recipes' + SID, newRecipe)
         router.push({ name: 'Recipes' })
       } catch (err) { console.error(err) }
     },
@@ -196,7 +199,7 @@ export default new Vuex.Store({
     // TODO this works differently, so set up when modal idea developed
     // },
     deleteRecipe({ commit, dispatch }, recipeId) {
-      api.delete('recipes/' + recipeId)
+      api.delete('recipes/' + SID + recipeId)
         .then(res => {
           dispatch('getRecipes')
         })
@@ -204,7 +207,7 @@ export default new Vuex.Store({
 
     async editRecipe({ commit, dispatch }, payload) {
       try {
-        await api.put('recipes/' + payload._id, payload)
+        await api.put('recipes/' + SID + payload._id, payload)
         dispatch('getRecipes')
       } catch (error) { console.error(error) }
     },

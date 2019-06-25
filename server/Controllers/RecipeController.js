@@ -30,7 +30,7 @@ export default class RecipeController {
     try {
       //only gets Recipe by user who is logged in
       let siteId = req.query.siteId
-      let data = await _recipeRepo.find()
+      let data = await _recipeRepo.find({ siteId })
       return res.send(data)
     } catch (err) { next(err) }
   }
