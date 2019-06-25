@@ -25,11 +25,11 @@
                 <input v-model="creds.password" type="password" class="form-control" id="loginInputPassword1"
                   placeholder="Password">
               </div>
+              <button type="submit" class="btn btn-primary">Login</button>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Login</button>
           </div>
         </div>
       </div>
@@ -39,17 +39,18 @@
       <form @submit.prevent="registerUser">
         <div class="form-group">
           <label for="userNameInput">User Name</label>
-          <input type="name" class="form-control" id="userNameInput" placeholder="User Name">
+          <input v-model="creds.name" type="name" class="form-control" id="userNameInput" placeholder="User Name">
         </div>
         <div class="form-group">
           <label for="registerInputEmail1">Email address</label>
-          <input type="email" class="form-control" id="registerInputEmail1" aria-describedby="emailHelp"
-            placeholder="Enter email">
+          <input v-model="creds.email" type="email" class="form-control" id="registerInputEmail1"
+            aria-describedby="emailHelp" placeholder="Enter email">
           <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
         </div>
         <div class="form-group">
           <label for="registerInputPassword1">Password</label>
-          <input type="password" class="form-control" id="registerInputPassword1" placeholder="Password">
+          <input v-model="creds.password" type="password" class="form-control" id="registerInputPassword1"
+            placeholder="Password">
           <small id="emailHelp" class="form-text text-muted">Password Must be at least 6 Characters</small>
         </div>
 
