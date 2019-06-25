@@ -119,7 +119,9 @@
 
   export default {
     name: "Costing",
-    mounted() { },
+    mounted() {
+      this.$store.dispatch('getIngredients')
+    },
     props: [],
     data() {
       return {
@@ -135,9 +137,6 @@
         allergens: [],
         salesPriceA: "",
         salesPriceB: "",
-
-
-
         // use emits
       }
     },
@@ -194,7 +193,10 @@
             costPerRecipe: this.costPerRecipe,
             calories: this.calories,
             allergens: this.allergens,
-            salesPriceB: this.salesPriceB
+            salesPriceB: this.salesPriceB,
+            ingredients: this.recipeIngredients,
+            // siteId: id,
+            //TODO get the ID to work and make it the actual site id
           }
         } else {
           let newRecipe = {
@@ -207,9 +209,14 @@
             costPerRecipe: this.costPerRecipe,
             calories: this.calories,
             allergens: this.allergens,
-            salesPriceB: this.salesPriceA
+            salesPriceB: this.salesPriceA,
+            ingredients: this.recipeIngredients,
+            // siteId: id,
+            //TODO get the ID to work and make it the actual site id
           }
         }
+        this.$store.dispatch('saveRecipe', newRecipe)
+        this.$router.push('Recipes')
       }
     },
     components: {
