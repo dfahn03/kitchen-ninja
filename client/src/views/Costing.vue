@@ -16,19 +16,17 @@
                 v-model="newRecipe.portions" min="0" required>
               <input type="number" class="form-control portionS-input ml-1" placeholder="Portion Size"
                 v-model="newRecipe.portionSize" min="0" step=".5" required>
-              <select class="form-control portionU-input ml-1" placeholder="Portion Unit"
-                v-model="newRecipe.portionUnit" required>
+              <select class="form-control portionU-input ml-1" v-model="newRecipe.portionUnit" required>
                 <option disabled value="">Unit</option>
                 <option value="Yes">OZ</option>
                 <option value="No">EA</option>
               </select>
-              <select class="form-control side-input ml-1" placeholder="Side" v-model="newRecipe.side" required>
+              <select class="form-control side-input ml-1" v-model="newRecipe.side" required>
                 <option disabled value="">Side</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>
               </select>
-              <select class="form-control station-input ml-1" placeholder="Station" v-model="newRecipe.station"
-                required>
+              <select class="form-control station-input ml-1" v-model="newRecipe.station" required>
                 <option disabled value="">Choose Station</option>
                 <option value="Global">Global</option>
                 <option value="Grill">Grill</option>
