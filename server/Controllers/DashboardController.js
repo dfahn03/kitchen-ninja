@@ -1,6 +1,6 @@
-import DashboardService from '../Services/DashboardService.js'
+import DashboardService from '../services/DashboardService'
 import express from 'express'
-// import { Authorize } from '../middlewear/authorize'
+import { Authorize } from '../middlewear/authorize'
 
 let _service = new DashboardService()
 let _dashboardRepo = _service.repository
@@ -9,9 +9,9 @@ export default class DashboardController {
 
   constructor() {
     this.router = express.Router()
+      .use(Authorize.authenticated) //move back to top after functioning
       .get('', this.getAll)
       .get('/:id', this.getById)
-      // .use(Authorize.authenticated) move back to top after functioning
       .delete('/:id', this.delete)
       .post('', this.create)
       .put('/:id', this.edit)
