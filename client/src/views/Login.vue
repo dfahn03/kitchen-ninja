@@ -64,7 +64,7 @@
     <!-- Register New User Form -->
     <div class="card d-inline-flex col-4 offset-4" id="registerForm">
       <form @submit.prevent="registerUser">
-        <div class="form-group">
+        <div class="form-group mt-2">
           <label for="userNameInput">User Name</label>
           <input v-model="registerForm.name" type="name" class="form-control" id="userNameInput"
             placeholder="User Name">
@@ -82,8 +82,8 @@
           <small id="emailHelp" class="form-text text-muted">Password Must be at least 6 Characters</small>
         </div>
 
-        <button type="submit" class="btn btn-primary">Create Account</button>
-        <button type="button" class="btn btn-outline-secondary ml-1" data-toggle="modal"
+        <button type="submit" class="btn btn-primary mb-1">Create Account</button>
+        <button type="button" class="btn btn-outline-secondary ml-1 mb-1" data-toggle="modal"
           data-target="#exampleModal">Login</button>
       </form>
     </div>
