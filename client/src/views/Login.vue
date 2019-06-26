@@ -51,7 +51,7 @@
                 <input v-model="creds.password" type="password" class="form-control" id="loginInputPassword1"
                   placeholder="Password">
               </div>
-              <button type="submit" class="btn btn-primary">Login</button>
+              <button type="submit" class="btn btn-primary mt-2">Login</button>
             </form>
           </div>
 
@@ -64,7 +64,7 @@
     <!-- Register New User Form -->
     <div class="card d-inline-flex col-4 offset-4" id="registerForm">
       <form @submit.prevent="registerUser">
-        <div class="form-group">
+        <div class="form-group mt-2">
           <label for="userNameInput">User Name</label>
           <input v-model="registerForm.name" type="name" class="form-control" id="userNameInput"
             placeholder="User Name">
@@ -82,8 +82,9 @@
           <small id="emailHelp" class="form-text text-muted">Password Must be at least 6 Characters</small>
         </div>
 
-        <button type="submit" class="btn btn-primary">Create Account</button>
-        <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">Login</button>
+        <button type="submit" class="btn btn-primary mb-1">Create Account</button>
+        <button type="button" class="btn btn-outline-secondary ml-1 mb-1" data-toggle="modal"
+          data-target="#exampleModal">Login</button>
       </form>
     </div>
     <!-- Site Selector -->
@@ -95,7 +96,6 @@
   // @ is an alias to /src
 
   export default {
-
     name: 'Login',
     data() {
       return {
@@ -109,17 +109,16 @@
           email: "",
           password: ""
         },
-        siteId: ''
+        siteId: ""
       }
-
     },
     methods: {
       loginUser() {
         this.$store.dispatch("login", this.creds);
-
       },
       registerUser() {
-        this.$store.dispatch("register", this.registerUser);
+        debugger
+        this.$store.dispatch("register", this.registerForm);
       },
       selectSite(e) {
         let site = e.target.value
@@ -141,13 +140,9 @@
       },
       memberSites() {
         return this.$store.state.sites.memberSites
-
       }
     },
-    components: {
-
-    },
-
+    components: {},
   }
 </script>
 

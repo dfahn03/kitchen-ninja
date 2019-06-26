@@ -49,7 +49,6 @@
             <div class="col-12">
               <button type="button" class="btn addIng-btn text-white my-2" @click="addIngredient">Add
                 Ingredient <img src="../assets/icons8-plus-25.png" alt="Plus Icon" class="ml-1"></button>
-              <!-- TODO re-color icon/button to make same bg color  -->
             </div>
             <div class="col d-inline-flex">
               <table class="table table-hover text-white">
@@ -57,16 +56,16 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Remove</th>
-                    <th scope="col">Category</th>
                     <th scope="col">Ingredient Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Ingredient Cost</th>
+                    <th scope="col">Category</th>
                     <th scope="col">Distributor</th>
                     <th scope="col">Product #</th>
                     <th scope="col">Brand</th>
                     <th scope="col">Package Size</th>
                     <th scope="col">Package Cost</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Unit</th>
-                    <th scope="col">Ingredient Cost</th>
                   </tr>
                 </thead>
                 <!-- <recipe-ingredient v-if="showForm" /> -->
@@ -79,19 +78,19 @@
                 <div class="col-6 text-white text-left d-flex justify-content-center">
                   <ul>
                     <li class="">Cost Per Category:</li>
-                    <li class="mt-2">Storeroom PL ($) </li>
-                    <li class="mt-2">Meat PL ($)</li>
-                    <li class="mt-2">Diary PL ($)</li>
-                    <li class="mt-2">Produce PL ($)</li>
-                    <li class="mt-2">Bakery PL ($)</li>
-                    <li class="mt-2">Frozen PL ($)</li>
+                    <li class="mt-2">Storeroom PL (${{this.storeroom}}) </li>
+                    <li class="mt-2">Meat PL (${{this.meat}})</li>
+                    <li class="mt-2">Dairy PL (${{this.dairy}})</li>
+                    <li class="mt-2">Produce PL (${{this.produce}})</li>
+                    <li class="mt-2">Bakery PL (${{this.bakery}})</li>
+                    <li class="mt-2">Frozen PL (${{this.frozen}})</li>
                   </ul>
                   <!--run a for each on each  category using ingcostcalc
                   total is all added-->
                 </div>
                 <div class="col-6 text-white d-flex justify-content-center text-left">
                   <ul>
-                    <li>Total Cost: $ {{newRecipe.costPerRecipe}}</li>
+                    <li>Total Cost: $ {{recipeCost}}</li>
                     <li class="mt-2">Food Cost: $ </li>
                     <!-- TODO possibly recommended sales price -->
                     <li>Sales Price: $<input type="number" placeholder="0.00" class="totalP-input ml-1 mt-2"
@@ -143,38 +142,36 @@
           allergens: [],
           salesPrice: ""
         },
-        salesPriceB: ""
-        // use emits
+        storeroom: 0,
+        meat: 0,
+        dairy: 0,
+        produce: 0,
+        bakery: 0,
+        frozen: 0
       }
+    },
+    watch: {
+      itemCost(nv, ov) {
+        // console.log(`ov ${ov}, nv ${nv}`)
+        // Leave watcher to run computed
+      }
+
     },
     computed: {
       recipeIngredient() {
-        return this.data.recipeIngredient
+        return this.$data.recipeIngredient
       },
-      totalCost(recipeIngredients) {
-        let recipe = {}
-        for (let i = 0; i < recipeIngredients.length; i++) {
-          let ingredient = recipeIngredients[i]
-          if (!ingredient == recipe[ingredient]) {
-            recipe[ingredient]
-          }
-        }
-
+      recipeCost() {
+        return this.storeroom + this.meat + this.dairy + this.produce + this.bakery + this.frozen
       },
-      foodCost() {
-
-      },
-      salesPrice() {
-
-      },
-      profit() {
-
-      },
-      profitMargin() {
-
-      },
-      markup() {
-
+      itemCost() {
+        this.storeroom = 0
+        this.meat = 0
+        this.dairy = 0
+        this.produce = 0
+        this.bakery = 0
+        this.frozen = 0
+        return this.newRecipe.recipeIngredients.forEach(r => this.$data[r.category.toLowerCase()] += +r.itemCost)
       }
     },
     methods: {
@@ -192,17 +189,27 @@
           distributor: "",
         }
         this.newRecipe.recipeIngredients.push(newIngredient)
-        //TODO Fill this out to what the empty object is going to be in recipeIngredients
+        // this.costPerCategory()
+      },
+      saveRecipe() {
+        this.$store.dispatch('saveRecipe', this.newRecipe)
+      },
+      foodCost() {
+
+      },
+      salesPrice() {
+
+      },
+      profit() {
+
+      },
+      profitMargin() {
+
+      },
+      markup() {
+
       },
 
-      saveRecipe() {
-        // if (salesPrice == "") {
-        //   this.newRecipe.salesPrice = this.salesPriceB
-        // } else {
-        //   this.newRecipe.salesPrice = this.salesPrice
-        // }
-        this.$store.dispatch('saveRecipe', this.newRecipe)
-      }
     },
     components: {
       RecipeIngredient
