@@ -143,8 +143,7 @@
           allergens: [],
           salesPrice: ""
         },
-        salesPriceB: ""
-        // use emits
+
       }
     },
     computed: {
@@ -192,15 +191,9 @@
           distributor: "",
         }
         this.newRecipe.recipeIngredients.push(newIngredient)
-        //TODO Fill this out to what the empty object is going to be in recipeIngredients
       },
 
       saveRecipe() {
-        // if (salesPrice == "") {
-        //   this.newRecipe.salesPrice = this.salesPriceB
-        // } else {
-        //   this.newRecipe.salesPrice = this.salesPrice
-        // }
         this.$store.dispatch('saveRecipe', this.newRecipe)
       }
     },
