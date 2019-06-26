@@ -78,19 +78,19 @@
                 <div class="col-6 text-white text-left d-flex justify-content-center">
                   <ul>
                     <li class="">Cost Per Category:</li>
-                    <li class="mt-2">Storeroom PL ($) </li>
-                    <li class="mt-2">Meat PL ($)</li>
-                    <li class="mt-2">Diary PL ($)</li>
-                    <li class="mt-2">Produce PL ($)</li>
-                    <li class="mt-2">Bakery PL ($)</li>
-                    <li class="mt-2">Frozen PL ($)</li>
+                    <li class="mt-2">Storeroom PL (${{this.storeroom}}) </li>
+                    <li class="mt-2">Meat PL (${{this.meat}})</li>
+                    <li class="mt-2">Dairy PL (${{this.dairy}})</li>
+                    <li class="mt-2">Produce PL (${{this.produce}})</li>
+                    <li class="mt-2">Bakery PL (${{this.bakery}})</li>
+                    <li class="mt-2">Frozen PL (${{this.frozen}})</li>
                   </ul>
                   <!--run a for each on each  category using ingcostcalc
                   total is all added-->
                 </div>
                 <div class="col-6 text-white d-flex justify-content-center text-left">
                   <ul>
-                    <li>Total Cost: $ {{newRecipe.costPerRecipe}}</li>
+                    <li>Total Cost: $ {{recipeCost}}</li>
                     <li class="mt-2">Food Cost: $ </li>
                     <!-- TODO possibly recommended sales price -->
                     <li>Sales Price: $<input type="number" placeholder="0.00" class="totalP-input ml-1 mt-2"
@@ -142,37 +142,36 @@
           allergens: [],
           salesPrice: ""
         },
-
+        storeroom: 0,
+        meat: 0,
+        dairy: 0,
+        produce: 0,
+        bakery: 0,
+        frozen: 0
       }
+    },
+    watch: {
+      itemCost(nv, ov) {
+        // console.log(`ov ${ov}, nv ${nv}`)
+        // Leave watcher to run computed
+      }
+
     },
     computed: {
       recipeIngredient() {
-        return this.data.recipeIngredient
+        return this.$data.recipeIngredient
       },
-      totalCost(recipeIngredients) {
-        let recipe = {}
-        for (let i = 0; i < recipeIngredients.length; i++) {
-          let ingredient = recipeIngredients[i]
-          if (!ingredient == recipe[ingredient]) {
-            recipe[ingredient]
-          }
-        }
-
+      recipeCost() {
+        return this.storeroom + this.meat + this.dairy + this.produce + this.bakery + this.frozen
       },
-      foodCost() {
-
-      },
-      salesPrice() {
-
-      },
-      profit() {
-
-      },
-      profitMargin() {
-
-      },
-      markup() {
-
+      itemCost() {
+        this.storeroom = 0
+        this.meat = 0
+        this.dairy = 0
+        this.produce = 0
+        this.bakery = 0
+        this.frozen = 0
+        return this.newRecipe.recipeIngredients.forEach(r => this.$data[r.category.toLowerCase()] += +r.itemCost)
       }
     },
     methods: {
@@ -190,11 +189,59 @@
           distributor: "",
         }
         this.newRecipe.recipeIngredients.push(newIngredient)
+        // this.costPerCategory()
+      },
+      seperatePackage(string) {
+        let dict = {}
+        if (string.includes('/') && string.includes(' ')) {
+          let array = string.split('/').join(" ").split(" ")
+          dict["fullCase"] = array[0]
+          dict["fullPackage"] = array[1]
+          dict["unit"] = array[2]
+        } else if (!string.includes(' ')) {
+          let arr = string.split('/').join(" ").split(" ")
+          dict["fullCase"] = arr[0]
+          dict["fullPackage"] = arr[1].split(/[a-z]/gi).shift()
+          dict["unit"] = arr[1].split(/[0-9]/gi).pop()
+        }
+        else {
+          let array = string.split(" ")
+          dict["fullCase"] = array[0]
+          dict["unit"] = array[1]
+        }
+        return dict
+      },
+      totalCost(str) {
+        let pkgCost = str.split("$").join('')
+        return pkgCost
+      },
+      costPer(fullPackage, fullPrice) {
+        let sPDict = this.seperatePackage(fullPackage)
+        let pCost = this.totalCost(fullPrice)
+        let fullPkg = sPDict['fullCase'] * sPDict['package']
+        let costEA = pCost / fullPkg
+        return costEA
       },
 
       saveRecipe() {
         this.$store.dispatch('saveRecipe', this.newRecipe)
-      }
+      },
+      foodCost() {
+
+      },
+      salesPrice() {
+
+      },
+      profit() {
+
+      },
+      profitMargin() {
+
+      },
+      markup() {
+
+      },
+
     },
     components: {
       RecipeIngredient

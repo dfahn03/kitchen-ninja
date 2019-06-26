@@ -50,7 +50,15 @@
     props: ['recipeIngredient', 'recipeIngredients'],
     data() {
       return {
+        // brand: '',
+        // category: '',
+        // distributor: '',
         // itemCost: 0,
+        // packageCost: '',
+        // packageSize: '',
+        // productNumber: 0,
+        // quantity: 0,
+        // unit: ''
       }
     },
     mounted() {
@@ -69,37 +77,7 @@
         let index = this.recipeIngredients.indexOf(ingredient)
         this.recipeIngredients.splice(index, 1)
       },
-      seperatePackage(string) {
-        let dict = {}
-        if (string.includes('/') && string.includes(' ')) {
-          let array = string.split('/').join(" ").split(" ")
-          dict["fullCase"] = array[0]
-          dict["fullPackage"] = array[1]
-          dict["unit"] = array[2]
-        } else if (!string.includes(' ')) {
-          let arr = string.split('/').join(" ").split(" ")
-          dict["fullCase"] = arr[0]
-          dict["fullPackage"] = arr[1].split(/[a-z]/gi).shift()
-          dict["unit"] = arr[1].split(/[0-9]/gi).pop()
-        }
-        else {
-          let array = string.split(" ")
-          dict["fullCase"] = array[0]
-          dict["unit"] = array[1]
-        }
-        return dict
-      },
-      totalCost(str) {
-        let pkgCost = str.split("$").join('')
-        return pkgCost
-      },
-      costPer(fullPackage, fullPrice) {
-        let sPDict = this.seperatePackage(fullPackage)
-        let pCost = this.totalCost(fullPrice)
-        let fullPkg = sPDict['fullCase'] * sPDict['package']
-        let costEA = pCost / fullPkg
-        return costEA
-      },
+
       ingredientCostCalc() {
         // this.$store.dispatch(costPer, payload)
         //TODO finish filling this out so it will auto populate ingredient cost
