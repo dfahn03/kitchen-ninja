@@ -1,14 +1,11 @@
 <template>
   <tbody class="recipe-ingredient">
     <tr>
-      <th scope="row">1</th>
       <td><button type="button" class="btn btn-danger btn-sm"
           @click="deleteIngredient(recipeIngredient)">Delete</button>
       </td>
       <td>
         <auto-complete @result="setIngredient" :items="ingredients" @input="setIngredientName" />
-        <!-- <input type="text" placeholder="Ingredient Name" v-model="recipeIngredient.itemName" class="ingName-input"
-            required> -->
       </td>
       <td><input type="number" placeholder="Quantity" min="0" step=".5" v-model="recipeIngredient.quantity"
           class="quan-input" required></td>
@@ -25,9 +22,10 @@
         {{calculateCost()}}
       </td>
 
-      <td>
-        <input type="text" readonly="true" v-model="recipeIngredient.category">
-        <!-- <select class="form-control category-input" placeholder="Category" v-model="recipeIngredient.category" required>
+      <td v-if="recipeIngredient.category"><input type="text" readonly="true" v-model="recipeIngredient.category"
+          class=" category-input1">
+      </td>
+      <td v-else><select class="category-input2" placeholder="Category" v-model="recipeIngredient.category" required>
           <option disabled value="">Category</option>
           <option value="Bakery">Bakery</option>
           <option value="Dairy">Dairy</option>
@@ -35,42 +33,32 @@
           <option value="Produce">Produce</option>
           <option value="Meat">Meat</option>
           <option value="Storeroom">Storeroom</option>
-        </select> -->
+        </select>
       </td>
-
-      <td><input type="text" placeholder="Distributor" disabled="true" v-model="recipeIngredient.distributor"
-          class="dist-input" required></td>
-      <!-- TODO get a input select with a custom input field included -->
-      <td><input type="text" placeholder="Product #" readonly="true" v-model="recipeIngredient.productNumber"
-          class="prod-input" required>
-      </td>
-      <td><input type="text" placeholder="Brand" readonly="true" v-model="recipeIngredient.brand" class="brand-input"
+      <td><input type="text" placeholder="Distributor" v-model="recipeIngredient.distributor" class="dist-input"
           required></td>
-      <td><input type="text" placeholder="Package Size" readonly="true" v-model="recipeIngredient.packageSize"
-          class="packS-input" required></td>
-      <td><input type="text" placeholder="Package Cost" readonly="true" v-model="recipeIngredient.packageCost"
-          class="packC-input" required></td>
+      <!-- TODO get a input select with a custom input field included -->
+      <td><input type="text" placeholder="Product #" readonly="recipeIngredient.productNumber"
+          v-model="recipeIngredient.productNumber" class="prod-input" required>
+      </td>
+      <td><input type="text" placeholder="Brand" readonly="recipeIngredient.brand" v-model="recipeIngredient.brand"
+          class="brand-input" required></td>
+      <td><input type="text" placeholder="Package Size" readonly="recipeIngredient.packageSize"
+          v-model="recipeIngredient.packageSize" class="packS-input" required></td>
+      <td><input type="text" placeholder="Package Cost" readonly="recipeIngredient.packageCost"
+          v-model="recipeIngredient.packageCost" class="packC-input" required></td>
     </tr>
   </tbody>
 </template>
 
 <script>
   import AutoComplete from '@/components/AutoComplete'
+
   export default {
     name: "RecipeIngredient",
     props: ['recipeIngredient', 'recipeIngredients'],
     data() {
-      return {
-        // brand: '',
-        // category: '',
-        // distributor: '',
-        // itemCost: 0,
-        // packageCost: '',
-        // packageSize: '',
-        // productNumber: 0,
-        // quantity: 0,
-        // unit: ''
-      }
+      return {}
     },
     mounted() {
       return this.$store.dispatch("getIngredients")
@@ -93,6 +81,7 @@
         // console.log("FROM AUTOCOMPLETE", ingredient)
         this.recipeIngredient = autocomplete.result
         this.recipeIngredient.quantity = 1
+        this.recipeIngredients = [this.recipeIngredient]
         this.calculateCost()
       },
       seperatePackage(string) {
@@ -149,7 +138,13 @@
     max-width: 6rem;
   }
 
-  .category-input {
+  .category-input1 {
+    text-align: center;
+    max-width: 6rem;
+    height: 2rem;
+  }
+
+  .category-input2 {
     text-align: center;
     min-width: 8rem;
     height: 2rem;

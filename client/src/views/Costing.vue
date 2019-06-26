@@ -54,7 +54,6 @@
               <table class="table table-hover text-white">
                 <thead>
                   <tr>
-                    <th scope="col">#</th>
                     <th scope="col">Remove</th>
                     <th scope="col">Ingredient Name</th>
                     <th scope="col">Quantity</th>
@@ -155,7 +154,6 @@
         // console.log(`ov ${ov}, nv ${nv}`)
         // Leave watcher to run computed
       }
-
     },
     computed: {
       recipeIngredient() {
