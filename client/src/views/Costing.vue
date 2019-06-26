@@ -49,7 +49,6 @@
             <div class="col-12">
               <button type="button" class="btn addIng-btn text-white my-2" @click="addIngredient">Add
                 Ingredient <img src="../assets/icons8-plus-25.png" alt="Plus Icon" class="ml-1"></button>
-              <!-- TODO re-color icon/button to make same bg color  -->
             </div>
             <div class="col d-inline-flex">
               <table class="table table-hover text-white">
