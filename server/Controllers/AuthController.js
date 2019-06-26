@@ -6,7 +6,7 @@ import { Authorize } from '../middlewear/authorize'
 let _us = new UserService()
 let _siteService = new SiteService()
 let _repo = _us.repository
-let _siteRepo = _siteService.repository
+// let _siteRepo = _siteService.repository
 
 //PUBLIC
 export default class AuthController {
@@ -73,7 +73,7 @@ export default class AuthController {
             res.send(user)
         }
         catch (err) {
-            res.status(400).send("Invalid Username Or Password")
+            res.status(400).send("Invalid Username or Password")
         }
     }
 
@@ -82,7 +82,7 @@ export default class AuthController {
             let user = await _repo.findOne({ _id: req.session.uid })
             if (!user) {
                 return res.status(401).send({
-                    error: 'Please login to continue'
+                    error: 'Please Login to Continue'
                 })
             }
             delete user._doc.hash
