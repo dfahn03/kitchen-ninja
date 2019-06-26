@@ -51,7 +51,7 @@
                 <input v-model="creds.password" type="password" class="form-control" id="loginInputPassword1"
                   placeholder="Password">
               </div>
-              <button type="submit" class="btn btn-primary">Login</button>
+              <button type="submit" class="btn btn-primary mt-2">Login</button>
             </form>
           </div>
 
@@ -83,7 +83,8 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Create Account</button>
-        <button class="btn btn-outline-secondary" data-toggle="modal" data-target="#exampleModal">Login</button>
+        <button type="button" class="btn btn-outline-secondary ml-1" data-toggle="modal"
+          data-target="#exampleModal">Login</button>
       </form>
     </div>
     <!-- Site Selector -->
@@ -109,7 +110,7 @@
           email: "",
           password: ""
         },
-        siteId: ''
+        siteId: ""
       }
 
     },
@@ -119,7 +120,7 @@
 
       },
       registerUser() {
-        this.$store.dispatch("register", this.registerUser);
+        this.$store.dispatch("register", this.registerForm);
       },
       selectSite(e) {
         let site = e.target.value
