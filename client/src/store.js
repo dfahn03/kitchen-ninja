@@ -99,10 +99,7 @@ export default new Vuex.Store({
         let res = await api.get('sites/' + userId)
         commit('setSites', res.data)
         console.log(res)
-      } catch (error) {
-        console.error(error)
-
-      }
+      } catch (error) { console.error(error) }
     },
     async selectSite({ commit, dispatch }, siteId) {
       try {
@@ -110,7 +107,6 @@ export default new Vuex.Store({
         commit('setSite', res.data)
         console.log(res)
         router.push({ name: 'dashboard' })
-
       } catch (error) { console.error(error) }
     },
     logout({ commit, dispatch }, creds) {
@@ -127,10 +123,7 @@ export default new Vuex.Store({
       try {
         let res = await api.get("ingredients")
         commit('setIngredients', res.data)
-      } catch (error) {
-        console.error(error)
-
-      }
+      } catch (error) { console.error(error) }
     },
     //#endregion
 
@@ -147,9 +140,7 @@ export default new Vuex.Store({
       try {
         let res = await api.post('' + SID, payload)
         dispatch('getBlogs', res.data.data)
-      } catch (error) {
-        console.error('Blog was not created')
-      }
+      } catch (error) { console.error('Blog was not created') }
     },
     async editBlog({ commit, dispatch }, payload) {
       try {
