@@ -72,8 +72,7 @@
         content: '',
         title: '',
         author: '',
-        image: '',
-        showModal: false
+        image: ''
       }
     },
     components: {
