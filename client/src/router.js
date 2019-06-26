@@ -8,6 +8,11 @@ import Costing from './views/Costing.vue'
 import Login from './views/Login.vue'
 import Recipes from './views/Recipes.vue'
 
+//admin route and child routes below
+import Admin from './views/Admin.vue'
+import AdminUsers from './components/AdminUsers.vue'
+import AdminSites from './components/AdminSites.vue'
+import AdminKitchens from './components/AdminKitchens.vue'
 
 Vue.use(Router)
 
@@ -38,6 +43,28 @@ export default new Router({
       path: '/recipes',
       name: 'Recipes',
       component: Recipes
+    },
+    {
+      path: '/admin',
+      name: 'Admin',
+      component: Admin,
+      children: [
+        {
+          path: 'users',
+          name: 'AdminUsers',
+          component: AdminUsers
+        },
+        {
+          path: 'sites',
+          name: 'AdminSites',
+          component: AdminSites
+        },
+        {
+          path: 'kitchens',
+          name: 'AdminKitchens',
+          component: AdminKitchens
+        },
+      ]
     }
   ]
 })
