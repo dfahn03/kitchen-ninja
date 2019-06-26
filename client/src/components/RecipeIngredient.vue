@@ -31,7 +31,6 @@
           required></td>
       <td><input type="number" placeholder="Quantity" min="0" step=".5" v-model="recipeIngredient.quantity"
           class="quan-input" required></td>
-      <!-- <td><input type="text" placeholder="Unit" v-model="recipeIngredient.unit" class="unit-input" required></td> -->
       <td><select class="form-control unit-input" placeholder="Unit" v-model="recipeIngredient.unit" required>
           <option disabled value="">Unit</option>
           <option value="Oz">OZ</option>
@@ -48,14 +47,10 @@
 <script>
   export default {
     name: "RecipeIngredient",
-    props: ['recipeIngredient', 'recipeIngredients'], // use this object if already exists
+    props: ['recipeIngredient', 'recipeIngredients'],
     data() {
       return {
-        itemCost: 0,
-        // id: this.recipeIngredient._id,
-        ingredient: { //use this object if creating
-
-        }
+        // itemCost: 0,
       }
     },
     mounted() {
@@ -73,8 +68,6 @@
       deleteIngredient(ingredient) {
         let index = this.recipeIngredients.indexOf(ingredient)
         this.recipeIngredients.splice(index, 1)
-        //return this.recipeIngredients.filter(recipeIngredient => this.recipeIngredient.tempId !== id)
-        //TODO Be able to delete the specific ingredient in the array with the specific tempId
       },
       seperatePackage(string) {
         let dict = {}
