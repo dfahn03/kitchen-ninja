@@ -47,7 +47,7 @@ export default new Vuex.Store({
     setUser(state, user) {
       state.user = user
     },
-    setIngredients(state, ingredients) {
+    setIngredients(state, ingredients = []) {
       state.ingredients = ingredients
     },
     setIngredient(state, ingredient) {

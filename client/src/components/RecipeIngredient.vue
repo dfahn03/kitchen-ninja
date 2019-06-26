@@ -5,8 +5,29 @@
       <td><button type="button" class="btn btn-danger btn-sm"
           @click="deleteIngredient(recipeIngredient)">Delete</button>
       </td>
-      <td><select class="form-control category-input" placeholder="Category" v-model="recipeIngredient.category"
+      <td>
+        <auto-complete @result="setIngredient" :items="ingredients" @input="setIngredientName" />
+        <!-- <input type="text" placeholder="Ingredient Name" v-model="recipeIngredient.itemName" class="ingName-input"
+            required> -->
+      </td>
+      <td><input type="number" placeholder="Quantity" min="0" step=".5" v-model="recipeIngredient.quantity"
+          class="quan-input" required></td>
+      <td><select class="form-control unit-input" placeholder="Unit" readonly="true" v-model="recipeIngredient.unit"
           required>
+          <option disabled value="">Unit</option>
+          <option value="Oz">OZ</option>
+          <option value="Ea">EA</option>
+        </select></td>
+
+      <td>
+        <input v-if="!calculateCost()" type="text" placeholder="Cost" v-model="recipeIngredient.itemCost"
+          class="ingC-input" required>
+        {{calculateCost()}}
+      </td>
+
+      <td>
+        <input type="text" readonly="true" v-model="recipeIngredient.category">
+        <!-- <select class="form-control category-input" placeholder="Category" v-model="recipeIngredient.category" required>
           <option disabled value="">Category</option>
           <option value="Bakery">Bakery</option>
           <option value="Dairy">Dairy</option>
@@ -14,37 +35,27 @@
           <option value="Produce">Produce</option>
           <option value="Meat">Meat</option>
           <option value="Storeroom">Storeroom</option>
-        </select></td>
-      <td><input type="text" placeholder="Ingredient Name" v-model="recipeIngredient.itemName" class="ingName-input"
-          required>
+        </select> -->
       </td>
-      <td><input type="text" placeholder="Distributor" v-model="recipeIngredient.distributor" class="dist-input"
-          required></td>
+
+      <td><input type="text" placeholder="Distributor" disabled="true" v-model="recipeIngredient.distributor"
+          class="dist-input" required></td>
       <!-- TODO get a input select with a custom input field included -->
-      <td><input type="text" placeholder="Product #" v-model="recipeIngredient.productNumber" class="prod-input"
-          required>
+      <td><input type="text" placeholder="Product #" readonly="true" v-model="recipeIngredient.productNumber"
+          class="prod-input" required>
       </td>
-      <td><input type="text" placeholder="Brand" v-model="recipeIngredient.brand" class="brand-input" required></td>
-      <td><input type="text" placeholder="Package Size" v-model="recipeIngredient.packageSize" class="packS-input"
+      <td><input type="text" placeholder="Brand" readonly="true" v-model="recipeIngredient.brand" class="brand-input"
           required></td>
-      <td><input type="text" placeholder="Package Cost" v-model="recipeIngredient.packageCost" class="packC-input"
-          required></td>
-      <td><input type="number" placeholder="Quantity" min="0" step=".5" v-model="recipeIngredient.quantity"
-          class="quan-input" required></td>
-      <td><select class="form-control unit-input" placeholder="Unit" v-model="recipeIngredient.unit" required>
-          <option disabled value="">Unit</option>
-          <option value="Oz">OZ</option>
-          <option value="Ea">EA</option>
-        </select></td>
-      <td v-if="ingredientCostCalc"><input type="text" placeholder="Cost" v-model="recipeIngredient.itemCost"
-          class="ingC-input" required>{{ingredientCostCalc()}}</td>
-      <td v-else><input type="text" placeholder="Cost" v-model="recipeIngredient.itemCost" class="ingC2-input" required>
-      </td>
+      <td><input type="text" placeholder="Package Size" readonly="true" v-model="recipeIngredient.packageSize"
+          class="packS-input" required></td>
+      <td><input type="text" placeholder="Package Cost" readonly="true" v-model="recipeIngredient.packageCost"
+          class="packC-input" required></td>
     </tr>
   </tbody>
 </template>
 
 <script>
+  import AutoComplete from '@/components/AutoComplete'
   export default {
     name: "RecipeIngredient",
     props: ['recipeIngredient', 'recipeIngredients'],
@@ -66,26 +77,64 @@
     },
     computed: {
       ingredients() {
-        this.$store.state.ingredients
+        return this.$store.state.ingredients
       },
-
-
-
     },
     methods: {
       deleteIngredient(ingredient) {
         let index = this.recipeIngredients.indexOf(ingredient)
         this.recipeIngredients.splice(index, 1)
       },
-
-      ingredientCostCalc() {
-        // this.$store.dispatch(costPer, payload)
-        //TODO finish filling this out so it will auto populate ingredient cost
-        // return size / cost * qquantity
+      setIngredientName(val) {
+        this.recipeIngredient = {}
+        this.recipeIngredient.itemName = val
       },
+      setIngredient(autocomplete) {
+        // console.log("FROM AUTOCOMPLETE", ingredient)
+        this.recipeIngredient = autocomplete.result
+        this.recipeIngredient.quantity = 1
+        this.calculateCost()
+      },
+      seperatePackage(string) {
+        let dict = {}
+        if (string.includes('/') && string.includes(' ')) {
+          let array = string.split('/').join(" ").split(" ")
+          dict["fullCase"] = array[0]
+          dict["fullPackage"] = array[1]
+          dict["unit"] = array[2]
+        } else if (!string.includes(' ')) {
+          // packages that look like x/ea/7
+          let arr = string.split('/').join(" ").split(" ")
+          dict["fullCase"] = arr[0]
+          dict["fullPackage"] = arr[1].split(/[a-z]/gi).shift()
+          dict["unit"] = arr[1].split(/[0-9]/gi).pop()
+        }
+        else {
+          let array = string.split(" ")
+          dict["fullCase"] = array[0]
+          dict["unit"] = array[1]
+        }
+        return dict
+      },
+      totalCost(str) {
+        let pkgCost = str.split("$").join('')
+        return pkgCost
+      },
+      costPer(fullPackage, fullPrice) {
+        let sPDict = this.seperatePackage(fullPackage)
+        let pCost = this.totalCost(fullPrice)
+        let fullPkg = sPDict['fullCase'] * sPDict['package']
+        let costEA = pCost / fullPkg
+        return costEA
+      },
+      calculateCost() {
+        if (this.recipeIngredient.packageSize && this.recipeIngredient.packageCost) {
+          return this.costPer(this.recipeIngredient.packageSize, this.recipeIngredient.packageCost) * this.recipeIngredient.quantity
+        }
+      }
 
     },
-    components: {}
+    components: { AutoComplete }
   }
 </script>
 

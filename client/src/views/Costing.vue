@@ -56,16 +56,16 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Remove</th>
-                    <th scope="col">Category</th>
                     <th scope="col">Ingredient Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Ingredient Cost</th>
+                    <th scope="col">Category</th>
                     <th scope="col">Distributor</th>
                     <th scope="col">Product #</th>
                     <th scope="col">Brand</th>
                     <th scope="col">Package Size</th>
                     <th scope="col">Package Cost</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Unit</th>
-                    <th scope="col">Ingredient Cost</th>
                   </tr>
                 </thead>
                 <!-- <recipe-ingredient v-if="showForm" /> -->
@@ -191,38 +191,6 @@
         this.newRecipe.recipeIngredients.push(newIngredient)
         // this.costPerCategory()
       },
-      seperatePackage(string) {
-        let dict = {}
-        if (string.includes('/') && string.includes(' ')) {
-          let array = string.split('/').join(" ").split(" ")
-          dict["fullCase"] = array[0]
-          dict["fullPackage"] = array[1]
-          dict["unit"] = array[2]
-        } else if (!string.includes(' ')) {
-          let arr = string.split('/').join(" ").split(" ")
-          dict["fullCase"] = arr[0]
-          dict["fullPackage"] = arr[1].split(/[a-z]/gi).shift()
-          dict["unit"] = arr[1].split(/[0-9]/gi).pop()
-        }
-        else {
-          let array = string.split(" ")
-          dict["fullCase"] = array[0]
-          dict["unit"] = array[1]
-        }
-        return dict
-      },
-      totalCost(str) {
-        let pkgCost = str.split("$").join('')
-        return pkgCost
-      },
-      costPer(fullPackage, fullPrice) {
-        let sPDict = this.seperatePackage(fullPackage)
-        let pCost = this.totalCost(fullPrice)
-        let fullPkg = sPDict['fullCase'] * sPDict['package']
-        let costEA = pCost / fullPkg
-        return costEA
-      },
-
       saveRecipe() {
         this.$store.dispatch('saveRecipe', this.newRecipe)
       },
