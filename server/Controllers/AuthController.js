@@ -27,12 +27,8 @@ export default class AuthController {
     }
     async register(req, res, next) {
         //VALIDATE PASSWORD LENGTH
-
         if (req.body.password.length < 6) {
-
-            return res.status(400).send({
-                error: 'Password must be at least 6 characters'
-            })
+            return res.status(400).send({ error: 'Password must be at least 6 characters' })
         }
         //TODO change password requirement to 10 characters
         // let site = await _siteRepo.findById(req.body.siteId)
@@ -45,7 +41,6 @@ export default class AuthController {
         try {
             //CHANGE THE PASSWORD TO A HASHED PASSWORD
             req.body.hash = _us.generateHash(req.body.password)
-
             //CREATE THE USER
             let user = await _repo.create(req.body)
             //REMOVE THE PASSWORD BEFORE RETURNING
@@ -53,10 +48,7 @@ export default class AuthController {
             //SET THE SESSION UID (SHORT FOR USERID)
             req.session.uid = user._id
             res.status(201).send(user)
-        }
-        catch (err) {
-            res.status(400).send(err)
-        }
+        } catch (err) { res.status(400).send(err) }
     }
 
     async login(req, res, next) {
@@ -106,9 +98,7 @@ export default class AuthController {
         try {
             let user = await _repo.find({ name: req.params.id })
             return res.send(user)
-        } catch (error) {
-            next(error)
-        }
+        } catch (error) { next(error) }
     }
     // Do we do this on Auth or On Site Controller
     // async getSitesForUser(req, res, next) {
