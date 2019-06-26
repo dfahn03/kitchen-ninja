@@ -96,7 +96,6 @@
   // @ is an alias to /src
 
   export default {
-
     name: 'Login',
     data() {
       return {
@@ -112,14 +111,13 @@
         },
         siteId: ""
       }
-
     },
     methods: {
       loginUser() {
         this.$store.dispatch("login", this.creds);
-
       },
       registerUser() {
+        debugger
         this.$store.dispatch("register", this.registerForm);
       },
       selectSite(e) {
@@ -142,13 +140,9 @@
       },
       memberSites() {
         return this.$store.state.sites.memberSites
-
       }
     },
-    components: {
-
-    },
-
+    components: {},
   }
 </script>
 
