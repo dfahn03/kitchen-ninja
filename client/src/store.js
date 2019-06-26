@@ -126,7 +126,7 @@ export default new Vuex.Store({
     async getIngredients({ commit, dispatch }) {
       try {
         let res = await api.get("ingredients")
-        commit('setIngredients')
+        commit('setIngredients', res.data)
       } catch (error) {
         console.error(error)
 
