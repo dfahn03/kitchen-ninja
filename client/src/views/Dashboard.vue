@@ -20,29 +20,35 @@
             <div class="modal-body">
               <form @submit.prevent="enterBlog">
                 <div class="modalform-group">
-                  <label for="blogInputTitle">Blog Title</label>
+                  <label for="blogInputTitle" class="mt-2 mb-0">Blog Title</label>
                   <input v-model="title" type="email" class="form-control" id="blogInputTitle"
-                    aria-describedby="blogHelp" placeholder="Enter blog title">
+                    aria-describedby="blogHelp" placeholder="Enter Blog Title" required>
                   <small id="blogHelp" class="form-text text-muted">Enter a descriptive blog title.</small>
                 </div>
                 <div class="modal-form-group">
-                  <label for="inputBlogAuthor">Blog Author</label>
+                  <label for="inputBlogAuthor" class="mt-2 mb-0">Blog Author</label>
                   <input v-model="user" type="text" class="form-control" id="inputBlogAuthor"
-                    placeholder="Enter Username">
+                    placeholder="Enter Username" required>
                 </div>
                 <div class="modal-form-group">
-                  <label for="inputBlogImage">Blog Image</label>
+                  <!-- <div class="custom-file">
+                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                    <input type="file" class="custom-file-input" id="inputGroupFile01"
+                      aria-describedby="inputGroupFileAddon01" v-model="image">
+                  </div> -->
+
+                  <label for="inputBlogImage" class="mt-2 mb-0">Blog Image</label>
                   <input v-model="image" type="image" class="form-control" id="inputBlogImage"
                     aria-describedby="blogImageHelp" placeholder="Enter Image">
                   <small id="blogImageHelp" class="form-text text-muted">Image not required.</small>
                 </div>
                 <div class="modal-form-group">
-                  <label for="inputBlogContent">Blog Image</label>
+                  <label for="inputBlogContent" class="mt-2 mb-0">Blog Content</label>
                   <textarea rows="3" v-model="content" type="text" class="form-control" id="inputBlogContent"
-                    aria-describedby="blogContentHelp" placeholder="Enter Blog Content"></textarea>
+                    aria-describedby="blogContentHelp" placeholder="Enter Blog Content" required></textarea>
                   <small id="blogContentHelp" class="form-text text-muted">Image not required.</small>
                 </div>
-                <button type="submit" class="btn btn-primary mb-3">Save Blog</button>
+                <button type="submit" class="btn btn-primary mb-3 mt-3">Save Blog</button>
                 <div class="modal-footer justify-content-center">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                 </div>
