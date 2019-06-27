@@ -1,5 +1,5 @@
 <template>
-  <tbody class="recipe-ingredient">
+  <tbody class="recipe-ingredient col-6">
     <tr>
       <td><button type="button" class="btn btn-danger btn-sm"
           @click="deleteIngredient(recipeIngredient)">Delete</button>
@@ -19,13 +19,14 @@
       <td>
         <input v-if="!calculateCost()" type="text" placeholder="Cost" v-model="recipeIngredient.itemCost"
           class="ingC-input" required>
-        {{calculateCost()}}
+        <p class="mt-1">
+          {{calculateCost()}}
+        </p>
       </td>
 
-      <td v-if="recipeIngredient.category"><input type="text" readonly="true" v-model="recipeIngredient.category"
-          class=" category-input1">
-      </td>
-      <td v-else><select class="category-input2" placeholder="Category" v-model="recipeIngredient.category" required>
+      <!-- <td v-if=""><input type="text" v-model="recipeIngredient.category" class=" category-input1">
+      </td> -->
+      <td><select class="category-input2" placeholder="Category" v-model="recipeIngredient.category" required>
           <option disabled value="">Category</option>
           <option value="Bakery">Bakery</option>
           <option value="Dairy">Dairy</option>
