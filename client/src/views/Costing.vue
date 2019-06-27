@@ -181,7 +181,7 @@
           category: "",
           brand: "",
           productNumber: 0,
-          quantity: 0,
+          quantity: 1,
           unit: "",
           itemCost: 0,
           packageSize: "",
