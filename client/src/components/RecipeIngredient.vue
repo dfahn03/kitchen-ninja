@@ -115,11 +115,11 @@
         let sPDict = this.seperatePackage(fullPackage)
         let pCost = this.totalCost(fullPrice)
         if (sPDict.fullPackage) {
-          let fullPkg = parseFloat(sPDict.fullCase) * parseFloat(sPDict.fullPackage)
-          let costEA = parseFloat(pCost) / fullPkg
+          let fullPkg = +sPDict.fullCase * +sPDict.fullPackage
+          let costEA = +pCost / fullPkg
         } else {
           let Pkg = +sPDict.fullCase * 16
-          let costOZ = parseFloat(pCost) / Pkg
+          let costOZ = +pCost / Pkg
           return costOZ.toFixed(2)
         }
 
@@ -127,7 +127,7 @@
       },
       calculateCost() {
         if (this.recipeIngredient.packageSize && this.recipeIngredient.packageCost) {
-          return this.costPer(this.recipeIngredient.packageSize, this.recipeIngredient.packageCost) * this.recipeIngredient.quantity
+          // return this.costPer(this.recipeIngredient.packageSize, this.recipeIngredient.packageCost) * this.recipeIngredient.quantity
         }
       }
 
