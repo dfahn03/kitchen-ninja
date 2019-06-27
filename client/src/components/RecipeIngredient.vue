@@ -112,9 +112,16 @@
       costPer(fullPackage, fullPrice) {
         let sPDict = this.seperatePackage(fullPackage)
         let pCost = this.totalCost(fullPrice)
-        let fullPkg = +sPDict.fullCase * +sPDict.fullPackage
-        let costEA = pCost / fullPkg
-        debugger
+        let LBS = "16"
+        if (sPDict.fullPackage) {
+          let fullPkg = +sPDict.fullCase * +sPDict.fullPackage
+          let costEA = pCost / fullPkg
+        } else {
+          let Pkg = +sPDict.fullCase * 16
+          let costOZ = parseFloat(pCost) / Pkg
+          return costOZ.toFixed(2)
+        }
+
         return costEA.toFixed(2)
 
       },
