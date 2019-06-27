@@ -110,7 +110,7 @@
           </div>
           <!-- v-if="!req.params.id" -->
           <!-- v-else -->
-          <div class="form-row">
+          <div class="form-row d-flex justify-content-center align-content-center">
             <button type="submit" class="btn btn-success">Save Recipe</button>
             <button type="submit" class="btn btn-warning ml-1">Update Recipe</button>
           </div>
