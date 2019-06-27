@@ -164,7 +164,10 @@
     },
     computed: {
       recipeIngredient() {
-        return this.$data.recipeIngredient
+        return this.recipeIngredient
+      },
+      recipeIngredients() {
+        return this.$data.newRecipe.recipeIngredients
       },
       recipeCost() {
         return this.storeroom + this.meat + this.dairy + this.produce + this.bakery + this.frozen
