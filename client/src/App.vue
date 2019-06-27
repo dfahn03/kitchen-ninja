@@ -147,9 +147,9 @@
     width: 0px;
     height: 100%;
     overflow-y: hidden;
-    background-color: #fff;
+    background-color: whitesmoke;
     border: 5px #42b983;
-    opacity: .9;
+
     margin-top: 80px;
     margin-bottom: -80px;
     padding-top: 20px;
@@ -170,10 +170,11 @@
   /* Displayed */
   #wrapper.toggled #sidebar-wrapper {
     width: 250px;
+    z-index: 2;
   }
 
   #wrapper.toggled #page-content-wrapper {
-    padding-left: 250px;
+    /* padding-left: 250px; */
     z-index: -1;
   }
 
