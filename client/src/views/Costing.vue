@@ -3,6 +3,7 @@
     <div class="row">
       <div class="col-12">
         <button type="button" class="btn btn-secondary float-right my-2" @click="">Converter</button>
+        <!-- TODO link this button to the sidebar calculator -->
       </div>
     </div>
     <div class="row">
@@ -45,7 +46,6 @@
               <input type="text" class="form-control allergens-input ml-1" placeholder="Allergens"
                 v-model="newRecipe.allergens" min="0" required>
             </div>
-            <!-- TODO Make allergens a button to add and then show checkboxes below to select all the allergens -->
           </div>
           <div class="form-row">
             <div class="col-12">
@@ -71,7 +71,6 @@
                     <th scope="col">Package Cost</th>
                   </tr>
                 </thead>
-                <!-- <recipe-ingredient v-if="showForm" /> -->
                 <recipe-ingredient v-for="recipeIngredient in newRecipe.recipeIngredients"
                   :recipeIngredient="recipeIngredient" :recipeIngredients="newRecipe.recipeIngredients" />
               </table>
@@ -130,6 +129,7 @@
       if (this.id) {
         this.newRecipe = this.$store.state.recipes.find(r => r._id == this.id)
       }
+      //TODO  ingredients persist on reload 
     },
     props: ["id"],
     data() {
@@ -224,9 +224,9 @@
 </script>
 
 <style>
-  table {
+  /* table {
     border: 1px solid;
-  }
+  } */
 
   .addIng-btn {
     background-color: rgb(5, 38, 45);
