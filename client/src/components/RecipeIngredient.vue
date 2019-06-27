@@ -115,9 +115,9 @@
       costPer(fullPackage, fullPrice) {
         let sPDict = this.seperatePackage(fullPackage)
         let pCost = this.totalCost(fullPrice)
-        let LBS = "16"
+        debugger
         if (sPDict.fullPackage) {
-          let fullPkg = +sPDict.fullCase * +sPDict.fullPackage
+          let fullPkg = parseFloat(sPDict.fullCase) * parseFloat(sPDict.fullPackage)
           let costEA = pCost / fullPkg
         } else {
           let Pkg = +sPDict.fullCase * 16
@@ -126,7 +126,7 @@
         }
 
         return costEA.toFixed(2)
-
+        debugger
       },
       calculateCost() {
         if (this.recipeIngredient.packageSize && this.recipeIngredient.packageCost) {
