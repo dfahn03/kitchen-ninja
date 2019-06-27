@@ -78,6 +78,7 @@
         this.recipeIngredient.itemName = val
       },
       setIngredient(autocomplete) {
+
         // console.log("FROM AUTOCOMPLETE", ingredient)
         this.recipeIngredient = autocomplete.result
         this.recipeIngredient.quantity = 1
@@ -114,10 +115,9 @@
       costPer(fullPackage, fullPrice) {
         let sPDict = this.seperatePackage(fullPackage)
         let pCost = this.totalCost(fullPrice)
-
         if (sPDict.fullPackage) {
           let fullPkg = parseFloat(sPDict.fullCase) * parseFloat(sPDict.fullPackage)
-          let costEA = pCost / fullPkg
+          let costEA = parseFloat(pCost) / fullPkg
         } else {
           let Pkg = +sPDict.fullCase * 16
           let costOZ = parseFloat(pCost) / Pkg
@@ -125,7 +125,6 @@
         }
 
         return costEA.toFixed(2)
-        debugger
       },
       calculateCost() {
         if (this.recipeIngredient.packageSize && this.recipeIngredient.packageCost) {
