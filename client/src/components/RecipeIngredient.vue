@@ -115,7 +115,7 @@
       costPer(fullPackage, fullPrice) {
         let sPDict = this.seperatePackage(fullPackage)
         let pCost = this.totalCost(fullPrice)
-        debugger
+
         if (sPDict.fullPackage) {
           let fullPkg = parseFloat(sPDict.fullCase) * parseFloat(sPDict.fullPackage)
           let costEA = pCost / fullPkg
