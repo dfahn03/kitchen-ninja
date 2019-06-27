@@ -22,7 +22,8 @@
         <p class="mt-1">{{calculateCost()}}</p>
       </td>
 
-      <!-- <td v-if=""><input type="text" v-model="recipeIngredient.category" class=" category-input1">
+      <!-- <td v-if="recipe-ingredient.category"><input type="text" v-model="recipeIngredient.category" readonly="true"
+          class=" category-input1">
       </td> -->
       <td><select class="category-input2" placeholder="Category" v-model="recipeIngredient.category" required>
           <option disabled value="">Category</option>
