@@ -70,7 +70,7 @@
       <!-- Page Content -->
 
       <div id="page-content-wrapper">
-        <div class="container">
+        <div class="container-fluid">
           <router-view />
         </div>
       </div>

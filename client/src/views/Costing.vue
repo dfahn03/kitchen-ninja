@@ -9,7 +9,7 @@
       <div class="col">
         <form @submit.prevent="saveRecipe">
           <div class="form-row">
-            <div class="col-lg-12 d-flex justify-content-center">
+            <div class="col d-flex justify-content-center">
               <input type="text" class="form-control recipeName-input" placeholder="Recipe Name"
                 v-model="newRecipe.name" required>
               <input type="number" class="form-control portions-input ml-1" placeholder="Portions"
@@ -46,15 +46,18 @@
                 v-model="newRecipe.allergens" min="0" required>
             </div>
             <!-- TODO Make allergens a button to add and then show checkboxes below to select all the allergens -->
+          </div>
+          <div class="form-row">
             <div class="col-12">
               <button type="button" class="btn addIng-btn text-white my-2" @click="addIngredient">Add
                 Ingredient <img src="../assets/icons8-plus-25.png" alt="Plus Icon" class="ml-1"></button>
             </div>
-            <div class="col d-inline-flex">
+          </div>
+          <div class="form-row">
+            <div class="col-12">
               <table class="table text-white">
                 <thead>
                   <tr>
-
                     <th scope="col">Remove</th>
                     <th scope="col">Ingredient Name</th>
                     <th scope="col">Quantity</th>
@@ -73,6 +76,8 @@
                   :recipeIngredient="recipeIngredient" :recipeIngredients="newRecipe.recipeIngredients" />
               </table>
             </div>
+          </div>
+          <div class="form-row">
             <div class="col-12">
               <div class="row">
                 <div class="col-6 text-white text-left d-flex justify-content-center">
@@ -220,7 +225,7 @@
 
 <style>
   table {
-    max-width: 100vw;
+    border: 1px solid;
   }
 
   .addIng-btn {
