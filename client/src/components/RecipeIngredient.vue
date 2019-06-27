@@ -88,18 +88,20 @@
       seperatePackage(string) {
         let dict = {}
         if (string.includes('/') && string.includes(' ')) {
+          //string coming in looks like "12/12 EA"
           let array = string.split('/').join(" ").split(" ")
           dict["fullCase"] = array[0]
           dict["fullPackage"] = array[1]
           dict["unit"] = array[2]
         } else if (!string.includes(' ')) {
-          // packages that look like x/ea/7
+          // strings that look like 12/12EA
           let arr = string.split('/').join(" ").split(" ")
           dict["fullCase"] = arr[0]
           dict["fullPackage"] = arr[1].split(/[a-z]/gi).shift()
           dict["unit"] = arr[1].split(/[0-9]/gi).pop()
         }
         else {
+          // strings that look like 12 EA
           let array = string.split(" ")
           dict["fullCase"] = array[0]
           dict["unit"] = array[1]
@@ -113,8 +115,16 @@
       costPer(fullPackage, fullPrice) {
         let sPDict = this.seperatePackage(fullPackage)
         let pCost = this.totalCost(fullPrice)
-        let fullPkg = +sPDict.fullCase * +sPDict.fullPackage
-        let costEA = pCost / fullPkg
+        let LBS = "16"
+        if (sPDict.fullPackage) {
+          let fullPkg = +sPDict.fullCase * +sPDict.fullPackage
+          let costEA = pCost / fullPkg
+        } else {
+          let Pkg = +sPDict.fullCase * 16
+          let costOZ = parseFloat(pCost) / Pkg
+          return costOZ.toFixed(2)
+        }
+
         return costEA.toFixed(2)
 
       },
