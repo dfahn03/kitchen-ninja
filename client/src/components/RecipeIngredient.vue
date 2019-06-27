@@ -1,5 +1,5 @@
 <template>
-  <tbody class="recipe-ingredient col-6">
+  <tbody class="recipe-ingredient">
     <tr>
       <td><button type="button" class="btn btn-danger btn-sm"
           @click="deleteIngredient(recipeIngredient)">Delete</button>
