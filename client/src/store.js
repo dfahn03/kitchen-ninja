@@ -156,8 +156,8 @@ export default new Vuex.Store({
     async createBlog({ commit, dispatch }, newBlog) {
       try {
         debugger
-        let res = await api.post('blogs' + SID, newBlog)
-        dispatch('getBlogs', res.data)
+        await api.post('blogs' + SID, newBlog)
+        dispatch('getBlogs', newBlog)
       } catch (error) { console.error(error) }
     },
     async editBlog({ commit, dispatch }, blogData) {
