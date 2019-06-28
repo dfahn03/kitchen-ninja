@@ -102,7 +102,7 @@
                     </li>
                     <li class="mt-2">Profit: $ {{profit}} </li>
                     <li class="mt-2">Profit Margin: $ {{profitMargin}} </li>
-                    <li class="mt-2">Markup: %</li>
+                    <li class="mt-2">Markup: % {{markup}} </li>
                   </ul>
                 </div>
               </div>
@@ -186,19 +186,24 @@
       foodCost() {
         //totalCost / portions
         if (this.newRecipe.portions && this.recipeCost) {
-          return this.recipeCost / this.newRecipe.portions
+          return (this.recipeCost / this.newRecipe.portions).toFixed(2)
         }
       },
       profit() {
         if (this.foodCost && this.newRecipe.salesPrice) {
-          return this.newRecipe.salesPrice - this.foodCost
+          return (this.newRecipe.salesPrice - this.foodCost).toFixed(2)
         }
       },
       profitMargin() {
         // profit/salesprice
-
         if (this.newRecipe.salesPrice) {
           return (this.profit / this.newRecipe.salesPrice).toFixed(2)
+        }
+      },
+      markup() {
+        //profit / foodcost
+        if (this.newRecipe.salesPrice) {
+          return (this.profit / this.foodCost).toFixed(2)
         }
       },
     },
@@ -226,9 +231,7 @@
 
 
 
-      markup() {
 
-      },
 
     },
     components: {
