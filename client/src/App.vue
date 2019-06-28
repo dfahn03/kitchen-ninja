@@ -23,7 +23,7 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a @click='logout' class="dropdown-item" href="#">Logout</a>
-              <a class="dropdown-item" href="#">Admin Options</a>
+              <router-link to="/admin"><a class="dropdown-item" href="#">Admin Options</a></router-link>
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </div>

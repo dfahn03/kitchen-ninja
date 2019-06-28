@@ -30,6 +30,7 @@ export default new Vuex.Store({
     sites: {},
     site: {},
     user: {},
+    users: [],
     ingredient: {},
     ingredients: [],
     recipe: {},
@@ -46,6 +47,9 @@ export default new Vuex.Store({
     },
     setUser(state, user) {
       state.user = user
+    },
+    setUsers(state, users) {
+      state.users = users
     },
     setIngredients(state, ingredients = []) {
       state.ingredients = ingredients
@@ -115,6 +119,19 @@ export default new Vuex.Store({
           commit('setUser', {})
           router.push({ name: 'Login' })
         })
+    },
+    deleteUser({ commit, dispatch }, userId) {
+      api.delete('auth/' + SID + userId)
+        .then(res => {
+          dispatch('getUsers')
+        })
+    },
+    async editUser({ commit, dispatch }, payload) {
+      try {
+        await api.put('auth/' + SID + payload._id, payload)
+        commit('setUser', payload.data)
+        dispatch('getUsers')
+      } catch (error) { console.error(error) }
     },
     //#endregion
 
