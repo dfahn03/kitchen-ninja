@@ -56,7 +56,7 @@
 
   export default {
     name: "RecipeIngredient",
-    props: ['recipeIngredient', 'recipeIngredients'],
+    // props: ['recipeIngredient', 'recipeIngredients'],
     data() {
       return {}
     },

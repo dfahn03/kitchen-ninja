@@ -72,7 +72,7 @@
                   </tr>
                 </thead>
                 <recipe-ingredient v-for="recipeIngredient in newRecipe.recipeIngredients"
-                  :recipeIngredient="recipeIngredient" :recipeIngredients="newRecipe.recipeIngredients" />
+                  :key="recipeIngredient.name" />
               </table>
             </div>
           </div>
