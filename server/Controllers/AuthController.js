@@ -19,8 +19,8 @@ export default class AuthController {
             .get('/:id', this.getUserByName)
             .put('/:id', this.edit)
             // .get('/:id', this.getSitesForUser)
-            .delete('/:id', this.delete)
             .delete('/logout', this.logout)
+            .delete('/:id', this.delete)
             .use(this.defaultRoute)
     } //TODO if changing site make put route
 

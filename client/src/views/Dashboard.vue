@@ -27,7 +27,7 @@
                 </div>
                 <div class="modal-form-group">
                   <label for="inputBlogAuthor" class="mt-2 mb-0">Blog Author</label>
-                  <input v-model="newBlog.user" type="text" class="form-control" id="inputBlogAuthor"
+                  <input v-model="newBlog.author" type="text" class="form-control" id="inputBlogAuthor"
                     placeholder="Enter Username" required>
                 </div>
                 <div class="modal-form-group">
@@ -75,7 +75,7 @@
         newBlog: {
           content: '',
           title: '',
-          user: '',
+          author: '',
           image: ''
         }
       }

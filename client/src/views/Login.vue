@@ -22,7 +22,7 @@
             <select v-model="siteId" id="member" @change="selectSite($event)" class="form-control myMember-input"
               placeholder="Team Member" required>
               <option disabled value="">Choose Site</option>
-              <option v-for="memberSite in memberSites" :value="memberSite.name">{{memberSite.name}}</option>
+              <option v-for="memberSite in memberSites" :value="memberSite._id">{{memberSite.name}}</option>
             </select>
             <!-- <div class="dropdown">
   <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
@@ -122,7 +122,7 @@
       },
       selectSite(e) {
         let site = e.target.value
-        this.$store.dispatch("selectSite")
+        this.$store.dispatch("selectSite", this.siteId)
         $("#exampleModal").modal("hide");
         $(".modal-backdrop").remove();
 
