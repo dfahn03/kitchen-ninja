@@ -1,5 +1,10 @@
 <template>
   <div class="container-fluid admin">
+    <div class="row">
+      <div class="col-4">
+
+      </div>
+    </div>
     <div class="row justify-content-center">
       <div class="col-2">
         <button class="btn" type="button" id="btn-users">
@@ -34,6 +39,10 @@
 <script>
   export default {
     name: "admin",
+    mounted() {
+      this.$store.dispatch('getUserSites')
+      // this.$store.dispatch('getSiteUsers')
+    },
     props: [],
     data() {
       return {}

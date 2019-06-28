@@ -17,7 +17,9 @@ export default class AuthController {
             .use(Authorize.authenticated)
             .get('/authenticate', this.authenticate)
             .get('/:id', this.getUserByName)
+            .put('/:id', this.edit)
             // .get('/:id', this.getSitesForUser)
+            .delete('/:id', this.delete)
             .delete('/logout', this.logout)
             .use(this.defaultRoute)
     } //TODO if changing site make put route
@@ -118,6 +120,23 @@ export default class AuthController {
 
     //     }
     // }
+
+    async edit(req, res, next) {
+        try {
+            let data = await _repo.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+            if (data) {
+                return res.send(data)
+            }
+            throw new Error("Invalid Id")
+        } catch (error) { next(error) }
+    }
+
+    async delete(req, res, next) {
+        try {
+            await _repo.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+            return res.send("Successfully Deleted")
+        } catch (error) { next(error) }
+    }
 
     async logout(req, res, next) {
         try {

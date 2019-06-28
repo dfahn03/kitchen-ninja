@@ -25,7 +25,7 @@ let _siteUserSchema = new Schema({
 })
 
 let _siteUserRepo = mongoose.model('SiteUser', _siteUserSchema)
-
+//you need access to the siteuser repository in your controller
 export default class SiteService {
   get repository() {
     return mongoose.model('Site', _schema)

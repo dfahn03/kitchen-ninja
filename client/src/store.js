@@ -30,6 +30,7 @@ export default new Vuex.Store({
     sites: {},
     site: {},
     user: {},
+    users: [],
     ingredient: {},
     ingredients: [],
     recipe: {},
@@ -46,6 +47,9 @@ export default new Vuex.Store({
     },
     setUser(state, user) {
       state.user = user
+    },
+    setUsers(state, users) {
+      state.users = users
     },
     setIngredients(state, ingredients = []) {
       state.ingredients = ingredients
@@ -116,6 +120,19 @@ export default new Vuex.Store({
           router.push({ name: 'Login' })
         })
     },
+    deleteUser({ commit, dispatch }, userId) {
+      api.delete('auth/' + SID + userId)
+        .then(res => {
+          dispatch('getUsers')
+        })
+    },
+    async editUser({ commit, dispatch }, payload) {
+      try {
+        await api.put('auth/' + SID + payload._id, payload)
+        commit('setUser', payload.data)
+        dispatch('getUsers')
+      } catch (error) { console.error(error) }
+    },
     //#endregion
 
     //#region -- MasterIngredient Stuff --
@@ -128,23 +145,23 @@ export default new Vuex.Store({
     //#endregion
 
     //#region --  Dashboard Stuff --
-    async getBlogs({ commit }) {
+    async getBlogs({ commit, dispatch }) {
       try {
-        let res = await api.get('')
-        commit('setBlogs' + SID, res.data.data)
+        let res = await api.get('' + SID)
+        commit('setBlogs' + SID, res.data)
       } catch (error) {
         console.error('Blog was not created')
       }
     },
-    async createBlog({ commit, dispatch }, payload) {
+    async createBlog({ commit, dispatch }, newBlog) {
       try {
-        let res = await api.post('' + SID, payload)
-        dispatch('getBlogs', res.data.data)
+        let res = await api.post('' + SID, newBlog)
+        dispatch('getBlogs', res.data)
       } catch (error) { console.error('Blog was not created') }
     },
-    async editBlog({ commit, dispatch }, payload) {
+    async editBlog({ commit, dispatch }, blogData) {
       try {
-        await api.put('blogs/' + SID + payload._id, payload)
+        await api.put('blogs/' + SID + blogData._id, blogData)
         dispatch('getBlogs')
       } catch (error) { console.error(error) }
     },

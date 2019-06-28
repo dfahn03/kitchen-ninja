@@ -8,7 +8,7 @@ import Costing from './views/Costing.vue'
 import Login from './views/Login.vue'
 import Recipes from './views/Recipes.vue'
 
-//admin route and child routes below
+//admin route and child routes below. add menu child when complete
 import Admin from './views/Admin.vue'
 import AdminUsers from './components/AdminUsers.vue'
 import AdminSites from './components/AdminSites.vue'
