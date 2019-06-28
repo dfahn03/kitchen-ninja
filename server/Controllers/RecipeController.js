@@ -35,46 +35,28 @@ export default class RecipeController {
     } catch (err) { next(err) }
   }
 
-  // async getSharedRecipe(req, res, next) { //get Recipe SHARED with you
-  //   try {
-  //     //only gets Recipe if user who is logged in matches a shared Id
-  //     let data = await _recipeRepo.find({ sharedIds: { $in: [req.session.uid] } })
-  //     return res.send(data)
-  //   }
-  //   catch (err) { next(err) }
-  // }
-
+  //used when taking from recipes view to costing view
   async getById(req, res, next) {
     try {
-      let data = await _recipeRepo.findOne()
+      let siteId = req.query.siteId
+      let data = await _recipeRepo.findOne({ siteId, _id: req.params.id })
       return res.send(data)
     } catch (error) { next(error) }
   }
-  // async getRecipeLists(req, res, next) {
-  //   try {
-  //     if (await _recipeRepo.find({ $or: [{ authorId: req.session.uid }, { sharedIds: { $in: [req.session.uid] } }] })) {
-  //       //get Lists for Recipe were 
-  //       let data = await _listRepo.find({
-  //         recipeId: req.params.id,
-  //         // $or: [{ authorId: req.session.uid }, { sharedIds: { $in: [req.session.uid] } }]
-  //       })
-  //       return res.send(data)
-  //     }
-  //   }
-  //   catch (err) { next(err) }
-  // }
 
   async create(req, res, next) {
     try {
+      let siteId = req.query.siteId
       req.body.authorId = req.session.uid
-      let data = await _recipeRepo.create(req.body)
+      let data = await _recipeRepo.create({ siteId }, req.body)
       return res.status(201).send(data)
     } catch (error) { next(error) }
   }
 
   async edit(req, res, next) {
     try {
-      let data = await _recipeRepo.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+      let siteId = req.query.siteId
+      let data = await _recipeRepo.findOneAndUpdate({ siteId, _id: req.params.id }, req.body, { new: true })
       if (data) {
         return res.send(data)
       }
@@ -84,7 +66,8 @@ export default class RecipeController {
 
   async delete(req, res, next) {
     try {
-      await _recipeRepo.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+      let siteId = req.query.siteId
+      await _recipeRepo.findOneAndRemove({ siteId, _id: req.params.id, authorId: req.session.uid })
       return res.send("Successfully Deleted")
     } catch (error) { next(error) }
   }

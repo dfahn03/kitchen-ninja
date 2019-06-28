@@ -149,24 +149,23 @@ export default new Vuex.Store({
       try {
         let res = await api.get('' + SID)
         commit('setBlogs' + SID, res.data)
-      } catch (error) {
-        console.error('Blog was not created')
-      }
+      } catch (error) { console.error(error) }
     },
     async createBlog({ commit, dispatch }, newBlog) {
       try {
+        debugger
         let res = await api.post('' + SID, newBlog)
         dispatch('getBlogs', res.data)
-      } catch (error) { console.error('Blog was not created') }
+      } catch (error) { console.error(error) }
     },
     async editBlog({ commit, dispatch }, blogData) {
       try {
-        await api.put('blogs/' + SID + blogData._id, blogData)
+        await api.put('blogs/' + blogData._id + SID, blogData)
         dispatch('getBlogs')
       } catch (error) { console.error(error) }
     },
     deleteBlog({ commit, dispatch }, blogId) {
-      api.delete('blogs/' + SID + blogId)
+      api.delete('blogs/' + blogId + SID)
         .then(res => {
           dispatch('getBlogs')
         })

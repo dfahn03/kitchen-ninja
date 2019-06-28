@@ -24,7 +24,8 @@ export default class DashboardController {
 
   async getAll(req, res, next) {
     try {
-      let data = await _dashboardRepo.find({ authorId: req.session.uid })
+      let siteId = req.query.siteId
+      let data = await _dashboardRepo.find({ siteId, authorId: req.session.uid })
       return res.send(data)
     }
     catch (err) { next(err) }
@@ -32,22 +33,25 @@ export default class DashboardController {
 
   async getById(req, res, next) {
     try {
-      let data = await _dashboardRepo.findOne({ _id: req.params.id, authorId: req.session.uid })
+      let siteId = req.query.siteId
+      let data = await _dashboardRepo.findOne({ siteId, _id: req.params.id, authorId: req.session.uid })
       return res.send(data)
     } catch (error) { next(error) }
   }
 
   async create(req, res, next) {
     try {
+      let siteId = req.query.siteId
       req.body.authorId = req.session.uid
-      let data = await _dashboardRepo.create(req.body)
+      let data = await _dashboardRepo.create({ siteId }, req.body)
       return res.status(201).send(data)
     } catch (error) { next(error) }
   }
 
   async edit(req, res, next) {
     try {
-      let data = await _dashboardRepo.findOneAndUpdate({ _id: req.params.id, authorId: req.session.uid }, req.body, { new: true })
+      let siteId = req.query.siteId
+      let data = await _dashboardRepo.findOneAndUpdate({ siteId, _id: req.params.id, authorId: req.session.uid }, req.body, { new: true })
       if (data) {
         return res.send(data)
       }
@@ -57,7 +61,8 @@ export default class DashboardController {
 
   async delete(req, res, next) {
     try {
-      await _dashboardRepo.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+      let siteId = req.query.siteId
+      await _dashboardRepo.findOneAndRemove({ siteId, _id: req.params.id, authorId: req.session.uid })
       return res.send("successfully deleted")
     } catch (error) { next(error) }
   }

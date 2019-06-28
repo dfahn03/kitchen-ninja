@@ -7,10 +7,10 @@ let _schema = new Schema({
   title: { type: String, required: true, default: "no desc" },
   authorId: { type: ObjectId, ref: 'User', required: true },
   content: { type: String, required: true, default: "this post needs some content" },
-  image: { type: ObjectId, required: false }
+  image: { type: String, default: "https://images.unsplash.com/photo-1488992783499-418eb1f62d08?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" },
+  siteId: { type: ObjectId, ref: 'Site', required: true }
 })
-// TODO insert default image
-// default: "https://www.fairfaxcounty.gov/news2/wp-content/uploads/2016/05/meal.jpg"
+
 
 export default class DashboardService {
   get repository() {

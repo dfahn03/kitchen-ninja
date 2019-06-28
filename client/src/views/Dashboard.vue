@@ -90,7 +90,6 @@
     },
     methods: {
       createBlog() {
-        debugger
         this.$store.dispatch('createBlog', this.newBlog)
         this.newBlog.title = ""
         this.newBlog.content = ""
