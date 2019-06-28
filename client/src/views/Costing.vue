@@ -97,9 +97,10 @@
                     <li>Total Cost: $ {{recipeCost}}</li>
                     <li class="mt-2">Food Cost: $ {{foodCost}} </li>
                     <!-- TODO possibly recommended sales price -->
-                    <li>Sales Price: $<input type="number" placeholder="0.00" class="totalP-input ml-1 mt-2"
+                    <li>Sales Price: $ <input type="number" placeholder="0.00" class="totalP-input ml-1 mt-2"
                         v-model="newRecipe.salesPrice" required>
                     </li>
+                    <li class="mt-2"> Suggested Price: $ {{suggestedSalesPrice}} </li>
                     <li class="mt-2">Profit: $ {{profit}} </li>
                     <li class="mt-2">Profit Margin: $ {{profitMargin}} </li>
                     <li class="mt-2">Markup: % {{markup}} </li>
@@ -206,6 +207,11 @@
           return (this.profit / this.foodCost).toFixed(2)
         }
       },
+      suggestedSalesPrice() {
+        if (this.profitMargin >= .04) {
+          return (this.foodCost * 1.04).toFixed(2)
+        }
+      }
     },
     methods: {
       addIngredient() {
