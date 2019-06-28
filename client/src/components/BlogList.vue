@@ -12,7 +12,8 @@
       </div>
       <div class="w-100"></div>
       <div class="card-footer w-100 text-muted">
-        <button class="btn btn-primary" type="button">Edit Blog</button>
+        <button class="btn btn-warning" type="button" @click="">Edit Blog</button>
+        <button class="btn btn-danger ml-1" type="button" @click="">Delete Blog</button>
       </div>
     </div>
   </div>

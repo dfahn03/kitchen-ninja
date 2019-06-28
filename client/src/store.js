@@ -145,23 +145,23 @@ export default new Vuex.Store({
     //#endregion
 
     //#region --  Dashboard Stuff --
-    async getBlogs({ commit }) {
+    async getBlogs({ commit, dispatch }) {
       try {
-        let res = await api.get('')
-        commit('setBlogs' + SID, res.data.data)
+        let res = await api.get('' + SID)
+        commit('setBlogs' + SID, res.data)
       } catch (error) {
         console.error('Blog was not created')
       }
     },
-    async createBlog({ commit, dispatch }, payload) {
+    async createBlog({ commit, dispatch }, newBlog) {
       try {
-        let res = await api.post('' + SID, payload)
-        dispatch('getBlogs', res.data.data)
+        let res = await api.post('' + SID, newBlog)
+        dispatch('getBlogs', res.data)
       } catch (error) { console.error('Blog was not created') }
     },
-    async editBlog({ commit, dispatch }, payload) {
+    async editBlog({ commit, dispatch }, blogData) {
       try {
-        await api.put('blogs/' + SID + payload._id, payload)
+        await api.put('blogs/' + SID + blogData._id, blogData)
         dispatch('getBlogs')
       } catch (error) { console.error(error) }
     },

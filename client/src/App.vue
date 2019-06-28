@@ -70,7 +70,7 @@
       <!-- Page Content -->
 
       <div id="page-content-wrapper">
-        <div class="container">
+        <div class="container-fluid">
           <router-view />
         </div>
       </div>
@@ -107,16 +107,13 @@
   }
 </script>
 <style>
-  app {
-    user-select: none;
-  }
-
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+    user-select: none;
   }
 
   #home-nav {
@@ -147,9 +144,9 @@
     width: 0px;
     height: 100%;
     overflow-y: hidden;
-    background-color: #fff;
+    background-color: whitesmoke;
     border: 5px #42b983;
-    opacity: .9;
+
     margin-top: 80px;
     margin-bottom: -80px;
     padding-top: 20px;
@@ -170,10 +167,11 @@
   /* Displayed */
   #wrapper.toggled #sidebar-wrapper {
     width: 250px;
+    z-index: 2;
   }
 
   #wrapper.toggled #page-content-wrapper {
-    padding-left: 250px;
+    /* padding-left: 250px; */
     z-index: -1;
   }
 

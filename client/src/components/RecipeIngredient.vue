@@ -19,13 +19,13 @@
       <td>
         <input v-if="!calculateCost()" type="text" placeholder="Cost" v-model="recipeIngredient.itemCost"
           class="ingC-input" required>
-        {{calculateCost()}}
+        <p class="mt-1">{{calculateCost()}}</p>
       </td>
 
-      <td v-if="recipeIngredient.category"><input type="text" readonly="true" v-model="recipeIngredient.category"
+      <!-- <td v-if="recipe-ingredient.category"><input type="text" v-model="recipeIngredient.category" readonly="true"
           class=" category-input1">
-      </td>
-      <td v-else><select class="category-input2" placeholder="Category" v-model="recipeIngredient.category" required>
+      </td> -->
+      <td><select class="category-input2" placeholder="Category" v-model="recipeIngredient.category" required>
           <option disabled value="">Category</option>
           <option value="Bakery">Bakery</option>
           <option value="Dairy">Dairy</option>
@@ -78,6 +78,7 @@
         this.recipeIngredient.itemName = val
       },
       setIngredient(autocomplete) {
+
         // console.log("FROM AUTOCOMPLETE", ingredient)
         this.recipeIngredient = autocomplete.result
         this.recipeIngredient.quantity = 1
@@ -87,18 +88,20 @@
       seperatePackage(string) {
         let dict = {}
         if (string.includes('/') && string.includes(' ')) {
+          //string coming in looks like "12/12 EA"
           let array = string.split('/').join(" ").split(" ")
           dict["fullCase"] = array[0]
           dict["fullPackage"] = array[1]
           dict["unit"] = array[2]
         } else if (!string.includes(' ')) {
-          // packages that look like x/ea/7
+          // strings that look like 12/12EA
           let arr = string.split('/').join(" ").split(" ")
           dict["fullCase"] = arr[0]
           dict["fullPackage"] = arr[1].split(/[a-z]/gi).shift()
           dict["unit"] = arr[1].split(/[0-9]/gi).pop()
         }
         else {
+          // strings that look like 12 EA
           let array = string.split(" ")
           dict["fullCase"] = array[0]
           dict["unit"] = array[1]
@@ -112,15 +115,20 @@
       costPer(fullPackage, fullPrice) {
         let sPDict = this.seperatePackage(fullPackage)
         let pCost = this.totalCost(fullPrice)
-        let fullPkg = +sPDict.fullCase * +sPDict.fullPackage
-        let costEA = pCost / fullPkg
-        debugger
-        return costEA.toFixed(2)
+        if (sPDict.fullPackage) {
+          let fullPkg = +sPDict.fullCase * +sPDict.fullPackage
+          let costEA = +pCost / fullPkg
+        } else {
+          let Pkg = +sPDict.fullCase * 16
+          let costOZ = +pCost / Pkg
+          return costOZ.toFixed(2)
+        }
 
+        return costEA.toFixed(2)
       },
       calculateCost() {
         if (this.recipeIngredient.packageSize && this.recipeIngredient.packageCost) {
-          return this.costPer(this.recipeIngredient.packageSize, this.recipeIngredient.packageCost) * this.recipeIngredient.quantity
+          // return this.costPer(this.recipeIngredient.packageSize, this.recipeIngredient.packageCost) * this.recipeIngredient.quantity
         }
       }
 
