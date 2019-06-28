@@ -2,7 +2,7 @@
   <div class="container-fluid blog-list">
     <div class="card flex-row flex-wrap m-2">
       <div class="card-header border-0">
-        <!-- <img :src="" alt=""> {{blogData.blogImage}} -->
+        <img v-attr="src: {{blogData.blogImage}}"> {{blogData.blogImage}}
       </div>
       <div class=" card-block px-2 py-2">
         <h4 class="card-title">Title: {{blogData.blogTitle}}</h4>

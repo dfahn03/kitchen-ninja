@@ -186,8 +186,9 @@ export default new Vuex.Store({
     },
     async saveRecipe({ commit, dispatch }, newRecipe) {
       try {
-        let res = api.post('recipes' + SID, newRecipe)
+        await api.post('recipes' + SID, newRecipe)
         router.push({ name: 'Recipes' })
+        dispatch('setRecipes')
       } catch (err) { console.error(err) }
     },
 
