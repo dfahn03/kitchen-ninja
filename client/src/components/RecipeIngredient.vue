@@ -1,15 +1,14 @@
 <template>
   <tbody class="recipe-ingredient">
     <tr>
-      <td><button type="button" class="btn btn-danger btn-sm"
-          @click="deleteIngredient(recipeIngredient)">Delete</button>
+      <td><button type="button" class="btn btn-danger btn-sm" @click="$emit('deleteIngredient', i)">Delete</button>
       </td>
       <td>
         <auto-complete @result="setIngredient" :items="ingredients" @input="setIngredientName" />
       </td>
-      <td><input type="number" placeholder="Quantity" min="0" step=".5" v-model="recipeIngredient.quantity"
+      <td><input type="number" placeholder="Quantity" min="0" step=".5" v-model="newIngredient.quantity"
           class="quan-input" required></td>
-      <td><select class="form-control unit-input" placeholder="Unit" readonly="true" v-model="recipeIngredient.unit"
+      <td><select class="form-control unit-input" placeholder="Unit" readonly="true" v-model="newIngredient.unit"
           required>
           <option disabled value="">Unit</option>
           <option value="Oz">OZ</option>
@@ -17,15 +16,15 @@
         </select></td>
 
       <td>
-        <input v-if="!calculateCost()" type="text" placeholder="Cost" v-model="recipeIngredient.itemCost"
+        <input v-if="!calculateCost()" type="text" placeholder="Cost" v-model="newIngredient.itemCost"
           class="ingC-input" required>
         <p class="mt-1">{{calculateCost()}}</p>
       </td>
 
-      <!-- <td v-if="recipe-ingredient.category"><input type="text" v-model="recipeIngredient.category" readonly="true"
+      <!-- <td v-if="recipe-ingredient.category"><input type="text" v-model="newIngredient.category" readonly="true"
           class=" category-input1">
       </td> -->
-      <td><select class="category-input2" placeholder="Category" v-model="recipeIngredient.category" required>
+      <td><select class="category-input2" placeholder="Category" v-model="newIngredient.category" required>
           <option disabled value="">Category</option>
           <option value="Bakery">Bakery</option>
           <option value="Dairy">Dairy</option>
@@ -35,18 +34,18 @@
           <option value="Storeroom">Storeroom</option>
         </select>
       </td>
-      <td><input type="text" placeholder="Distributor" v-model="recipeIngredient.distributor" class="dist-input"
-          required></td>
-      <!-- TODO get a input select with a custom input field included -->
-      <td><input type="text" placeholder="Product #" readonly="recipeIngredient.productNumber"
-          v-model="recipeIngredient.productNumber" class="prod-input" required>
+      <td><input type="text" placeholder="Distributor" v-model="newIngredient.distributor" class="dist-input" required>
       </td>
-      <td><input type="text" placeholder="Brand" readonly="recipeIngredient.brand" v-model="recipeIngredient.brand"
+      <!-- TODO get a input select with a custom input field included -->
+      <td><input type="text" placeholder="Product #" readonly="newIngredient.productNumber"
+          v-model="newIngredient.productNumber" class="prod-input" required>
+      </td>
+      <td><input type="text" placeholder="Brand" readonly="newIngredient.brand" v-model="newIngredient.brand"
           class="brand-input" required></td>
-      <td><input type="text" placeholder="Package Size" readonly="recipeIngredient.packageSize"
-          v-model="recipeIngredient.packageSize" class="packS-input" required></td>
-      <td><input type="text" placeholder="Package Cost" readonly="recipeIngredient.packageCost"
-          v-model="recipeIngredient.packageCost" class="packC-input" required></td>
+      <td><input type="text" placeholder="Package Size" readonly="newIngredient.packageSize"
+          v-model="newIngredient.packageSize" class="packS-input" required></td>
+      <td><input type="text" placeholder="Package Cost" readonly="newIngredient.packageCost"
+          v-model="newIngredient.packageCost" class="packC-input" required></td>
     </tr>
   </tbody>
 </template>
@@ -56,9 +55,12 @@
 
   export default {
     name: "RecipeIngredient",
-    // props: ['recipeIngredient', 'recipeIngredients'],
+    props: ['recipeIngredients', "i"],
+    // 'recipeIngredient',
     data() {
-      return {}
+      return {
+        newIngredient: this.recipeIngredients[this.i]
+      }
     },
     mounted() {
       return this.$store.dispatch("getIngredients")
@@ -67,23 +69,30 @@
       ingredients() {
         return this.$store.state.ingredients
       },
+      // newIngredient: {
+      //   get: function () {
+      //     return this.recipeIngredients[this.i]
+      //   },
+      //   set: function (whatAmI) {
+      //     console.log(whatAmI)
+      //   }
+      // }
     },
     methods: {
-      deleteIngredient(ingredient) {
-        let index = this.recipeIngredients.indexOf(ingredient)
-        this.recipeIngredients.splice(index, 1)
+      deleteIngredient(i) {
+        this.recipeIngredients.splice(i, 1)
       },
       setIngredientName(val) {
         this.recipeIngredient = {}
-        this.recipeIngredient.itemName = val
+        this.newIngredient.itemName = val
       },
       setIngredient(autocomplete) {
-
         // console.log("FROM AUTOCOMPLETE", ingredient)
-        this.recipeIngredient = autocomplete.result
-        this.recipeIngredient.quantity = 1
-        this.recipeIngredients = [this.recipeIngredient]
-        this.calculateCost()
+        this.newIngredient = autocomplete.result
+        this.newIngredient.quantity = 1
+        // this.recipeIngredients = [this.newIngredient]
+        this.newIngredient.itemCost = this.calculateCost()
+        this.recipeIngredients[this.i] = this.newIngredient
       },
       seperatePackage(string) {
         let dict = {}
@@ -113,11 +122,12 @@
         return pkgCost
       },
       costPer(fullPackage, fullPrice) {
+        let costEA
         let sPDict = this.seperatePackage(fullPackage)
         let pCost = this.totalCost(fullPrice)
         if (sPDict.fullPackage) {
           let fullPkg = +sPDict.fullCase * +sPDict.fullPackage
-          let costEA = +pCost / fullPkg
+          costEA = +pCost / fullPkg
         } else {
           let Pkg = +sPDict.fullCase * 16
           let costOZ = +pCost / Pkg
@@ -127,13 +137,13 @@
         return costEA.toFixed(2)
       },
       calculateCost() {
-        if (this.recipeIngredient.packageSize && this.recipeIngredient.packageCost) {
-          return this.costPer(this.recipeIngredient.packageSize, this.recipeIngredient.packageCost) * this.recipeIngredient.quantity
+        if (this.newIngredient.packageSize && this.newIngredient.packageCost) {
+          return this.costPer(this.newIngredient.packageSize, this.newIngredient.packageCost) * this.newIngredient.quantity
         }
-      }
-
+      },
     },
     components: { AutoComplete }
+
   }
 </script>
 
