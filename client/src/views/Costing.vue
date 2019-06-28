@@ -101,7 +101,7 @@
                         v-model="newRecipe.salesPrice" required>
                     </li>
                     <li class="mt-2">Profit: $ {{profit}} </li>
-                    <li class="mt-2">Profit Margin: $</li>
+                    <li class="mt-2">Profit Margin: $ {{profitMargin}} </li>
                     <li class="mt-2">Markup: %</li>
                   </ul>
                 </div>
@@ -194,6 +194,13 @@
           return this.newRecipe.salesPrice - this.foodCost
         }
       },
+      profitMargin() {
+        // profit/salesprice
+
+        if (this.newRecipe.salesPrice) {
+          return (this.profit / this.newRecipe.salesPrice).toFixed(2)
+        }
+      },
     },
     methods: {
       addIngredient() {
@@ -218,9 +225,7 @@
 
 
 
-      profitMargin() {
 
-      },
       markup() {
 
       },
