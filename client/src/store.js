@@ -149,7 +149,7 @@ export default new Vuex.Store({
     //#region --  Dashboard Stuff --
     async getBlogs({ commit, dispatch }) {
       try {
-        let res = await api.get('' + SID)
+        let res = await api.get('blogs' + SID)
         commit('setBlogs', res.data)
       } catch (error) { console.error(error) }
     },
