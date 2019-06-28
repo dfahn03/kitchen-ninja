@@ -95,12 +95,12 @@
                 <div class="col-6 text-white d-flex justify-content-center text-left">
                   <ul>
                     <li>Total Cost: $ {{recipeCost}}</li>
-                    <li class="mt-2">Food Cost: $ </li>
+                    <li class="mt-2">Food Cost: $ {{foodCost}} </li>
                     <!-- TODO possibly recommended sales price -->
                     <li>Sales Price: $<input type="number" placeholder="0.00" class="totalP-input ml-1 mt-2"
                         v-model="newRecipe.salesPrice" required>
                     </li>
-                    <li class="mt-2">Profit: $</li>
+                    <li class="mt-2">Profit: $ {{profit}} </li>
                     <li class="mt-2">Profit Margin: $</li>
                     <li class="mt-2">Markup: %</li>
                   </ul>
@@ -182,7 +182,18 @@
         this.bakery = 0
         this.frozen = 0
         return this.newRecipe.recipeIngredients.forEach(r => this.$data[r.category.toLowerCase()] += +r.itemCost)
-      }
+      },
+      foodCost() {
+        //totalCost / portions
+        if (this.newRecipe.portions && this.recipeCost) {
+          return this.recipeCost / this.newRecipe.portions
+        }
+      },
+      profit() {
+        if (this.foodCost && this.newRecipe.salesPrice) {
+          return this.newRecipe.salesPrice - this.foodCost
+        }
+      },
     },
     methods: {
       addIngredient() {
@@ -204,15 +215,9 @@
       saveRecipe() {
         this.$store.dispatch('saveRecipe', this.newRecipe)
       },
-      foodCost() {
 
-      },
-      salesPrice() {
 
-      },
-      profit() {
 
-      },
       profitMargin() {
 
       },
