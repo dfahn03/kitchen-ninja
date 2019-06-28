@@ -204,7 +204,7 @@
       markup() {
         //profit / foodcost
         if (this.newRecipe.salesPrice) {
-          return (this.profit / this.foodCost).toFixed(2)
+          return ((this.profit / this.foodCost) * 100).toFixed(0)
         }
       },
       suggestedSalesPrice() {
@@ -233,12 +233,6 @@
       saveRecipe() {
         this.$store.dispatch('saveRecipe', this.newRecipe)
       },
-
-
-
-
-
-
     },
     components: {
       RecipeIngredient
