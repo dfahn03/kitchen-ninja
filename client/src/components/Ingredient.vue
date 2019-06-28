@@ -1,0 +1,85 @@
+<template>
+  <div class="ingredient">
+    <div class="form-row">
+      <div class="col-12">
+        <button type="button" class="btn addIng-btn text-white my-2" @click="addIngredient">Add
+          Ingredient <img src="../assets/icons8-plus-25.png" alt="Plus Icon" class="ml-1"></button>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <table class="table text-white">
+            <thead>
+              <tr>
+                <th scope="col">Remove</th>
+                <th scope="col">Ingredient Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Unit</th>
+                <th scope="col">Ingredient Cost</th>
+                <th scope="col">Category</th>
+                <th scope="col">Distributor</th>
+                <th scope="col">Product #</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Package Size</th>
+                <th scope="col">Package Cost</th>
+              </tr>
+            </thead>
+            <recipe-ingredient @deleteIngredient="test" @sendThatIngredient="ing => recipeIngredients.push(ing)"
+              v-for="(recipeIngredient, i) in recipeIngredients" :i="i" :recipeIngredients="recipeIngredients" />
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+  import RecipeIngredient from '@/components/RecipeIngredient'
+  export default {
+    name: "Ingredient",
+    data() {
+      return {
+        recipeIngredients: []
+      }
+    },
+    methods: {
+      addIngredient() {
+        let newIngredient = {
+          itemName: "",
+          category: "",
+          brand: "",
+          productNumber: 0,
+          quantity: 1,
+          unit: "",
+          itemCost: 0,
+          packageSize: "",
+          packageCost: "",
+          distributor: "",
+        }
+        this.recipeIngredients.push(newIngredient)
+        // this.costPerCategory()
+      },
+      test(i) {
+        this.recipeIngredients.splice(i, 1)
+      }
+    },
+    computed: {
+      // recipeIngredients() {
+      //   return this.$store.state.recipeIngredients
+      // }
+    },
+    components: {
+      RecipeIngredient
+    },
+    watch: {
+      recipeIngredients(val) {
+        this.$emit('passThemIngredients', val)
+      }
+    }
+
+  }
+
+</script>
+
+<style>
+
+</style>

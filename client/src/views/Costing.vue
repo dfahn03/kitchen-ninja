@@ -1,11 +1,13 @@
 <template>
   <div class="costing">
+    <!-- Converter Button -->
     <div class="row">
       <div class="col-12">
         <button type="button" class="btn btn-secondary float-right my-2" @click="">Converter</button>
         <!-- TODO link this button to the sidebar calculator -->
       </div>
     </div>
+    <!-- Recipe Form -->
     <div class="row">
       <div class="col">
         <form @submit.prevent="saveRecipe">
@@ -47,35 +49,7 @@
                 v-model="newRecipe.allergens" min="0" required>
             </div>
           </div>
-          <div class="form-row">
-            <div class="col-12">
-              <button type="button" class="btn addIng-btn text-white my-2" @click="addIngredient">Add
-                Ingredient <img src="../assets/icons8-plus-25.png" alt="Plus Icon" class="ml-1"></button>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="col-12">
-              <table class="table text-white">
-                <thead>
-                  <tr>
-                    <th scope="col">Remove</th>
-                    <th scope="col">Ingredient Name</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Unit</th>
-                    <th scope="col">Ingredient Cost</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Distributor</th>
-                    <th scope="col">Product #</th>
-                    <th scope="col">Brand</th>
-                    <th scope="col">Package Size</th>
-                    <th scope="col">Package Cost</th>
-                  </tr>
-                </thead>
-                <recipe-ingredient v-for="recipeIngredient in newRecipe.recipeIngredients"
-                  :key="recipeIngredient.name" />
-              </table>
-            </div>
-          </div>
+          <ingredient @passThemIngredients="arr => newRecipe.recipeIngredients = arr" />
           <div class="form-row">
             <div class="col-12">
               <div class="row">
@@ -118,13 +92,13 @@
         </form>
       </div>
     </div>
-
+    <!-- Recipe Form -->
   </div>
 </template>
 
 <script>
   import RecipeIngredient from '@/components/RecipeIngredient'
-
+  import Ingredient from '@/components/Ingredient'
   export default {
     name: "Costing",
     mounted() {
@@ -160,7 +134,6 @@
     },
     watch: {
       itemCost(nv, ov) {
-        // console.log(`ov ${ov}, nv ${nv}`)
         // Leave watcher to run computed
       }
 
@@ -214,28 +187,13 @@
       }
     },
     methods: {
-      addIngredient() {
-        let newIngredient = {
-          itemName: "",
-          category: "",
-          brand: "",
-          productNumber: 0,
-          quantity: 1,
-          unit: "",
-          itemCost: 0,
-          packageSize: "",
-          packageCost: "",
-          distributor: "",
-        }
-        this.newRecipe.recipeIngredients.push(newIngredient)
-        // this.costPerCategory()
-      },
       saveRecipe() {
         this.$store.dispatch('saveRecipe', this.newRecipe)
       },
     },
     components: {
-      RecipeIngredient
+      RecipeIngredient,
+      Ingredient
     }
   }
 
