@@ -128,7 +128,7 @@
       },
       calculateCost() {
         if (this.recipeIngredient.packageSize && this.recipeIngredient.packageCost) {
-          // return this.costPer(this.recipeIngredient.packageSize, this.recipeIngredient.packageCost) * this.recipeIngredient.quantity
+          return this.costPer(this.recipeIngredient.packageSize, this.recipeIngredient.packageCost) * this.recipeIngredient.quantity
         }
       }
 
