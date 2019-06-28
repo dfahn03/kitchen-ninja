@@ -4,9 +4,9 @@ const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 
 let _schema = new Schema({
-  title: { type: String, required: true, default: "no desc" },
+  blogTitle: { type: String, required: true, default: "no desc" },
   authorId: { type: ObjectId, ref: 'User', required: true },
-  content: { type: String, required: true, default: "this post needs some content" },
+  blogContent: { type: String, required: true, default: "this post needs some content" },
   image: { type: String, default: "https://images.unsplash.com/photo-1488992783499-418eb1f62d08?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" },
   siteId: { type: ObjectId, ref: 'Site', required: true }
 })
