@@ -42,7 +42,6 @@ export default new Vuex.Store({
       state.sites = sites
     },
     setSite(state, siteId) {
-
       SID += siteId
       state.site = state.sites.memberSites.find(s => s._id == siteId) || state.sites.mySites.find(s => s._id == siteId)
     },
@@ -149,13 +148,13 @@ export default new Vuex.Store({
     //#region --  Dashboard Stuff --
     async getBlogs({ commit, dispatch }) {
       try {
+        // debugger
         let res = await api.get('blogs' + SID)
         commit('setBlogs', res.data)
       } catch (error) { console.error(error) }
     },
     async createBlog({ commit, dispatch }, newBlog) {
       try {
-        debugger
         await api.post('blogs' + SID, newBlog)
         dispatch('getBlogs', newBlog)
       } catch (error) { console.error(error) }

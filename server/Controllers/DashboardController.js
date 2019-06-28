@@ -12,10 +12,10 @@ export default class DashboardController {
         this.router = express.Router()
             .use(Authorize.authenticated) //move back to top after functioning
             .get('', this.getAll)
-            .get('/:id', this.getById)
-            .delete('/:id', this.delete)
+            // .get('/:id', this.getById)
             .post('', this.create)
             .put('/:id', this.edit)
+            .delete('/:id', this.delete)
             .use(this.defaultRoute)
     }
 
@@ -25,20 +25,20 @@ export default class DashboardController {
 
     async getAll(req, res, next) {
         try {
-            let siteId = req.query.siteId
-            let data = await _dashboardRepo.find({ siteId, authorId: req.session.uid })
+            req.siteId = mongodb.ObjectID(req.query.siteId)
+            // let siteId = req.query.siteId
+            let data = await _dashboardRepo.find({ siteId: req.query.siteId })
             return res.send(data)
-        }
-        catch (err) { next(err) }
+        } catch (err) { next(err) }
     }
 
-    async getById(req, res, next) {
-        try {
-            let siteId = req.query.siteId
-            let data = await _dashboardRepo.findOne({ siteId, _id: req.params.id, authorId: req.session.uid })
-            return res.send(data)
-        } catch (error) { next(error) }
-    }
+    // async getById(req, res, next) {
+    //     try {
+    //         let siteId = req.query.siteId
+    //         let data = await _dashboardRepo.findOne({ siteId, _id: req.params.id, authorId: req.session.uid })
+    //         return res.send(data)
+    //     } catch (error) { next(error) }
+    // }
 
     async create(req, res, next) {
         try {

@@ -92,9 +92,14 @@
     methods: {
       createBlog() {
         this.$store.dispatch('createBlog', this.newBlog)
-        this.newBlog.title = ""
-        this.newBlog.content = ""
-        this.newBlog.image = ""
+        setTimeout(() => {
+          this.newBlog.blogTitle = ""
+          this.newBlog.blogContent = ""
+          this.newBlog.blogImage = ""
+          this.newBlog.author = ""
+        }, 1000);
+        $("#blogModal").modal("hide");
+        $(".modal-backdrop").remove();
       },
     }
   }
