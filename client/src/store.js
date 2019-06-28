@@ -23,7 +23,7 @@ let api = Axios.create({
   withCredentials: true
 })
 
-let SID = "?siteId"
+let SID = "?siteId="
 
 export default new Vuex.Store({
   state: {
@@ -41,9 +41,10 @@ export default new Vuex.Store({
     setSites(state, sites) {
       state.sites = sites
     },
-    setSite(state, site) {
-      SID = "?siteId=" + site._id
-      state.site = site
+    setSite(state, siteId) {
+
+      SID += siteId
+      state.site = state.sites.memberSites.find(s => s._id == siteId) || state.sites.mySites.find(s => s._id == siteId)
     },
     setUser(state, user) {
       state.user = user
@@ -107,9 +108,10 @@ export default new Vuex.Store({
     },
     async selectSite({ commit, dispatch }, siteId) {
       try {
-        let res = await api.get('sites/' + siteId)
-        commit('setSite', res.data)
-        console.log(res)
+
+        // let res = await api.get('sites/' + siteId)
+        commit('setSite', siteId)
+        // console.log(res)
         router.push({ name: 'dashboard' })
       } catch (error) { console.error(error) }
     },
@@ -147,15 +149,15 @@ export default new Vuex.Store({
     //#region --  Dashboard Stuff --
     async getBlogs({ commit, dispatch }) {
       try {
-        let res = await api.get('' + SID)
-        commit('setBlogs' + SID, res.data)
+        let res = await api.get('blogs' + SID)
+        commit('setBlogs', res.data)
       } catch (error) { console.error(error) }
     },
     async createBlog({ commit, dispatch }, newBlog) {
       try {
         debugger
-        let res = await api.post('' + SID, newBlog)
-        dispatch('getBlogs', res.data)
+        await api.post('blogs' + SID, newBlog)
+        dispatch('getBlogs', newBlog)
       } catch (error) { console.error(error) }
     },
     async editBlog({ commit, dispatch }, blogData) {
