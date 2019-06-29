@@ -1,9 +1,9 @@
 <template>
   <div class="container-fluid recipes">
-    <!-- v-for="recipe in recipes" :key="recipe._id" -->
+
     <div class="row">
       <div class="col">
-        <div class="card text-center">
+        <div class="card text-center" v-for="recipe in recipes" :key="recipe._id">
           <h5 class="card-header">{{recipe.name}}</h5>
           <div class="card-body">
             <h5 class="card-title">{{recipe.portionSize}}</h5>
