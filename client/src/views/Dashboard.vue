@@ -54,9 +54,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-12 mt-5">
-        <blog-list v-for="blog in blogs" :key="blog._id" :blogData="blog" />
-      </div>
+      <blog-list v-for="blog in blogs" :key="blog._id" :blogData="blog" />
     </div>
   </div>
   </div>
