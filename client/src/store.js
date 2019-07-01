@@ -35,7 +35,9 @@ export default new Vuex.Store({
     ingredients: [],
     recipe: {},
     recipes: [],
-    blogs: []
+    blogs: [],
+    // menus: [],
+    // kitchens: []
   },
   mutations: {
     setSites(state, sites) {
@@ -102,16 +104,40 @@ export default new Vuex.Store({
       try {
         let res = await api.get('sites/' + userId)
         commit('setSites', res.data)
-        console.log(res)
+
       } catch (error) { console.error(error) }
     },
+    async getAllSites({ commit, dispatch }) {
+      try {
+        let res = await api.get('sites')
+        console.log(res)
+        commit('setSites', res.data)
+      } catch (error) {
+        console.error(error)
+
+      }
+    },
+    // working on this 
+    // async getUserBySites({ commit, dispatch }, userId) {
+    //   try {
+    //     let res = await api.get('sites/' + userId)
+    //     commit('setSites', res.data)
+
+    //   } catch (error) { console.error(error) }
+    // },
     async selectSite({ commit, dispatch }, siteId) {
       try {
 
         // let res = await api.get('sites/' + siteId)
         commit('setSite', siteId)
-        // console.log(res)
         router.push({ name: 'dashboard' })
+      } catch (error) { console.error(error) }
+    },
+    async selectAdminSite({ commit, dispatch }, siteId) {
+      try {
+        // let res = await api.get('sites/' + siteId)
+        commit('setSite', siteId)
+        // router.push({ name: 'dashboard' })
       } catch (error) { console.error(error) }
     },
     logout({ commit, dispatch }, creds) {

@@ -117,7 +117,6 @@
         this.$store.dispatch("login", this.creds);
       },
       registerUser() {
-        debugger
         this.$store.dispatch("register", this.registerForm);
       },
       selectSite(e) {
