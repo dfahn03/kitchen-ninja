@@ -150,14 +150,35 @@ export default new Vuex.Store({
     deleteUser({ commit, dispatch }, userId) {
       api.delete('auth/' + SID + userId)
         .then(res => {
-          dispatch('getUsers')
+          dispatch('getSiteUsers')
         })
     },
     async editUser({ commit, dispatch }, payload) {
       try {
         await api.put('auth/' + SID + payload._id, payload)
         commit('setUser', payload.data)
-        dispatch('getUsers')
+        dispatch('getSiteUsers')
+      } catch (error) { console.error(error) }
+    },
+    //#endregion
+
+    //#region -- extra Admin Stuff --
+    // async getAllUsersbySite({ commit, dispatch }, siteId) {
+    //   try {
+    //     let res = await api.get(SID + siteId + '/users')
+    //     // console.log(res)
+    //     commit('setUsers', siteId)
+    //     dispatch('getSiteUsers')
+    //   } catch (error) {
+    //     console.error(error)
+    //   }
+    // },
+    async getAllUsersBySite({ commit, dispatch }) {
+      try {
+        debugger
+        let res = await api.get('sites' + SID + '/users')
+        console.log(res)
+        commit('setUsers', res.data)
       } catch (error) { console.error(error) }
     },
     //#endregion

@@ -40,7 +40,7 @@
   export default {
     name: "admin",
     mounted() {
-      this.$store.dispatch('getUserSites')
+      // this.$store.dispatch('getUserSites')
       // this.$store.dispatch('getSiteUsers')
     },
     props: [],
