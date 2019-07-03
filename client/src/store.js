@@ -225,12 +225,21 @@ export default new Vuex.Store({
     //#endregion
 
     //#region --  Recipes Stuff --
-    getRecipes({ commit, dispatch }) {
-      api.get('recipes')
-        .then(res => {
-          commit('setRecipes' + SID, res.data)
-        })
+    async getRecipes({ commit, dispatch }) {
+      try {
+        let res = await api.get('recipes' + SID)
+        commit('setRecipes', res.data)
+      } catch (error) {
+        console.error(error)
+
+      }
     },
+    // getRecipes({ commit, dispatch }) {
+    //   api.get('recipes' + SID)
+    //     .then(res => {
+    //       commit('setRecipes', res.data)
+    //     })
+    // },
     async saveRecipe({ commit, dispatch }, newRecipe) {
       try {
         await api.post('recipes' + SID, newRecipe)

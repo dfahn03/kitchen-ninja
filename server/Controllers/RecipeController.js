@@ -67,8 +67,8 @@ export default class RecipeController {
 
   async delete(req, res, next) {
     try {
-      let siteId = req.query.siteId
-      await _recipeRepo.findOneAndRemove({ siteId, _id: req.params.id, authorId: req.session.uid })
+      req.body.siteId = mongodb.ObjectID(req.query.siteId)
+      await _recipeRepo.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
       return res.send("Successfully Deleted")
     } catch (error) { next(error) }
   }

@@ -7,7 +7,7 @@
           <h5 class="card-header">{{recipe.name}}</h5>
           <div class="card-body">
             <h5 class="card-title">{{recipe.portionSize}}</h5>
-            <p class="card-text">{{recipe.costPerPortion}}</p>
+            <p class="card-text">$ {{recipe.costPerPortion}}</p>
             <!-- TODO check the above route for exact name/function -->
             <button class="btn btn-secondary" @click="openRecipe(recipe._id)">Show Recipe</button>
             <button class="btn btn-danger" @click="deleteRecipe(recipe._id)">Delete Recipe</button>
