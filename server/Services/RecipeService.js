@@ -30,6 +30,7 @@ let _schema = new Schema({
   allergens: [],
   siteId: { type: ObjectId, ref: 'Site', required: true },
   salesPrice: { type: Number, required: true }
+  //costPerPortion
 })
 
 

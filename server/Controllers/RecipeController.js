@@ -29,9 +29,10 @@ export default class RecipeController {
 
   async getAll(req, res, next) { //get YOUR Recipe
     try {
+      req.body.siteId = mongodb.ObjectID(req.query.siteId)
       //only gets Recipe by user who is logged in
       let siteId = req.query.siteId
-      let data = await _recipeRepo.find({ siteId })
+      let data = await _recipeRepo.find()
       return res.send(data)
     } catch (err) { next(err) }
   }
@@ -39,8 +40,9 @@ export default class RecipeController {
   //used when taking from recipes view to costing view
   async getById(req, res, next) {
     try {
-      let siteId = req.query.siteId
-      let data = await _recipeRepo.findOne({ siteId, _id: req.params.id })
+      req.body.siteId = mongodb.ObjectID(req.query.siteId)
+      // let siteId = req.query.siteId
+      let data = await _recipeRepo.findOne({ _id: req.params.id })
       return res.send(data)
     } catch (error) { next(error) }
   }
@@ -56,7 +58,8 @@ export default class RecipeController {
 
   async edit(req, res, next) {
     try {
-      let siteId = req.query.siteId
+      req.body.siteId = mongodb.ObjectID(req.query.siteId)
+      // let siteId = req.query.siteId
       let data = await _recipeRepo.findOneAndUpdate({ siteId, _id: req.params.id }, req.body, { new: true })
       if (data) {
         return res.send(data)
