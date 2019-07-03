@@ -1,5 +1,6 @@
 import RecipeService from '../services/RecipeService'
 import express from 'express'
+import mongodb from 'mongodb'
 import { Authorize } from '../middlewear/authorize'
 
 //import service and create an instance
@@ -46,9 +47,9 @@ export default class RecipeController {
 
   async create(req, res, next) {
     try {
-      let siteId = req.query.siteId
+      req.body.siteId = mongodb.ObjectID(req.query.siteId)
       req.body.authorId = req.session.uid
-      let data = await _recipeRepo.create({ siteId }, req.body)
+      let data = await _recipeRepo.create(req.body)
       return res.status(201).send(data)
     } catch (error) { next(error) }
   }
@@ -66,8 +67,8 @@ export default class RecipeController {
 
   async delete(req, res, next) {
     try {
-      let siteId = req.query.siteId
-      await _recipeRepo.findOneAndRemove({ siteId, _id: req.params.id, authorId: req.session.uid })
+      req.body.siteId = mongodb.ObjectID(req.query.siteId)
+      await _recipeRepo.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
       return res.send("Successfully Deleted")
     } catch (error) { next(error) }
   }

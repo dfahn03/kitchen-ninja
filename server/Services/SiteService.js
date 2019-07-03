@@ -20,7 +20,7 @@ let _schema = new Schema({
 
 let _siteUserSchema = new Schema({
   userId: { type: ObjectId, ref: 'User', required: true },
-  siteId: { type: ObjectId, ref: 'User', required: true },
+  siteId: { type: ObjectId, ref: 'Site', required: true },
   role: { type: String, enum: ["chef", "admin"], default: "chef" }
 })
 
