@@ -95,6 +95,7 @@
         this.recipeIngredients[this.i] = this.newIngredient
       },
       seperatePackage(string) {
+        //TODO Needs futher evaluation for various cases
         let dict = {}
         if (string.includes('/') && string.includes(' ')) {
           //string coming in looks like "12/12 EA"
@@ -102,12 +103,16 @@
           dict["fullCase"] = array[0]
           dict["fullPackage"] = array[1]
           dict["unit"] = array[2]
-        } else if (!string.includes(' ')) {
+        } else if (!string.includes(' ') && string.includes('/')) {
           // strings that look like 12/12EA
           let arr = string.split('/').join(" ").split(" ")
           dict["fullCase"] = arr[0]
           dict["fullPackage"] = arr[1].split(/[a-z]/gi).shift()
           dict["unit"] = arr[1].split(/[0-9]/gi).pop()
+        } else if (!string.includes(' ')) {
+          let arr = string.split(/[a-z]/gi)
+          dict["fullCase"] = arr[0]
+          dict["unit"] = arr[2]
         }
         else {
           // strings that look like 12 EA
@@ -122,7 +127,7 @@
         return pkgCost
       },
       costPer(fullPackage, fullPrice) {
-        let costEA
+        let costEA = 0
         let sPDict = this.seperatePackage(fullPackage)
         let pCost = this.totalCost(fullPrice)
         if (sPDict.fullPackage) {

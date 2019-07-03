@@ -21,8 +21,8 @@
                 v-model="newRecipe.portionSize" min="0" step=".5" required>
               <select class="form-control portionU-input ml-1" v-model="newRecipe.portionUnit" required>
                 <option disabled value="">Unit</option>
-                <option value="Yes">OZ</option>
-                <option value="No">EA</option>
+                <option value="OZ">OZ</option>
+                <option value="EA">EA</option>
               </select>
               <select class="form-control side-input ml-1" v-model="newRecipe.side" required>
                 <option disabled value="">Side</option>
@@ -68,7 +68,7 @@
                 </div>
                 <div class="col-6 text-white d-flex justify-content-center text-left">
                   <ul>
-                    <li>Total Cost: $ {{recipeCost}}</li>
+                    <li v-model="newRecipe.costPerRecipe">Total Cost: $ {{recipeCost}}</li>
                     <li class="mt-2">Food Cost: $ {{foodCost}} </li>
                     <!-- TODO possibly recommended sales price -->
                     <li>Sales Price: $ <input type="number" placeholder="0.00" class="totalP-input ml-1 mt-2"
@@ -135,7 +135,20 @@
     watch: {
       itemCost(nv, ov) {
         // Leave watcher to run computed
-      }
+        console.log("itemCost has changed")
+      },
+      recipeCost(nv, ov) {
+        console.log("recipeCost has changed")
+      },
+      foodCost(nv, ov) {
+        console.log("foodCost has changed")
+      },
+      profit(nv, ov) {
+        console.log("profit has changed")
+      },
+      profitMargin(nv, ov) {
+        console.log("profitMargin has changed")
+      },
 
     },
     computed: {
@@ -146,7 +159,7 @@
         return this.$data.newRecipe.recipeIngredients
       },
       recipeCost() {
-        return this.storeroom + this.meat + this.dairy + this.produce + this.bakery + this.frozen
+        return this.newRecipe.costPerRecipe = this.storeroom + this.meat + this.dairy + this.produce + this.bakery + this.frozen
       },
       itemCost() {
         this.storeroom = 0
@@ -189,6 +202,7 @@
     methods: {
       //TODO Find out while data isn't sending to the server 
       saveRecipe() {
+        debugger
         this.$store.dispatch('saveRecipe', this.newRecipe)
       },
     },
