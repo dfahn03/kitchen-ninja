@@ -63,13 +63,7 @@
       }
     },
     methods: {
-      // selectUsers() {
-      //   debugger
-      //   this.$store.dispatch('getAllUsersBySite', this.site)
-      //   // this.$store.dispatch('selectSite')
-      // }
       selectUser() {
-        debugger
         this.$store.dispatch('selectAdminUser', this.newSite)
       }
     },

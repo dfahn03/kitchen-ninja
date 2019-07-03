@@ -141,7 +141,6 @@ export default new Vuex.Store({
     },
     async selectAdminUser({ commit, dispatch }, siteId) {
       try {
-        debugger
         // let res = await api.get('sites/' + siteId)
         commit('setSite', siteId._id)
         dispatch('getAllUsersBySite', siteId._id)
@@ -183,7 +182,6 @@ export default new Vuex.Store({
     // },
     async getAllUsersBySite({ commit, dispatch }, siteId) {
       try {
-        debugger
         let res = await api.get('sites/' + siteId + '/users')
         // SID
         // '5d1a5bb2349598141c0e31ba'
@@ -205,7 +203,6 @@ export default new Vuex.Store({
     //#region --  Dashboard Stuff --
     async getBlogs({ commit, dispatch }) {
       try {
-        // debugger
         let res = await api.get('blogs' + SID)
         commit('setBlogs', res.data)
       } catch (error) { console.error(error) }
