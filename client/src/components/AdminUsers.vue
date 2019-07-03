@@ -14,8 +14,8 @@
     <div id="sites">
       <div class="card">
         <div class=" card-block px-2 py-2">
-          <h4 class="card-title text-left">User name: {{user.name}}</h4>
-          <h6 class="author-Name text-left">User email: {{user.email}}</h6>
+          <h4 class="card-title text-left">User name: {{siteUser.name}}</h4>
+          <h6 class="author-Name text-left">User email: {{siteUser.email}}</h6>
           <h6 class="card-text text-left">Site Code: {{site.passcode}}</h6>
           <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editBlogModal">Edit</button>
           <!-- <button class="btn btn-danger ml-1" type="button" @click="deleteBlog">Delete Site</button> -->
@@ -39,12 +39,11 @@
           name: '',
           // passcode: '',
           siteId: '',
-          siteUser: ''
-        },
-        user: {
-          name: '',
-          email: '',
-          siteId: ''
+          siteUser: {
+            name: '',
+            email: '',
+            siteId: ''
+          },
         },
       }
     },
