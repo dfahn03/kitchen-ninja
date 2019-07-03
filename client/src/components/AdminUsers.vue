@@ -3,7 +3,7 @@
     <div class="title">
       <h1>This is the AdminUsers component</h1>
       <label for="#manage">Manage Site</label>
-      <select v-model="site" @change="selectUsers($event)" id="manage" class="form-control" placeholder="Owner"
+      <select v-model="newSite" @change="selectUser($event)" id="manage" class="form-control" placeholder="Owner"
         required>
         <option disabled value="">Choose Site</option>
         <option v-for="siteOne in mySites" :value="siteOne">{{siteOne.name}}</option>
@@ -12,10 +12,11 @@
     </div>
 
     <div id="sites">
-      <div class="card">
+      <div class="card" v-for='user in users' :key='user._id'>
         <div class=" card-block px-2 py-2">
-          <h4 class="card-title text-left">User name: {{siteUser.name}}</h4>
-          <h6 class="author-Name text-left">User email: {{siteUser.email}}</h6>
+          <h4 class="card-title text-left">User role: {{user.role}}</h4>
+          <h4 class="card-title text-left">User name: {{user.userId.name}}</h4>
+          <h6 class="author-Name text-left">User email: {{user.userId.email}}</h6>
           <h6 class="card-text text-left">Site Code: {{site.passcode}}</h6>
           <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editBlogModal">Edit</button>
           <!-- <button class="btn btn-danger ml-1" type="button" @click="deleteBlog">Delete Site</button> -->
@@ -30,16 +31,16 @@
     name: "AdminUsers",
     mounted() {
       this.$store.dispatch('getAllSites')
+      // this.$store.dispatch('getAllUsersBySite')
     },
     props: [],
     data() {
       return {
-        site: {
-          // kitchens: [],
+        newSite: {
           name: '',
-          // passcode: '',
           siteId: '',
           siteUser: {
+            role: '',
             name: '',
             email: '',
             siteId: ''
@@ -57,13 +58,19 @@
       memberSites() {
         return this.$store.state.sites.memberSites
       },
-      // users() {
-      //   return this.$store.state.site.users
-      // }
+      users() {
+        return this.$store.state.users
+      }
     },
     methods: {
-      selectUsers() {
-        this.$store.dispatch('getAllUsersBySite', this.site)
+      // selectUsers() {
+      //   debugger
+      //   this.$store.dispatch('getAllUsersBySite', this.site)
+      //   // this.$store.dispatch('selectSite')
+      // }
+      selectUser() {
+        debugger
+        this.$store.dispatch('selectAdminUser', this.newSite)
       }
     },
     components: {}

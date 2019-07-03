@@ -19,6 +19,7 @@
           <h6 class="author-Name text-left">Kitchens: {{site.kitchens}}</h6>
           <h6 class="card-text text-left">Site Code: {{site.passcode}}</h6>
           <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editBlogModal">Edit</button>
+          <!-- <router-link to='/admin/users'>Users</router-link> -->
           <!-- <button class="btn btn-danger ml-1" type="button" @click="deleteBlog">Delete Site</button> -->
         </div>
       </div>

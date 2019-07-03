@@ -127,7 +127,6 @@ export default new Vuex.Store({
     // },
     async selectSite({ commit, dispatch }, siteId) {
       try {
-
         // let res = await api.get('sites/' + siteId)
         commit('setSite', siteId)
         router.push({ name: 'dashboard' })
@@ -137,6 +136,15 @@ export default new Vuex.Store({
       try {
         // let res = await api.get('sites/' + siteId)
         commit('setSite', siteId)
+        // router.push({ name: 'dashboard' })
+      } catch (error) { console.error(error) }
+    },
+    async selectAdminUser({ commit, dispatch }, siteId) {
+      try {
+        debugger
+        // let res = await api.get('sites/' + siteId)
+        commit('setSite', siteId._id)
+        dispatch('getAllUsersBySite', siteId._id)
         // router.push({ name: 'dashboard' })
       } catch (error) { console.error(error) }
     },
@@ -173,10 +181,12 @@ export default new Vuex.Store({
     //     console.error(error)
     //   }
     // },
-    async getAllUsersBySite({ commit, dispatch }) {
+    async getAllUsersBySite({ commit, dispatch }, siteId) {
       try {
         debugger
-        let res = await api.get('sites' + SID + '/users')
+        let res = await api.get('sites/' + siteId + '/users')
+        // SID
+        // '5d1a5bb2349598141c0e31ba'
         console.log(res)
         commit('setUsers', res.data)
       } catch (error) { console.error(error) }

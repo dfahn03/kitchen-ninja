@@ -1,6 +1,7 @@
 import SiteService from '../services/SiteService'
 import express from 'express'
 import { Authorize } from '../middlewear/authorize'
+import mongodb from 'mongodb'
 
 //import service and create an instance
 let _service = new SiteService()
@@ -70,7 +71,9 @@ export default class SiteController {
   }
   async getSiteUsers(req, res, next) {
     try {
-      let siteReq = await _service._findUserSite(req.params.id, req.session.uid)
+      req.body.siteId = mongodb.ObjectID(req.query.siteId)
+      let siteReq = await _service._findUserSite(req.session.uid)
+      // req.params.id,
       if (siteReq.siteUser.role != "admin") { throw new Error("Invalid Access") }
       let users = await _service.findAllSiteUsers(req.params.id)
       res.send(users)
