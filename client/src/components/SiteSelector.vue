@@ -39,7 +39,7 @@
       }
     },
     mounted() {
-      this.$store.state.open
+
     },
     computed: {
       user() {
@@ -64,7 +64,6 @@
       selectSite(e) {
         let site = e.target.value
         this.$store.dispatch("selectSite", this.siteId)
-        this.$store.dispatch("")
         $("#exampleModal").modal("hide");
         $(".modal-backdrop").remove();
 

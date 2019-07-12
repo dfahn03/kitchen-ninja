@@ -72,8 +72,9 @@ export default new Vuex.Store({
     setBlogs(state, blogs) {
       state.blogs = blogs
     },
-    openSite(state, open) {
-      state.open = true
+    setSiteSelectorStatus(state, status) {
+
+      state.open = status
 
     }
   },
@@ -138,9 +139,10 @@ export default new Vuex.Store({
     //   } catch (error) { console.error(error) }
     // },
     changeSite({ commit, dispatch }) {
-      debugger
-      localStorage.removeItem("KM__lastsite")
-      commit('openSite')
+
+      // localStorage.removeItem("KM__lastsite")
+      commit('setSiteSelectorStatus', true)
+
       // dispatch("selectSite")
     },
     async selectSite({ commit, dispatch }, siteId) {
@@ -148,7 +150,10 @@ export default new Vuex.Store({
         localStorage.setItem("KM__lastsite", siteId)
         // let res = await api.get('sites/' + siteId)
         commit('setSite', siteId)
-        this.state.open = false
+        commit('setSiteSelectorStatus', false)
+        dispatch("getBlogs")
+        dispatch("getRecipes")
+        dispatch("getIngredients")
         router.push({ name: 'dashboard' })
       } catch (error) { console.error(error) }
     },
