@@ -71,9 +71,10 @@ export default class SiteController {
   }
   async getSiteUsers(req, res, next) {
     try {
-      req.body.siteId = mongodb.ObjectID(req.query.siteId)
+      req.body.siteId = new mongodb.ObjectID(req.query.siteId)
       let siteReq = await _service._findUserSite(req.session.uid)
       // req.params.id,
+      // @ts-ignore
       if (siteReq.siteUser.role != "admin") { throw new Error("Invalid Access") }
       let users = await _service.findAllSiteUsers(req.params.id)
       res.send(users)
