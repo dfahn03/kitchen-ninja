@@ -2,14 +2,10 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
 import router from './router'
-
-
-
+import { STATES } from 'mongoose';
 
 Vue.use(Vuex)
 let base = window.location.host.includes('localhost:8080') ? '//localhost:3000/' : '/'
-
-
 
 let auth = Axios.create({
   baseURL: base + "auth/",
@@ -36,16 +32,24 @@ export default new Vuex.Store({
     recipe: {},
     recipes: [],
     blogs: [],
+    siteId: "",
+    open: false
     // menus: [],
     // kitchens: []
   },
   mutations: {
     setSites(state, sites) {
       state.sites = sites
+      if (state.siteId) {
+        state.site = state.sites.memberSites.find(s => s._id == state.siteId) || state.sites.mySites.find(s => s._id == state.siteId)
+      }
     },
     setSite(state, siteId) {
-      SID += siteId
-      state.site = state.sites.memberSites.find(s => s._id == siteId) || state.sites.mySites.find(s => s._id == siteId)
+      SID = "?siteId=" + siteId
+      state.siteId = siteId
+      if (state.sites.memberSites) {
+        state.site = state.sites.memberSites.find(s => s._id == siteId) || state.sites.mySites.find(s => s._id == siteId)
+      }
     },
     setUser(state, user) {
       state.user = user
@@ -67,6 +71,10 @@ export default new Vuex.Store({
     },
     setBlogs(state, blogs) {
       state.blogs = blogs
+    },
+    openSite(state, open) {
+      state.open = true
+
     }
   },
   actions: {
@@ -82,8 +90,12 @@ export default new Vuex.Store({
     authenticate({ commit, dispatch }) {
       auth.get('authenticate')
         .then(res => {
-          commit('setUser', res.data)
-          dispatch('selectSite', res.data._id)
+          let user = res.data
+          commit('setUser', user)
+          dispatch('getUserSites', user._id)
+          dispatch('loadLastSite')
+          router.push({ name: "dashboard" })
+          // dispatch('selectSite', res.data._id)
           // if (router.currentRoute.name !== 'cositng') {
           //   router.push({ name: 'dashboard' })
           // }
@@ -125,12 +137,27 @@ export default new Vuex.Store({
 
     //   } catch (error) { console.error(error) }
     // },
+    changeSite({ commit, dispatch }) {
+      debugger
+      localStorage.removeItem("KM__lastsite")
+      commit('openSite')
+      // dispatch("selectSite")
+    },
     async selectSite({ commit, dispatch }, siteId) {
       try {
+        localStorage.setItem("KM__lastsite", siteId)
         // let res = await api.get('sites/' + siteId)
         commit('setSite', siteId)
+        this.state.open = false
         router.push({ name: 'dashboard' })
       } catch (error) { console.error(error) }
+    },
+    loadLastSite({ dispatch, commit }) {
+      let siteId = localStorage.getItem("KM__lastsite")
+      if (siteId) {
+        commit('setSite', siteId)
+      }
+
     },
     async selectAdminSite({ commit, dispatch }, siteId) {
       try {
@@ -148,6 +175,7 @@ export default new Vuex.Store({
       } catch (error) { console.error(error) }
     },
     logout({ commit, dispatch }, creds) {
+      localStorage.removeItem("KM__lastsite")
       auth.delete('logout', creds)
         .then(res => {
           commit('setUser', {})

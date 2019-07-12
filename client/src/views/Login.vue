@@ -121,7 +121,6 @@
       },
       selectSite(e) {
         let site = e.target.value
-        debugger
         this.$store.dispatch("selectSite", this.siteId)
         $("#exampleModal").modal("hide");
         $(".modal-backdrop").remove();

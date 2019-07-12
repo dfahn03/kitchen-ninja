@@ -23,8 +23,8 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a @click='logout' class="dropdown-item" href="#">Logout</a>
+              <a @click='openSiteSelect' class="dropdown-item" href="#">Change Site</a>
               <router-link to="/admin"><a class="dropdown-item" href="#">Admin Options</a></router-link>
-              <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </div>
         </li>
@@ -75,6 +75,7 @@
         </div>
       </div>
     </div>
+    <site-selector />
   </div>
 </template>
 
@@ -82,15 +83,18 @@
 
 <script>
   import Calculator from '@/components/Calculator.vue'
-
+  import SiteSelector from "@/components/SiteSelector.vue"
   // $('#myModal').on('shown.bs.modal', function () {
   //   $('#myInput').trigger('focus')
   // })
   export default {
-
+    name: "APP",
     methods: {
       logout() {
         this.$store.dispatch('logout', this.creds)
+      },
+      openSiteSelect() {
+        this.$store.dispatch('changeSite')
       }
     },
     mounted() {
@@ -99,10 +103,12 @@
         $("#wrapper").toggleClass("toggled");
         $("#page-content-wrapper").toggleClass("toggled")
       });
-      this.$store.authenticate
+      this.$store.dispatch("authenticate")
+      // this.$store.authenticate
     },
     components: {
-      Calculator
+      Calculator,
+      SiteSelector
     }
   }
 </script>
