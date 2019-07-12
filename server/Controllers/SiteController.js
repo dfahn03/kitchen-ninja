@@ -38,7 +38,7 @@ export default class SiteController {
 
   async create(req, res, next) {
     try {
-      // req.body.siteId = mongodb.ObjectID(req.query.siteId)
+      req.body.userId = req.session.uid
       let data = await _serviceRepo.create(req.body)
       return res.status(201).send(data)
     } catch (error) { next(error) }
@@ -46,8 +46,8 @@ export default class SiteController {
 
   async edit(req, res, next) {
     try {
-      // req.body.siteId = mongodb.ObjectID(req.query.siteId)
       let siteReq = await _service._findUserSite(req.params.id, req.session.uid)
+
       let data = await _serviceRepo.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
       if (data) {
         return res.send(data)
@@ -65,7 +65,6 @@ export default class SiteController {
 
   async addSiteUser(req, res, next) {
     try {
-      // req.body.siteId = mongodb.ObjectID(req.query.siteId)
       let siteUser = await _service.addSiteUser(req.params.id, req.session.uid, req.body)
       res.send(siteUser)
     } catch (err) { next(err) }
