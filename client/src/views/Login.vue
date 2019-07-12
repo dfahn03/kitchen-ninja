@@ -16,7 +16,7 @@
             <select v-model="siteId" @change="selectSite($event)" id="owned" class="form-control mySite-input"
               placeholder="Owner" required>
               <option disabled value="">Choose Site</option>
-              <option v-for="mySite in mySites">{{mySite.name}}</option>
+              <option v-for="mySite in mySites" :value="mySite._id">{{mySite.name}}</option>
             </select>
             <label class="mt-2" for="#member">Team Member</label>
             <select v-model="siteId" id="member" @change="selectSite($event)" class="form-control myMember-input"
@@ -121,6 +121,7 @@
       },
       selectSite(e) {
         let site = e.target.value
+        debugger
         this.$store.dispatch("selectSite", this.siteId)
         $("#exampleModal").modal("hide");
         $(".modal-backdrop").remove();
