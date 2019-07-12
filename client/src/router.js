@@ -28,7 +28,7 @@ export default new Router({
       component: Login
     },
     {
-      path: '/',
+      path: '/dashboard',
       name: 'dashboard',
       component: Dashboard
     },

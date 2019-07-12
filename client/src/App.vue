@@ -40,7 +40,7 @@
         <ul class="sidebar-nav">
           <h4><b>Directory</b></h4>
           <li>
-            <router-link to='/'><a href="#">Dashboard</a></router-link>
+            <router-link to='/dashboard'><a href="#">Dashboard</a></router-link>
           </li>
           <li>
             <router-link to='/recipes'><a href="#">Recipes</a></router-link>

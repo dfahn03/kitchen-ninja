@@ -110,7 +110,6 @@ export default new Vuex.Store({
         .then(res => {
           commit('setUser', res.data)
           dispatch('getUserSites', res.data._id)
-          // router.push({ name: 'dashboard' })
         })
     },
     async getUserSites({ commit, dispatch }, userId) {
