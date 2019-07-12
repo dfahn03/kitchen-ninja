@@ -202,7 +202,6 @@
     methods: {
       //TODO Find out while data isn't sending to the server 
       saveRecipe() {
-        debugger
         this.$store.dispatch('saveRecipe', this.newRecipe)
       },
     },
