@@ -29,7 +29,7 @@ export default class RecipeController {
 
   async getAll(req, res, next) { //get YOUR Recipe
     try {
-      req.body.siteId = mongodb.ObjectID(req.query.siteId)
+      req.siteId = mongodb.ObjectID(req.query.siteId)
       //only gets Recipe by user who is logged in
       let siteId = req.query.siteId
       let data = await _recipeRepo.find()
@@ -40,7 +40,7 @@ export default class RecipeController {
   //used when taking from recipes view to costing view
   async getById(req, res, next) {
     try {
-      req.body.siteId = mongodb.ObjectID(req.query.siteId)
+      req.siteId = mongodb.ObjectID(req.query.siteId)
       // let siteId = req.query.siteId
       let data = await _recipeRepo.findOne({ _id: req.params.id })
       return res.send(data)
@@ -70,7 +70,7 @@ export default class RecipeController {
 
   async delete(req, res, next) {
     try {
-      req.body.siteId = mongodb.ObjectID(req.query.siteId)
+      req.siteId = mongodb.ObjectID(req.query.siteId)
       await _recipeRepo.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
       return res.send("Successfully Deleted")
     } catch (error) { next(error) }
