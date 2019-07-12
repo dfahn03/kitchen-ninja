@@ -66,7 +66,7 @@ export default new Vuex.Store({
       state.recipe = recipe
     },
     setRecipes(state, recipes) {
-      state.recipes = recipes
+      state.recipes = recipes.sort((a, b) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1)
     },
     setBlogs(state, blogs) {
       state.blogs = blogs
