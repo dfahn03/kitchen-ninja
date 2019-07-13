@@ -50,6 +50,8 @@
             </div>
           </div>
           <ingredient @passThemIngredients="arr => newRecipe.recipeIngredients = arr" />
+          <ingredient-list />
+          <!-- <ingredient-list v-for="i in recipeIngredients" :key="i._id" /> -->
           <div class="form-row">
             <div class="col-12">
               <div class="row">
@@ -66,7 +68,6 @@
                   <!--run a for each on each  category using ingcostcalc
                   total is all added-->
                 </div>
-                <ingredient-list v-for="i in recipeIngredients" :key="i._id" />
                 <div class="col-6 text-white d-flex justify-content-center text-left">
                   <ul>
                     <li v-model="newRecipe.costPerRecipe">Total Cost: $ {{recipeCost}}</li>
