@@ -1,19 +1,25 @@
 <template>
-  <div class="col-6 blog-list d-flex justify-content-center align">
-    <div class="card flex-row flex-wrap my-2" style="width: 60rem">
-      <div class="card-header border-0">
-        <img
-          src="https://images.unsplash.com/photo-1488992783499-418eb1f62d08?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-          width="225px" class="blog-img">
-      </div>
-      <div class=" card-block px-2 py-2">
-        <h4 class="card-title text-left">Title: {{blogData.blogTitle}}</h4>
-        <h6 class="author-Name text-left">Author: {{blogData.author}}</h6>
-        <p class="card-text text-left">Content: {{blogData.blogContent}}</p>
-        <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editBlogModal">Edit
-          Blog</button>
-        <!-- TODO make sure that the edit modal is the right blog id that we want to edit -->
-        <button class="btn btn-danger ml-1" type="button" @click="deleteBlog">Delete Blog</button>
+  <div class="col-12 my-2 blog-list d-flex justify-content-center align">
+    <div class="card" style="width: 60rem">
+      <div class="row no-gutters">
+        <div class="col-md-4 d-flex justify-content-start">
+          <img
+            src="https://images.unsplash.com/photo-1488992783499-418eb1f62d08?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
+            width="310px" class="blog-img">
+        </div>
+        <div class="col-md-8 px-0 py-0">
+          <div class="card-body">
+            <h4 class="card-title text-left">{{blogData.blogTitle}}</h4>
+            <p class="card-text text-left blog-content">{{blogData.blogContent}}</p>
+            <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editBlogModal">Edit
+              Blog</button>
+            <!-- TODO make sure that the edit modal is the right blog id that we want to edit -->
+            <button class="btn btn-danger ml-1" type="button" @click="deleteBlog">Delete Blog</button>
+            <p class="card-text d-flex justify-content-end">
+              <small class="author-name text-right text-muted">@{{blogData.author}}</small>
+            </p>
+          </div>
+        </div>
       </div>
     </div>
     <!-- TODO Put buttons in a dropdown 3 button layout in top right of the card -->
@@ -78,7 +84,9 @@
           blogTitle: this.blogData.blogTitle || "",
           blogImage: this.blogData.blogImage || "",
           blogContent: this.blogData.blogContent || "",
-          blogAuthor: this.blogData.author || ""
+          blogAuthor: this.blogData.author || "",
+          blogId: this.blogData._id
+          //TODO Make is so the author is automatically set to user name
         }
       }
     },
@@ -101,7 +109,7 @@
         $(".modal-backdrop").remove();
       },
       deleteBlog() {
-
+        this.$store.dispatch("deleteBlog", this.blog.blogId)
       }
     },
     components: {}
@@ -109,16 +117,16 @@
 </script>
 
 <style scoped>
-  .card-footer {
-    background: rgba(109, 197, 154, 0);
-    border: none;
-    color: white;
+  .card-body {
+    padding-left: 0px;
   }
 
-  .card-header,
-  .card {
-    background: rgb(109, 197, 155);
-    border: none;
-    color: black;
+  .blog-content {
+    font-family: 'Aleo', serif;
+    font-size: 18px;
+  }
+
+  .card-title {
+    font-family: 'Bree Serif', serif;
   }
 </style>
