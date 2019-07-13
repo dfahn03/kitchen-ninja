@@ -94,7 +94,10 @@ export default new Vuex.Store({
           commit('setUser', user)
           dispatch('getUserSites', user._id)
           dispatch('loadLastSite')
-          if (router.currentRoute.path !== '/costing' && router.currentRoute.path !== '/recipes') {
+          if (router.currentRoute.path !== '/costing') {
+            router.push({ name: "dashboard" })
+          }
+          else if (router.currentRoute.name !== 'Recipes') {
             router.push({ name: "dashboard" })
           }
         })

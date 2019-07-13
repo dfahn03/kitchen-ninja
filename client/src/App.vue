@@ -8,7 +8,7 @@
             aria-controls="wrapper page-content-wrapper" id="menu-toggle"><img
               src="../src/assets/iconFinalLeaf.png"></a></li>
 
-        <router-link to='/'><img src="../src/assets/finalLogo2.png" class></router-link>
+        <router-link to='/dashboard'><img src="../src/assets/finalLogo2.png" class></router-link>
         <!-- https://img.icons8.com/office/16/000000/leaf.png -->
 
         <div class="dropdown dropleft">
