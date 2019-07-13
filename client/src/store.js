@@ -246,7 +246,7 @@ export default new Vuex.Store({
     },
     async editBlog({ commit, dispatch }, blogData) {
       try {
-        await api.put('blogs/' + blogData.blogId + SID, blogData)
+        await api.put('blogs/' + blogData.id + SID, blogData)
         dispatch('getBlogs')
       } catch (err) { console.error(err) }
     },
