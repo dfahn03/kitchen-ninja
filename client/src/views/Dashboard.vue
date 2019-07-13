@@ -22,7 +22,7 @@
               <form @submit.prevent="createBlog">
                 <div class="modalform-group">
                   <label for="blogInputTitle" class="mt-2 mb-0">Blog Title</label>
-                  <input v-model="newBlog.blogTitle" type="text" class="form-control" id="blogInputTitle"
+                  <input v-model="newBlog.title" type="text" class="form-control" id="blogInputTitle"
                     aria-describedby="blogHelp" placeholder="Enter Blog Title" required>
                   <small id="blogHelp" class="form-text text-muted">Enter a descriptive blog title.</small>
                 </div>
@@ -33,15 +33,14 @@
                 </div>
                 <div class="modal-form-group">
                   <label for="inputBlogImage" class="mt-2 mb-0">Blog Image</label>
-                  <input v-model="newBlog.blogImage" type="url" class="form-control" id="inputBlogImage"
+                  <input v-model="newBlog.image" type="url" class="form-control" id="inputBlogImage"
                     aria-describedby="blogImageHelp" placeholder="Enter Image">
                   <small id="blogImageHelp" class="form-text text-muted">Image not required.</small>
                 </div>
                 <div class="modal-form-group">
                   <label for="inputBlogContent" class="mt-2 mb-0">Blog Content</label>
-                  <textarea rows="3" v-model="newBlog.blogContent" type="text" class="form-control"
-                    id="inputBlogContent" aria-describedby="blogContentHelp" placeholder="Enter Blog Content"
-                    required></textarea>
+                  <textarea rows="3" v-model="newBlog.content" type="text" class="form-control" id="inputBlogContent"
+                    aria-describedby="blogContentHelp" placeholder="Enter Blog Content" required></textarea>
                   <small id="blogContentHelp" class="form-text text-muted">Enter blog content here.</small>
                 </div>
                 <button type="submit" class="btn btn-success mb-3 mt-3">Save Blog</button>
@@ -67,16 +66,13 @@
 
   export default {
     name: "dashboard",
-    mounted() {
-      this.$store.dispatch('getBlogs')
-    },
     data() {
       return {
         newBlog: {
-          blogContent: '',
-          blogTitle: '',
+          content: '',
+          title: '',
           author: '',
-          blogImage: ''
+          image: ''
         }
       }
     },
@@ -92,9 +88,9 @@
       createBlog() {
         this.$store.dispatch('createBlog', this.newBlog)
         setTimeout(() => {
-          this.newBlog.blogTitle = ""
-          this.newBlog.blogContent = ""
-          this.newBlog.blogImage = ""
+          this.newBlog.title = ""
+          this.newBlog.content = ""
+          this.newBlog.image = ""
           this.newBlog.author = ""
         }, 1000);
         $("#blogModal").modal("hide");

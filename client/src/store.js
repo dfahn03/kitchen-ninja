@@ -95,10 +95,6 @@ export default new Vuex.Store({
           dispatch('getUserSites', user._id)
           dispatch('loadLastSite')
           router.push({ name: "dashboard" })
-          // dispatch('selectSite', res.data._id)
-          // if (router.currentRoute.name !== 'cositng') {
-          //   router.push({ name: 'dashboard' })
-          // }
         })
         .catch(res => {
           router.push({ name: 'Login' })
@@ -128,20 +124,8 @@ export default new Vuex.Store({
 
       }
     },
-    // working on this 
-    // async getUserBySites({ commit, dispatch }, userId) {
-    //   try {
-    //     let res = await api.get('sites/' + userId)
-    //     commit('setSites', res.data)
-
-    //   } catch (error) { console.error(error) }
-    // },
     changeSite({ commit, dispatch }) {
-
-      // localStorage.removeItem("KM__lastsite")
       commit('setSiteSelectorStatus', true)
-
-      // dispatch("selectSite")
     },
     async selectSite({ commit, dispatch }, siteId) {
       try {
@@ -158,9 +142,8 @@ export default new Vuex.Store({
     loadLastSite({ dispatch, commit }) {
       let siteId = localStorage.getItem("KM__lastsite")
       if (siteId) {
-        commit('setSite', siteId)
+        dispatch('selectSite', siteId)
       }
-
     },
     async selectAdminSite({ commit, dispatch }, siteId) {
       try {
@@ -182,7 +165,7 @@ export default new Vuex.Store({
       auth.delete('logout', creds)
         .then(res => {
           commit('setUser', {})
-          router.push({ name: 'Login' })
+          window.location.reload()
         })
     },
     deleteUser({ commit, dispatch }, userId) {
@@ -246,7 +229,7 @@ export default new Vuex.Store({
     },
     async editBlog({ commit, dispatch }, blogData) {
       try {
-        await api.put('blogs/' + blogData.blogId + SID, blogData)
+        await api.put('blogs/' + blogData.id + SID, blogData)
         dispatch('getBlogs')
       } catch (err) { console.error(err) }
     },
