@@ -95,10 +95,6 @@ export default new Vuex.Store({
           dispatch('getUserSites', user._id)
           dispatch('loadLastSite')
           router.push({ name: "dashboard" })
-          // dispatch('selectSite', res.data._id)
-          // if (router.currentRoute.name !== 'cositng') {
-          //   router.push({ name: 'dashboard' })
-          // }
         })
         .catch(res => {
           router.push({ name: 'Login' })
@@ -128,20 +124,8 @@ export default new Vuex.Store({
 
       }
     },
-    // working on this 
-    // async getUserBySites({ commit, dispatch }, userId) {
-    //   try {
-    //     let res = await api.get('sites/' + userId)
-    //     commit('setSites', res.data)
-
-    //   } catch (error) { console.error(error) }
-    // },
     changeSite({ commit, dispatch }) {
-
-      // localStorage.removeItem("KM__lastsite")
       commit('setSiteSelectorStatus', true)
-
-      // dispatch("selectSite")
     },
     async selectSite({ commit, dispatch }, siteId) {
       try {
