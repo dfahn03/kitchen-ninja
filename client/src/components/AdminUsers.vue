@@ -12,17 +12,27 @@
     </div>
 
     <div id="sites">
-      <div class="card" v-for='user in users' :key='user._id'>
-        <div class=" card-block px-2 py-2">
-          <h4 class="card-title text-left">User role: {{user.role}}</h4>
-          <h4 class="card-title text-left">User name: {{user.userId.name}}</h4>
-          <h6 class="author-Name text-left">User email: {{user.userId.email}}</h6>
-          <h6 class="card-text text-left">Site Code: {{site.passcode}}</h6>
-          <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editBlogModal">Edit</button>
-          <!-- <button class="btn btn-danger ml-1" type="button" @click="deleteBlog">Delete Site</button> -->
+      <form>
+        <div class="card form-group" v-for='user in users' :key='user._id'>
+          <div class=" card-block px-2 py-2 form-group">
+            <div class="form-group">
+              <h4 class="card-title text-left form-control-sm">User role: {{user.role}} </h4>
+            </div>
+            <div class="form-group">
+              <h4 class="card-title text-left form-control-sm">User name: {{user.userId.name}}</h4>
+            </div>
+            <div class="form-group">
+              <h6 class="author-Name text-left form-control-sm">User email: {{user.userId.email}}</h6>
+              <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editModal">Edit</button>
+            </div>
+          </div>
         </div>
-      </div>
+      </form>
     </div>
+    <!--Edit Modal -->
+
+
+    <!-- Modal End -->
   </div>
 </template>
 
@@ -65,6 +75,10 @@
     methods: {
       selectUser() {
         this.$store.dispatch('selectAdminUser', this.newSite)
+      },
+      editUser() {
+        debugger
+        this.$store.dispatch("editUser", payload)
       }
     },
     components: {}
