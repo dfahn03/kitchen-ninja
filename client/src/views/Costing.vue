@@ -66,6 +66,7 @@
                   <!--run a for each on each  category using ingcostcalc
                   total is all added-->
                 </div>
+                <ingredient-list v-for="i in recipeIngredients" :key="i._id" />
                 <div class="col-6 text-white d-flex justify-content-center text-left">
                   <ul>
                     <li v-model="newRecipe.costPerRecipe">Total Cost: $ {{recipeCost}}</li>
@@ -92,17 +93,18 @@
         </form>
       </div>
     </div>
+
     <!-- Recipe Form -->
   </div>
 </template>
 
 <script>
+  import IngredientList from '@/components/IngredientList'
   import RecipeIngredient from '@/components/RecipeIngredient'
   import Ingredient from '@/components/Ingredient'
   export default {
     name: "Costing",
     mounted() {
-      this.$store.dispatch('getIngredients')
       if (this.id) {
         this.newRecipe = this.$store.state.recipes.find(r => r._id == this.id)
       };
@@ -217,12 +219,17 @@
     methods: {
       //TODO Find out while data isn't sending to the server 
       saveRecipe() {
+        this.$data.newRecipe.recipeIngredients.forEach(i => {
+          i.unit = i.unit.toUpperCase();
+          i.category = i.category.toLowerCase();
+        })
         this.$store.dispatch('saveRecipe', this.newRecipe)
       },
     },
     components: {
       RecipeIngredient,
-      Ingredient
+      Ingredient,
+      IngredientList
     }
   }
 

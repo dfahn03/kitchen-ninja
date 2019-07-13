@@ -51,7 +51,7 @@ export default class RecipeController {
     try {
       req.body.siteId = mongodb.ObjectID(req.query.siteId)
       req.body.authorId = req.session.uid
-      req.body.ingredients = req.body.recipeIngredients
+      // req.body.ingredients = req.body.recipeIngredients
       let data = await _recipeRepo.create(req.body)
       return res.status(201).send(data)
     } catch (error) { next(error) }

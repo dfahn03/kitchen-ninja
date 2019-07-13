@@ -1,6 +1,6 @@
 <template>
-  <tbody class="recipe-ingredient">
-    <tr>
+  <tbody class="ingredient-list">
+    <tr v-for="i in recipeIngredients" :key="i._id">
       <td><button type="button" class="btn btn-danger btn-sm" @click="$emit('deleteIngredient', i)">Delete</button>
       </td>
       <td>
@@ -54,7 +54,7 @@
   import AutoComplete from '@/components/AutoComplete'
 
   export default {
-    name: "RecipeIngredient",
+    name: "IngredientList",
     props: ['recipeIngredients', "i"],
     // 'recipeIngredient',
     data() {

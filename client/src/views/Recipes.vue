@@ -55,7 +55,7 @@
   export default {
     name: "Recipes",
     mounted() {
-      this.$store.dispatch("getRecipes");
+      this.$store.dispatch("getRecipes")
     },
     data() {
       return {
@@ -73,15 +73,10 @@
 
       };
     },
-    created() {
-      //blocks users not logged in
-      if (!this.$store.state.user._id) {
-        this.$router.push({ name: "dashboard" });
-      }
-    },
     computed: {
       recipes() {
         return this.$store.state.recipes;
+        console.log(recipes)
       },
       groups() {
         let groups = {}
@@ -104,6 +99,8 @@
         let ActiveRecipe = this.$data
         this.$store.dispatch("setActiveRecipe", ActiveRecipe)
         this.$router.push({ name: 'Costing' })
+        $("#exampleModal").modal("hide");
+        $(".modal-backdrop").remove();
       },
       itemClicked: function (item) {
         this.siteId = item.siteId;
