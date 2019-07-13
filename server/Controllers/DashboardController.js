@@ -52,19 +52,18 @@ export default class DashboardController {
     async edit(req, res, next) {
         try {
             req.body.siteId = mongodb.ObjectID(req.query.siteId)
-            let data = await _dashboardRepo.findOneAndUpdate({ _id: req.params.id, authorId: req.session.uid }, req.body, { new: true })
-            if (data) {
-                return res.send(data)
-            }
-            throw new Error("invalid id")
-        } catch (error) { next(error) }
+            req.body.authorId = req.session.uid
+            let data = await _dashboardRepo.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
+            return res.send(data)
+        } catch (err) { next(err) }
     }
 
     async delete(req, res, next) {
         try {
             req.siteId = mongodb.ObjectID(req.query.siteId)
-            await _dashboardRepo.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
-            return res.send("successfully deleted")
-        } catch (error) { next(error) }
+            req.body.authorId = req.session.uid
+            await _dashboardRepo.findOneAndRemove({ _id: req.params.id })
+            return res.send("Successfully Deleted")
+        } catch (err) { next(err) }
     }
 }

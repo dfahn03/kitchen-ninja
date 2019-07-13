@@ -246,15 +246,13 @@ export default new Vuex.Store({
     },
     async editBlog({ commit, dispatch }, blogData) {
       try {
-        await api.put('blogs/' + blogData._id + SID, blogData)
+        await api.put('blogs/' + blogData.blogId + SID, blogData)
         dispatch('getBlogs')
-      } catch (error) { console.error(error) }
+      } catch (err) { console.error(err) }
     },
     deleteBlog({ commit, dispatch }, blogId) {
       api.delete('blogs/' + blogId + SID)
-        .then(res => {
-          dispatch('getBlogs')
-        })
+        .then(res => { dispatch('getBlogs') })
     },
     //#endregion
 
