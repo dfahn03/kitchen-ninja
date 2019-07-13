@@ -16,10 +16,11 @@
             aria-haspopup="true" aria-expanded="false">
             <img src="../src/assets/icons8-user-menu-male-35.png" alt="" srcset="">
           </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <div class="dropdown-menu" v-if="" aria-labelledby="dropdownMenuButton">
             <a @click='logout' class="dropdown-item" href="#">Logout</a>
             <a @click='openSiteSelect' class="dropdown-item" href="#">Change Site</a>
             <router-link to="/admin"><a class="dropdown-item" href="#">Admin Options</a></router-link>
+            <!-- TODO make the dropdown not show up if logged out and make another dropdown menu if logged out for that just says login as a reminder -->
           </div>
         </div>
         </li>

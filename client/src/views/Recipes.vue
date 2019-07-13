@@ -73,12 +73,6 @@
 
       };
     },
-    created() {
-      //blocks users not logged in
-      if (!this.$store.state.user._id) {
-        this.$router.push({ name: "dashboard" });
-      }
-    },
     computed: {
       recipes() {
         return this.$store.state.recipes;
