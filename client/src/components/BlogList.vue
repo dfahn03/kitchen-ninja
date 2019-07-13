@@ -5,15 +5,32 @@
         <div class="col-md-4 d-flex justify-content-center align-self-center">
           <img :src="blogData.image" class="blog-img">
         </div>
-        <div class="col-md-8 px-0 py-0 pl-1">
+        <div class="col-md-8 pl-1">
           <div class="card-body">
-            <h4 class="card-title text-left">{{blogData.title}}</h4>
+            <div class="row">
+              <div class="col-md-11 pt-3 pr-1">
+                <h4 class="card-title text-left">{{blogData.title}}</h4>
+              </div>
+              <div class="col-md-1">
+                <div class="dropdown d-flex justify-content-end align-self-right">
+                  <button class="btn  d-down" type="button" id="dropdownBlogButton" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <img src="../assets/BlogMenu-vertical-32.png" alt="" srcset="">
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a data-toggle="modal" :data-target="'#editBlogModal'+blogData._id" class="dropdown-item"
+                      href="#">Edit
+                      Blog</a>
+                    <a @click='deleteBlog' class="dropdown-item" href="#">Delete Blog</a>
+                  </div>
+                </div>
+              </div>
+            </div>
             <p class="card-text text-left blog-content">{{blogData.content}}</p>
-            <button class="btn btn-warning" type="button" data-toggle="modal"
+            <!-- <button class="btn btn-warning" type="button" data-toggle="modal"
               :data-target="'#editBlogModal'+blogData._id">Edit
-              Blog</button>
-            <!-- TODO make sure that the edit modal is the right blog id that we want to edit -->
-            <button class="btn btn-danger ml-1" type="button" @click="deleteBlog">Delete Blog</button>
+              Blog</button> -->
+            <!-- <button class="btn btn-danger ml-1" type="button" @click="deleteBlog">Delete Blog</button> -->
             <p class="card-text d-flex justify-content-end">
               <small class="author-name text-right text-muted">@{{blogData.author}}</small>
             </p>
@@ -117,6 +134,9 @@
 <style scoped>
   .card-body {
     padding-left: 0px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
   }
 
   .blog-content {
@@ -131,5 +151,12 @@
   .blog-img {
     max-height: 300px;
     max-width: 300px;
+  }
+
+  .d-down {
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
   }
 </style>
