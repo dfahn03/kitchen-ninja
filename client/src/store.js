@@ -94,10 +94,7 @@ export default new Vuex.Store({
           commit('setUser', user)
           dispatch('getUserSites', user._id)
           dispatch('loadLastSite')
-          if (router.currentRoute.path !== '/costing') {
-            router.push({ name: "dashboard" })
-          }
-          else if (router.currentRoute.name !== 'Recipes') {
+          if (router.currentRoute.path == '/login') {
             router.push({ name: "dashboard" })
           }
         })
@@ -139,7 +136,9 @@ export default new Vuex.Store({
         dispatch("getBlogs")
         dispatch("getIngredients")
         dispatch("getRecipes")
-        router.push({ name: 'dashboard' })
+        if (router.currentRoute.path == '/login') {
+          router.push({ name: 'dashboard' })
+        }
       } catch (error) { console.error(error) }
     },
     loadLastSite({ dispatch, commit }) {
