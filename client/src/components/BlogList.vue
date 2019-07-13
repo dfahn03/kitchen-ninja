@@ -27,10 +27,12 @@
               </div>
             </div>
             <p class="card-text text-left blog-content">{{blogData.content}}</p>
-            <p class="card-text d-flex justify-content-end">
-              <small class="author-name text-right text-muted">@{{blogData.author}}</small>
-            </p>
           </div>
+
+          <div class="card-footer d-flex justify-content-end mr-1">
+            <small class="author-name text-right text-muted">@{{blogData.author}}</small>
+          </div>
+
         </div>
       </div>
     </div>
@@ -142,6 +144,16 @@
 
   .card-title {
     font-family: 'Bree Serif', serif;
+  }
+
+  .card-footer {
+    background: transparent;
+    border: none;
+    padding-left: 0px;
+    padding-right: 2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+
   }
 
   .blog-img {
