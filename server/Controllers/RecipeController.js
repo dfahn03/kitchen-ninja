@@ -51,6 +51,7 @@ export default class RecipeController {
     try {
       req.body.siteId = mongodb.ObjectID(req.query.siteId)
       req.body.authorId = req.session.uid
+      req.body.ingredients = req.body.recipeIngredients
       let data = await _recipeRepo.create(req.body)
       return res.status(201).send(data)
     } catch (error) { next(error) }
@@ -60,7 +61,7 @@ export default class RecipeController {
     try {
       req.body.siteId = mongodb.ObjectID(req.query.siteId)
       // let siteId = req.query.siteId
-      let data = await _recipeRepo.findOneAndUpdate({ siteId, _id: req.params.id }, req.body, { new: true })
+      let data = await _recipeRepo.findOneAndUpdate({ siteId: req.body.siteId, _id: req.params.id }, req.body, { new: true })
       if (data) {
         return res.send(data)
       }

@@ -105,7 +105,10 @@
       this.$store.dispatch('getIngredients')
       if (this.id) {
         this.newRecipe = this.$store.state.recipes.find(r => r._id == this.id)
-      }
+      };
+      // if (ActiveRecipe) {
+      //   this.store.dispatch('setRecipe')
+      // }
       //TODO  ingredients persist on reload 
     },
     props: ["id"],
@@ -149,6 +152,10 @@
       profitMargin(nv, ov) {
         console.log("profitMargin has changed")
       },
+      activeRecipe(nv, ov) {
+        console.log("active recipe has changed")
+        this.newRecipe = nv
+      }
 
     },
     computed: {
@@ -168,6 +175,9 @@
         this.produce = 0
         this.bakery = 0
         this.frozen = 0
+        if (!this.newRecipe.recipeIngredients) {
+          return 0
+        }
         return this.newRecipe.recipeIngredients.forEach(r => this.$data[r.category.toLowerCase()] += +r.itemCost)
       },
       foodCost() {
@@ -197,8 +207,13 @@
         if (this.profitMargin >= .04) {
           return (this.foodCost * 1.04).toFixed(2)
         }
+      },
+      activeRecipe() {
+        return this.$store.state.recipe
       }
+
     },
+
     methods: {
       //TODO Find out while data isn't sending to the server 
       saveRecipe() {

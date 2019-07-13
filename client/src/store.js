@@ -287,7 +287,14 @@ export default new Vuex.Store({
       try {
         await api.put('recipes/' + SID + payload._id, payload)
         dispatch('getRecipes')
-        router.push({ name: 'Costing' })
+        router.push({ name: 'Recipes' })
+      } catch (error) { console.error(error) }
+    },
+    async setActiveRecipe({ commit, dispatch }, payload) {
+      try {
+        let res = await api.put('recipes/' + payload.id + SID, payload)
+        commit('setRecipe', res.data)
+        // router.push({ name: 'Recipes' })
       } catch (error) { console.error(error) }
     },
     //#endregion
