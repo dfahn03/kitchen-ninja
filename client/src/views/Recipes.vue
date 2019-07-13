@@ -42,8 +42,7 @@
               <p>Portions Calories: {{ calories }}</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Edit Recipe</button>
-              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+              <button type="button" class="btn btn-primary" @click="sendRecipeToCosting()">Edit Recipe</button>
             </div>
           </div>
         </div>
@@ -60,6 +59,8 @@
     },
     data() {
       return {
+        id: '',
+        siteId: "",
         name: "",
         station: "",
         side: "",
@@ -68,6 +69,8 @@
         portionSize: "",
         portionUnit: "",
         calories: "",
+
+
       };
     },
     created() {
@@ -87,6 +90,7 @@
           groups[r.station].push(r)
         });
         return groups
+        console.log(groups)
       }
     },
     methods: {
@@ -96,10 +100,14 @@
       deleteRecipe(recipeId) {
         this.$store.dispatch("deleteRecipe", recipeId);
       },
-      openRecipe(recipeId) {
-        this.$router.push({ name: 'recipe', params: { recipeId } })
+      sendRecipeToCosting() {
+        let ActiveRecipe = this.$data
+        this.$store.dispatch("setActiveRecipe", ActiveRecipe)
+        this.$router.push({ name: 'Costing' })
       },
       itemClicked: function (item) {
+        this.siteId = item.siteId;
+        this.id = item._id;
         this.name = item.name;
         this.station = item.station;
         this.side = item.side;
