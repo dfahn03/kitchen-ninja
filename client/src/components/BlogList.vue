@@ -27,10 +27,6 @@
               </div>
             </div>
             <p class="card-text text-left blog-content">{{blogData.content}}</p>
-            <!-- <button class="btn btn-warning" type="button" data-toggle="modal"
-              :data-target="'#editBlogModal'+blogData._id">Edit
-              Blog</button> -->
-            <!-- <button class="btn btn-danger ml-1" type="button" @click="deleteBlog">Delete Blog</button> -->
             <p class="card-text d-flex justify-content-end">
               <small class="author-name text-right text-muted">@{{blogData.author}}</small>
             </p>
@@ -107,7 +103,7 @@
       }
     },
     mounted() {
-      this.$store.dispatch('getBlogs')
+      // this.$store.dispatch('getBlogs')
     },
     computed: {
       blogs() {

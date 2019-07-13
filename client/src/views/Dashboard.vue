@@ -66,9 +66,6 @@
 
   export default {
     name: "dashboard",
-    mounted() {
-      this.$store.dispatch('getBlogs')
-    },
     data() {
       return {
         newBlog: {

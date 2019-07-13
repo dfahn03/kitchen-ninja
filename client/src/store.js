@@ -158,9 +158,8 @@ export default new Vuex.Store({
     loadLastSite({ dispatch, commit }) {
       let siteId = localStorage.getItem("KM__lastsite")
       if (siteId) {
-        commit('setSite', siteId)
+        dispatch('selectSite', siteId)
       }
-
     },
     async selectAdminSite({ commit, dispatch }, siteId) {
       try {
@@ -182,7 +181,7 @@ export default new Vuex.Store({
       auth.delete('logout', creds)
         .then(res => {
           commit('setUser', {})
-          router.push({ name: 'Login' })
+          window.location.reload()
         })
     },
     deleteUser({ commit, dispatch }, userId) {
