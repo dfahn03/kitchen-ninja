@@ -2,15 +2,15 @@
   <div class="col-12 my-2 blog-list d-flex justify-content-center align">
     <div class="card" style="width: 60rem">
       <div class="row no-gutters">
-        <div class="col-md-4">
+        <div class="col-md-4 d-flex justify-content-start">
           <img
             src="https://images.unsplash.com/photo-1488992783499-418eb1f62d08?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
-            width="225px" class="blog-img">
+            width="310px" class="blog-img">
         </div>
         <div class="col-md-8 px-0 py-0">
           <div class="card-body">
             <h4 class="card-title text-left">{{blogData.blogTitle}}</h4>
-            <p class="card-text text-left">{{blogData.blogContent}}</p>
+            <p class="card-text text-left blog-content">{{blogData.blogContent}}</p>
             <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#editBlogModal">Edit
               Blog</button>
             <!-- TODO make sure that the edit modal is the right blog id that we want to edit -->
@@ -117,24 +117,16 @@
 </script>
 
 <style scoped>
-  /* .card-footer {
-    background: rgba(109, 197, 154, 0);
-    border: none;
-    color: white;
-  } */
-
-  /* .card-header, */
-  /* .card {
-    background: rgb(109, 197, 154);
-    background: rgb(197, 197, 197);
-    border: none;
-    color: black;
-  } */
   .card-body {
     padding-left: 0px;
   }
 
-  /* .author-name {
-    font-size: 13px;
-  } */
+  .blog-content {
+    font-family: 'Aleo', serif;
+    font-size: 18px;
+  }
+
+  .card-title {
+    font-family: 'Bree Serif', serif;
+  }
 </style>
