@@ -7,26 +7,21 @@
             class="btn btn-outline-secondary" data-toggle="#wrapper #page-content-wrapper"
             aria-controls="wrapper page-content-wrapper" id="menu-toggle"><img
               src="../src/assets/iconFinalLeaf.png"></a></li>
-        <router-link to='/'><img src="../src/assets/finalLogo2.png"></router-link>
+
+        <router-link to='/'><img src="../src/assets/finalLogo2.png" class></router-link>
         <!-- https://img.icons8.com/office/16/000000/leaf.png -->
 
-        <li>
-        </li>
-        <li>
-
-        </li>
-        <li>
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img src="../src/assets/menuButton2.png" alt="" srcset="">
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a @click='logout' class="dropdown-item" href="#">Logout</a>
-              <a @click='openSiteSelect' class="dropdown-item" href="#">Change Site</a>
-              <router-link to="/admin"><a class="dropdown-item" href="#">Admin Options</a></router-link>
-            </div>
+        <div class="dropdown dropleft">
+          <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <img src="../src/assets/menuButton2.png" alt="" srcset="">
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a @click='logout' class="dropdown-item" href="#">Logout</a>
+            <a @click='openSiteSelect' class="dropdown-item" href="#">Change Site</a>
+            <router-link to="/admin"><a class="dropdown-item" href="#">Admin Options</a></router-link>
           </div>
+        </div>
         </li>
       </ul>
       <!-- Login Modal -->

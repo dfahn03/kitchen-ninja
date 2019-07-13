@@ -1,10 +1,11 @@
 <template>
   <div class="row dashboard">
     <div class="col-12 text-center">
-      <h1 class="text-white">Communications Blog</h1>
+      <h1 class="blog-page-title">Chef Notes</h1>
 
       <!-- Blog Modal -->
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#blogModal">
+      <button type="button" class="btn btn-sm create-new-blog-bg mb-5 mt-3" data-toggle="modal"
+        data-target="#blogModal">
         Create New Blog
       </button>
       <div class="modal fade" id="blogModal" tabindex="-1" role="dialog" aria-labelledby="blogModalLabel"
@@ -104,6 +105,16 @@
 </script>
 
 <style>
+  .create-new-blog-bg {
+    background-color: white;
+    font-weight: 600;
+    color: rgb(5, 38, 45);
+  }
 
+  .blog-page-title {
+    font-family: 'Pacifico', cursive;
+    color: rgb(109, 197, 154);
+    font-size: 70px;
 
+  }
 </style>
