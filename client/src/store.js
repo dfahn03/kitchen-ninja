@@ -94,11 +94,11 @@ export default new Vuex.Store({
           commit('setUser', user)
           dispatch('getUserSites', user._id)
           dispatch('loadLastSite')
-          router.push({ name: "dashboard" })
+          if (router.currentRoute.path !== '/costing' && router.currentRoute.path !== '/recipes') {
+            router.push({ name: "dashboard" })
+          }
         })
-        .catch(res => {
-          router.push({ name: 'Login' })
-        })
+        .catch(res => { router.push({ name: 'Login' }) })
     },
     login({ commit, dispatch }, creds) {
       auth.post('login', creds)
@@ -134,8 +134,8 @@ export default new Vuex.Store({
         commit('setSite', siteId)
         commit('setSiteSelectorStatus', false)
         dispatch("getBlogs")
-        dispatch("getRecipes")
         dispatch("getIngredients")
+        dispatch("getRecipes")
         router.push({ name: 'dashboard' })
       } catch (error) { console.error(error) }
     },

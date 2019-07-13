@@ -6,12 +6,17 @@ import Dashboard from './views/Dashboard.vue'
 import Costing from './views/Costing.vue'
 // @ts-ignore
 import Login from './views/Login.vue'
+// @ts-ignore
 import Recipes from './views/Recipes.vue'
 
 //admin route and child routes below. add menu child when complete
+// @ts-ignore
 import Admin from './views/Admin.vue'
+// @ts-ignore
 import AdminUsers from './components/AdminUsers.vue'
+// @ts-ignore
 import AdminSites from './components/AdminSites.vue'
+// @ts-ignore
 import AdminKitchens from './components/AdminKitchens.vue'
 
 Vue.use(Router)
