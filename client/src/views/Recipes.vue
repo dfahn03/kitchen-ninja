@@ -7,31 +7,51 @@
             <h3 class="text-light">{{station}}</h3>
             <ul v-for="recipe in group" :key="recipe._id">
               <li class="recipe_list">{{recipe.name}} -- Cost per Portion: $
-                {{(recipe.costPerRecipe / recipe.portions).toFixed(2)}}</li>
+                {{(recipe.costPerRecipe / recipe.portions).toFixed(2)}}
+                <span><button class="btn btn-sm edit_recipe" @click="itemClicked(recipe)">Show Recipe</button></span>
+              </li>
             </ul>
           </li>
         </ul>
-        <!-- <div class="card text-center" v-for="recipe in recipes" :key="recipe._id">
-          <h5 class="card-header">Recipe Name: {{recipe.name}}</h5>
-          <div class="card-body">
-            <h5 class="card-title">Recipe Portion Size: {{recipe.portionSize}}</h5>
-            <p class="card-text">Recipe Cost per Portion: $ {{(recipe.costPerRecipe / recipe.portions).toFixed(2)}}</p>
-            <button class="btn btn-secondary" @click="openRecipe(recipe._id)">Show Recipe</button>
-            <button class="btn btn-danger" @click="deleteRecipe(recipe._id)">Delete Recipe</button>
-          </div>
-        </div> -->
       </div>
     </div>
-    <!-- <slot></slot> -->
-    <!-- TODO slot for recipe modal -->
     <div class="row">
       <div class="col">
         <button class="btn btn-warning" @click="addRecipe()">Add Recipe</button>
       </div>
     </div>
+    <!-- RECIPE MODAL -->
+    <div id="recipe modal">
+      <div id="my-modal" class="modal fade">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">RECIPE DETAILS</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Name: {{ name }}</p>
+              <p>Station: {{ station }}</p>
+              <p>Side: {{ side }}</p>
+              <p>Cost per Recipe: {{ costPerRecipe }}</p>
+              <p>Portions: {{ portions }}</p>
+              <p>Portions Size: {{ portionSize }}</p>
+              <p>Portions Unit: {{ portionUnit }}</p>
+              <p>Portions Calories: {{ calories }}</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary">Edit Recipe</button>
+              <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
-<!-- Sort by Station If(recipe.station == 'Salad bar') -->
+
 <script>
   export default {
     name: "Recipes",
@@ -40,6 +60,14 @@
     },
     data() {
       return {
+        name: "",
+        station: "",
+        side: "",
+        costPerRecipe: "",
+        portions: "",
+        portionSize: "",
+        portionUnit: "",
+        calories: "",
       };
     },
     created() {
@@ -71,7 +99,17 @@
       openRecipe(recipeId) {
         this.$router.push({ name: 'recipe', params: { recipeId } })
       },
-      // TODO how do we handle this openRecipe?
+      itemClicked: function (item) {
+        this.name = item.name;
+        this.station = item.station;
+        this.side = item.side;
+        this.costPerRecipe = item.costPerRecipe;
+        this.portions = item.portions;
+        this.portionSize = item.portionSize;
+        this.portionUnit = item.portionUnit;
+        this.calories = item.calories;
+        $("#my-modal").modal('show');
+      },
     }
   };
 </script>
@@ -81,5 +119,10 @@
     padding: 2px;
     border: 1px solid whitesmoke;
     font-size: 15px;
+  }
+
+  .edit_recipe {
+    background-color: rgb(109, 197, 154);
+    margin-left: 15px;
   }
 </style>

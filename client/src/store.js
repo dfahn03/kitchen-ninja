@@ -306,6 +306,7 @@ export default new Vuex.Store({
       try {
         await api.put('recipes/' + SID + payload._id, payload)
         dispatch('getRecipes')
+        router.push({ name: 'Costing' })
       } catch (error) { console.error(error) }
     },
     //#endregion
