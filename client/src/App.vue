@@ -12,9 +12,9 @@
         <!-- https://img.icons8.com/office/16/000000/leaf.png -->
 
         <div class="dropdown dropleft">
-          <button class="btn btn-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+          <button class="btn btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <img src="../src/assets/menuButton2.png" alt="" srcset="">
+            <img src="../src/assets/icons8-user-menu-male-35.png" alt="" srcset="">
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a @click='logout' class="dropdown-item" href="#">Logout</a>
@@ -136,6 +136,7 @@
     background-color: #fff;
     border: 5px #42b98385;
     color: rgb(5, 38, 45);
+    top: 0;
 
   }
 
@@ -148,7 +149,7 @@
     background-color: whitesmoke;
     border: 5px #42b983;
 
-    margin-top: 80px;
+    /* margin-top: 80px; */
     margin-bottom: -80px;
     padding-top: 20px;
   }
@@ -168,12 +169,14 @@
   /* Displayed */
   #wrapper.toggled #sidebar-wrapper {
     width: 250px;
-    z-index: 2;
+    position: absolute;
+
   }
 
   #wrapper.toggled #page-content-wrapper {
-    /* padding-left: 250px; */
-    z-index: -1;
+    padding-left: 250px;
+    position: static;
+    /* z-index: -1; */
   }
 
   .sidebar-nav {

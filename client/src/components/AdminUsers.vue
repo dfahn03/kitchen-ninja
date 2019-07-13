@@ -3,8 +3,8 @@
     <div class="title">
       <h1>This is the AdminUsers component</h1>
       <label for="#manage">Manage Site</label>
-      <select v-model="newSite" @change="selectUser($event)" id="manage" class="form-control" placeholder="Owner"
-        required>
+      <select v-model="newSite" @change="selectUser($event)" id="manage" class="form-control d-inline-flex"
+        style="inline-size: 30%" placeholder="Owner" required>
         <option disabled value="">Choose Site</option>
         <option v-for="siteOne in mySites" :value="siteOne">{{siteOne.name}}</option>
         <option v-for="siteTwo in memberSites" :value="siteTwo">{{siteTwo.name}}</option>
@@ -13,7 +13,8 @@
 
     <div id="sites">
       <form>
-        <div class="card form-group" v-for='user in users' :key='user._id'>
+        <div class="card form-group d-flex justify-content-center" style="inline-size: 40%" v-for='user in users'
+          :key='user._id'>
           <div class=" card-block px-2 py-2 form-group">
             <div class="form-group">
               <h4 class="card-title text-left form-control-sm">User role: {{user.role}} </h4>
