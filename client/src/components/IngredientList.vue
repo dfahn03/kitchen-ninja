@@ -4,7 +4,8 @@
       <td><button type="button" class="btn btn-danger btn-sm" @click="$emit('deleteIngredient', i)">Delete</button>
       </td>
       <td>
-        <auto-complete @result="setIngredient" :items="ingredients" @input="setIngredientName" />
+        <input type="text" placeholder="Ingredient" v-model="newI.ingredient" class="dist-input" required>
+        <!-- <auto-complete @result="setIngredient" :items="ingredients" @input="setIngredientName" /> -->
       </td>
       <td><input type="number" placeholder="Quantity" min="0" step=".5" v-model="newI.quantity" class="quan-input"
           required></td>
@@ -50,7 +51,7 @@
 </template>
 
 <script>
-  import AutoComplete from '@/components/AutoComplete'
+  // import AutoComplete from '@/components/AutoComplete'
 
   export default {
     name: "IngredientList",
@@ -84,18 +85,18 @@
       deleteIngredient(i) {
         this.recipeIngredients.splice(i, 1)
       },
-      setIngredientName(val) {
-        this.recipeIngredient = {}
-        this.newI.itemName = val
-      },
-      setIngredient(autocomplete) {
-        // console.log("FROM AUTOCOMPLETE", ingredient)
-        this.newI = autocomplete.result
-        this.newI.quantity = 1
-        // this.recipeIngredients = [this.newI]
-        // this.newI.itemCost = this.calculateCost()
-        this.recipeIngredients[this.i] = this.newI
-      },
+      // setIngredientName(val) {
+      //   this.recipeIngredient = {}
+      //   this.newI.itemName = val
+      // },
+      // setIngredient(autocomplete) {
+      //   // console.log("FROM AUTOCOMPLETE", ingredient)
+      //   this.newI = autocomplete.result
+      //   this.newI.quantity = 1
+      //   // this.recipeIngredients = [this.newI]
+      //   // this.newI.itemCost = this.calculateCost()
+      //   this.recipeIngredients[this.i] = this.newI
+      // },
       // seperatePackage(string) {
       //   //TODO Needs futher evaluation for various cases
       //   let dict = {}
@@ -149,7 +150,7 @@
       //   }
       // },
     },
-    components: { AutoComplete }
+    // components: { AutoComplete }
 
   }
 </script>

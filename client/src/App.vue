@@ -176,6 +176,7 @@
 
   #wrapper.toggled #page-content-wrapper {
     padding-left: 250px;
+    /* max-width: 80%; */
     position: static;
     /* z-index: -1; */
   }
