@@ -297,14 +297,14 @@ export default new Vuex.Store({
         let res = await api.put('recipes/' + payload.id + SID, payload)
         commit('setRecipe', res.data)
         dispatch('getIngredients')
-      // router.push({ name: 'Recipes' })
-    } catch (error) { console.error(error) }
+        // router.push({ name: 'Recipes' })
+      } catch (error) { console.error(error) }
     },
-  //#endregion
+    //#endregion
 
-  //#region --  Stuff --
+    //#region --  Stuff --
 
-  //#endregion
+    //#endregion
 
   }
 })
