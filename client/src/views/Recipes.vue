@@ -1,10 +1,16 @@
 <template>
   <div class="container-fluid recipes">
+    <div class="row recipes">
+      <div class="col-12 text-center">
+        <h1 class="recipes_title">Recipes</h1>
+        <button class="btn btn-sm create-recipe-bg mb-5 mt-3" @click="addRecipe()">Add Recipe</button>
+      </div>
+    </div>
     <div class="row">
-      <div class="col">
+      <div class="col-6">
         <ul>
           <li v-for="(group, station) in groups">
-            <h3 class="text-light">{{station}}</h3>
+            <h3 class="text-light station_name mt-4">{{station}}</h3>
             <ul v-for="recipe in group" :key="recipe._id">
               <li class="recipe_list">{{recipe.name}} -- Cost per Portion: $
                 {{(recipe.costPerRecipe / recipe.portions).toFixed(2)}}
@@ -13,11 +19,6 @@
             </ul>
           </li>
         </ul>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <button class="btn btn-warning" @click="addRecipe()">Add Recipe</button>
       </div>
     </div>
     <!-- RECIPE MODAL -->
@@ -69,8 +70,6 @@
         portionSize: "",
         portionUnit: "",
         calories: "",
-
-
       };
     },
     computed: {
@@ -124,10 +123,37 @@
     padding: 2px;
     border: 1px solid whitesmoke;
     font-size: 15px;
+    font-family: 'Aleo', serif;
+    font-size: 18px;
   }
 
   .edit_recipe {
     background-color: rgb(109, 197, 154);
     margin-left: 15px;
   }
+
+  .recipes_title {
+    font-family: 'Pacifico', cursive;
+    color: rgb(109, 197, 154);
+    font-size: 70px;
+  }
+
+  .create-recipe-bg {
+    background-color: white;
+    font-weight: 600;
+    color: rgb(5, 38, 45);
+  }
+
+  .station_name {
+    font-family: 'Bree Serif', serif;
+    font-size: 2em;
+  }
+
+  /* ul {
+    -ms-column-count: 2;
+    -o-column-count: 2;
+    -moz-column-count: 2;
+    -khtml-column-count: 2;
+    column-count: 2;
+  } */
 </style>
