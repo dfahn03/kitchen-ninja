@@ -11,18 +11,29 @@
         <router-link to='/dashboard'><img src="../src/assets/finalLogo2.png" class></router-link>
         <!-- https://img.icons8.com/office/16/000000/leaf.png -->
 
-        <div class="dropdown dropleft">
+        <div v-if="user" class="dropdown dropleft">
           <button class="btn btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <img src="../src/assets/icons8-user-menu-male-35.png" alt="" srcset="">
           </button>
-          <div class="dropdown-menu" v-if="" aria-labelledby="dropdownMenuButton">
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a @click='logout' class="dropdown-item" href="#">Logout</a>
             <a @click='openSiteSelect' class="dropdown-item" href="#">Change Site</a>
-            <router-link to="/admin"><a class="dropdown-item" href="#">Admin Options</a></router-link>
+            <router-link v-if="owned" to="/admin"><a class="dropdown-item" href="#">Admin Options</a>
+            </router-link>
             <!-- TODO make the dropdown not show up if logged out and make another dropdown menu if logged out for that just says login as a reminder -->
           </div>
         </div>
+        <div v-else class="dropdown dropleft">
+          <button class="btn btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <img src="../src/assets/icons8-user-menu-male-35.png" alt="" srcset="">
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item">Login</a>
+          </div>
+        </div>
+
         </li>
       </ul>
       <!-- Login Modal -->
@@ -85,6 +96,14 @@
   // })
   export default {
     name: "APP",
+    computed: {
+      owned() {
+        return this.$store.state.sites.mySites
+      },
+      user() {
+        return this.$store.state.user
+      }
+    },
     methods: {
       logout() {
         this.$store.dispatch('logout', this.creds)
