@@ -7,18 +7,18 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-6">
-        <ul>
-          <li v-for="(group, station) in groups">
-            <h3 class="text-light station_name mt-4">{{station}}</h3>
-            <ul v-for="recipe in group" :key="recipe._id">
-              <li class="recipe_list">{{recipe.name}} -- Cost per Portion: $
-                {{(recipe.costPerRecipe / recipe.portions).toFixed(2)}}
-                <span><button class="btn btn-sm edit_recipe" @click="itemClicked(recipe)">Show Recipe</button></span>
-              </li>
-            </ul>
-          </li>
-        </ul>
+      <div v-for="menu in menus" class="col-6">
+        <!-- <li v-for="(group, station) in groups"> original, working but not sorted list -->
+        <div v-for="(recipes, stationName) in menu">
+          <h3 class="text-light station_name mt-4">{{stationName}}</h3>
+          <!-- <ul v-for="recipe in group" :key="recipe._id"> original, working but not sorted list -->
+          <ul v-for="recipe in recipes" :key="recipe._id">
+            <li class="recipe_list">{{recipe.name}} -- Cost per Portion: $
+              {{(recipe.costPerRecipe / recipe.portions).toFixed(2)}}
+              <span><button class="btn btn-sm edit_recipe" @click="itemClicked(recipe)">Show Recipe</button></span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <!-- RECIPE MODAL -->
@@ -72,20 +72,39 @@
         calories: "",
       };
     },
+    components: {
+      // SubMenu
+    },
     computed: {
       recipes() {
-        return this.$store.state.recipes;
-        console.log(recipes)
-      },
-      groups() {
-        let groups = {}
-        this.recipes.forEach(r => {
-          groups[r.station] = groups[r.station] || []
-          groups[r.station].push(r)
+        let rec = this.$store.state.recipes.sort(function (a, b) {
+          return (a.station).localeCompare(b.station);
         });
-        return groups
-        console.log(groups)
-      }
+        return rec
+      },
+      menus() {
+        let colMenus = []
+        let menu = {}
+        let count = 0
+        this.recipes.forEach(r => {
+          menu[r.station] = menu[r.station] || []
+          menu[r.station].push(r)
+          count++
+          if (count == 15) {
+            colMenus.push(JSON.parse(JSON.stringify(menu)))
+            menu = {}
+          }
+        });
+        colMenus.push(menu)
+        // console.log(menu)
+        return colMenus
+        // console.log(groups)
+      },
+      // columnMenu() {
+      //   //menu object with keys of stations values of recipies
+      //   let colMenu = []
+      //   //array of menu objects, where the total recipies among the keys does not exceed 15
+      // }
     },
     methods: {
       addRecipe() {
