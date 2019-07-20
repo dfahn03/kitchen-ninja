@@ -263,21 +263,6 @@ export default new Vuex.Store({
       } catch (err) { console.error(err) }
     },
 
-    // async getRecipeById({ commit, dispatch }, recipeId) {
-    //   try {
-    //     let res = await api.get('recipes/' + recipeId)
-    //     commit('setActiveBoard', res.data)
-    //   } catch (error) { console.error(error) }
-    // },
-    // TODO this works differently, so set up when modal idea developed
-
-    // addRecipe({ commit, dispatch }, recipeData) {
-    //   api.post('recipes', recipeData)
-    //     .then(serverRecipe => {
-    //       dispatch('getRecipes')
-    //     })
-    // TODO this works differently, so set up when modal idea developed
-    // },
     deleteRecipe({ commit, dispatch }, recipeId) {
       api.delete('recipes/' + recipeId + SID)
         .then(res => { dispatch('getRecipes') })
@@ -291,6 +276,7 @@ export default new Vuex.Store({
         router.push({ name: 'Recipes' })
       } catch (error) { console.error(error) }
     },
+
     async setActiveRecipe({ commit, dispatch }, payload) {
       try {
         let res = await api.put('recipes/' + payload.id + SID, payload)
