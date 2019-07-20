@@ -44,8 +44,13 @@
               <p>Portions Unit: {{ portionUnit }}</p>
               <p>Portions Calories: {{ calories }}</p>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" @click="sendRecipeToCosting()">Edit Recipe</button>
+            <div class="modal-footer justify-content-center">
+              <img src="../assets/Edit-Icon-40.png" alt="Delete Recipe" title="Edit Recipe"
+                @click="sendRecipeToCosting()">
+              <!-- <button type="button" class="btn btn-warning" @click="sendRecipeToCosting()">Edit Recipe</button> -->
+              <img src="../assets/Trash-Can-Red-40.png" alt="Delete Recipe" title="Delete Recipe"
+                @click="deleteRecipe()">
+              <!-- <button type="button" class="btn btn-danger" @click="deleteRecipe()">Delete Recipe</button> -->
             </div>
           </div>
         </div>
