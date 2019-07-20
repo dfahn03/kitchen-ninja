@@ -11,7 +11,7 @@
         <router-link to='/dashboard'><img src="../src/assets/finalLogo2.png" class></router-link>
         <!-- https://img.icons8.com/office/16/000000/leaf.png -->
 
-        <div v-if="user" class="dropdown dropleft">
+        <div v-if="user._id" class="dropdown dropleft">
           <button class="btn btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <img src="../src/assets/icons8-user-menu-male-35.png" alt="" srcset="">
@@ -98,7 +98,8 @@
     name: "APP",
     computed: {
       owned() {
-        return this.$store.state.sites.mySites
+        //FIXME Will need to be changed for new admins that have no sites yet
+        return this.$store.state.sites.mySites ? this.$store.state.sites.mySites.length > 0 : false
       },
       user() {
         return this.$store.state.user
