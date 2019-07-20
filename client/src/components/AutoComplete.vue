@@ -1,11 +1,12 @@
 <template>
   <div class="autocomplete">
-    <input :class="inputClass" type="text" @input="onChange" v-model.trim="search" @keydown.down="onArrow(1)"
+    <input :class="inputClass" readonly :value="selected.itemName" type="text" @focus="isOpen = true" v-if="!isOpen">
+    <input v-else :class="inputClass" type="text" @input="onChange" v-model.trim="search" @keydown.down="onArrow(1)"
       @keydown.up="onArrow(-1)" @keydown.enter="onEnter" :placeholder="placeholder" @blur="blurOff">
-    <ul id="autocomplete-results" v-show="isOpen" class="autocomplete-results" ref="resultbox">
+    <ul id="autocomplete-results" v-if="isOpen" class="autocomplete-results" ref="resultbox">
       <li class="loading" v-if="isLoading">Loading results...</li>
-      <li :tabIndex="i" v-else v-for="(result, i) in results" :key="i" @click="setResult(result)"
-        @mouseover="setIndex(i)" class="autocomplete-result" :class="{ 'is-active': i === index }"
+      <li v-else v-for="(result, i) in results" :key="i" @click="setResult(result)" @mouseover="setIndex(i)"
+        class="autocomplete-result" :class="{ 'is-active': i === index }"
         v-html="result.html ? result.html : result.itemName"></li>
     </ul>
   </div>
@@ -31,16 +32,25 @@
         type: Boolean,
         required: false,
         default: true
-      }
+      },
+      selected: { type: Object }
     },
     data() {
       return {
         isOpen: false,
         results: [],
+        result: {},
         search: "",
         isLoading: false,
         index: 0
       };
+    },
+    mounted() {
+      if (this.selected) { 
+        // this.setResult(this.selected)
+        this.result = this.selected
+        this.search = this.selected.itemName
+      }
     },
     methods: {
       blurOff() {
@@ -52,7 +62,7 @@
           this.isLoading = true;
         } else {
           this.filterResults();
-          this.open();
+          //this.open();
         }
       },
       filterResults() {
@@ -103,19 +113,18 @@
     },
     watch: {
       items: function (val, oldValue) {
-        this.results = val;
+        //this.results = val;
         this.isLoading = false;
-        val.length ? this.open() : this.close()
       }
     },
-    mounted() {
-      document.addEventListener("keydown", this.handleEscape);
-      document.addEventListener("click", this.handleClickOutside);
-    },
-    destroyed() {
-      document.removeEventListener("keydown", this.handleEscape);
-      document.removeEventListener("click", this.handleClickOutside);
-    }
+    // mounted() {
+    //   document.addEventListener("keydown", this.handleEscape);
+    //   document.addEventListener("click", this.handleClickOutside);
+    // },
+    // destroyed() {
+    //   document.removeEventListener("keydown", this.handleEscape);
+    //   document.removeEventListener("click", this.handleClickOutside);
+    // }
   };
 </script>
 

@@ -25,7 +25,8 @@
               </tr>
             </thead>
             <recipe-ingredient @deleteIngredient="test" @sendThatIngredient="ing => recipeIngredients.push(ing)"
-              v-for="(recipeIngredient, i) in recipeIngredients" :i="i" :recipeIngredients="recipeIngredients" />
+              v-for="(recipeIngredient, i) in recipeIngredients" :key="recipeIngredient._id" :i="i"
+              :recipe-ingredient="recipeIngredient" />
           </table>
         </div>
       </div>
@@ -37,9 +38,14 @@
   import RecipeIngredient from '@/components/RecipeIngredient'
   export default {
     name: "Ingredient",
-    data() {
-      return {
-        recipeIngredients: []
+    // data() {
+    //   return {
+    //     recipeIngredients: []
+    //   }
+    // },
+    computed: {
+      recipeIngredients() {
+        return this.$store.state.recipe.recipeIngredients || []
       }
     },
     methods: {
@@ -62,7 +68,6 @@
         this.recipeIngredients.splice(i, 1)
       }
     },
-    computed: {},
     components: {
       RecipeIngredient
     },
@@ -71,7 +76,6 @@
         this.$emit('passThemIngredients', val)
       }
     }
-
   }
 
 </script>
