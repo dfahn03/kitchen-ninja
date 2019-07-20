@@ -1,10 +1,8 @@
 <template>
   <tbody class="ingredient-list">
     <tr v-for="newI in recipe" :key="newI._id">
-      <td><button type="button" class="btn btn-danger btn-sm" @click="$emit('deleteIngredient', i)">Delete</button>
-      </td>
       <td>
-        <input type="text" placeholder="Ingredient" v-model="newI.ingredient" class="dist-input" required>
+        <input type="text" placeholder="Ingredient" v-model="newI.itemName" class="ingName-input" required>
         <!-- <auto-complete @result="setIngredient" :items="ingredients" @input="setIngredientName" /> -->
       </td>
       <td><input type="number" placeholder="Quantity" min="0" step=".5" v-model="newI.quantity" class="quan-input"
@@ -16,10 +14,10 @@
         </select></td>
 
       <td>
-        <!-- <input v-if="!calculateCost()" type="text" placeholder="Cost" v-model="newI.itemCost" class="ingC-input" -->
-        required>
+        <input type="text" placeholder="Cost" v-model="newI.itemCost" class="ingC-input" required>
         <!-- <p class="mt-1">{{calculateCost()}}</p> -->
       </td>
+
 
       <!-- <td v-if="recipe-ingredient.category"><input type="text" v-model="newI.category" readonly="true"
           class=" category-input1">
@@ -47,6 +45,8 @@
       <td><input type="text" placeholder="Package Cost" readonly="newI.packageCost" v-model="newI.packageCost"
           class="packC-input" required></td>
     </tr>
+    <td><button type="button" class="btn btn-danger btn-sm" @click="$emit('deleteIngredient', i)">Delete</button>
+    </td>
   </tbody>
 </template>
 
@@ -180,7 +180,7 @@
 
   .ingName-input {
     text-align: center;
-    max-width: 10rem;
+    max-width: 20rem;
   }
 
   .brand-input {
