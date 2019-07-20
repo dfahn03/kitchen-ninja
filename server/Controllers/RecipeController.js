@@ -51,7 +51,6 @@ export default class RecipeController {
     try {
       req.body.siteId = mongodb.ObjectID(req.query.siteId)
       req.body.authorId = req.session.uid
-      // req.body.ingredients = req.body.recipeIngredients
       let data = await _recipeRepo.create(req.body)
       return res.status(201).send(data)
     } catch (error) { next(error) }
@@ -60,8 +59,8 @@ export default class RecipeController {
   async edit(req, res, next) {
     try {
       req.body.siteId = mongodb.ObjectID(req.query.siteId)
-      // let siteId = req.query.siteId
-      let data = await _recipeRepo.findOneAndUpdate({ siteId: req.body.siteId, _id: req.params.id }, req.body, { new: true })
+      req.body.authorId = req.session.uid
+      let data = await _recipeRepo.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
       if (data) {
         return res.send(data)
       }
@@ -72,7 +71,8 @@ export default class RecipeController {
   async delete(req, res, next) {
     try {
       req.siteId = mongodb.ObjectID(req.query.siteId)
-      await _recipeRepo.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+      req.body.authorId = req.session.uid
+      await _recipeRepo.findOneAndRemove({ _id: req.params.id })
       return res.send("Successfully Deleted")
     } catch (error) { next(error) }
   }

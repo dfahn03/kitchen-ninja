@@ -279,10 +279,9 @@ export default new Vuex.Store({
     // TODO this works differently, so set up when modal idea developed
     // },
     deleteRecipe({ commit, dispatch }, recipeId) {
-      api.delete('recipes/' + SID + recipeId)
-        .then(res => {
-          dispatch('getRecipes')
-        })
+      api.delete('recipes/' + recipeId + SID)
+        .then(res => { dispatch('getRecipes') })
+      console.log(recipeId)
     },
 
     async editRecipe({ commit, dispatch }, payload) {

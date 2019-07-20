@@ -46,10 +46,10 @@
             </div>
             <div class="modal-footer justify-content-center">
               <img src="../assets/Edit-Icon-40.png" alt="Delete Recipe" title="Edit Recipe"
-                @click="sendRecipeToCosting()">
+                @click="sendRecipeToCosting()" class="edit-recipe">
               <!-- <button type="button" class="btn btn-warning" @click="sendRecipeToCosting()">Edit Recipe</button> -->
               <img src="../assets/Trash-Can-Red-40.png" alt="Delete Recipe" title="Delete Recipe"
-                @click="deleteRecipe()">
+                @click="deleteRecipe()" class="delete-recipe">
               <!-- <button type="button" class="btn btn-danger" @click="deleteRecipe()">Delete Recipe</button> -->
             </div>
           </div>
@@ -117,14 +117,17 @@
       addRecipe() {
         this.$router.push({ name: 'Costing' })
       },
-      deleteRecipe(recipeId) {
-        this.$store.dispatch("deleteRecipe", recipeId);
+      deleteRecipe() {
+        let ActiveRecipe = this.$data
+        this.$store.dispatch("deleteRecipe", ActiveRecipe.id);
+        $("#my-modal").modal("hide");
+        $(".modal-backdrop").remove();
       },
       sendRecipeToCosting() {
         let ActiveRecipe = this.$data
         this.$store.dispatch("setActiveRecipe", ActiveRecipe)
         this.$router.push({ name: 'Costing' })
-        $("#exampleModal").modal("hide");
+        $("#my-modal").modal("hide");
         $(".modal-backdrop").remove();
       },
       itemClicked: function (item) {
@@ -154,6 +157,14 @@
   }
 
   .details-img {
+    cursor: pointer;
+  }
+
+  .edit-recipe {
+    cursor: pointer;
+  }
+
+  .delete-recipe {
     cursor: pointer;
   }
 
