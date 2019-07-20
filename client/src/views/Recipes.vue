@@ -15,7 +15,9 @@
           <ul v-for="recipe in recipes" :key="recipe._id">
             <li class="recipe_list">{{recipe.name}} -- Cost per Portion: $
               {{(recipe.costPerRecipe / recipe.portions).toFixed(2)}}
-              <span><button class="btn btn-sm edit_recipe" @click="itemClicked(recipe)">Show Recipe</button></span>
+              <img src="../assets/Plus-Icon-18.png" alt="Recipe Details" title="Recipe Details"
+                @click="itemClicked(recipe)" class="mb-1 ml-1 details-img">
+              <!-- <span><button class="btn btn-sm edit_recipe" @click="itemClicked(recipe)">+</button></!-->
             </li>
           </ul>
         </div>
@@ -140,10 +142,14 @@
   .recipe_list {
     color: white;
     padding: 2px;
-    border: 1px solid whitesmoke;
+    /* border: 1px solid whitesmoke; */
     font-size: 15px;
     font-family: 'Aleo', serif;
     font-size: 18px;
+  }
+
+  .details-img {
+    cursor: pointer;
   }
 
   .edit_recipe {
