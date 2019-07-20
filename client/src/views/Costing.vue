@@ -7,7 +7,6 @@
         <!-- TODO link this button to the sidebar calculator -->
       </div>
     </div>
-    <!-- Recipe Form -->
     <div class="row">
       <div class="col">
         <form @submit.prevent="saveRecipe">
@@ -51,7 +50,6 @@
           </div>
           <ingredient @passThemIngredients="arr => newRecipe.recipeIngredients = arr" />
           <ingredient-list />
-          <!-- <ingredient-list v-for="i in recipeIngredients" :key="i._id" /> -->
           <div class="form-row">
             <div class="col-12">
               <div class="row">
@@ -65,8 +63,6 @@
                     <li class="mt-2">Bakery PL (${{this.bakery}})</li>
                     <li class="mt-2">Frozen PL (${{this.frozen}})</li>
                   </ul>
-                  <!--run a for each on each  category using ingcostcalc
-                  total is all added-->
                 </div>
                 <div class="col-6 text-white d-flex justify-content-center text-left">
                   <ul>
@@ -89,7 +85,7 @@
           <!-- v-else -->
           <div class="form-row d-flex justify-content-center align-content-center">
             <button type="submit" class="btn btn-success">Save Recipe</button>
-            <button type="submit" class="btn btn-warning ml-1">Update Recipe</button>
+            <button @click="updateRecipe()" class="btn btn-warning ml-1">Update Recipe</button>
           </div>
         </form>
       </div>
@@ -106,8 +102,9 @@
   export default {
     name: "Costing",
     mounted() {
-      if (this.id) {
-        this.newRecipe = this.$store.state.recipes.find(r => r._id == this.id)
+      if (this.activeRecipe) {
+        this.newRecipe = this.$store.state.recipe
+        // .find(r => r._id == this.id)
       };
       // if (ActiveRecipe) {
       //   this.store.dispatch('setRecipe')
@@ -140,7 +137,6 @@
     },
     watch: {
       itemCost(nv, ov) {
-        // Leave watcher to run computed
         console.log("itemCost has changed")
       },
       recipeCost(nv, ov) {
@@ -226,6 +222,13 @@
         })
         this.$store.dispatch('saveRecipe', this.newRecipe)
       },
+      updateRecipe() {
+        this.$data.newRecipe.recipeIngredients.forEach(i => {
+          i.unit = i.unit.toUpperCase();
+          i.category = i.category.toLowerCase();
+        })
+        this.$store.dispatch('editRecipe', this.activeRecipe)
+      }
     },
     components: {
       RecipeIngredient,
@@ -301,5 +304,68 @@
   .allergens-input {
     max-width: 20rem;
     text-align: center
+  }
+
+  .dist-input {
+    text-align: center;
+    max-width: 9rem;
+  }
+
+  .prod-input {
+    text-align: center;
+    max-width: 6rem;
+  }
+
+  .category-input1 {
+    text-align: center;
+    max-width: 6rem;
+    height: 2rem;
+  }
+
+  .category-input2 {
+    text-align: center;
+    min-width: 8rem;
+    height: 2rem;
+  }
+
+  .ingName-input {
+    text-align: center;
+    max-width: 10rem;
+  }
+
+  .brand-input {
+    text-align: center;
+    max-width: 6rem;
+  }
+
+  .unit-input {
+    text-align: center;
+    min-width: 5rem;
+    height: 2rem;
+  }
+
+  .packS-input {
+    text-align: center;
+    max-width: 7rem;
+  }
+
+  .packC-input {
+    text-align: center;
+    max-width: 7rem;
+  }
+
+  .quan-input {
+
+    max-width: 3rem;
+  }
+
+  .ingC-input {
+    text-align: center;
+    max-width: 5rem;
+  }
+
+  .ingC2-input {
+    text-align: center;
+    max-width: 5rem;
   }
 </style>

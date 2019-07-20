@@ -1,7 +1,7 @@
 <template>
   <div class="ingredient">
     <div class="form-row">
-      <div class="col-12">
+      <div class="col-lg-12 col-md-8 col-sm-6">
         <button type="button" class="btn addIng-btn text-white my-2" @click="addIngredient">Add
           Ingredient <img src="../assets/icons8-plus-25.png" alt="Plus Icon" class="ml-1"></button>
       </div>
@@ -10,7 +10,6 @@
           <table class="table text-white">
             <thead>
               <tr>
-                <th scope="col">Remove</th>
                 <th scope="col">Ingredient Name</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Unit</th>
@@ -21,6 +20,8 @@
                 <th scope="col">Brand</th>
                 <th scope="col">Package Size</th>
                 <th scope="col">Package Cost</th>
+                <th scope="col">Remove</th>
+
               </tr>
             </thead>
             <recipe-ingredient @deleteIngredient="test" @sendThatIngredient="ing => recipeIngredients.push(ing)"
@@ -56,17 +57,12 @@
           distributor: "",
         }
         this.recipeIngredients.push(newIngredient)
-        // this.costPerCategory()
       },
       test(i) {
         this.recipeIngredients.splice(i, 1)
       }
     },
-    computed: {
-      // recipeIngredients() {
-      //   return this.$store.state.recipeIngredients
-      // }
-    },
+    computed: {},
     components: {
       RecipeIngredient
     },

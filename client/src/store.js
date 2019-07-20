@@ -241,10 +241,6 @@ export default new Vuex.Store({
     },
     //#endregion
 
-    //#region --  Costing Stuff --
-
-    //#endregion
-
     //#region --  Recipes Stuff --
     async getRecipes({ commit, dispatch }) {
       try {
@@ -263,15 +259,10 @@ export default new Vuex.Store({
       } catch (err) { console.error(err) }
     },
 
-    deleteRecipe({ commit, dispatch }, recipeId) {
-      api.delete('recipes/' + recipeId + SID)
-        .then(res => { dispatch('getRecipes') })
-      console.log(recipeId)
-    },
 
     async editRecipe({ commit, dispatch }, payload) {
       try {
-        await api.put('recipes/' + SID + payload._id, payload)
+        await api.put('recipes/' + payload._id + SID, payload)
         dispatch('getRecipes')
         router.push({ name: 'Recipes' })
       } catch (error) { console.error(error) }
@@ -282,14 +273,13 @@ export default new Vuex.Store({
         let res = await api.put('recipes/' + payload.id + SID, payload)
         commit('setRecipe', res.data)
         dispatch('getIngredients')
-        // router.push({ name: 'Recipes' })
       } catch (error) { console.error(error) }
     },
+
+    deleteRecipe({ commit, dispatch }, recipeId) {
+      api.delete('recipes/' + recipeId + SID)
+        .then(res => { dispatch('getRecipes') })
+    },
     //#endregion
-
-    //#region --  Stuff --
-
-    //#endregion
-
   }
 })

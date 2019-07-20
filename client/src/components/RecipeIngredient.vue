@@ -1,8 +1,6 @@
 <template>
   <tbody class="recipe-ingredient">
     <tr>
-      <td><button type="button" class="btn btn-danger btn-sm" @click="$emit('deleteIngredient', i)">Delete</button>
-      </td>
       <td>
         <auto-complete @result="setIngredient" :items="ingredients" @input="setIngredientName" />
       </td>
@@ -20,10 +18,6 @@
           class="ingC-input" required>
         <p class="mt-1">{{calculateCost()}}</p>
       </td>
-
-      <!-- <td v-if="recipe-ingredient.category"><input type="text" v-model="newIngredient.category" readonly="true"
-          class=" category-input1">
-      </td> -->
       <td><select class="category-input2" placeholder="Category" v-model="newIngredient.category" required>
           <option disabled value="">Category</option>
           <option value="bakery">Bakery</option>
@@ -36,7 +30,6 @@
       </td>
       <td><input type="text" placeholder="Distributor" v-model="newIngredient.distributor" class="dist-input" required>
       </td>
-      <!-- TODO get a input select with a custom input field included -->
       <td><input type="text" placeholder="Product #" readonly="newIngredient.productNumber"
           v-model="newIngredient.productNumber" class="prod-input" required>
       </td>
@@ -46,6 +39,8 @@
           v-model="newIngredient.packageSize" class="packS-input" required></td>
       <td><input type="text" placeholder="Package Cost" readonly="newIngredient.packageCost"
           v-model="newIngredient.packageCost" class="packC-input" required></td>
+      <td><button type="button" class="btn btn-danger btn-sm" @click="$emit('deleteIngredient', i)">Delete</button>
+      </td>
     </tr>
   </tbody>
 </template>
@@ -56,7 +51,6 @@
   export default {
     name: "RecipeIngredient",
     props: ['recipeIngredients', "i"],
-    // 'recipeIngredient',
     data() {
       return {
         newIngredient: this.recipeIngredients[this.i]
@@ -69,14 +63,6 @@
       ingredients() {
         return this.$store.state.ingredients
       },
-      // newIngredient: {
-      //   get: function () {
-      //     return this.recipeIngredients[this.i]
-      //   },
-      //   set: function (whatAmI) {
-      //     console.log(whatAmI)
-      //   }
-      // }
     },
     methods: {
       deleteIngredient(i) {
@@ -153,66 +139,5 @@
 </script>
 
 <style>
-  .dist-input {
-    text-align: center;
-    max-width: 9rem;
-  }
 
-  .prod-input {
-    text-align: center;
-    max-width: 6rem;
-  }
-
-  .category-input1 {
-    text-align: center;
-    max-width: 6rem;
-    height: 2rem;
-  }
-
-  .category-input2 {
-    text-align: center;
-    min-width: 8rem;
-    height: 2rem;
-  }
-
-  .ingName-input {
-    text-align: center;
-    max-width: 10rem;
-  }
-
-  .brand-input {
-    text-align: center;
-    max-width: 6rem;
-  }
-
-  .unit-input {
-    text-align: center;
-    min-width: 5rem;
-    height: 2rem;
-  }
-
-  .packS-input {
-    text-align: center;
-    max-width: 7rem;
-  }
-
-  .packC-input {
-    text-align: center;
-    max-width: 7rem;
-  }
-
-  .quan-input {
-
-    max-width: 3rem;
-  }
-
-  .ingC-input {
-    text-align: center;
-    max-width: 5rem;
-  }
-
-  .ingC2-input {
-    text-align: center;
-    max-width: 5rem;
-  }
 </style>
