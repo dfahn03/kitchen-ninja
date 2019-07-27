@@ -5,6 +5,8 @@ import Dashboard from './views/Dashboard.vue'
 // @ts-ignore
 import Costing from './views/Costing.vue'
 // @ts-ignore
+import EditRecipe from './views/EditRecipe.vue'
+// @ts-ignore
 import Login from './views/Login.vue'
 // @ts-ignore
 import Recipes from './views/Recipes.vue'
@@ -43,10 +45,10 @@ export default new Router({
       component: Costing
     },
     {
-      path: '/costing/:id',
-      name: 'CostingEdit',
-      props: true,
-      component: Costing
+      path: '/edit',
+      name: 'EditRecipe',
+      // props: true,
+      component: EditRecipe
     },
     {
       path: '/recipes',

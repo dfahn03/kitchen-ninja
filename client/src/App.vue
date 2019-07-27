@@ -53,7 +53,7 @@
             <router-link to='/recipes'><a href="#">Recipes</a></router-link>
           </li>
           <li>
-            <router-link to='/costing'><a href="#">Costing</a></router-link>
+            <router-link @click.native="clearRecipe" to='/costing'><a href="#">Costing</a></router-link>
           </li>
           <li>
             <router-link to='/menu'><a href="#">Menu</a></router-link>
@@ -111,6 +111,9 @@
       },
       openSiteSelect() {
         this.$store.dispatch('changeSite')
+      },
+      clearRecipe() {
+        this.$store.dispatch('clearRecipe')
       }
     },
     mounted() {

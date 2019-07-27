@@ -1,5 +1,5 @@
 <template>
-  <div class="costing">
+  <div class="edit-recipe">
     <!-- Converter Button -->
     <div class="row">
       <div class="col-12">
@@ -48,7 +48,7 @@
                 v-model="newRecipe.allergens" min="0" required>
             </div>
           </div>
-          <ingredient @passThemIngredients="arr => newRecipe.recipeIngredients = arr" />
+          <edit-form @passThemIngredients="arr => newRecipe.recipeIngredients = arr" />
           <!-- <ingredient-list /> -->
           <div class="form-row">
             <div class="col-12">
@@ -84,7 +84,6 @@
           <!-- v-if="!req.params.id" -->
           <!-- v-else -->
           <div class="form-row d-flex justify-content-center align-content-center">
-            <button type="submit" class="btn btn-success">Save Recipe</button>
             <button @click="updateRecipe()" class="btn btn-warning ml-1">Update Recipe</button>
           </div>
         </form>
@@ -96,11 +95,12 @@
 </template>
 
 <script>
-  // import EditIngredient from '@/components/EditIngredient'
-  import AddIngredient from '@/components/AddIngredient'
-  import Ingredient from '@/components/Ingredient'
+  // import AddIngredient from '@/components/AddIngredient'
+  import EditIngredient from '@/components/EditIngredient'
+  // import Ingredient from '@/components/Ingredient'
+  import EditForm from '@/components/EditForm'
   export default {
-    name: "Costing",
+    name: "EditRecipe",
     mounted() {
       if (this.activeRecipe) {
         this.newRecipe = this.$store.state.recipe
@@ -215,13 +215,6 @@
 
     methods: {
       //TODO Find out while data isn't sending to the server 
-      saveRecipe() {
-        this.$data.newRecipe.recipeIngredients.forEach(i => {
-          i.unit = i.unit.toUpperCase();
-          i.category = i.category.toLowerCase();
-        })
-        this.$store.dispatch('saveRecipe', this.newRecipe)
-      },
       updateRecipe() {
         this.$data.newRecipe.recipeIngredients.forEach(i => {
           i.unit = i.unit.toUpperCase();
@@ -231,9 +224,9 @@
       }
     },
     components: {
-      AddIngredient,
-      Ingredient,
-      // EditIngredient
+      // AddIngredient,
+      EditForm,
+      EditIngredient
     }
   }
 

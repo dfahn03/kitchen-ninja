@@ -29,6 +29,7 @@ export default new Vuex.Store({
     ingredient: {},
     ingredients: [],
     recipe: {},
+    editRecipe: {},
     recipes: [],
     blogs: [],
     siteId: "",
@@ -64,6 +65,12 @@ export default new Vuex.Store({
     },
     setRecipe(state, recipe) {
       state.recipe = recipe
+    },
+    setEditRecipe(state, editRecipe) {
+      state.editRecipe = editRecipe
+    },
+    resetRecipe(state, recipe) {
+      state.recipe = {}
     },
     setRecipes(state, recipes) {
       state.recipes = recipes.sort((a, b) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1)
@@ -263,11 +270,14 @@ export default new Vuex.Store({
     async editRecipe({ commit, dispatch }, payload) {
       try {
         await api.put('recipes/' + payload._id + SID, payload)
-        dispatch('getRecipes')
+        commit("resetRecipe")
+        // dispatch('getRecipes')
         router.push({ name: 'Recipes' })
       } catch (error) { console.error(error) }
     },
-
+    clearRecipe({ commit, dispatch }) {
+      commit('resetRecipe')
+    },
     async setActiveRecipe({ commit, dispatch }, payload) {
       try {
         let res = await api.put('recipes/' + payload.id + SID, payload)

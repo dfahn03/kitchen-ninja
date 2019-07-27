@@ -1,6 +1,6 @@
 <template>
   <!-- This is the form for the ingredients it gos to the costing view -->
-  <div class="ingredient">
+  <div class="edit-form">
     <div class="form-row">
       <div class="col-lg-12 col-md-8 col-sm-6">
         <button type="button" class="btn addIng-btn text-white my-2" @click="addIngredient">Add
@@ -25,10 +25,9 @@
 
               </tr>
             </thead>
-            <add-ingredient @deleteIngredient="test" @sendThatIngredient="ing => recipeIngredients.push(ing)"
+            <edit-ingredient @deleteIngredient="test" @sendThatIngredient="ing => recipeIngredients.push(ing)"
               v-for="(recipeIngredient, i) in recipeIngredients" :key="recipeIngredient._id" :i="i"
               :recipe-ingredient="recipeIngredient" />
-
           </table>
         </div>
       </div>
@@ -38,9 +37,9 @@
 
 <script>
   import AddIngredient from '@/components/AddIngredient'
-  // import EditIngredient from '@/components/EditIngredient'
+  import EditIngredient from '@/components/EditIngredient'
   export default {
-    name: "Ingredient",
+    name: "EditForm",
     // data() {
     //   return {
     //     recipeIngredients: []
@@ -72,8 +71,8 @@
       }
     },
     components: {
-      AddIngredient,
-      // EditIngredient
+      // AddIngredient,
+      EditIngredient
     },
     watch: {
       recipeIngredients(val) {
