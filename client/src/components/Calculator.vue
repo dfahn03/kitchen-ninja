@@ -1,8 +1,8 @@
 <template v-slot:Calculator>
-  <div name='Calculator' class="card calculate d-inline-flex p-6">
-    <input v-model.number="amount" type="number">
+  <div name='Calculator' class="card calculate d-inline-flex p-6" id="calculator">
+    <input v-model.number="amount" type="number" class="rounded" style="background-color: gray">
 
-    <select v-model="from">
+    <select v-model="from" class="rounded">
       <option disabled value="">Please select one</option>
       <option>g</option>
       <option>oz</option>
@@ -10,14 +10,14 @@
     </select>
     <span>Selected: {{ calculator }}</span>
 
-    <select @change="calculate" v-model="to">
+    <select @change="calculate" v-model="to" class="rounded">
       <option disabled value="">Please select one</option>
       <option>g</option>
       <option>oz</option>
       <option>lb</option>
     </select>
     <span>Selected: {{ calculator }}</span>
-    <h5>total conversion {{this.result}}</h5>
+    <h5>Total: {{this.result}}</h5>
 
   </div>
 
@@ -52,3 +52,9 @@
     components: {}
   }
 </script>
+<style>
+  #calculator {
+    display: flex;
+    justify-content: center;
+  }
+</style>

@@ -6,7 +6,7 @@
         <button class="btn btn-sm create-recipe-bg mb-5 mt-3" @click="addRecipe()">Add Recipe</button>
       </div>
     </div>
-    <div class="row">
+    <div class="row" id="recipe-by-station">
       <div v-for="menu in menus" class="col-6">
         <!-- <li v-for="(group, station) in groups"> original, working but not sorted list -->
         <div v-for="(recipes, stationName) in menu">
@@ -188,6 +188,12 @@
   .station_name {
     font-family: 'Bree Serif', serif;
     font-size: 2em;
+  }
+
+  /* TODO we may want to remove this when more recipes are rendering */
+  #recipe-by-station {
+    display: flex;
+    justify-content: center;
   }
 
   /* ul {
