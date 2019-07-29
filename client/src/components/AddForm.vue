@@ -1,7 +1,7 @@
 <template>
   <!-- This is the form for the ingredients it gos to the costing view -->
   <div class="add-form">
-    <div class="form-row">
+    <div class="form-row justify-content-center">
       <div class="col-lg-12 col-md-8 col-sm-6">
         <button type="button" class="btn addIng-btn text-white my-2" @click="addIngredient">Add
           Ingredient <img src="../assets/icons8-plus-25.png" alt="Plus Icon" class="ml-1"></button>
@@ -84,6 +84,6 @@
 
 </script>
 
-<style>
+<style scoped>
 
 </style>

@@ -1,14 +1,14 @@
 <template>
-  <div class="costing">
+  <div class="costing contianer-fluid">
     <!-- Converter Button -->
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-12">
-        <button type="button" class="btn btn-secondary float-right my-2" @click="">Converter</button>
-        <!-- TODO link this button to the sidebar calculator -->
-      </div>
-    </div>
+        <button type="button" class="btn btn-secondary float-right my-2" @click="">Converter</button> -->
+    <!-- TODO link this button to the sidebar calculator -->
+    <!-- </div>
+    </div> -->
     <div class="row">
-      <div class="col">
+      <div class="col-lg-12 col-md-8 col-sm-2">
         <form @submit.prevent="saveRecipe">
           <div class="form-row">
             <div class="col d-flex justify-content-center">
