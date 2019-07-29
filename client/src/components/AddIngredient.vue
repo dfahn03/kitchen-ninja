@@ -1,6 +1,7 @@
 <template>
   <!-- Recipe ingredient once an ingredient field is added takes in auto-complete fills out information sends to database -->
-  <tbody class="recipe-ingredient" v-if="ingredient">
+  <tbody class="recipe-ingredient">
+    <!-- v-if="ingredient" -->
     <tr>
       <td>
         <auto-complete @result="setIngredient" :selected="ingredient" :items="ingredients" @input="setIngredientName" />
@@ -49,7 +50,7 @@
   import AutoComplete from '@/components/AutoComplete'
 
   export default {
-    name: "RecipeIngredient",
+    name: "AddIngredient",
     props: ['recipeIngredient', "i"],
     data() {
       return {

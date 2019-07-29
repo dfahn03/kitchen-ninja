@@ -1,6 +1,6 @@
 <template>
   <!-- This is the form for the ingredients it gos to the costing view -->
-  <div class="ingredient">
+  <div class="add-form">
     <div class="form-row">
       <div class="col-lg-12 col-md-8 col-sm-6">
         <button type="button" class="btn addIng-btn text-white my-2" @click="addIngredient">Add
@@ -40,12 +40,12 @@
   import AddIngredient from '@/components/AddIngredient'
   // import EditIngredient from '@/components/EditIngredient'
   export default {
-    name: "Ingredient",
-    // data() {
-    //   return {
-    //     recipeIngredients: []
-    //   }
-    // },
+    name: "AddForm",
+    data() {
+      return {
+        recipeIngredients: []
+      }
+    },
     computed: {
       recipeIngredients() {
         return this.$store.state.recipe.recipeIngredients || []
