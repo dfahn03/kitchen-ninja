@@ -8,7 +8,7 @@
     <!-- </div>
     </div> -->
     <div class="row">
-      <div class="col-lg-12 col-md-8 col-sm-2">
+      <div class="col">
         <form @submit.prevent="saveRecipe">
           <div class="form-row">
             <div class="col d-flex justify-content-center">
@@ -48,8 +48,9 @@
                 v-model="newRecipe.allergens" min="0" required>
             </div>
           </div>
+
           <add-form @passThemIngredients="arr => newRecipe.recipeIngredients = arr" />
-          <!-- <ingredient-list /> -->
+
           <div class="form-row">
             <div class="col-12">
               <div class="row">
@@ -81,8 +82,7 @@
               </div>
             </div>
           </div>
-          <!-- v-if="!req.params.id" -->
-          <!-- v-else -->
+
           <div class="form-row d-flex justify-content-center align-content-center">
             <button type="submit" class="btn btn-success">Save Recipe</button>
           </div>
@@ -233,9 +233,9 @@
 </script>
 
 <style>
-  /* table {
+  table {
     border: 1px solid;
-  } */
+  }
 
   .addIng-btn {
     background-color: rgb(5, 38, 45);
@@ -297,68 +297,5 @@
   .allergens-input {
     max-width: 20rem;
     text-align: center
-  }
-
-  .dist-input {
-    text-align: center;
-    max-width: 9rem;
-  }
-
-  .prod-input {
-    text-align: center;
-    max-width: 6rem;
-  }
-
-  .category-input1 {
-    text-align: center;
-    max-width: 6rem;
-    height: 2rem;
-  }
-
-  .category-input2 {
-    text-align: center;
-    min-width: 8rem;
-    height: 2rem;
-  }
-
-  .ingName-input {
-    text-align: center;
-    max-width: 10rem;
-  }
-
-  .brand-input {
-    text-align: center;
-    max-width: 6rem;
-  }
-
-  .unit-input {
-    text-align: center;
-    min-width: 5rem;
-    height: 2rem;
-  }
-
-  .packS-input {
-    text-align: center;
-    max-width: 7rem;
-  }
-
-  .packC-input {
-    text-align: center;
-    max-width: 7rem;
-  }
-
-  .quan-input {
-
-    max-width: 3rem;
-  }
-
-  .ingC-input {
-    text-align: center;
-    max-width: 5rem;
-  }
-
-  .ingC2-input {
-    text-align: center;
-    max-width: 5rem;
   }
 </style>
