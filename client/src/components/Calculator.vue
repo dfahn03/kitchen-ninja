@@ -1,23 +1,30 @@
 <template v-slot:Calculator>
   <div name='Calculator' class="card calculate d-inline-flex p-6" id="calculator">
-    <input v-model.number="amount" type="number" class="rounded" style="background-color: gray">
+    <input v-model.number="amount" type="number" class="rounded unit-input text-center" min="0" step=".5"
+      style="background-color: rgb(236, 236, 236)">
 
+    <span>Convert From: {{ calculator }}</span>
     <select v-model="from" class="rounded">
-      <option disabled value="">Please select one</option>
+      <option disabled value="">Convert From</option>
       <option>g</option>
       <option>oz</option>
       <option>lb</option>
     </select>
-    <span>Selected: {{ calculator }}</span>
 
+    <span>Convert To: {{ calculator }}</span>
     <select @change="calculate" v-model="to" class="rounded">
-      <option disabled value="">Please select one</option>
+      <option disabled value="">Convert To</option>
       <option>g</option>
       <option>oz</option>
       <option>lb</option>
     </select>
-    <span>Selected: {{ calculator }}</span>
-    <h5>Total: {{this.result}}</h5>
+    <br>
+    <h5>Total: {{this.result.toFixed(2)}}
+      <small v-if="this.to == 'lb'">lbs</small>
+      <small v-else-if="this.to == 'g'">grams</small>
+      <small v-else-if="this.to == 'oz'">oz</small>
+      <small v-else></small>
+    </h5>
 
   </div>
 
@@ -56,5 +63,13 @@
   #calculator {
     display: flex;
     justify-content: center;
+  }
+
+  .card {
+    border: 1px solid #000;
+  }
+
+  .unit-input {
+    border: none;
   }
 </style>
