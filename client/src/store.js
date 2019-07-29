@@ -70,7 +70,9 @@ export default new Vuex.Store({
       state.editRecipe = editRecipe
     },
     resetRecipe(state, recipe) {
-      state.recipe = {}
+      state.recipe = {
+        recipeIngredients: []
+      }
     },
     setRecipes(state, recipes) {
       state.recipes = recipes.sort((a, b) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1)

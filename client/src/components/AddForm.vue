@@ -43,7 +43,7 @@
     name: "AddForm",
     data() {
       return {
-        recipeIngredients: []
+        // recipeIngredients: []
       }
     },
     computed: {
