@@ -51,20 +51,33 @@
 
   export default {
     name: "AddIngredient",
-    props: ['recipeIngredient', "i"],
+    props: {
+      // ingredient: { bind: true, type: Object, required: true },
+      i: Number
+    },
     data() {
       return {
-        ingredient: {}
+        // ingredient: {}
       }
     },
     mounted() {
-      this.ingredient = { ...this.recipeIngredient }
+      // this.ingredient = { ...this.recipeIngredient }
       // return this.$store.dispatch("getIngredients")
     },
     computed: {
       ingredients() {
-        return this.$store.state.ingredients
+        console.log(this.$store.state.masterIngredients)
+        return this.$store.state.masterIngredients
       },
+      ingredient:
+      {
+        get() {
+          return this.$store.state.recipe.recipeIngredients[this.i]
+        },
+        set() {
+
+        }
+      }
     },
     methods: {
       deleteIngredient(i) {

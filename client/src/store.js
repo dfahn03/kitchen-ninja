@@ -27,8 +27,10 @@ export default new Vuex.Store({
     user: {},
     users: [],
     ingredient: {},
-    ingredients: [],
-    recipe: {},
+    masterIngredients: [],
+    recipe: {
+      recipeIngredients: []
+    },
     editRecipe: {},
     recipes: [],
     blogs: [],
@@ -58,7 +60,7 @@ export default new Vuex.Store({
       state.users = users
     },
     setIngredients(state, ingredients = []) {
-      state.ingredients = ingredients
+      state.masterIngredients = ingredients
     },
     setIngredient(state, ingredient) {
       state.ingredient = ingredient
@@ -69,7 +71,7 @@ export default new Vuex.Store({
     setEditRecipe(state, editRecipe) {
       state.editRecipe = editRecipe
     },
-    resetRecipe(state, recipe) {
+    resetRecipe(state) {
       state.recipe = {
         recipeIngredients: []
       }

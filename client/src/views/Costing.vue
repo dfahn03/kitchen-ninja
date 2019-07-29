@@ -102,7 +102,8 @@
     name: "Costing",
     mounted() {
       if (this.activeRecipe) {
-        this.newRecipe = this.$store.state.recipe
+        this.$store.state.recipe = this.newRecipe
+        // this.newRecipe = this.$store.state.recipe
         // .find(r => r._id == this.id)
       };
       // if (ActiveRecipe) {

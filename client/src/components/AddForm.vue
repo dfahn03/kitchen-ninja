@@ -48,7 +48,7 @@
     },
     computed: {
       recipeIngredients() {
-        return this.$store.state.recipe.recipeIngredients || []
+        return this.$store.state.recipe.recipeIngredients
       }
     },
     methods: {
