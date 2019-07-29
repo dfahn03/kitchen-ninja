@@ -1,5 +1,6 @@
 <template>
   <div class="login row">
+
     <!-- Login Model -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
@@ -51,6 +52,7 @@
         </div>
       </div>
     </div>
+
     <!-- Register New User Form -->
     <div class="card d-inline-flex col-4 offset-4" id="registerForm">
       <form @submit.prevent="registerUser">
@@ -77,13 +79,12 @@
           data-target="#exampleModal">Login</button>
       </form>
     </div>
-    <!-- Site Selector -->
+
 
   </div>
 </template>
 
 <script>
-  // @ is an alias to /src
 
   export default {
     name: 'Login',
@@ -136,7 +137,7 @@
 </script>
 
 <style scoped>
-  card {
+  .card {
     padding: 15px;
   }
 </style>
