@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+
     <!-- Navbar -->
     <div class="container-fluid" id="navbar">
       <ul class="navbar">
@@ -7,10 +8,7 @@
             class="btn btn-outline-secondary" data-toggle="#wrapper #page-content-wrapper"
             aria-controls="wrapper page-content-wrapper" id="menu-toggle"><img
               src="../src/assets/iconFinalLeaf.png"></a></li>
-
         <router-link to='/dashboard'><img src="../src/assets/finalLogo2.png" class></router-link>
-        <!-- https://img.icons8.com/office/16/000000/leaf.png -->
-
         <div v-if="user._id" class="dropdown dropleft">
           <button class="btn btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
@@ -21,7 +19,6 @@
             <a @click='openSiteSelect' class="dropdown-item" href="#">Change Site</a>
             <router-link v-if="owned" to="/admin"><a class="dropdown-item" href="#">Admin Options</a>
             </router-link>
-            <!-- TODO make the dropdown not show up if logged out and make another dropdown menu if logged out for that just says login as a reminder -->
           </div>
         </div>
         <div v-else class="dropdown dropleft">
@@ -33,16 +30,12 @@
             <a class="dropdown-item">Login</a>
           </div>
         </div>
-
         </li>
       </ul>
-      <!-- Login Modal -->
-
-
-      <!-- Login Form -->
     </div>
+
+    <!-- Sidebar -->
     <div id="wrapper">
-      <!-- Sidebar -->
       <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
           <h4><b>Directory</b></h4>
@@ -70,19 +63,21 @@
             <div id="collapseOne" class="collapse">
               <calculator />
             </div>
-            <!-- <slot name='Calculator' v-slot:Calculator></slot> -->
           </li>
         </ul>
       </div>
-      <!-- Page Content -->
 
+      <!-- Page Content -->
       <div id="page-content-wrapper">
         <div class="container-fluid">
           <router-view />
         </div>
       </div>
     </div>
+
+    <!-- Site Selector Modal -->
     <site-selector />
+
   </div>
 </template>
 
@@ -91,9 +86,7 @@
 <script>
   import Calculator from '@/components/Calculator.vue'
   import SiteSelector from "@/components/SiteSelector.vue"
-  // $('#myModal').on('shown.bs.modal', function () {
-  //   $('#myInput').trigger('focus')
-  // })
+
   export default {
     name: "APP",
     computed: {
@@ -123,7 +116,6 @@
         $("#page-content-wrapper").toggleClass("toggled")
       });
       this.$store.dispatch("authenticate")
-      // this.$store.authenticate
     },
     components: {
       Calculator,
@@ -182,9 +174,6 @@
   #page-content-wrapper {
     position: absolute;
     margin-top: 80px;
-    /* padding-left: 250px; */
-    /* margin-left: 250px; */
-    /* margin-right: -250px; */
     width: 100%;
     padding: 15px;
     border: 5px #fff;
@@ -199,9 +188,7 @@
 
   #wrapper.toggled #page-content-wrapper {
     padding-left: 250px;
-    /* max-width: 80%; */
     position: static;
-    /* z-index: -1; */
   }
 
   .sidebar-nav {
