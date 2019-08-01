@@ -38,7 +38,7 @@
 
 <script>
   import AddIngredient from '@/components/AddIngredient'
-  // import EditIngredient from '@/components/EditIngredient'
+
   export default {
     name: "AddForm",
     data() {
@@ -47,9 +47,10 @@
       }
     },
     computed: {
-      recipeIngredients() {
-        return this.$store.state.recipe.recipeIngredients
-      }
+      // recipeIngredients() {
+      //   return this.$store.state.recipe.recipeIngredients
+      //   // NOTE This is state & not local so shouldn't be here
+      // }
     },
     methods: {
       addIngredient() {
@@ -66,6 +67,7 @@
           distributor: "",
         }
         this.recipeIngredients.push(newIngredient)
+        // NOTE This is pushing to local data on this component
       },
       test(i) {
         this.recipeIngredients.splice(i, 1)
@@ -73,7 +75,6 @@
     },
     components: {
       AddIngredient,
-      // EditIngredient
     },
     watch: {
       recipeIngredients(val) {

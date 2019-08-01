@@ -59,8 +59,8 @@ export default new Vuex.Store({
     setUsers(state, users) {
       state.users = users
     },
-    setIngredients(state, ingredients = []) {
-      state.masterIngredients = ingredients
+    setMasterIngredients(state, masterIngredients) {
+      state.masterIngredients = masterIngredients
     },
     setIngredient(state, ingredient) {
       state.ingredient = ingredient
@@ -152,6 +152,7 @@ export default new Vuex.Store({
         commit('setSite', siteId)
         commit('setSiteSelectorStatus', false)
         dispatch("getBlogs")
+        // NOTE Master Ingredients
         dispatch("getIngredients")
         dispatch("getRecipes")
         if (router.currentRoute.path == '/login') {
@@ -205,7 +206,7 @@ export default new Vuex.Store({
     async getIngredients({ commit, dispatch }) {
       try {
         let res = await api.get("ingredients")
-        commit('setIngredients', res.data)
+        commit('setMasterIngredients', res.data)
       } catch (error) { console.error(error) }
     },
     //#endregion
@@ -264,6 +265,7 @@ export default new Vuex.Store({
         let res = await api.put('recipes/' + payload.id + SID, payload)
         commit('setRecipe', res.data)
         dispatch('getIngredients')
+        // NOTE Why is this dispatch here
       } catch (error) { console.error(error) }
     },
 

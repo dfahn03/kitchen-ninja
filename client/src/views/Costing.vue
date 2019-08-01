@@ -52,7 +52,7 @@
             </div>
           </div>
 
-          <!-- New Recipe Table -->
+          <!-- New Recipe Table - AutoComplete?-->
           <add-form @passThemIngredients="arr => newRecipe.recipeIngredients = arr" />
 
           <!-- New Recipe Calculations -->
@@ -162,6 +162,7 @@
     computed: {
       recipeIngredient() {
         return this.recipeIngredient
+        // NOTE WTF are you doing
       },
       recipeIngredients() {
         return this.$data.newRecipe.recipeIngredients
@@ -179,8 +180,10 @@
         this.frozen = 0
         if (!this.newRecipe.recipeIngredients) {
           return 0
+          // NOTE AM I BREAKING THINGS?
         }
         return this.newRecipe.recipeIngredients.forEach(r => this.$data[r.category.toLowerCase()] += +r.itemCost)
+        // NOTE GOOD
       },
       foodCost() {
         //totalCost / portions
