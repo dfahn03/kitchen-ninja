@@ -9,7 +9,7 @@
     </div>
     <div class="row">
       <div class="col">
-        <form @submit.prevent="saveRecipe">
+        <form @submit.prevent="updateRecipe">
           <div class="form-row">
             <div class="col d-flex justify-content-center">
               <input type="text" class="form-control recipeName-input" placeholder="Recipe Name"

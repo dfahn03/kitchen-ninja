@@ -167,6 +167,7 @@
         return this.newRecipe.costPerRecipe = this.storeroom + this.meat + this.dairy + this.produce + this.bakery + this.frozen
       },
       itemCost() {
+        debugger
         this.storeroom = 0
         this.meat = 0
         this.dairy = 0
