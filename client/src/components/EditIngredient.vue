@@ -16,7 +16,7 @@
       <td>
         <input v-if="!calculateCost()" type="text" placeholder="Cost" v-model="ingredient.itemCost" class="ingC-input"
           required>
-        <p class="mt-1">{{calculateCost()}}</p>
+        <p v-else class="mt-1">{{calculateCost()}}</p>
       </td>
       <td><select class="category-input2" placeholder="Category" v-model="ingredient.category" required>
           <option disabled value="">Category</option>

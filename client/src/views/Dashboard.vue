@@ -3,11 +3,12 @@
     <div class="col-12 text-center">
       <h1 class="blog-page-title">Chef Notes</h1>
 
-      <!-- Blog Modal -->
       <button type="button" class="btn btn-sm create-new-blog-bg mb-5 mt-3" data-toggle="modal"
         data-target="#blogModal">
         Create New Blog
       </button>
+
+      <!-- Blog Modal -->
       <div class="modal fade" id="blogModal" tabindex="-1" role="dialog" aria-labelledby="blogModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -53,10 +54,12 @@
         </div>
       </div>
     </div>
+
+    <!-- Blog List -->
     <div class="row">
       <blog-list v-for="blog in blogs" :key="blog._id" :blogData="blog" />
     </div>
-  </div>
+
   </div>
 </template>
 
@@ -111,6 +114,5 @@
     font-family: 'Pacifico', cursive;
     color: rgb(109, 197, 154);
     font-size: 70px;
-
   }
 </style>

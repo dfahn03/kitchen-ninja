@@ -1,12 +1,15 @@
 <template>
-  <div class="costing">
+  <div class="costing contianer-fluid">
+
     <!-- Converter Button -->
-    <div class="row">
+    <!-- TODO link this button to the sidebar calculator -->
+    <!-- <div class="row">
       <div class="col-12">
         <button type="button" class="btn btn-secondary float-right my-2" @click="">Converter</button>
-        <!-- TODO link this button to the sidebar calculator -->
       </div>
-    </div>
+    </div> -->
+
+    <!-- New Recipe Template -->
     <div class="row">
       <div class="col">
         <form @submit.prevent="saveRecipe">
@@ -48,8 +51,11 @@
                 v-model="newRecipe.allergens" min="0" required>
             </div>
           </div>
+
+          <!-- New Recipe Table -->
           <add-form @passThemIngredients="arr => newRecipe.recipeIngredients = arr" />
-          <!-- <ingredient-list /> -->
+
+          <!-- New Recipe Calculations -->
           <div class="form-row">
             <div class="col-12">
               <div class="row">
@@ -68,7 +74,6 @@
                   <ul>
                     <li v-model="newRecipe.costPerRecipe">Total Cost: $ {{recipeCost}}</li>
                     <li class="mt-2">Food Cost: $ {{foodCost}} </li>
-                    <!-- TODO possibly recommended sales price -->
                     <li>Sales Price: $ <input type="number" placeholder="0.00" class="totalP-input ml-1 mt-2"
                         v-model="newRecipe.salesPrice" required>
                     </li>
@@ -81,8 +86,7 @@
               </div>
             </div>
           </div>
-          <!-- v-if="!req.params.id" -->
-          <!-- v-else -->
+
           <div class="form-row d-flex justify-content-center align-content-center">
             <button type="submit" class="btn btn-success">Save Recipe</button>
           </div>
@@ -90,19 +94,18 @@
       </div>
     </div>
 
-    <!-- Recipe Form -->
   </div>
 </template>
 
 <script>
-  // import EditIngredient from '@/components/EditIngredient'
   import AddIngredient from '@/components/AddIngredient'
   import AddForm from '@/components/AddForm'
   export default {
     name: "Costing",
     mounted() {
       if (this.activeRecipe) {
-        this.newRecipe = this.$store.state.recipe
+        this.$store.state.recipe = this.newRecipe
+        // this.newRecipe = this.$store.state.recipe
         // .find(r => r._id == this.id)
       };
       // if (ActiveRecipe) {
@@ -214,7 +217,6 @@
     },
 
     methods: {
-      //TODO Find out while data isn't sending to the server 
       saveRecipe() {
         this.$data.newRecipe.recipeIngredients.forEach(i => {
           i.unit = i.unit.toUpperCase();
@@ -226,21 +228,18 @@
     components: {
       AddIngredient,
       AddForm,
-      // EditIngredient
     }
   }
 
 </script>
 
 <style>
-  /* table {
+  table {
     border: 1px solid;
-  } */
+  }
 
   .addIng-btn {
     background-color: rgb(5, 38, 45);
-    /* border-color: rgb(109, 197, 154);
-    border: 1px; */
   }
 
   ul {
@@ -297,68 +296,5 @@
   .allergens-input {
     max-width: 20rem;
     text-align: center
-  }
-
-  .dist-input {
-    text-align: center;
-    max-width: 9rem;
-  }
-
-  .prod-input {
-    text-align: center;
-    max-width: 6rem;
-  }
-
-  .category-input1 {
-    text-align: center;
-    max-width: 6rem;
-    height: 2rem;
-  }
-
-  .category-input2 {
-    text-align: center;
-    min-width: 8rem;
-    height: 2rem;
-  }
-
-  .ingName-input {
-    text-align: center;
-    max-width: 10rem;
-  }
-
-  .brand-input {
-    text-align: center;
-    max-width: 6rem;
-  }
-
-  .unit-input {
-    text-align: center;
-    min-width: 5rem;
-    height: 2rem;
-  }
-
-  .packS-input {
-    text-align: center;
-    max-width: 7rem;
-  }
-
-  .packC-input {
-    text-align: center;
-    max-width: 7rem;
-  }
-
-  .quan-input {
-
-    max-width: 3rem;
-  }
-
-  .ingC-input {
-    text-align: center;
-    max-width: 5rem;
-  }
-
-  .ingC2-input {
-    text-align: center;
-    max-width: 5rem;
   }
 </style>

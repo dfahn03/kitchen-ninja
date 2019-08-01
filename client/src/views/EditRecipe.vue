@@ -1,12 +1,15 @@
 <template>
   <div class="edit-recipe">
+
     <!-- Converter Button -->
-    <div class="row">
+    <!-- TODO link this button to the sidebar calculator -->
+    <!-- <div class="row">
       <div class="col-12">
         <button type="button" class="btn btn-secondary float-right my-2" @click="">Converter</button>
-        <!-- TODO link this button to the sidebar calculator -->
       </div>
-    </div>
+    </div> -->
+
+    <!-- Edit Recipe Template -->
     <div class="row">
       <div class="col">
         <form @submit.prevent="updateRecipe">
@@ -48,8 +51,11 @@
                 v-model="newRecipe.allergens" min="0" required>
             </div>
           </div>
+
+          <!-- Edit Ingredient Table -->
           <edit-form @passThemIngredients="arr => newRecipe.recipeIngredients = arr" />
-          <!-- <ingredient-list /> -->
+
+          <!-- Recipe Calculations -->
           <div class="form-row">
             <div class="col-12">
               <div class="row">
@@ -68,7 +74,6 @@
                   <ul>
                     <li v-model="newRecipe.costPerRecipe">Total Cost: $ {{recipeCost}}</li>
                     <li class="mt-2">Food Cost: $ {{foodCost}} </li>
-                    <!-- TODO possibly recommended sales price -->
                     <li>Sales Price: $ <input type="number" placeholder="0.00" class="totalP-input ml-1 mt-2"
                         v-model="newRecipe.salesPrice" required>
                     </li>
@@ -81,35 +86,26 @@
               </div>
             </div>
           </div>
-          <!-- v-if="!req.params.id" -->
-          <!-- v-else -->
           <div class="form-row d-flex justify-content-center align-content-center">
-            <button @click="updateRecipe()" class="btn btn-warning ml-1">Update Recipe</button>
+            <button type="submit" class="btn btn-warning ml-1">Update Recipe</button>
           </div>
         </form>
       </div>
     </div>
 
-    <!-- Recipe Form -->
   </div>
 </template>
 
 <script>
-  // import AddIngredient from '@/components/AddIngredient'
   import EditIngredient from '@/components/EditIngredient'
-  // import Ingredient from '@/components/Ingredient'
   import EditForm from '@/components/EditForm'
+
   export default {
     name: "EditRecipe",
     mounted() {
       if (this.activeRecipe) {
         this.newRecipe = this.$store.state.recipe
-        // .find(r => r._id == this.id)
-      };
-      // if (ActiveRecipe) {
-      //   this.store.dispatch('setRecipe')
-      // }
-      //TODO  ingredients persist on reload 
+      }
     },
     props: ["id"],
     data() {
@@ -214,7 +210,6 @@
     },
 
     methods: {
-      //TODO Find out while data isn't sending to the server 
       updateRecipe() {
         this.$data.newRecipe.recipeIngredients.forEach(i => {
           i.unit = i.unit.toUpperCase();
@@ -224,7 +219,6 @@
       }
     },
     components: {
-      // AddIngredient,
       EditForm,
       EditIngredient
     }
@@ -233,14 +227,12 @@
 </script>
 
 <style>
-  /* table {
+  table {
     border: 1px solid;
-  } */
+  }
 
   .addIng-btn {
     background-color: rgb(5, 38, 45);
-    /* border-color: rgb(109, 197, 154);
-    border: 1px; */
   }
 
   ul {
