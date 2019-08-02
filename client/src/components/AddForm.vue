@@ -37,51 +37,51 @@
 </template>
 
 <script>
-  import AddIngredient from '@/components/AddIngredient'
+  // import AddIngredient from '@/components/AddIngredient'
 
-  export default {
-    name: "AddForm",
-    data() {
-      return {
-        // recipeIngredients: []
-      }
-    },
-    computed: {
-      // recipeIngredients() {
-      //   return this.$store.state.recipe.recipeIngredients
-      //   // NOTE This is state & not local so shouldn't be here
-      // }
-    },
-    methods: {
-      addIngredient() {
-        let newIngredient = {
-          itemName: "",
-          category: "",
-          brand: "",
-          productNumber: 0,
-          quantity: 1,
-          unit: "",
-          itemCost: 0,
-          packageSize: "",
-          packageCost: "",
-          distributor: "",
-        }
-        this.recipeIngredients.push(newIngredient)
-        // NOTE This is pushing to local data on this component
-      },
-      test(i) {
-        this.recipeIngredients.splice(i, 1)
-      }
-    },
-    components: {
-      AddIngredient,
-    },
-    watch: {
-      recipeIngredients(val) {
-        this.$emit('passThemIngredients', val)
-      }
-    }
-  }
+  // export default {
+  //   name: "AddForm",
+  //   data() {
+  //     return {
+  //       // recipeIngredients: []
+  //     }
+  //   },
+  //   computed: {
+  //     // recipeIngredients() {
+  //     //   return this.$store.state.recipe.recipeIngredients
+  //     //   // NOTE This is state & not local so shouldn't be here
+  //     // }
+  //   },
+  //   methods: {
+  //     addIngredient() {
+  //       let newIngredient = {
+  //         itemName: "",
+  //         category: "",
+  //         brand: "",
+  //         productNumber: 0,
+  //         quantity: 1,
+  //         unit: "",
+  //         itemCost: 0,
+  //         packageSize: "",
+  //         packageCost: "",
+  //         distributor: "",
+  //       }
+  //       this.recipeIngredients.push(newIngredient)
+  //       // NOTE This is pushing to local data on this component
+  //     },
+  //     test(i) {
+  //       this.recipeIngredients.splice(i, 1)
+  //     }
+  //   },
+  //   components: {
+  //     AddIngredient,
+  //   },
+  //   watch: {
+  //     recipeIngredients(val) {
+  //       this.$emit('passThemIngredients', val)
+  //     }
+  //   }
+  // }
 
 </script>
 

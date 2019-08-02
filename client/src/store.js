@@ -67,6 +67,9 @@ export default new Vuex.Store({
     setActiveRecipe(state, activeRecipe) {
       state.activeRecipe = activeRecipe
     },
+    setActiveRecipeIngredient(state, newIngredient) {
+      state.activeRecipe.recipeIngredients.push(newIngredient)
+    },
     // setEditRecipe(state, editRecipe) {
     //   state.editRecipe = editRecipe
     // },
@@ -242,10 +245,10 @@ export default new Vuex.Store({
     },
     async saveRecipe({ commit, dispatch }, newRecipe) {
       try {
-        await api.post('recipes' + SID, newRecipe)
-        commit('setActiveRecipe', newRecipe)
-        router.push({ name: 'Recipes' })
-        dispatch('setRecipes')
+        let res = await api.post('recipes' + SID, newRecipe)
+        commit('setActiveRecipe', res.data)
+        // router.push({ name: 'Recipes' })
+        // dispatch('setRecipes')
       } catch (err) { console.error(err) }
     },
     async editRecipe({ commit, dispatch }, payload) {
@@ -288,6 +291,12 @@ export default new Vuex.Store({
       api.delete('recipes/' + recipeId + SID)
         .then(res => { dispatch('getRecipes') })
     },
+    //#endregion
+
+    //#region -- Ingredient Stuff --
+    addIngredient({ commit, dispatch }, newIngredient) {
+      commit('setActiveRecipeIngredient', newIngredient)
+    }
     //#endregion
   }
 })

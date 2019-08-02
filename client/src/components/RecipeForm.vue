@@ -39,7 +39,8 @@
             v-model="newRecipe.allergens" min="0" required>
         </div>
       </div>
-      <button type="submit" class="btn saveRecipe-btn">Create Recipe</button>
+      <button type="submit" v-if="!activeRecipe._id" class="btn saveRecipe-btn">Create
+        Recipe</button>
     </form>
   </div>
 </template>
@@ -47,9 +48,7 @@
 <script>
   export default {
     name: "RecipeForm",
-    mounted() {
-
-    },
+    mounted() { },
     props: [],
     data() {
       return {
@@ -68,7 +67,11 @@
         }
       }
     },
-    computed: {},
+    computed: {
+      activeRecipe() {
+        return this.$store.state.activeRecipe
+      }
+    },
 
 
     methods: {

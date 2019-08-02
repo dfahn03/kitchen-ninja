@@ -9,12 +9,18 @@
       </div>
     </div> -->
 
-    <!-- New Recipe Template -->
+    <!-- New Recipe Form Template -->
     <div class="row">
       <recipe-form />
     </div>
 
-    <!-- New Recipe Table -->
+    <div class="row" v-if="activeRecipe._id">
+      <add-ingredients />
+    </div>
+
+
+
+    <!-- New Ingredient Table -->
     <!-- <add-form @passThemIngredients="arr => newRecipe.recipeIngredients = arr" /> -->
 
     <!-- New Recipe Calculations -->
@@ -60,8 +66,9 @@
 
 <script>
   import RecipeForm from '@/components/RecipeForm'
-  import AddIngredient from '@/components/AddIngredient'
-  import AddForm from '@/components/AddForm'
+  import AddIngredients from '@/components/AddIngredients'
+  // import AddForm from '@/components/AddForm'
+
   export default {
     name: "Costing",
     mounted() {
@@ -163,7 +170,6 @@
 
 
     methods: {
-
       // saveRecipe() {
       //   this.$data.newRecipe.recipeIngredients.forEach(i => {
       //     i.unit = i.unit.toUpperCase();
@@ -173,8 +179,8 @@
       // }
     },
     components: {
-      AddIngredient,
-      AddForm,
+      AddIngredients,
+      // AddForm,
       RecipeForm
     }
   }
