@@ -180,7 +180,6 @@
     },
     components: {
       AddIngredients,
-      // AddForm,
       RecipeForm
     }
   }
@@ -188,11 +187,6 @@
 </script>
 
 <style>
-  table {
-    border: 1px solid;
-  }
-
-
   ul {
     list-style: none;
   }

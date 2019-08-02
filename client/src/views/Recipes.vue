@@ -117,7 +117,7 @@
       sendRecipeToCosting() {
         let ActiveRecipe = this.$data
         this.$store.dispatch("setActiveRecipe", ActiveRecipe)
-        this.$router.push({ name: 'EditRecipe' })
+        // this.$router.push({ name: 'EditRecipe' })
         $("#my-modal").modal("hide");
         $(".modal-backdrop").remove();
       },

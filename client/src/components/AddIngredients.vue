@@ -79,6 +79,7 @@
           </div>
         </div>
       </div>
+      <!-- TODO Add submit button to save(put request) ingredients into recipe -->
     </form>
   </div>
 </template>
@@ -145,6 +146,7 @@
       setIngredientName(rIngredient, val) {
         let i = this.recipeIngredients.indexOf(rIngredient)
         this.recipeIngredients[i].itemName = val
+        // TODO Get this working for autocomplete
       },
       setIngredient(autocomplete) {
         // console.log("FROM AUTOCOMPLETE", ingredient)
@@ -152,6 +154,7 @@
         this.rIngredient.quantity = 1
         // this.recipeIngredients = [this.ingredient]
         this.rIngredient.itemCost = this.calculateCost()
+        // TODO Get this working for autocomplete
       },
       seperatePackage(string) {
         //TODO Needs futher evaluation for various cases
@@ -219,14 +222,23 @@
 
 </script>
 
-<style>
-  .dist-input {
-    text-align: center;
-    max-width: 9rem;
+<style scoped>
+  table {
+    border: 1px solid;
   }
 
   .addIng-btn {
     background-color: rgb(5, 38, 45);
+  }
+
+  .ingName-input {
+    text-align: center;
+    max-width: 10rem;
+  }
+
+  .dist-input {
+    text-align: center;
+    max-width: 9rem;
   }
 
   .prod-input {
@@ -240,16 +252,11 @@
     height: 2rem;
   }
 
-  .category-input2 {
+  /* .category-input2 {
     text-align: center;
     min-width: 8rem;
     height: 2rem;
-  }
-
-  .ingName-input {
-    text-align: center;
-    max-width: 10rem;
-  }
+  } */
 
   .brand-input {
     text-align: center;
@@ -273,7 +280,6 @@
   }
 
   .quan-input {
-
     max-width: 3rem;
   }
 

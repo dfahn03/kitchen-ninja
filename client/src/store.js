@@ -278,14 +278,23 @@ export default new Vuex.Store({
       }
       commit('setActiveRecipe', newRecipe)
     },
-    async setActiveRecipe({ commit, dispatch }, payload) {
+    setActiveRecipe({ commit, dispatch }, Recipe) {
       try {
-        let res = await api.put('recipes/' + payload.id + SID, payload)
-        commit('setActiveRecipe', res.data)
+        // let res = await api.put('recipes/' + payload.id + SID, payload)
+        commit('setActiveRecipe', Recipe)
+        router.push({ name: 'EditRecipe' })
         // dispatch('getIngredients')
         // NOTE Why is this dispatch here
       } catch (error) { console.error(error) }
     },
+    // async setActiveRecipe({ commit, dispatch }, payload) {
+    //   try {
+    //     let res = await api.put('recipes/' + payload.id + SID, payload)
+    //     commit('setActiveRecipe', res.data)
+    //     // dispatch('getIngredients')
+    //     // NOTE Why is this dispatch here
+    //   } catch (error) { console.error(error) }
+    // },
 
     deleteRecipe({ commit, dispatch }, recipeId) {
       api.delete('recipes/' + recipeId + SID)
