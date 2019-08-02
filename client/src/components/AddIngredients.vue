@@ -32,8 +32,8 @@
               <tbody v-for="rIngredient in recipeIngredients" :rIngredient="rIngredient" class="recipe-ingredient">
                 <tr>
                   <td>
-                    <auto-complete @result="setIngredient" :selected="ingredient" :items="ingredients"
-                      @input="setIngredientName" />
+                    <auto-complete @result="setIngredient" :selected="rIngredient" :items="ingredients"
+                      @input="setIngredientName(rIngredient)" />
                   </td>
                   <td><input type="number" placeholder="Quantity" min="0" step=".5" v-model="rIngredient.quantity"
                       class="quan-input" required></td>
@@ -142,15 +142,16 @@
         let i = this.recipeIngredients.indexOf(ingredient)
         this.recipeIngredients.splice(i, 1)
       },
-      setIngredientName(val) {
-        this.ingredient.itemName = val
+      setIngredientName(rIngredient, val) {
+        let i = this.recipeIngredients.indexOf(rIngredient)
+        this.recipeIngredients[i].itemName = val
       },
       setIngredient(autocomplete) {
         // console.log("FROM AUTOCOMPLETE", ingredient)
-        this.ingredient = autocomplete.result
-        this.ingredient.quantity = 1
+        this.rIngredient = autocomplete.result
+        this.rIngredient.quantity = 1
         // this.recipeIngredients = [this.ingredient]
-        this.ingredient.itemCost = this.calculateCost()
+        this.rIngredient.itemCost = this.calculateCost()
       },
       seperatePackage(string) {
         //TODO Needs futher evaluation for various cases
@@ -209,11 +210,11 @@
     components: {
       AutoComplete
     },
-    watch: {
-      recipeIngredients(val) {
-        this.$emit('passThemIngredients', val)
-      }
-    }
+    // watch: {
+    //   recipeIngredients(val) {
+    //     this.$emit('passThemIngredients', val)
+    //   }
+    // }
   }
 
 </script>

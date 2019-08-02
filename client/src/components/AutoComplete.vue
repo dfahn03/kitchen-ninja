@@ -46,7 +46,7 @@
       };
     },
     mounted() {
-      if (this.selected) { 
+      if (this.selected) {
         // this.setResult(this.selected)
         this.result = this.selected
         this.search = this.selected.itemName
@@ -113,7 +113,7 @@
     },
     watch: {
       items: function (val, oldValue) {
-        //this.results = val;
+        // this.results = val;
         this.isLoading = false;
       }
     },
