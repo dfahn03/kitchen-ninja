@@ -91,6 +91,10 @@
     max-width: 9rem;
   }
 
+  .addIng-btn {
+    background-color: rgb(5, 38, 45);
+  }
+
   .prod-input {
     text-align: center;
     max-width: 6rem;
