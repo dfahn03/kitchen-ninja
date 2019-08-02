@@ -28,10 +28,9 @@ export default new Vuex.Store({
     users: [],
     ingredient: {},
     masterIngredients: [],
-    recipe: {
-      recipeIngredients: []
-    },
-    editRecipe: {},
+    activeRecipe: {},
+    // newrecipe: {},
+    // editRecipe: {},
     recipes: [],
     blogs: [],
     siteId: "",
@@ -65,16 +64,14 @@ export default new Vuex.Store({
     setIngredient(state, ingredient) {
       state.ingredient = ingredient
     },
-    setRecipe(state, recipe) {
-      state.recipe = recipe
+    setActiveRecipe(state, activeRecipe) {
+      state.activeRecipe = activeRecipe
     },
-    setEditRecipe(state, editRecipe) {
-      state.editRecipe = editRecipe
-    },
+    // setEditRecipe(state, editRecipe) {
+    //   state.editRecipe = editRecipe
+    // },
     resetRecipe(state) {
-      state.recipe = {
-        recipeIngredients: []
-      }
+      state.activeRecipe = {}
     },
     setRecipes(state, recipes) {
       state.recipes = recipes.sort((a, b) => a.name.toLowerCase() < b.name.toLowerCase() ? -1 : 1)
@@ -257,14 +254,31 @@ export default new Vuex.Store({
         router.push({ name: 'Recipes' })
       } catch (error) { console.error(error) }
     },
-    clearRecipe({ commit, dispatch }) {
+    // clearRecipe({ commit, dispatch }) {
+    //   commit('resetRecipe')
+    // },
+    createActiveRecipe({ commit, dispatch }) {
       commit('resetRecipe')
+      let newRecipe = {
+        recipeIngredients: [],
+        station: "",
+        side: "",
+        name: "",
+        portions: "",
+        portionSize: "",
+        portionUnit: "",
+        costPerRecipe: "",
+        calories: "",
+        allergens: [],
+        salesPrice: ""
+      }
+      commit('setActiveRecipe', newRecipe)
     },
     async setActiveRecipe({ commit, dispatch }, payload) {
       try {
         let res = await api.put('recipes/' + payload.id + SID, payload)
-        commit('setRecipe', res.data)
-        dispatch('getIngredients')
+        commit('setActiveRecipe', res.data)
+        // dispatch('getIngredients')
         // NOTE Why is this dispatch here
       } catch (error) { console.error(error) }
     },

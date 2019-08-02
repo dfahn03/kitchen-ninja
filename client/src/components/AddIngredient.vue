@@ -52,32 +52,32 @@
   export default {
     name: "AddIngredient",
     props: {
-      // ingredient: { bind: true, type: Object, required: true },
+      ingredient: { bind: true, type: Object, required: true },
       i: Number
     },
     data() {
       return {
-        // ingredient: {}
+        ingredient: {}
       }
     },
     mounted() {
-      // this.ingredient = { ...this.recipeIngredient }
+      this.ingredient = { ...this.recipeIngredient }
       // return this.$store.dispatch("getIngredients")
     },
     computed: {
       ingredients() {
-        console.log(this.$store.state.masterIngredients)
+        // console.log(this.$store.state.masterIngredients)
         return this.$store.state.masterIngredients
       },
-      ingredient:
-      {
-        get() {
-          return this.$store.state.recipe.recipeIngredients[this.i]
-        },
-        set() {
+      // ingredient:
+      // {
+      //   get() {
+      //     return this.$store.state.recipe.recipeIngredients[this.i]
+      //   },
+      //   set() {
 
-        }
-      }
+      //   }
+      // }
     },
     methods: {
       deleteIngredient(i) {

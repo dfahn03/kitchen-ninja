@@ -52,7 +52,7 @@
             </div>
           </div>
 
-          <!-- New Recipe Table - AutoComplete?-->
+          <!-- New Recipe Table -->
           <add-form @passThemIngredients="arr => newRecipe.recipeIngredients = arr" />
 
           <!-- New Recipe Calculations -->
@@ -162,7 +162,6 @@
     computed: {
       recipeIngredient() {
         return this.recipeIngredient
-        // NOTE WTF are you doing
       },
       recipeIngredients() {
         return this.$data.newRecipe.recipeIngredients
@@ -171,7 +170,6 @@
         return this.newRecipe.costPerRecipe = this.storeroom + this.meat + this.dairy + this.produce + this.bakery + this.frozen
       },
       itemCost() {
-        debugger
         this.storeroom = 0
         this.meat = 0
         this.dairy = 0
@@ -180,10 +178,8 @@
         this.frozen = 0
         if (!this.newRecipe.recipeIngredients) {
           return 0
-          // NOTE AM I BREAKING THINGS?
         }
         return this.newRecipe.recipeIngredients.forEach(r => this.$data[r.category.toLowerCase()] += +r.itemCost)
-        // NOTE GOOD
       },
       foodCost() {
         //totalCost / portions
@@ -219,7 +215,11 @@
 
     },
 
+
     methods: {
+      startRecipe() {
+
+      },
       saveRecipe() {
         this.$data.newRecipe.recipeIngredients.forEach(i => {
           i.unit = i.unit.toUpperCase();
