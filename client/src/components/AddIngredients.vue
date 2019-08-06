@@ -33,7 +33,7 @@
                 <tr>
                   <td>
                     <auto-complete @result="setIngredient" :selected="rIngredient" :items="ingredients"
-                      @input="setIngredientName(rIngredient)" />
+                      @input="setIngredientName(ingredient)" />
                   </td>
                   <td><input type="number" placeholder="Quantity" min="0" step=".5" v-model="rIngredient.quantity"
                       class="quan-input" required></td>
@@ -59,14 +59,14 @@
                     </select> </td>
                   <td><input type="text" placeholder="Distributor" v-model="rIngredient.distributor" class="dist-input"
                       required> </td>
-                  <td><input type="text" placeholder="Product #" readonly="ingredient.productNumber"
+                  <td><input type="text" placeholder="Product #" readonly="rIngredient.productNumber"
                       v-model="rIngredient.productNumber" class="prod-input" required>
                   </td>
-                  <td><input type="text" placeholder="Brand" readonly="ingredient.brand" v-model="rIngredient.brand"
+                  <td><input type="text" placeholder="Brand" readonly="rIngredient.brand" v-model="rIngredient.brand"
                       class="brand-input" required> </td>
-                  <td><input type="text" placeholder="Package Size" readonly="ingredient.packageSize"
+                  <td><input type="text" placeholder="Package Size" readonly="rIngredient.packageSize"
                       v-model="rIngredient.packageSize" class="packS-input" required> </td>
-                  <td><input type="text" placeholder="Package Cost" readonly="ingredient.packageCost"
+                  <td><input type="text" placeholder="Package Cost" readonly="rIngredient.packageCost"
                       v-model="rIngredient.packageCost" class="packC-input" required> </td>
                   <td>
                     <button type="button" class="btn btn-danger btn-sm"
@@ -94,7 +94,7 @@
     //   i: Number
     // },
     mounted() {
-      this.ingredient = { ...this.recipeIngredient }
+      this.rIngredient = { ...this.recipeIngredient }
       this.$store.state.activeRecipe
     },
     data() {
@@ -110,15 +110,9 @@
       ingredients() {
         return this.$store.state.masterIngredients
       },
-      // ingredient:
-      // {
-      //   get() {
-      //     return this.$store.state.recipe.recipeIngredients[this.i]
-      //   },
-      //   set() {
-
-      //   }
-      // }
+      ingredient() {
+        return this.$store.state.activeRecipe.recipeIngredients[this.i]
+      }
     },
     methods: {
       addIngredient() {
@@ -143,20 +137,26 @@
         let i = this.recipeIngredients.indexOf(ingredient)
         this.recipeIngredients.splice(i, 1)
       },
-      setIngredientName(rIngredient, val) {
-        let i = this.recipeIngredients.indexOf(rIngredient)
-        this.recipeIngredients[i].itemName = val
+      setIngredientName(payload) {
+        // console.log(payload)
+        this.rIngredient = {}
+        this.rIngredient.itemName = payload
+        // val
+        // let i = this.recipeIngredients.indexOf(rIngredient)
+        // this.recipeIngredients[i].itemName = rIngredient.itemName
         // TODO Get this working for autocomplete
       },
       setIngredient(autocomplete) {
-        // console.log("FROM AUTOCOMPLETE", ingredient)
+        // console.log("FROM AUTOCOMPLETE", rIngredient)
         this.rIngredient = autocomplete.result
         this.rIngredient.quantity = 1
-        // this.recipeIngredients = [this.ingredient]
         this.rIngredient.itemCost = this.calculateCost()
-        // TODO Get this working for autocomplete
+        this.$store.dispatch('addIngredient', this.rIngredient)
       },
+      // this.recipeIngredients = [this.ingredient]
+      // TODO Get this working for autocomplete
       seperatePackage(string) {
+        // console.log(string)
         //TODO Needs futher evaluation for various cases
         let dict = {}
         if (string.includes('/') && string.includes(' ')) {
@@ -185,10 +185,12 @@
         return dict
       },
       totalCost(str) {
+        // console.log(str)
         let pkgCost = str.split("$").join('')
         return pkgCost
       },
       costPer(fullPackage, fullPrice) {
+        // console.log(fullPackage, fullPrice)
         let costEA = 0
         let sPDict = this.seperatePackage(fullPackage)
         let pCost = this.totalCost(fullPrice)
@@ -202,10 +204,12 @@
         }
 
         return costEA.toFixed(2)
+        // console.log(costEA)
       },
       calculateCost() {
-        if (this.ingredient.packageSize && this.ingredient.packageCost) {
-          return this.costPer(this.ingredient.packageSize, this.ingredient.packageCost) * this.ingredient.quantity
+        // may need turn this back to ingredient
+        if (this.rIngredient.packageSize && this.rIngredient.packageCost) {
+          return this.costPer(this.rIngredient.packageSize, this.rIngredient.packageCost) * this.rIngredient.quantity
         }
         return 0
       },
@@ -213,11 +217,14 @@
     components: {
       AutoComplete
     },
-    // watch: {
-    //   recipeIngredients(val) {
-    //     this.$emit('passThemIngredients', val)
-    //   }
-    // }
+    watch: {
+      //   recipeIngredients(val) {
+      //     this.$emit('passThemIngredients', val)
+      //   }
+      quantity(nv, ov) {
+        console.log("quantity has changed")
+      },
+    }
   }
 
 </script>

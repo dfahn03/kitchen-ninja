@@ -48,6 +48,8 @@
     mounted() {
       if (this.selected) {
         // this.setResult(this.selected)
+        debugger
+
         this.result = this.selected
         this.search = this.selected.itemName
       }
@@ -62,7 +64,7 @@
           this.isLoading = true;
         } else {
           this.filterResults();
-          //this.open();
+          // this.open();
         }
       },
       filterResults() {
@@ -117,14 +119,14 @@
         this.isLoading = false;
       }
     },
-    // mounted() {
-    //   document.addEventListener("keydown", this.handleEscape);
-    //   document.addEventListener("click", this.handleClickOutside);
-    // },
-    // destroyed() {
-    //   document.removeEventListener("keydown", this.handleEscape);
-    //   document.removeEventListener("click", this.handleClickOutside);
-    // }
+    mounted() {
+      document.addEventListener("keydown", this.handleEscape);
+      document.addEventListener("click", this.handleClickOutside);
+    },
+    destroyed() {
+      document.removeEventListener("keydown", this.handleEscape);
+      document.removeEventListener("click", this.handleClickOutside);
+    }
   };
 </script>
 
