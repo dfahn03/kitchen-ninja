@@ -48,8 +48,6 @@
     mounted() {
       if (this.selected) {
         // this.setResult(this.selected)
-        debugger
-
         this.result = this.selected
         this.search = this.selected.itemName
       }

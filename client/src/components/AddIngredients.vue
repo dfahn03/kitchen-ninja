@@ -112,6 +112,11 @@
       },
       ingredient() {
         return this.$store.state.activeRecipe.recipeIngredients[this.i]
+      },
+      quantity() {
+        if (this.activeRecipe.recipeIngredients[this.i]) {
+          return (this.activeRecipe.recipeIngredients[this.i].quantity * this.activeRecipe.recipeIngredients[this.i].itemCost).toFixed(2)
+        }
       }
     },
     methods: {
