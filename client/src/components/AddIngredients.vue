@@ -3,7 +3,7 @@
     <!-- Add Ing Button -->
     <div class="row">
       <div class="col-lg-12 col-md-8 col-sm-6">
-        <button type="button" class="btn addIng-btn text-white my-2" @click="addIngredient">Add
+        <button type="button" class="btn addIng-btn text-white my-2" @click="addNewIngredient">Add
           Ingredient <img src="../assets/icons8-plus-25.png" alt="Plus Icon" class="ml-1"></button>
       </div>
     </div>
@@ -120,7 +120,7 @@
       }
     },
     methods: {
-      addIngredient() {
+      addNewIngredient() {
         let newIngredient = {
           itemName: "",
           category: "",
@@ -135,9 +135,6 @@
         }
         this.$store.dispatch('addIngredient', newIngredient)
       },
-      // test(i) {
-      //   this.recipeIngredients.splice(i, 1)
-      // },
       deleteIngredient(ingredient) {
         let i = this.recipeIngredients.indexOf(ingredient)
         this.recipeIngredients.splice(i, 1)
