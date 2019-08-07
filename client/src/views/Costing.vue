@@ -123,7 +123,7 @@
         return this.$store.state.activeRecipe.recipeIngredients
       },
       recipeCost() {
-        return this.activeRecipe.costPerRecipe = this.storeroom + this.meat + this.dairy + this.produce + this.bakery + this.frozen
+        return this.activeRecipe.costPerRecipe = (this.storeroom + this.meat + this.dairy + this.produce + this.bakery + this.frozen).toFixed(2)
       },
       itemCost() {
         this.storeroom = 0

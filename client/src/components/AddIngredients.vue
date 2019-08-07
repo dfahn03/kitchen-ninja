@@ -153,7 +153,7 @@
         this.rIngredient = autocomplete.result
         this.rIngredient.quantity = 1
         this.rIngredient.itemCost = this.calculateCost()
-        this.$store.dispatch('addIngredient', this.rIngredient)
+        // this.$store.dispatch('addIngredient', this.rIngredient)
       },
       // this.recipeIngredients = [this.ingredient]
       // TODO Get this working for autocomplete
