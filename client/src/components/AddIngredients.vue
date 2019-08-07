@@ -70,7 +70,7 @@
                       v-model="rIngredient.packageCost" class="packC-input" required> </td>
                   <td>
                     <button type="button" class="btn btn-danger btn-sm"
-                      @click="deleteIngredient(ingredient)">Delete</button>
+                      @click="deleteIngredient(rIngredient)">Delete</button>
                   </td>
                 </tr>
               </tbody>
@@ -135,8 +135,8 @@
         }
         this.$store.dispatch('addIngredient', newIngredient)
       },
-      deleteIngredient(ingredient) {
-        let i = this.recipeIngredients.indexOf(ingredient)
+      deleteIngredient(rIngredient) {
+        let i = this.recipeIngredients.indexOf(rIngredient)
         this.recipeIngredients.splice(i, 1)
       },
       setIngredientName(payload) {
@@ -153,7 +153,7 @@
         this.rIngredient = autocomplete.result
         this.rIngredient.quantity = 1
         this.rIngredient.itemCost = this.calculateCost()
-        // this.$store.dispatch('addIngredient', this.rIngredient)
+        this.$store.dispatch('addIngredient', this.rIngredient)
       },
       // this.recipeIngredients = [this.ingredient]
       // TODO Get this working for autocomplete
