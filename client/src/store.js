@@ -26,11 +26,9 @@ export default new Vuex.Store({
     site: {},
     user: {},
     users: [],
-    ingredient: {},
+    // ingredient: {},
     masterIngredients: [],
     activeRecipe: {},
-    // newrecipe: {},
-    // editRecipe: {},
     recipes: [],
     blogs: [],
     siteId: "",
@@ -61,14 +59,17 @@ export default new Vuex.Store({
     setMasterIngredients(state, masterIngredients) {
       state.masterIngredients = masterIngredients
     },
-    setIngredient(state, ingredient) {
-      state.ingredient = ingredient
-    },
+    // setIngredient(state, ingredient) {
+    //   state.ingredient = ingredient
+    // },
     setActiveRecipe(state, activeRecipe) {
       state.activeRecipe = activeRecipe
     },
     setActiveRecipeIngredient(state, newIngredient) {
       state.activeRecipe.recipeIngredients.push(newIngredient)
+    },
+    editActiveRecipeIngredient(state, payload) {
+      state.activeRecipe.recipeIngredients[payload.i] = payload.ing
     },
     // setEditRecipe(state, editRecipe) {
     //   state.editRecipe = editRecipe
@@ -83,9 +84,7 @@ export default new Vuex.Store({
       state.blogs = blogs
     },
     setSiteSelectorStatus(state, status) {
-
       state.open = status
-
     }
   },
   actions: {
@@ -153,7 +152,7 @@ export default new Vuex.Store({
         commit('setSiteSelectorStatus', false)
         dispatch("getBlogs")
         // NOTE Master Ingredients
-        dispatch("getIngredients")
+        dispatch("getMasterIngredients")
         dispatch("getRecipes")
         if (router.currentRoute.path == '/login') {
           router.push({ name: 'dashboard' })
@@ -203,7 +202,7 @@ export default new Vuex.Store({
     //#endregion
 
     //#region -- MasterIngredient Stuff --
-    async getIngredients({ commit, dispatch }) {
+    async getMasterIngredients({ commit, dispatch }) {
       try {
         let res = await api.get("ingredients")
         commit('setMasterIngredients', res.data)
@@ -304,7 +303,12 @@ export default new Vuex.Store({
 
     //#region -- Ingredient Stuff --
     addIngredient({ commit, dispatch }, newIngredient) {
+      debugger
       commit('setActiveRecipeIngredient', newIngredient)
+    },
+    editIngredient({ commit, dispatch }, payload) {
+      debugger
+      commit('editActiveRecipeIngredient', payload)
     }
     //#endregion
   }

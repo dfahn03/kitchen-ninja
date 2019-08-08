@@ -15,8 +15,6 @@
     </div>
 
     <div class="row" v-if="activeRecipe._id">
-
-
       <add-ingredients />
     </div>
 
@@ -69,14 +67,12 @@
 <script>
   import RecipeForm from '@/components/RecipeForm'
   import AddIngredients from '@/components/AddIngredients'
-  // import AddForm from '@/components/AddForm'
 
   export default {
     name: "Costing",
     mounted() {
       //TODO  ingredients persist on reload 
     },
-    props: ["id"],
     data() {
       return {
         storeroom: 0,
@@ -87,37 +83,30 @@
         frozen: 0
       }
     },
-    watch: {
-      itemCost(nv, ov) {
-        console.log("itemCost has changed")
-      },
-      recipeCost(nv, ov) {
-        console.log("recipeCost has changed")
-      },
-      foodCost(nv, ov) {
-        console.log("foodCost has changed")
-      },
-      profit(nv, ov) {
-        console.log("profit has changed")
-      },
-      profitMargin(nv, ov) {
-        console.log("profitMargin has changed")
-      },
-      activeRecipe(nv, ov) {
-        console.log("active recipe has changed")
-        this.activeRecipe = nv
-      }
-    },
+    // watch: {
+    //   itemCost(nv, ov) {
+    //     console.log("itemCost has changed")
+    //   },
+    //   recipeCost(nv, ov) {
+    //     console.log("recipeCost has changed")
+    //   },
+    //   foodCost(nv, ov) {
+    //     console.log("foodCost has changed")
+    //   },
+    //   profit(nv, ov) {
+    //     console.log("profit has changed")
+    //   },
+    //   profitMargin(nv, ov) {
+    //     console.log("profitMargin has changed")
+    //   },
+    //   activeRecipe(nv, ov) {
+    //     console.log("active recipe has changed")
+    //     this.activeRecipe = nv
+    //   }
+    // },
     computed: {
-      // recipeIngredient() {
-      //   return this.recipeIngredient
-      // },
       activeRecipe() {
         return this.$store.state.activeRecipe
-      },
-      recipeIngredients() {
-        // return this.$data.activeRecipe.recipeIngredients
-        return this.activeRecipe.recipeIngredients
       },
       recipeIngredients() {
         return this.$store.state.activeRecipe.recipeIngredients

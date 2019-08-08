@@ -3,7 +3,7 @@
     <!-- Add Ing Button -->
     <div class="row">
       <div class="col-lg-12 col-md-8 col-sm-6">
-        <button type="button" class="btn addIng-btn text-white my-2" @click="addNewIngredient">Add
+        <button type="button" class="btn addIng-btn text-white my-2" @click="addIngredient">Add
           Ingredient <img src="../assets/icons8-plus-25.png" alt="Plus Icon" class="ml-1"></button>
       </div>
     </div>
@@ -32,8 +32,8 @@
               <tbody v-for="rIngredient in recipeIngredients" :rIngredient="rIngredient" class="recipe-ingredient">
                 <tr>
                   <td>
-                    <auto-complete @result="setIngredient" :selected="rIngredient" :items="ingredients"
-                      @input="setIngredientName(ingredient)" />
+                    <auto-complete @result="setIngredient" :selected="rIngredient" :items="masterIngredients"
+                      @input="setIngredientName" />
                   </td>
                   <td><input type="number" placeholder="Quantity" min="0" step=".5" v-model="rIngredient.quantity"
                       class="quan-input" required></td>
@@ -44,9 +44,7 @@
                       <option value="EA">EA</option>
                     </select>
                   </td>
-                  <td> <input v-if="!calculateCost()" type="text" placeholder="Cost" v-model="rIngredient.itemCost"
-                      class="ingC-input" required>
-                    <p v-else class="mt-1">{{calculateCost()}}</p>
+                  <td> <input type="text" placeholder="Cost" v-model="rIngredient.itemCost" class="ingC-input" required>
                   </td>
                   <td><select class="category-input2" placeholder="Category" v-model="rIngredient.category" required>
                       <option disabled value="">Category</option>
@@ -70,7 +68,7 @@
                       v-model="rIngredient.packageCost" class="packC-input" required> </td>
                   <td>
                     <button type="button" class="btn btn-danger btn-sm"
-                      @click="deleteIngredient(rIngredient)">Delete</button>
+                      @click="deleteIngredient(ingredient)">Delete</button>
                   </td>
                 </tr>
               </tbody>
@@ -89,30 +87,26 @@
 
   export default {
     name: "AddIngredients",
-    // props: {
-    //   ingredient: { bind: true, type: Object, required: true },
-    //   i: Number
-    // },
     mounted() {
-      this.rIngredient = { ...this.recipeIngredient }
-      this.$store.state.activeRecipe
+      // this.$store.state.activeRecipe
+      // this.$store.state.recipeIngredients
     },
     data() {
       return {
-        // recipeIngredients: [],
-        // ingredient: {}
+        ingredientIndex: 0,
+        ingredient: {}
       }
     },
     computed: {
       recipeIngredients() {
         return this.$store.state.activeRecipe.recipeIngredients
       },
-      ingredients() {
+      masterIngredients() {
         return this.$store.state.masterIngredients
       },
-      ingredient() {
-        return this.$store.state.activeRecipe.recipeIngredients[this.i]
-      },
+      // ingredient() {
+      //   return this.$store.state.activeRecipe.recipeIngredients[this.i]
+      // },
       quantity() {
         if (this.activeRecipe.recipeIngredients[this.i]) {
           return (this.activeRecipe.recipeIngredients[this.i].quantity * this.activeRecipe.recipeIngredients[this.i].itemCost).toFixed(2)
@@ -120,7 +114,7 @@
       }
     },
     methods: {
-      addNewIngredient() {
+      addIngredient() {
         let newIngredient = {
           itemName: "",
           category: "",
@@ -135,28 +129,32 @@
         }
         this.$store.dispatch('addIngredient', newIngredient)
       },
-      deleteIngredient(rIngredient) {
-        let i = this.recipeIngredients.indexOf(rIngredient)
+      deleteIngredient(ingredient) {
+        let i = this.recipeIngredients.indexOf(ingredient)
         this.recipeIngredients.splice(i, 1)
       },
       setIngredientName(payload) {
-        // console.log(payload)
-        this.rIngredient = {}
-        this.rIngredient.itemName = payload
-        // val
-        // let i = this.recipeIngredients.indexOf(rIngredient)
-        // this.recipeIngredients[i].itemName = rIngredient.itemName
-        // TODO Get this working for autocomplete
+        let rec = this.recipeIngredients.find(r => r.name == payload)
+        if (!rec) {
+          rec = this.recipeIngredients[this.recipeIngredients.length - 1]
+        }
+        this.ingredientIndex = this.recipeIngredients.indexOf(rec)
+        rec.itemName = payload
       },
       setIngredient(autocomplete) {
-        // console.log("FROM AUTOCOMPLETE", rIngredient)
-        this.rIngredient = autocomplete.result
-        this.rIngredient.quantity = 1
-        this.rIngredient.itemCost = this.calculateCost()
-        this.$store.dispatch('addIngredient', this.rIngredient)
+        debugger
+        let ing = this.recipeIngredients[this.ingredientIndex]
+        ing = autocomplete.result
+        ing.quantity = 1
+        let i = this.ingredientIndex
+        this.ingredient = ing
+        ing.itemCost = this.calculateCost()
+        let payload = {
+          ing,
+          i
+        }
+        this.$store.dispatch('editIngredient', payload)
       },
-      // this.recipeIngredients = [this.ingredient]
-      // TODO Get this working for autocomplete
       seperatePackage(string) {
         // console.log(string)
         //TODO Needs futher evaluation for various cases
@@ -209,9 +207,8 @@
         // console.log(costEA)
       },
       calculateCost() {
-        // may need turn this back to ingredient
-        if (this.rIngredient.packageSize && this.rIngredient.packageCost) {
-          return this.costPer(this.rIngredient.packageSize, this.rIngredient.packageCost) * this.rIngredient.quantity
+        if (this.ingredient.packageSize && this.ingredient.packageCost) {
+          return this.costPer(this.ingredient.packageSize, this.ingredient.packageCost) * this.ingredient.quantity
         }
         return 0
       },
@@ -223,9 +220,9 @@
       //   recipeIngredients(val) {
       //     this.$emit('passThemIngredients', val)
       //   }
-      quantity(nv, ov) {
-        console.log("quantity has changed")
-      },
+      // quantity(nv, ov) {
+      //   console.log("quantity has changed")
+      // },
     }
   }
 
