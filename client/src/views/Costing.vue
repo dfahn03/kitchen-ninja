@@ -58,11 +58,11 @@
     </div>
 
     <div class="form-row d-flex justify-content-center align-content-center">
-      <button type="submit" class="btn btn-success">Save Recipe</button>
+      <button @click="saveRecipe" type="button" class="btn btn-success">Save Recipe</button>
     </div>
-    </form>
-  </div>
-  <!-- </div> -->
+    <!-- </form>
+  </div> -->
+    <!-- </div> -->
   </div>
 </template>
 
@@ -103,10 +103,10 @@
       profitMargin(nv, ov) {
         console.log("profitMargin has changed")
       },
-      activeRecipe(nv, ov) {
-        console.log("active recipe has changed")
-        this.activeRecipe = nv
-      }
+      // activeRecipe(nv, ov) {
+      //   console.log("active recipe has changed")
+      //   this.activeRecipe = nv
+      // }
     },
     computed: {
       // recipeIngredient() {
@@ -171,12 +171,13 @@
 
     methods: {
       saveRecipe() {
+        debugger
         // this.$data.activeRecipe.recipeIngredients.forEach(i => {
         this.activeRecipe.recipeIngredients.forEach(i => {
           i.unit = i.unit.toUpperCase();
           i.category = i.category.toLowerCase();
         })
-        this.$store.dispatch('saveRecipe', this.activeRecipe)
+        this.$store.dispatch('editRecipe', this.activeRecipe)
       }
     },
     components: {
