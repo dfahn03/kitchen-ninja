@@ -115,6 +115,7 @@
         $(".modal-backdrop").remove();
       },
       sendRecipeToCosting() {
+        debugger
         let ActiveRecipe = this.$data
         this.$store.dispatch("setActiveRecipe", ActiveRecipe)
         // this.$router.push({ name: 'EditRecipe' })
