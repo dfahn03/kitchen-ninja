@@ -244,7 +244,6 @@ export default new Vuex.Store({
     },
     async saveRecipe({ commit, dispatch }, newRecipe) {
       try {
-        debugger
         let res = await api.post('recipes' + SID, newRecipe)
         commit('setActiveRecipe', res.data)
         // router.push({ name: 'Recipes' })
@@ -253,7 +252,6 @@ export default new Vuex.Store({
     },
     async editRecipe({ commit, dispatch }, payload) {
       try {
-        debugger
         let res = await api.put('recipes/' + payload._id + SID, payload)
         commit("resetRecipe")
         router.push({ name: 'Recipes' })
@@ -305,11 +303,9 @@ export default new Vuex.Store({
 
     //#region -- Ingredient Stuff --
     addIngredient({ commit, dispatch }, newIngredient) {
-      debugger
       commit('setActiveRecipeIngredient', newIngredient)
     },
     editIngredient({ commit, dispatch }, payload) {
-      debugger
       commit('editActiveRecipeIngredient', payload)
     }
     //#endregion

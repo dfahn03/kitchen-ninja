@@ -32,7 +32,7 @@
               <tbody v-for="nIngredient in recipeIngredients" :nIngredient="nIngredient" class="recipe-ingredient">
                 <tr>
                   <td>
-                    <auto-complete @result="setIngredient" :selected="rIngredient" :items="masterIngredients"
+                    <auto-complete @result="setIngredient" :selected="nIngredient" :items="masterIngredients"
                       @input="setIngredientName" />
                   </td>
                   <td><input type="number" placeholder="Quantity" min="0" step=".5" v-model="nIngredient.quantity"
@@ -44,7 +44,7 @@
                       <option value="EA">EA</option>
                     </select>
                   </td>
-                  <td> <input type="text" placeholder="Cost" v-model="rIngredient.itemCost" class="ingC-input" required>
+                  <td> <input type="text" placeholder="Cost" v-model="nIngredient.itemCost" class="ingC-input" required>
                   </td>
                   <td><select class="category-input2" placeholder="Category" v-model="nIngredient.category" required>
                       <option disabled value="">Category</option>
@@ -68,7 +68,7 @@
                       v-model="nIngredient.packageCost" class="packC-input" required> </td>
                   <td>
                     <button type="button" class="btn btn-danger btn-sm"
-                      @click="deleteIngredient(ingredient)">Delete</button>
+                      @click="deleteIngredient(nIngredient)">Delete</button>
                   </td>
                 </tr>
               </tbody>
@@ -144,7 +144,6 @@
         rec.itemName = payload
       },
       setIngredient(autocomplete) {
-        debugger
         let ing = this.recipeIngredients[this.ingredientIndex]
         ing = autocomplete.result
         ing.quantity = 1
@@ -192,7 +191,6 @@
         return pkgCost
       },
       costPer(fullPackage, fullPrice) {
-        // debugger
         // console.log(fullPackage, fullPrice)
         let costEA = 0
         let sPDict = this.seperatePackage(fullPackage)

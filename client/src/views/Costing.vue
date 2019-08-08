@@ -160,7 +160,6 @@
 
     methods: {
       saveRecipe() {
-        debugger
         // this.$data.activeRecipe.recipeIngredients.forEach(i => {
         this.activeRecipe.recipeIngredients.forEach(i => {
           i.unit = i.unit.toUpperCase();
