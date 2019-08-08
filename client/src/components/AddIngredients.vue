@@ -3,7 +3,7 @@
     <!-- Add Ing Button -->
     <div class="row">
       <div class="col-lg-12 col-md-8 col-sm-6">
-        <button type="button" class="btn addIng-btn text-white my-2" @click="addIngredient">Add
+        <button type="button" class="btn addIng-btn text-white my-2" @click="addNewIngredient">Add
           Ingredient <img src="../assets/icons8-plus-25.png" alt="Plus Icon" class="ml-1"></button>
       </div>
     </div>
@@ -70,7 +70,11 @@
                       v-model="nIngredient.packageCost" class="packC-input" required> </td>
                   <td>
                     <button type="button" class="btn btn-danger btn-sm"
+<<<<<<< HEAD
                       @click="deleteIngredient(nIngredient)">Delete</button>
+=======
+                      @click="deleteIngredient(rIngredient)">Delete</button>
+>>>>>>> e08d594be7b8beb3bb4dbef7e3ccaedc0fbcc6f9
                   </td>
                 </tr>
               </tbody>
@@ -120,7 +124,7 @@
       }
     },
     methods: {
-      addIngredient() {
+      addNewIngredient() {
         let newIngredient = {
           itemName: "",
           category: "",
@@ -137,12 +141,18 @@
         // this.newIngredients.push(newIngredient)
         this.$store.dispatch('addIngredient', newIngredient)
       },
+<<<<<<< HEAD
       // test(i) {
       //   this.recipeIngredients.splice(i, 1)
       // },
       deleteIngredient(ingredient) {
         let i = this.newIngredients.indexOf(ingredient)
         this.newIngredients.splice(i, 1)
+=======
+      deleteIngredient(rIngredient) {
+        let i = this.recipeIngredients.indexOf(rIngredient)
+        this.recipeIngredients.splice(i, 1)
+>>>>>>> e08d594be7b8beb3bb4dbef7e3ccaedc0fbcc6f9
       },
       setIngredientName(val) {
         // console.log(payload)
@@ -154,6 +164,7 @@
         // TODO Get this working for autocomplete
       },
       setIngredient(autocomplete) {
+<<<<<<< HEAD
         // debugger
         let newIngredients = this.recipeIngredients
         let cIngredient = ''
@@ -174,6 +185,13 @@
         }
         this.$store.dispatch('editIngredient', payload)
         // }
+=======
+        // console.log("FROM AUTOCOMPLETE", rIngredient)
+        this.rIngredient = autocomplete.result
+        this.rIngredient.quantity = 1
+        this.rIngredient.itemCost = this.calculateCost()
+        this.$store.dispatch('addIngredient', this.rIngredient)
+>>>>>>> e08d594be7b8beb3bb4dbef7e3ccaedc0fbcc6f9
       },
       // this.recipeIngredients = [this.ingredient]
       // TODO Get this working for autocomplete
