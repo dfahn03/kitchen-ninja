@@ -244,6 +244,7 @@ export default new Vuex.Store({
     },
     async saveRecipe({ commit, dispatch }, newRecipe) {
       try {
+        debugger
         let res = await api.post('recipes' + SID, newRecipe)
         commit('setActiveRecipe', res.data)
         // router.push({ name: 'Recipes' })
@@ -252,7 +253,8 @@ export default new Vuex.Store({
     },
     async editRecipe({ commit, dispatch }, payload) {
       try {
-        await api.put('recipes/' + payload._id + SID, payload)
+        debugger
+        let res = await api.put('recipes/' + payload._id + SID, payload)
         commit("resetRecipe")
         router.push({ name: 'Recipes' })
       } catch (error) { console.error(error) }
@@ -277,11 +279,11 @@ export default new Vuex.Store({
       }
       commit('setActiveRecipe', newRecipe)
     },
-    setActiveRecipe({ commit, dispatch }, Recipe) {
+    async setActiveRecipe({ commit, dispatch }, Recipe) {
       try {
-        // let res = await api.put('recipes/' + payload.id + SID, payload)
-        commit('setActiveRecipe', Recipe)
-        router.push({ name: 'EditRecipe' })
+        let res = await api.put('recipes/' + Recipe.id + SID, Recipe)
+        commit('setActiveRecipe', res.data)
+        router.push({ name: 'Costing' })
         // dispatch('getIngredients')
         // NOTE Why is this dispatch here
       } catch (error) { console.error(error) }

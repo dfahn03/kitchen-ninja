@@ -56,11 +56,11 @@
     </div>
 
     <div class="form-row d-flex justify-content-center align-content-center">
-      <button type="submit" class="btn btn-success">Save Recipe</button>
+      <button @click="saveRecipe" type="button" class="btn btn-success">Save Recipe</button>
     </div>
-    </form>
-  </div>
-  <!-- </div> -->
+    <!-- </form>
+  </div> -->
+    <!-- </div> -->
   </div>
 </template>
 
@@ -83,27 +83,27 @@
         frozen: 0
       }
     },
-    // watch: {
-    //   itemCost(nv, ov) {
-    //     console.log("itemCost has changed")
-    //   },
-    //   recipeCost(nv, ov) {
-    //     console.log("recipeCost has changed")
-    //   },
-    //   foodCost(nv, ov) {
-    //     console.log("foodCost has changed")
-    //   },
-    //   profit(nv, ov) {
-    //     console.log("profit has changed")
-    //   },
-    //   profitMargin(nv, ov) {
-    //     console.log("profitMargin has changed")
-    //   },
-    //   activeRecipe(nv, ov) {
-    //     console.log("active recipe has changed")
-    //     this.activeRecipe = nv
-    //   }
-    // },
+    watch: {
+      itemCost(nv, ov) {
+        console.log("itemCost has changed")
+      },
+      recipeCost(nv, ov) {
+        console.log("recipeCost has changed")
+      },
+      foodCost(nv, ov) {
+        console.log("foodCost has changed")
+      },
+      profit(nv, ov) {
+        console.log("profit has changed")
+      },
+      profitMargin(nv, ov) {
+        console.log("profitMargin has changed")
+      },
+      // activeRecipe(nv, ov) {
+      //   console.log("active recipe has changed")
+      //   this.activeRecipe = nv
+      // }
+    },
     computed: {
       activeRecipe() {
         return this.$store.state.activeRecipe
@@ -160,12 +160,13 @@
 
     methods: {
       saveRecipe() {
+        debugger
         // this.$data.activeRecipe.recipeIngredients.forEach(i => {
         this.activeRecipe.recipeIngredients.forEach(i => {
           i.unit = i.unit.toUpperCase();
           i.category = i.category.toLowerCase();
         })
-        this.$store.dispatch('saveRecipe', this.activeRecipe)
+        this.$store.dispatch('editRecipe', this.activeRecipe)
       }
     },
     components: {
