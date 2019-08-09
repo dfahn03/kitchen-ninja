@@ -33,14 +33,14 @@
                 <tr>
                   <td>
                     <auto-complete @result="setIngredient" :selected="nIngredient" :items="masterIngredients"
-                      @input="setIngredientName" />
+                      @input="setIngredientName" id="autocomplete" />
                     <!-- v-bind:quantity.sync="nIngredient.itemName" -->
                   </td>
 
                   <!-- @oninput="quantity(this.value, nIngredient)" :selected="nIngredient" -->
                   <!-- v-bind:quantity.sync="nIngredient.quantity" -->
-                  <td><input type="number" v-model=" nIngredient.quantity" @input="quantity" placeholder="Quantity"
-                      min="0" step=".5" class="quan-input" required></td>
+                  <td><input type="number" v-model=" nIngredient.quantity" :selected="nIngredient" @input="quantity"
+                      placeholder="Quantity" min="0" step=".5" class="quan-input" required></td>
                   <td><select class="form-control unit-input" placeholder="Unit" readonly="true"
                       v-model="nIngredient.unit" required>
                       <option disabled value="">Unit</option>
@@ -98,7 +98,9 @@
     data() {
       return {
         ingredientIndex: 0,
-        ingredient: {}
+        ingredient: {},
+        ingredients: []
+
       }
     },
     computed: {
@@ -127,8 +129,9 @@
           packageCost: "",
           distributor: ""
         }
-        // this.newIngredients.push(newIngredient)
-        this.$store.dispatch('addIngredient', newIngredient)
+        if ()
+          // this.newIngredients.push(newIngredient)
+          this.$store.dispatch('addIngredient', newIngredient)
       },
       deleteIngredient(ingredient) {
         let i = this.recipeIngredients.indexOf(ingredient)
@@ -153,6 +156,7 @@
           ing,
           i
         }
+        this.ingredients.push(ing)
         this.$store.dispatch('editIngredient', payload)
       },
       seperatePackage(string) {
@@ -213,11 +217,19 @@
         return 0
       },
       quantity(val) {
+        debugger
         let q = this.ingredient.quantity
-        q = val.data
+        if (val.data) {
+          q = parseFloat(val.data)
+        }
         let cost = this.ingredient.itemCost
         let newCost = cost * q
-        this.ingredient.itemCost = newCost
+        this.ingredient.itemCost = newCost.toFixed(2)
+        this.$nextTick()
+      },
+      selected() {
+        debugger
+        this.ingredient = this.autocomplete
       }
 
     },
