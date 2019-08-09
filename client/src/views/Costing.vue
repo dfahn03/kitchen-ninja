@@ -56,7 +56,7 @@
     </div>
 
     <div class="form-row d-flex justify-content-center align-content-center">
-      <button @click="saveRecipe" type="button" class="btn btn-success">Save Recipe</button>
+      <button @click="saveRecipe" type="button" class="btn saveRecipe-btn">Save Recipe</button>
     </div>
     <!-- </form>
   </div> -->
@@ -178,6 +178,12 @@
 <style>
   ul {
     list-style: none;
+  }
+
+  .saveRecipe-btn {
+    margin: 1rem;
+    background-color: #6DC59A;
+    color: white;
   }
 
   .totalP-input {
