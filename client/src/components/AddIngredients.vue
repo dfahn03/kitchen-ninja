@@ -129,9 +129,8 @@
           packageCost: "",
           distributor: ""
         }
-        if ()
-          // this.newIngredients.push(newIngredient)
-          this.$store.dispatch('addIngredient', newIngredient)
+        // this.newIngredients.push(newIngredient)
+        this.$store.dispatch('addIngredient', newIngredient)
       },
       deleteIngredient(ingredient) {
         let i = this.recipeIngredients.indexOf(ingredient)
@@ -217,7 +216,6 @@
         return 0
       },
       quantity(val) {
-        debugger
         let q = this.ingredient.quantity
         if (val.data) {
           q = parseFloat(val.data)
@@ -227,10 +225,6 @@
         this.ingredient.itemCost = newCost.toFixed(2)
         this.$nextTick()
       },
-      selected() {
-        debugger
-        this.ingredient = this.autocomplete
-      }
 
     },
     components: {
