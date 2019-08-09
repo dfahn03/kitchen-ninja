@@ -154,7 +154,6 @@
           return (this.foodCost * 1.04).toFixed(2)
         }
       }
-
     },
 
 

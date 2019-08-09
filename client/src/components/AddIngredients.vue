@@ -34,9 +34,13 @@
                   <td>
                     <auto-complete @result="setIngredient" :selected="nIngredient" :items="masterIngredients"
                       @input="setIngredientName" />
+                    <!-- v-bind:quantity.sync="nIngredient.itemName" -->
                   </td>
-                  <td><input type="number" placeholder="Quantity" min="0" step=".5" v-model="nIngredient.quantity"
-                      class="quan-input" required></td>
+
+                  <!-- @oninput="quantity(this.value, nIngredient)" :selected="nIngredient" -->
+                  <!-- v-bind:quantity.sync="nIngredient.quantity" -->
+                  <td><input type="number" v-model=" nIngredient.quantity" @input="quantity" placeholder="Quantity"
+                      min="0" step=".5" class="quan-input" required></td>
                   <td><select class="form-control unit-input" placeholder="Unit" readonly="true"
                       v-model="nIngredient.unit" required>
                       <option disabled value="">Unit</option>
@@ -107,11 +111,7 @@
       // ingredient() {
       //   return this.$store.state.activeRecipe.recipeIngredients[this.i]
       // },
-      quantity() {
-        if (this.activeRecipe.recipeIngredients[this.i]) {
-          return (this.activeRecipe.recipeIngredients[this.i].quantity * this.activeRecipe.recipeIngredients[this.i].itemCost).toFixed(2)
-        }
-      }
+
     },
     methods: {
       addIngredient() {
@@ -125,8 +125,7 @@
           itemCost: 0,
           packageSize: "",
           packageCost: "",
-          distributor: "",
-          id: 1,
+          distributor: ""
         }
         // this.newIngredients.push(newIngredient)
         this.$store.dispatch('addIngredient', newIngredient)
@@ -213,6 +212,14 @@
         }
         return 0
       },
+      quantity(val) {
+        let q = this.ingredient.quantity
+        q = val.data
+        let cost = this.ingredient.itemCost
+        let newCost = cost * q
+        this.ingredient.itemCost = newCost
+      }
+
     },
     components: {
       AutoComplete
@@ -220,7 +227,8 @@
     watch: {
       recipeIngredients(nv, ov) {
         console.log("recipeIngredients updated")
-      }
+        this.calculateCost()
+      },
       // newIngredients(nv, ov) {
       //   console.log("newIngredients updated")
       // }
