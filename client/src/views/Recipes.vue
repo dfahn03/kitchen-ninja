@@ -46,8 +46,8 @@
               <p>Portions Calories: {{ calories }}</p>
             </div>
             <div class="modal-footer justify-content-center">
-              <img src="../assets/Edit-Icon-40.png" alt="Delete Recipe" title="Edit Recipe"
-                @click="sendRecipeToCosting()" class="edit-recipe">
+              <img src="../assets/Edit-Icon-40.png" alt="Edit Recipe" title="Edit Recipe" @click="sendRecipeToCosting()"
+                class="edit-recipe">
               <img src="../assets/Trash-Can-Red-40.png" alt="Delete Recipe" title="Delete Recipe"
                 @click="deleteRecipe()" class="delete-recipe">
             </div>
