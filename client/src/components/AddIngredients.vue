@@ -41,38 +41,38 @@
                   <!-- v-bind:quantity.sync="nIngredient.quantity" -->
                   <td><input type="number" v-model=" nIngredient.quantity" :selected="nIngredient" @input="quantity"
                       placeholder="Quantity" min="0" step=".5" class="quan-input" required></td>
-                  <td><select class="form-control unit-input" placeholder="Unit" readonly="true"
-                      v-model="nIngredient.unit" required>
+                  <td><select class="form-control unit-input" placeholder="Unit" v-model="nIngredient.unit" required>
                       <option disabled value="">Unit</option>
                       <option value="OZ">OZ</option>
                       <option value="EA">EA</option>
                     </select>
                   </td>
-                  <td> <input type="text" placeholder="Cost" v-model="nIngredient.itemCost" class="ingC-input" required>
+                  <td>
+                    <p v-model="nIngredient.itemCost" class="ing-cost">{{nIngredient.itemCost}}</p>
                   </td>
-                  <td><select class="category-input2" placeholder="Category" v-model="nIngredient.category" required>
-                      <option disabled value="">Category</option>
-                      <option value="bakery">Bakery</option>
-                      <option value="dairy">Dairy</option>
-                      <option value="frozen">Frozen</option>
-                      <option value="produce">Produce</option>
-                      <option value="meat">Meat</option>
-                      <option value="storeroom">Storeroom</option>
-                    </select> </td>
+                  <td>
+                    <p v-model="nIngredient.category" class="ing-category">{{nIngredient.category}}</p>
+                  </td>
                   <td><input type="text" placeholder="Distributor" v-model="nIngredient.distributor" class="dist-input"
                       required> </td>
-                  <td><input type="text" placeholder="Product #" readonly="nIngredient.productNumber"
-                      v-model="nIngredient.productNumber" class="prod-input" required>
-                  </td>
-                  <td><input type="text" placeholder="Brand" readonly="nIngredient.brand" v-model="nIngredient.brand"
-                      class="brand-input" required> </td>
-                  <td><input type="text" placeholder="Package Size" readonly="nIngredient.packageSize"
-                      v-model="nIngredient.packageSize" class="packS-input" required> </td>
-                  <td><input type="text" placeholder="Package Cost" readonly="nIngredient.packageCost"
-                      v-model="nIngredient.packageCost" class="packC-input" required> </td>
                   <td>
-                    <button type="button" class="btn btn-danger btn-sm"
-                      @click="deleteIngredient(nIngredient)">Delete</button>
+                    <p v-if="nIngredient.productNumber" v-model="nIngredient.productNumber" class="ing-prod">
+                      {{nIngredient.productNumber}}</p>
+                    <input v-else type="text" placeholder="Product #" v-model="nIngredient.productNumber"
+                      class="prod-input" required>
+                  </td>
+                  <td>
+                    <p v-model="nIngredient.brand" class="ing-brand">{{nIngredient.brand}}</p>
+                  </td>
+                  <td>
+                    <p v-model="nIngredient.packageSize" class="ing-packS">{{nIngredient.packageSize}}</p>
+                  </td>
+                  <td>
+                    <p v-model="nIngredient.packageCost" class="ing-packC">{{nIngredient.packageCost}}</p>
+                  </td>
+                  <td>
+                    <img src="../assets/Trash-Can-Red-30.png" alt="Delete Ingredient" title="Delete Ingredient"
+                      @click="deleteIngredient(nIngredient)" class="del-ing-btn">
                   </td>
                 </tr>
               </tbody>
@@ -81,7 +81,6 @@
           </div>
         </div>
       </div>
-      <!-- TODO Add submit button to save(put request) ingredients into recipe -->
     </form>
   </div>
 </template>
@@ -258,65 +257,34 @@
     background-color: rgb(5, 38, 45);
   }
 
+  .del-ing-btn {
+    cursor: pointer;
+  }
+
   .ingName-input {
     text-align: center;
     max-width: 10rem;
   }
 
+  .quan-input {
+    text-align: center;
+    max-width: 3.5rem;
+  }
+
+  .unit-input {
+    text-align: center;
+    min-width: 4.5rem;
+    /* height: 2rem; */
+  }
+
   .dist-input {
     text-align: center;
-    max-width: 9rem;
+    max-width: 6rem;
+    /* max-width: fit-content; */
   }
 
   .prod-input {
     text-align: center;
     max-width: 6rem;
-  }
-
-  .category-input1 {
-    text-align: center;
-    max-width: 6rem;
-    height: 2rem;
-  }
-
-  /* .category-input2 {
-    text-align: center;
-    min-width: 8rem;
-    height: 2rem;
-  } */
-
-  .brand-input {
-    text-align: center;
-    max-width: 6rem;
-  }
-
-  .unit-input {
-    text-align: center;
-    min-width: 5rem;
-    height: 2rem;
-  }
-
-  .packS-input {
-    text-align: center;
-    max-width: 7rem;
-  }
-
-  .packC-input {
-    text-align: center;
-    max-width: 7rem;
-  }
-
-  .quan-input {
-    max-width: 3rem;
-  }
-
-  .ingC-input {
-    text-align: center;
-    max-width: 5rem;
-  }
-
-  .ingC2-input {
-    text-align: center;
-    max-width: 5rem;
   }
 </style>
