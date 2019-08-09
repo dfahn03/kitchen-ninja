@@ -221,8 +221,8 @@
         }
         let cost = this.ingredient.itemCost
         let newCost = cost * q
+        let ing = this.ingredient
         this.ingredient.itemCost = newCost.toFixed(2)
-        this.$nextTick()
       },
 
     },
@@ -240,9 +240,10 @@
       //   recipeIngredients(val) {
       //     this.$emit('passThemIngredients', val)
       //   }
-      // quantity(nv, ov) {
-      //   console.log("quantity has changed")
-      // },
+      ingredient(nv, ov) {
+        console.log("quantity has changed")
+        this.$store.dispatch("editIngredient", this.ingredient)
+      },
     }
   }
 
