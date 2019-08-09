@@ -3,23 +3,29 @@
     <form @submit.prevent="saveRecipe">
       <div class="form-row">
         <div class="col d-flex justify-content-center">
-          <input type="text" class="form-control recipeName-input" placeholder="Recipe Name" v-model="newRecipe.name"
-            required>
-          <input type="number" class="form-control portions-input ml-1" placeholder="Portions"
+          <p v-if="activeRecipe">{{activeRecipe.name}}</p>
+          <input v-else type="text" class="form-control recipeName-input" placeholder="Recipe Name"
+            v-model="newRecipe.name" required>
+          <p v-if="activeRecipe">{{activeRecipe.portions}}</p>
+          <input v-else type="number" class="form-control portions-input ml-1" placeholder="Portions"
             v-model="newRecipe.portions" min="0" required>
-          <input type="number" class="form-control portionS-input ml-1" placeholder="Portion Size"
+          <p v-if="activeRecipe">{{activeRecipe.portionSize}}</p>
+          <input v-else type="number" class="form-control portionS-input ml-1" placeholder="Portion Size"
             v-model="newRecipe.portionSize" min="0" step=".5" required>
-          <select class="form-control portionU-input ml-1" v-model="newRecipe.portionUnit" required>
+          <p v-if="activeRecipe">{{activeRecipe.portionUnit}}</p>
+          <select v-else class="form-control portionU-input ml-1" v-model="newRecipe.portionUnit" required>
             <option disabled value="">Unit</option>
             <option value="OZ">OZ</option>
             <option value="EA">EA</option>
           </select>
-          <select class="form-control side-input ml-1" v-model="newRecipe.side" required>
+          <p v-if="activeRecipe">{{activeRecipe.side}}</p>
+          <select v-else class="form-control side-input ml-1" v-model="newRecipe.side" required>
             <option disabled value="">Side</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
           </select>
-          <select class="form-control station-input ml-1" v-model="newRecipe.station" required>
+          <p v-if="activeRecipe">{{activeRecipe.station}}</p>
+          <select v-else class="form-control station-input ml-1" v-model="newRecipe.station" required>
             <option disabled value="">Choose Station</option>
             <option value="Global">Global</option>
             <option value="Grill">Grill</option>
@@ -33,9 +39,11 @@
             <option value="Pizza">Pizza</option>
             <option value="Chef's Choice">Chef's Choice</option>
           </select>
-          <input type="number" class="form-control calories-input ml-1" placeholder="Calories"
+          <p v-if="activeRecipe._id">{{activeRecipe.calories}}</p>
+          <input v-else type="number" class="form-control calories-input ml-1" placeholder="Calories"
             v-model="newRecipe.calories" min="0" required>
-          <input type="text" class="form-control allergens-input ml-1" placeholder="Allergens"
+          <p v-if="activeRecipe">{{activeRecipe.allergens}}</p>
+          <input v-else type="text" class="form-control allergens-input ml-1" placeholder="Allergens"
             v-model="newRecipe.allergens" min="0" required>
         </div>
       </div>
@@ -87,7 +95,7 @@
 
 </script>
 
-<style>
+<style scoped>
   .saveRecipe-btn {
     margin: 1rem;
     background-color: #6DC59A;
@@ -97,6 +105,11 @@
   .station-input {
     max-width: 10rem;
     text-align: center
+  }
+
+  p {
+    color: white;
+    font-size: 2rem;
   }
 
   .side-input {
