@@ -1,9 +1,15 @@
 <template>
   <div class="recipe-form col">
-    <form @submit.prevent="saveRecipe">
+
+    <div class="row" v-if="activeRecipe._id">
+      <active-recipe />
+    </div>
+
+
+    <!-- <form @submit.prevent="saveRecipe">
       <div class="form-row">
         <div class="col d-flex justify-content-center">
-          <p v-if="activeRecipe">{{activeRecipe.name}}</p>
+          <p v-if="activeRecipe._id">{{activeRecipe.name}}</p>
           <input v-else type="text" class="form-control recipeName-input" placeholder="Recipe Name"
             v-model="newRecipe.name" required>
           <p v-if="activeRecipe">{{activeRecipe.portions}}</p>
@@ -49,15 +55,15 @@
       </div>
       <button type="submit" v-if="!activeRecipe._id" class="btn saveRecipe-btn">Create
         Recipe</button>
-    </form>
+    </form> -->
   </div>
 </template>
 
 <script>
+
   export default {
     name: "RecipeForm",
     mounted() { },
-    props: [],
     data() {
       return {
         newRecipe: {
@@ -80,14 +86,8 @@
         return this.$store.state.activeRecipe
       }
     },
-
-
     methods: {
       saveRecipe() {
-        // this.$data.newRecipe.recipeIngredients.forEach(i => {
-        //   i.unit = i.unit.toUpperCase();
-        //   i.category = i.category.toLowerCase();
-        // })
         this.$store.dispatch('saveRecipe', this.newRecipe)
       }
     },
