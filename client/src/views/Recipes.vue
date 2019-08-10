@@ -62,7 +62,9 @@
 <script>
   export default {
     name: "Recipes",
-    mounted() { },
+    mounted() {
+      this.$store.dispatch('getRecipes')
+    },
     data() {
       return {
         id: '',
@@ -137,6 +139,7 @@
     }
   };
 </script>
+
 <style>
   .recipe_list {
     color: white;

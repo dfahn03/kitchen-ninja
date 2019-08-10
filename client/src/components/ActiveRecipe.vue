@@ -22,7 +22,7 @@
           <td class="col-sm-1">{{activeRecipe.side}}</td>
           <td class="col-sm-2">{{activeRecipe.station}}</td>
           <td class="col-sm-1">{{activeRecipe.calories}}</td>
-          <td class="col-sm-2" v-for="allergen in activeRecipe.allergens">{{allergen}},</td>
+          <td class="col-sm-2" v-for="allergen in activeRecipe.allergens">{{allergen}}</td>
         </tr>
       </tbody>
     </table>
