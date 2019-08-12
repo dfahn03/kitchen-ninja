@@ -2,71 +2,58 @@
   <div class="costing contianer-fluid">
 
     <!-- Converter Button -->
-    <!-- TODO link this button to the sidebar calculator -->
     <!-- <div class="row">
       <div class="col-12">
         <button type="button" class="btn btn-secondary float-right my-2" @click="">Converter</button>
+        TODO link this button to the sidebar calculator
       </div>
     </div> -->
 
-    <!-- New Recipe Form Template -->
+    <!-- Recipe Form Templates -->
     <div class="row">
       <active-recipe v-if="activeRecipe._id" />
-      <recipe-form v-else />
+      <new-recipe-form v-else />
     </div>
-
+    <!-- Ingredient Table Template -->
     <div class="row" v-if="activeRecipe._id">
       <add-ingredients />
     </div>
-
-
-
-    <!-- New Ingredient Table -->
-    <!-- <add-form @passThemIngredients="arr => activeRecipe.recipeIngredients = arr" /> -->
-
-    <!-- New Recipe Calculations -->
-    <div class="form-row">
-      <div class="col-12">
-        <div class="row">
-          <div class="col-6 text-white text-left d-flex justify-content-center">
-            <ul>
-              <li class="">Cost Per Category:</li>
-              <li class="mt-2">Storeroom PL (${{this.storeroom}}) </li>
-              <li class="mt-2">Meat PL (${{this.meat}})</li>
-              <li class="mt-2">Dairy PL (${{this.dairy}})</li>
-              <li class="mt-2">Produce PL (${{this.produce}})</li>
-              <li class="mt-2">Bakery PL (${{this.bakery}})</li>
-              <li class="mt-2">Frozen PL (${{this.frozen}})</li>
-            </ul>
-          </div>
-          <div class="col-6 text-white d-flex justify-content-center text-left">
-            <ul>
-              <li v-model="activeRecipe.costPerRecipe">Total Cost: $ {{recipeCost}}</li>
-              <li class="mt-2">Food Cost: $ {{foodCost}} </li>
-              <li>Sales Price: $ <input type="number" placeholder="0.00" class="totalP-input ml-1 mt-2"
-                  v-model="activeRecipe.salesPrice" required>
-              </li>
-              <li class="mt-2"> Suggested Price: $ {{suggestedSalesPrice}} </li>
-              <li class="mt-2">Profit: $ {{profit}} </li>
-              <li class="mt-2">Profit Margin: $ {{profitMargin}} </li>
-              <li class="mt-2">Markup: % {{markup}} </li>
-            </ul>
-          </div>
-        </div>
+    <!-- Recipe Calculations -->
+    <div class="row">
+      <div class="col-6 text-white text-left d-flex justify-content-center">
+        <ul>
+          <li class="">Cost Per Category:</li>
+          <li class="mt-2">Storeroom PL (${{this.storeroom}}) </li>
+          <li class="mt-2">Meat PL (${{this.meat}})</li>
+          <li class="mt-2">Dairy PL (${{this.dairy}})</li>
+          <li class="mt-2">Produce PL (${{this.produce}})</li>
+          <li class="mt-2">Bakery PL (${{this.bakery}})</li>
+          <li class="mt-2">Frozen PL (${{this.frozen}})</li>
+        </ul>
+      </div>
+      <div class="col-6 text-white d-flex justify-content-center text-left">
+        <ul>
+          <li v-model="activeRecipe.costPerRecipe">Total Cost: $ {{recipeCost}}</li>
+          <li class="mt-2">Food Cost: $ {{foodCost}} </li>
+          <li>Sales Price: $ <input type="number" placeholder="0.00" class="totalP-input ml-1 mt-2"
+              v-model="activeRecipe.salesPrice" required>
+          </li>
+          <li class="mt-2"> Suggested Price: $ {{suggestedSalesPrice}} </li>
+          <li class="mt-2">Profit: $ {{profit}} </li>
+          <li class="mt-2">Profit Margin: $ {{profitMargin}} </li>
+          <li class="mt-2">Markup: % {{markup}} </li>
+        </ul>
       </div>
     </div>
-
+    <!-- Save Recipe Button -->
     <div v-if="activeRecipe._id" class="form-row d-flex justify-content-center align-content-center">
       <button @click="saveRecipe" type="button" class="btn saveRecipe-btn">Save Recipe</button>
     </div>
-    <!-- </form>
-  </div> -->
-    <!-- </div> -->
   </div>
 </template>
 
 <script>
-  import RecipeForm from '@/components/RecipeForm'
+  import NewRecipeForm from '@/components/NewRecipeForm'
   import ActiveRecipe from '@/components/ActiveRecipe'
   import AddIngredients from '@/components/AddIngredients'
 
@@ -169,7 +156,7 @@
     },
     components: {
       AddIngredients,
-      RecipeForm,
+      NewRecipeForm,
       ActiveRecipe
     }
   }

@@ -92,14 +92,12 @@
     name: "AddIngredients",
     mounted() {
       // this.$store.state.activeRecipe
-      // this.$store.state.recipeIngredients
     },
     data() {
       return {
         ingredientIndex: 0,
         ingredient: {},
         ingredients: []
-
       }
     },
     computed: {

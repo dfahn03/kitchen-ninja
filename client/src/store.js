@@ -49,6 +49,9 @@ export default new Vuex.Store({
         state.site = state.sites.memberSites.find(s => s._id == siteId) || state.sites.mySites.find(s => s._id == siteId)
       }
     },
+    setSiteSelectorStatus(state, status) {
+      state.open = status
+    },
     setUser(state, user) {
       state.user = user
     },
@@ -75,9 +78,6 @@ export default new Vuex.Store({
     },
     setBlogs(state, blogs) {
       state.blogs = blogs
-    },
-    setSiteSelectorStatus(state, status) {
-      state.open = status
     }
   },
   actions: {

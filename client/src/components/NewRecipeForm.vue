@@ -1,5 +1,5 @@
 <template>
-  <div class="recipe-form col">
+  <div class="new-recipe-form col">
 
     <form @submit.prevent="saveRecipe">
       <div class="form-row">
@@ -50,7 +50,7 @@
 <script>
 
   export default {
-    name: "RecipeForm",
+    name: "NewRecipeForm",
     mounted() { },
     data() {
       return {
