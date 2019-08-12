@@ -56,7 +56,7 @@
       </div>
     </div>
 
-    <div class="form-row d-flex justify-content-center align-content-center">
+    <div v-if="activeRecipe._id" class="form-row d-flex justify-content-center align-content-center">
       <button @click="saveRecipe" type="button" class="btn saveRecipe-btn">Save Recipe</button>
     </div>
     <!-- </form>
