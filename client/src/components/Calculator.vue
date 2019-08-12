@@ -1,6 +1,5 @@
 <template v-slot:Calculator>
   <div name='Calculator' class="card calculate d-inline-flex p-6" id="calculator">
-    <!-- <p class="text-center mb-0">Amount:</p> -->
     <input v-model.number="amount" type="number" class="rounded unit-input text-center m-1" min="0" step=".5"
       style="background-color: rgb(236, 236, 236)">
 

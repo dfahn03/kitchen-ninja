@@ -8,7 +8,7 @@
         Create New Blog
       </button>
 
-      <!-- Blog Modal -->
+      <!-- Create Blog Modal -->
       <div class="modal fade" id="blogModal" tabindex="-1" role="dialog" aria-labelledby="blogModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
