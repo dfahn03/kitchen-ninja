@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <!-- RECIPE MODAL -->
+    <!-- Recipe Details Modal -->
     <div id="recipe modal">
       <div id="my-modal" class="modal fade">
         <div class="modal-dialog" role="document">
@@ -55,7 +55,7 @@
         </div>
       </div>
     </div>
-
+    <!-- TODO Pagination for when have a lot of recipes in here -->
   </div>
 </template>
 
