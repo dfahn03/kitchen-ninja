@@ -26,7 +26,6 @@ export default new Vuex.Store({
     site: {},
     user: {},
     users: [],
-    // ingredient: {},
     masterIngredients: [],
     activeRecipe: {},
     recipes: [],
@@ -59,9 +58,6 @@ export default new Vuex.Store({
     setMasterIngredients(state, masterIngredients) {
       state.masterIngredients = masterIngredients
     },
-    // setIngredient(state, ingredient) {
-    //   state.ingredient = ingredient
-    // },
     setActiveRecipe(state, activeRecipe) {
       state.activeRecipe = activeRecipe
     },
@@ -71,9 +67,6 @@ export default new Vuex.Store({
     editActiveRecipeIngredient(state, payload) {
       state.activeRecipe.recipeIngredients[payload.i] = payload.ing
     },
-    // setEditRecipe(state, editRecipe) {
-    //   state.editRecipe = editRecipe
-    // },
     resetRecipe(state) {
       state.activeRecipe = {}
     },
@@ -151,7 +144,6 @@ export default new Vuex.Store({
         commit('setSite', siteId)
         commit('setSiteSelectorStatus', false)
         dispatch("getBlogs")
-        // NOTE Master Ingredients
         dispatch("getMasterIngredients")
         dispatch("getRecipes")
         if (router.currentRoute.path == '/login') {
@@ -257,9 +249,6 @@ export default new Vuex.Store({
         router.push({ name: 'Recipes' })
       } catch (error) { console.error(error) }
     },
-    // clearRecipe({ commit, dispatch }) {
-    //   commit('resetRecipe')
-    // },
     createActiveRecipe({ commit, dispatch }) {
       commit('resetRecipe')
       let newRecipe = {
@@ -282,19 +271,8 @@ export default new Vuex.Store({
         let res = await api.put('recipes/' + Recipe.id + SID, Recipe)
         commit('setActiveRecipe', res.data)
         router.push({ name: 'Costing' })
-        // dispatch('getIngredients')
-        // NOTE Why is this dispatch here
       } catch (error) { console.error(error) }
     },
-    // async setActiveRecipe({ commit, dispatch }, payload) {
-    //   try {
-    //     let res = await api.put('recipes/' + payload.id + SID, payload)
-    //     commit('setActiveRecipe', res.data)
-    //     // dispatch('getIngredients')
-    //     // NOTE Why is this dispatch here
-    //   } catch (error) { console.error(error) }
-    // },
-
     deleteRecipe({ commit, dispatch }, recipeId) {
       api.delete('recipes/' + recipeId + SID)
         .then(res => { dispatch('getRecipes') })
