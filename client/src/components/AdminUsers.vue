@@ -67,6 +67,7 @@
 
 <script>
   import AdminUserModal from '@/components/AdminUserModal.vue'
+
   export default {
     name: "AdminUsers",
     mounted() {

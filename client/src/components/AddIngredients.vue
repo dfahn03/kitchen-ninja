@@ -2,7 +2,7 @@
   <div class="col add-ingredients justify-content-center">
     <!-- Add Ing Button -->
     <div class="row">
-      <div class="col-lg-12 col-md-8 col-sm-6">
+      <div class="col-lg-12 col-md-8 col-sm-6 mt-3 mb-1">
         <button type="button" class="btn addIng-btn text-white my-2" @click="addIngredient">Add
           Ingredient <img src="../assets/icons8-plus-25.png" alt="Plus Icon" class="ml-1"></button>
       </div>
@@ -12,7 +12,7 @@
     <form @submit.prevent="saveIngredients">
       <div class="form-row">
         <div class="col-lg-12 col-md-8 col-sm-3">
-          <div class="table-responsive">
+          <div class="table-responsive align-items-center">
             <table class="table text-white">
               <thead>
                 <tr>
@@ -31,47 +31,58 @@
               </thead>
               <tbody v-for="nIngredient in recipeIngredients" :nIngredient="nIngredient" class="recipe-ingredient">
                 <tr>
+<<<<<<< HEAD
                   <td>
                     <auto-complete class="autocomplete" @result="setIngredient" ref="auto-complete"
                       :selected="nIngredient" :items="masterIngredients" @input="setIngredientName" id="autocomplete" />
+=======
+                  <td class="align-middle">
+                    <auto-complete @result="setIngredient" :selected="nIngredient" :items="masterIngredients"
+                      @input="setIngredientName" id="autocomplete" />
+>>>>>>> 270cf2f56fe70fc32b3d4461eb4e4387039c3122
                     <!-- v-bind:quantity.sync="nIngredient.itemName" -->
                   </td>
 
                   <!-- @oninput="quantity(this.value, nIngredient)" :selected="nIngredient" -->
                   <!-- v-bind:quantity.sync="nIngredient.quantity" -->
-                  <td><input type="number" v-model=" nIngredient.quantity" :selected="nIngredient" @input="quantity"
-                      placeholder="Quantity" min="0" step=".5" class="quan-input" required></td>
-                  <td><select class="form-control unit-input" placeholder="Unit" v-model="nIngredient.unit" required>
+                  <td class="align-middle"><input type="number" v-model=" nIngredient.quantity" :selected="nIngredient"
+                      @input="quantity" placeholder="Quantity" min="0" step=".5" class="quan-input" required></td>
+                  <td class="align-middle"><select class="form-control unit-input" placeholder="Unit"
+                      v-model="nIngredient.unit" required>
                       <option disabled value="">Unit</option>
                       <option value="OZ">OZ</option>
                       <option value="EA">EA</option>
                     </select>
                   </td>
+<<<<<<< HEAD
                   <td>
                     <p v-model="nIngredient._id" class="ing-id"></p>
+=======
+                  <td class="align-middle">
+>>>>>>> 270cf2f56fe70fc32b3d4461eb4e4387039c3122
                     <p v-model="nIngredient.itemCost" class="ing-cost">{{nIngredient.itemCost}}</p>
                   </td>
-                  <td>
+                  <td class="align-middle">
                     <p v-model="nIngredient.category" class="ing-category">{{nIngredient.category}}</p>
                   </td>
-                  <td><input type="text" placeholder="Distributor" v-model="nIngredient.distributor" class="dist-input"
-                      required> </td>
-                  <td>
+                  <td class="align-middle"><input type="text" placeholder="Distributor"
+                      v-model="nIngredient.distributor" class="dist-input" required> </td>
+                  <td class="align-middle">
                     <p v-if="nIngredient.productNumber" v-model="nIngredient.productNumber" class="ing-prod">
                       {{nIngredient.productNumber}}</p>
                     <input v-else type="text" placeholder="Product #" v-model="nIngredient.productNumber"
                       class="prod-input" required>
                   </td>
-                  <td>
+                  <td class="align-middle">
                     <p v-model="nIngredient.brand" class="ing-brand">{{nIngredient.brand}}</p>
                   </td>
-                  <td>
+                  <td class="align-middle">
                     <p v-model="nIngredient.packageSize" class="ing-packS">{{nIngredient.packageSize}}</p>
                   </td>
-                  <td>
+                  <td class="align-middle">
                     <p v-model="nIngredient.packageCost" class="ing-packC">{{nIngredient.packageCost}}</p>
                   </td>
-                  <td>
+                  <td class="align-middle">
                     <img src="../assets/Trash-Can-Red-30.png" alt="Delete Ingredient" title="Delete Ingredient"
                       @click="deleteIngredient(nIngredient)" class="del-ing-btn">
                   </td>
@@ -93,14 +104,12 @@
     name: "AddIngredients",
     mounted() {
       // this.$store.state.activeRecipe
-      // this.$store.state.recipeIngredients
     },
     data() {
       return {
         ingredientIndex: 0,
         ingredient: {},
         ingredients: []
-
       }
     },
     computed: {

@@ -1,5 +1,6 @@
 <template>
   <div class="col-12 my-2 blog-list d-flex justify-content-center align">
+    <!-- Blog Card List -->
     <div class="card" style="width: 60rem">
       <div class="row no-gutters">
         <div class="col-md-4 d-flex justify-content-center align-self-center">
@@ -28,16 +29,13 @@
             </div>
             <p class="card-text text-left blog-content">{{blogData.content}}</p>
           </div>
-
           <div class="card-footer d-flex justify-content-end mr-1">
             <small class="author-name text-right text-muted">@{{blogData.author}}</small>
           </div>
-
         </div>
       </div>
     </div>
-    <!-- TODO Put buttons in a dropdown 3 button layout in top right of the card -->
-
+    <!-- Edit Blog Modal -->
     <div class="modal fade" :id="'editBlogModal'+blogData._id" tabindex="-1" role="dialog"
       aria-labelledby="blogModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -82,9 +80,6 @@
         </div>
       </div>
     </div>
-
-
-
   </div>
 </template>
 
@@ -100,12 +95,8 @@
           content: this.blogData.content || "",
           author: this.blogData.author || "",
           id: this.blogData._id
-          //TODO Make is so the author is automatically set to user name
         }
       }
-    },
-    mounted() {
-      // this.$store.dispatch('getBlogs')
     },
     computed: {
       blogs() {
@@ -125,7 +116,6 @@
         this.$store.dispatch("deleteBlog", this.blog.id)
       }
     },
-    components: {}
   }
 </script>
 

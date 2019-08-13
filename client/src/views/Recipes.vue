@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <!-- RECIPE MODAL -->
+    <!-- Recipe Details Modal -->
     <div id="recipe modal">
       <div id="my-modal" class="modal fade">
         <div class="modal-dialog" role="document">
@@ -55,7 +55,7 @@
         </div>
       </div>
     </div>
-
+    <!-- TODO Pagination for when have a lot of recipes in here -->
   </div>
 </template>
 
@@ -90,6 +90,7 @@
         return rec
       },
       menus() {
+        //Putting Recipes into columns & stations
         let colMenus = []
         let menu = {}
         let count = 0
@@ -108,7 +109,7 @@
     },
     methods: {
       addRecipe() {
-        this.$router.push({ name: 'Costing' })
+        this.$store.dispatch('createActiveRecipe')
       },
       deleteRecipe() {
         let ActiveRecipe = this.$data
@@ -119,7 +120,6 @@
       sendRecipeToCosting() {
         let ActiveRecipe = this.$data
         this.$store.dispatch("setActiveRecipe", ActiveRecipe)
-        // this.$router.push({ name: 'EditRecipe' })
         $("#my-modal").modal("hide");
         $(".modal-backdrop").remove();
       },
