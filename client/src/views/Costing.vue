@@ -11,7 +11,7 @@
 
     <!-- Recipe Form Templates -->
     <div class="row">
-      <active-recipe v-if="activeRecipe._id" />
+      <edit-recipe-form v-if="activeRecipe._id" />
       <new-recipe-form v-else />
     </div>
     <!-- Ingredient Table Template -->
@@ -54,7 +54,7 @@
 
 <script>
   import NewRecipeForm from '@/components/NewRecipeForm'
-  import ActiveRecipe from '@/components/ActiveRecipe'
+  import EditRecipeForm from '@/components/EditRecipeForm'
   import AddIngredients from '@/components/AddIngredients'
 
   export default {
@@ -146,7 +146,6 @@
     },
     methods: {
       saveRecipe() {
-        // this.$data.activeRecipe.recipeIngredients.forEach(i => {
         this.activeRecipe.recipeIngredients.forEach(i => {
           i.unit = i.unit.toUpperCase();
           i.category = i.category.toLowerCase();
@@ -157,7 +156,7 @@
     components: {
       AddIngredients,
       NewRecipeForm,
-      ActiveRecipe
+      EditRecipeForm
     }
   }
 

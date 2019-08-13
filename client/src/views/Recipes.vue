@@ -109,7 +109,7 @@
     },
     methods: {
       addRecipe() {
-        this.$router.push({ name: 'Costing' })
+        this.$store.dispatch('createActiveRecipe')
       },
       deleteRecipe() {
         let ActiveRecipe = this.$data

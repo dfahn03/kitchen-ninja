@@ -265,6 +265,9 @@ export default new Vuex.Store({
         salesPrice: ""
       }
       commit('setActiveRecipe', newRecipe)
+      if (router.currentRoute.path == '/recipes') {
+        router.push({ name: "Costing" })
+      }
     },
     async setActiveRecipe({ commit, dispatch }, Recipe) {
       try {
