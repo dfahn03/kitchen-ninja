@@ -48,6 +48,8 @@
                       <option value="EA">EA</option>
                     </select>
                   </td>
+                  <!-- <p v-model="nIngredient._id" class="ing-id"></p> -->
+
                   <td class="align-middle">
                     <p v-model="nIngredient.itemCost" class="ing-cost">{{nIngredient.itemCost}}</p>
                   </td>
@@ -214,14 +216,33 @@
         return 0
       },
       quantity(val) {
-        let q = this.ingredient.quantity
-        if (val.data) {
-          q = parseFloat(val.data)
-        }
-        let cost = this.ingredient.itemCost
-        let newCost = cost * q
-        let ing = this.ingredient
-        this.ingredient.itemCost = newCost.toFixed(2)
+        var x = document.getElementById("autocomplete").value
+        // var x = document.getElementsByClassName("recipe-ingredient")[0].nIngredient;
+        console.log(x)
+        // document.getElementById("autocomplete").accessKey = "nIngredient._id"
+
+        // var child = parent.$refs.profile
+        // let rec = this.recipeIngredients.find(r => r.name == req.body.itemName)
+        // if (!rec) {
+        //   rec = this.recipeIngredients[this.recipeIngredients.length - 1]
+        // }
+        // this.ingredientIndex = this.recipeIngredients.indexOf(rec)
+        // let q = rec.quantity
+        // if (val.data) {
+        //   q = parseFloat(val.data)
+        // }
+        // let cost = rec.itemCost
+        // let newCost = cost * q
+        // let ing = rec
+        // rec.itemCost = newCost.toFixed(2)
+        // let q = this.ingredient.quantity
+        // if (val.data) {
+        //   q = parseFloat(val.data)
+        // }
+        // let cost = this.ingredient.itemCost
+        // let newCost = cost * q
+        // let ing = this.ingredient
+        // this.ingredient.itemCost = newCost.toFixed(2)
       },
 
     },
