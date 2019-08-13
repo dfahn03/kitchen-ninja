@@ -294,7 +294,7 @@ export default new Vuex.Store({
     },
     editIngredient({ commit, dispatch }, payload) {
       commit('editActiveRecipeIngredient', payload)
-    }
+    },
     //#endregion
   }
 })

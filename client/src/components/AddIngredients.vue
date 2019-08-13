@@ -11,9 +11,9 @@
     <!-- Ingredient Form -->
     <form @submit.prevent="saveIngredients">
       <div class="form-row">
-        <div class="col-lg-12 col-md-8 col-sm-3">
-          <div class="table-responsive align-items-center">
-            <table class="table text-white">
+        <div class="col-lg-12 col-md-8 col-sm-3 d-flex justify-content-center">
+          <div class="table-responsive">
+            <table class="table table-sm text-white">
               <thead>
                 <tr>
                   <th scope="col">Ingredient Name</th>
@@ -41,7 +41,7 @@
                   <!-- v-bind:quantity.sync="nIngredient.quantity" -->
                   <td class="align-middle"><input type="number" v-model=" nIngredient.quantity" :selected="nIngredient"
                       @input="quantity" placeholder="Quantity" min="0" step=".5" class="quan-input" required></td>
-                  <td class="align-middle"><select class="form-control unit-input" placeholder="Unit"
+                  <td class="align-middle"><select class="form-control custom-select-sm unit-input" placeholder="Unit"
                       v-model="nIngredient.unit" required>
                       <option disabled value="">Unit</option>
                       <option value="OZ">OZ</option>
@@ -51,27 +51,27 @@
                   <!-- <p v-model="nIngredient._id" class="ing-id"></p> -->
 
                   <td class="align-middle">
-                    <p v-model="nIngredient.itemCost" class="ing-cost">{{nIngredient.itemCost}}</p>
+                    <p v-model="nIngredient.itemCost" class="mt-3">{{nIngredient.itemCost}}</p>
                   </td>
                   <td class="align-middle">
-                    <p v-model="nIngredient.category" class="ing-category">{{nIngredient.category}}</p>
+                    <p v-model="nIngredient.category" class="mt-3">{{nIngredient.category}}</p>
                   </td>
                   <td class="align-middle"><input type="text" placeholder="Distributor"
                       v-model="nIngredient.distributor" class="dist-input" required> </td>
                   <td class="align-middle">
-                    <p v-if="nIngredient.productNumber" v-model="nIngredient.productNumber" class="ing-prod">
+                    <p v-if="nIngredient.productNumber" v-model="nIngredient.productNumber" class="mt-3">
                       {{nIngredient.productNumber}}</p>
                     <input v-else type="text" placeholder="Product #" v-model="nIngredient.productNumber"
                       class="prod-input" required>
                   </td>
                   <td class="align-middle">
-                    <p v-model="nIngredient.brand" class="ing-brand">{{nIngredient.brand}}</p>
+                    <p v-model="nIngredient.brand" class="mt-3">{{nIngredient.brand}}</p>
                   </td>
                   <td class="align-middle">
-                    <p v-model="nIngredient.packageSize" class="ing-packS">{{nIngredient.packageSize}}</p>
+                    <p v-model="nIngredient.packageSize" class="mt-3">{{nIngredient.packageSize}}</p>
                   </td>
                   <td class="align-middle">
-                    <p v-model="nIngredient.packageCost" class="ing-packC">{{nIngredient.packageCost}}</p>
+                    <p v-model="nIngredient.packageCost" class="mt-3">{{nIngredient.packageCost}}</p>
                   </td>
                   <td class="align-middle">
                     <img src="../assets/Trash-Can-Red-30.png" alt="Delete Ingredient" title="Delete Ingredient"
@@ -94,7 +94,7 @@
   export default {
     name: "AddIngredients",
     mounted() {
-      // this.$store.state.activeRecipe
+      // this.$store.state.activeRecipe.recipeIngredients
     },
     data() {
       return {
@@ -274,6 +274,11 @@
     border: 1px solid;
   }
 
+  /* .table>tbody>tr>td {
+    text-align: center;
+    vertical-align: middle;
+  } */
+
   .addIng-btn {
     background-color: rgb(5, 38, 45);
   }
@@ -296,6 +301,11 @@
     text-align: center;
     min-width: 4.5rem;
     /* height: 2rem; */
+  }
+
+  .ing-cost {
+    text-align: center;
+    align-self: center;
   }
 
   .dist-input {
