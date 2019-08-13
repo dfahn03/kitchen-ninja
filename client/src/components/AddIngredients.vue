@@ -31,15 +31,9 @@
               </thead>
               <tbody v-for="nIngredient in recipeIngredients" :nIngredient="nIngredient" class="recipe-ingredient">
                 <tr>
-<<<<<<< HEAD
-                  <td>
-                    <auto-complete class="autocomplete" @result="setIngredient" ref="auto-complete"
-                      :selected="nIngredient" :items="masterIngredients" @input="setIngredientName" id="autocomplete" />
-=======
                   <td class="align-middle">
                     <auto-complete @result="setIngredient" :selected="nIngredient" :items="masterIngredients"
                       @input="setIngredientName" id="autocomplete" />
->>>>>>> 270cf2f56fe70fc32b3d4461eb4e4387039c3122
                     <!-- v-bind:quantity.sync="nIngredient.itemName" -->
                   </td>
 
@@ -54,12 +48,9 @@
                       <option value="EA">EA</option>
                     </select>
                   </td>
-<<<<<<< HEAD
-                  <td>
-                    <p v-model="nIngredient._id" class="ing-id"></p>
-=======
+                  <!-- <p v-model="nIngredient._id" class="ing-id"></p> -->
+
                   <td class="align-middle">
->>>>>>> 270cf2f56fe70fc32b3d4461eb4e4387039c3122
                     <p v-model="nIngredient.itemCost" class="ing-cost">{{nIngredient.itemCost}}</p>
                   </td>
                   <td class="align-middle">
