@@ -150,7 +150,9 @@
           i.unit = i.unit.toUpperCase();
           i.category = i.category.toLowerCase();
         })
-        this.$store.dispatch('editRecipe', this.activeRecipe)
+        if (this.activeRecipe.recipeIngredients.length > 0) {
+          this.$store.dispatch('editRecipe', this.activeRecipe)
+        } else { this.$store.dispatch('editRecipeInCosting', this.activeRecipe) }
       }
     },
     components: {

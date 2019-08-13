@@ -1,5 +1,5 @@
 <template>
-  <div class="new-recipe-form col">
+  <div class="new-recipe-form col mt-2">
 
     <form @submit.prevent="saveRecipe">
       <div class="form-row">
@@ -40,7 +40,7 @@
             v-model="newRecipe.allergens" min="0" required>
         </div>
       </div>
-      <button type="submit" v-if="!activeRecipe._id" class="btn saveRecipe-btn">Create
+      <button type="submit" class="btn saveRecipe-btn">Create
         Recipe</button>
     </form>
 

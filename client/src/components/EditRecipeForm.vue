@@ -1,5 +1,5 @@
 <template>
-  <div class="edit-recipe-form col">
+  <div class="edit-recipe-form col mt-2">
 
     <form @submit.prevent="saveRecipe">
       <div class="form-row">
@@ -49,7 +49,6 @@
 
   export default {
     name: "EditRecipeForm",
-    mounted() { },
     data() {
       return {
         activeRecipe: {
@@ -71,11 +70,6 @@
     computed: {
       activeRecipe() {
         return this.$store.state.activeRecipe
-      }
-    },
-    methods: {
-      saveRecipe() {
-        this.$store.dispatch('editRecipe', this.activeRecipe)
       }
     },
   }

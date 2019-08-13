@@ -244,9 +244,15 @@ export default new Vuex.Store({
     },
     async editRecipe({ commit, dispatch }, payload) {
       try {
-        let res = await api.put('recipes/' + payload._id + SID, payload)
+        await api.put('recipes/' + payload._id + SID, payload)
         commit("resetRecipe")
         router.push({ name: 'Recipes' })
+      } catch (error) { console.error(error) }
+    },
+    async editRecipeInCosting({ commit, dispatch }, payload) {
+      try {
+        await api.put('recipes/' + payload._id + SID, payload)
+        commit('setActiveRecipe', payload)
       } catch (error) { console.error(error) }
     },
     createActiveRecipe({ commit, dispatch }) {
