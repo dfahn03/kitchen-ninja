@@ -32,7 +32,7 @@ server.use(bp.urlencoded({
 
 //REGISTER YOUR SESSION, OTHERWISE YOU WILL NEVER GET LOGGED IN
 import Session from "./middlewear/session"
-import AuthController from './controllers/AuthController'
+import AuthController from './Controllers/AuthController'
 
 server.use(new Session().express)
 server.use('/auth', new AuthController().router)
