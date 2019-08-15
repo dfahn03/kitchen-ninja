@@ -20,28 +20,52 @@
     </div>
     <!-- Recipe Calculations -->
     <div class="row">
-      <div class="col-6 text-white text-left d-flex justify-content-center">
+      <div class="col-3 text-white text-left d-flex justify-content-center">
         <ul>
           <li class="">Cost Per Category:</li>
-          <li class="mt-2">Storeroom PL (${{this.storeroom}}) </li>
-          <li class="mt-2">Meat PL (${{this.meat}})</li>
-          <li class="mt-2">Dairy PL (${{this.dairy}})</li>
-          <li class="mt-2">Produce PL (${{this.produce}})</li>
-          <li class="mt-2">Bakery PL (${{this.bakery}})</li>
-          <li class="mt-2">Frozen PL (${{this.frozen}})</li>
+          <li class="mt-2">Storeroom PL </li>
+          <li class="mt-2">Meat PL </li>
+          <li class="mt-2">Dairy PL </li>
+          <li class="mt-2">Produce PL </li>
+          <li class="mt-2">Bakery PL </li>
+          <li class="mt-2">Frozen PL </li>
         </ul>
       </div>
-      <div class="col-6 text-white d-flex justify-content-center text-left">
+      <div class="col-3 text-white text-left d-flex justify-content-center">
         <ul>
-          <li v-model="activeRecipe.costPerRecipe">Total Cost: $ {{recipeCost}}</li>
-          <li class="mt-2">Food Cost: $ {{foodCost}} </li>
-          <li>Sales Price: $ <input type="number" placeholder="0.00" class="totalP-input ml-1 mt-2"
-              v-model="activeRecipe.salesPrice" required>
+          <li class="">Price:</li>
+          <li class="mt-2">${{this.storeroom}}</li>
+          <li class="mt-2">${{this.meat}}</li>
+          <li class="mt-2">${{this.dairy}}</li>
+          <li class="mt-2">${{this.produce}}</li>
+          <li class="mt-2">${{this.bakery}}</li>
+          <li class="mt-2">${{this.frozen}}</li>
+        </ul>
+      </div>
+      <div class="col-3 text-white d-flex justify-content-center text-left">
+        <ul>
+          <li v-model="activeRecipe.costPerRecipe">Total Cost:</li>
+          <li class="mt-2">Food Cost:</li>
+          <li>Sales Price:
           </li>
-          <li class="mt-2"> Suggested Price: $ {{suggestedSalesPrice}} </li>
-          <li class="mt-2">Profit: $ {{profit}} </li>
-          <li class="mt-2">Profit Margin: $ {{profitMargin}} </li>
-          <li class="mt-2">Markup: % {{markup}} </li>
+          <li class="mt-2">Gross Margin: </li>
+          <li class="mt-2"> Suggested Price: 40%</li>
+          <li class="mt-2"> Suggested Price: 45%</li>
+          <li class="mt-2"> Suggested Price: 50%</li>
+        </ul>
+      </div>
+      <div class="col-3 text-white d-flex justify-content-center text-left">
+        <ul>
+          <li v-model="activeRecipe.costPerRecipe">{{recipeCost}}</li>
+          <li class="mt-2">{{foodCost}} </li>
+          <li>$ <input type="number" placeholder="0.00" class="totalP-input ml-1 mt-2" v-model="activeRecipe.salesPrice"
+              required>
+          </li>
+          <li class="mt-2">$ {{profit}} </li>
+          <li class="mt-2">$ {{suggestedSalesPrice1}} </li>
+          <li class="mt-2">$ {{suggestedSalesPrice2}} </li>
+          <li class="mt-2">$ {{suggestedSalesPrice3}} </li>
+
         </ul>
       </div>
     </div>
@@ -138,9 +162,19 @@
           return ((this.profit / this.foodCost) * 100).toFixed(0)
         }
       },
-      suggestedSalesPrice() {
-        if (this.profitMargin >= .04) {
-          return (this.foodCost * 1.04).toFixed(2)
+      suggestedSalesPrice1() {
+        if (this.profitMargin) {
+          return (this.foodCost * 1.4).toFixed(2)
+        }
+      },
+      suggestedSalesPrice2() {
+        if (this.profitMargin) {
+          return (this.foodCost * 1.45).toFixed(2)
+        }
+      },
+      suggestedSalesPrice3() {
+        if (this.profitMargin) {
+          return (this.foodCost * 1.5).toFixed(2)
         }
       }
     },
