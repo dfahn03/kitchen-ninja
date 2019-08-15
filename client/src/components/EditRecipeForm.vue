@@ -4,23 +4,23 @@
     <form @submit.prevent="saveRecipe">
       <div class="form-row">
         <div class="col d-flex justify-content-center">
-          <input type="text" class="form-control recipeName-input" placeholder="Recipe Name" v-model="activeRecipe.name"
-            required>
-          <input type="number" class="form-control portions-input ml-1" placeholder="Portions"
+          <input type="text" class="form-control-sm recipeName-input" placeholder="Recipe Name"
+            v-model="activeRecipe.name" required>
+          <input type="number" class="form-control-sm portions-input ml-1" placeholder="Portions"
             v-model="activeRecipe.portions" min="0" required>
-          <input type="number" class="form-control portionS-input ml-1" placeholder="Portion Size"
+          <input type="number" class="form-control-sm portionS-input ml-1" placeholder="Portion Size"
             v-model="activeRecipe.portionSize" min="0" step=".5" required>
-          <select class="form-control portionU-input ml-1" v-model="activeRecipe.portionUnit" required>
+          <select class="form-control custom-select-sm portionU-input ml-1" v-model="activeRecipe.portionUnit" required>
             <option disabled value="">Unit</option>
             <option value="OZ">OZ</option>
             <option value="EA">EA</option>
           </select>
-          <select class="form-control side-input ml-1" v-model="activeRecipe.side" required>
+          <select class="form-control custom-select-sm side-input ml-1" v-model="activeRecipe.side" required>
             <option disabled value="">Side</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
           </select>
-          <select class="form-control station-input ml-1" v-model="activeRecipe.station" required>
+          <select class="form-control custom-select-sm station-input ml-1" v-model="activeRecipe.station" required>
             <option disabled value="">Choose Station</option>
             <option value="Global">Global</option>
             <option value="Grill">Grill</option>
@@ -34,9 +34,9 @@
             <option value="Pizza">Pizza</option>
             <option value="Chef's Choice">Chef's Choice</option>
           </select>
-          <input type="number" class="form-control calories-input ml-1" placeholder="Calories"
+          <input type="number" class="form-control-sm calories-input ml-1" placeholder="Calories"
             v-model="activeRecipe.calories" min="0" required>
-          <input type="text" class="form-control allergens-input ml-1" placeholder="Allergens"
+          <input type="text" class="form-control-sm allergens-input ml-1" placeholder="Allergens"
             v-model="activeRecipe.allergens" min="0" required>
         </div>
       </div>
