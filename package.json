@@ -1,13 +1,14 @@
 {
-  "name": "server",
+  "name": "kitchen-ninja",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+    "debug": "node index.js",
     "start": "node index.js",
-    "dev": "npm --prefix ./server run start"
+    "dev": "node index.js"
   },
-  "author": "Dallin Fahnestock, Bryce Edmonds, Crystal Gallivan, ",
+  "author": "Dallin Fahnestock, Bryce Edmonds, Crystal Gallivan",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
