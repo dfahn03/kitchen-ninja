@@ -1,4 +1,4 @@
-import MenuService from '../services/MenuService'
+import MenuService from '../../tmp/MenuService'
 import express from 'express'
 import { Authorize } from '../middlewear/authorize'
 

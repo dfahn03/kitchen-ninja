@@ -1,4 +1,4 @@
-import InventoryService from '../Services/InventoryService'
+import InventoryService from '../../tmp/InventoryService'
 import express from 'express'
 import { Authorize } from '../middlewear/authorize'
 
