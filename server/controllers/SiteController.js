@@ -1,4 +1,4 @@
-import SiteService from '../../tmp/SiteService'
+import SiteService from '../services/SiteService'
 import express from 'express'
 import { Authorize } from '../middlewear/authorize'
 import mongodb from 'mongodb'

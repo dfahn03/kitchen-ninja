@@ -1,4 +1,4 @@
-import DashboardService from '../../tmp/DashboardService'
+import DashboardService from '../services/DashboardService'
 import express from 'express'
 import mongodb from 'mongodb'
 import { Authorize } from '../middlewear/authorize'

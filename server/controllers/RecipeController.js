@@ -1,4 +1,4 @@
-import RecipeService from '../../tmp/RecipeService'
+import RecipeService from '../services/RecipeService'
 import express from 'express'
 import mongodb from 'mongodb'
 import { Authorize } from '../middlewear/authorize'

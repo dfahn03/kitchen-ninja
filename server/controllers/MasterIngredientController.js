@@ -1,4 +1,4 @@
-import MasterIngredientService from '../../tmp/MasterIngredientService'
+import MasterIngredientService from '../services/MasterIngredientService'
 import express from 'express'
 import { Authorize } from '../middlewear/authorize'
 

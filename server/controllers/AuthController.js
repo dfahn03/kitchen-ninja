@@ -1,6 +1,6 @@
 import express from 'express'
-import UserService from '../../tmp/UserService';
-import SiteService from '../../tmp/SiteService'
+import UserService from '../services/UserService';
+import SiteService from '../services/SiteService'
 import { Authorize } from '../middlewear/authorize'
 
 let _us = new UserService()
