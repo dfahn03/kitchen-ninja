@@ -216,9 +216,9 @@
         return 0
       },
       quantity(val) {
-        var x = document.getElementById("autocomplete").value
+        // var x = document.getElementById("autocomplete").value
         // var x = document.getElementsByClassName("recipe-ingredient")[0].nIngredient;
-        console.log(x)
+        // console.log(x)
         // document.getElementById("autocomplete").accessKey = "nIngredient._id"
 
         // var child = parent.$refs.profile
@@ -235,14 +235,14 @@
         // let newCost = cost * q
         // let ing = rec
         // rec.itemCost = newCost.toFixed(2)
-        // let q = this.ingredient.quantity
-        // if (val.data) {
-        //   q = parseFloat(val.data)
-        // }
-        // let cost = this.ingredient.itemCost
-        // let newCost = cost * q
-        // let ing = this.ingredient
-        // this.ingredient.itemCost = newCost.toFixed(2)
+        let q = this.ingredient.quantity
+        if (val.data) {
+          q = parseFloat(val.data)
+        }
+        let cost = this.ingredient.itemCost
+        let newCost = cost * q
+        let ing = this.ingredient
+        this.ingredient.itemCost = newCost.toFixed(2)
       },
 
     },
