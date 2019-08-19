@@ -1,9 +1,12 @@
 import express from 'express'
 import cors from 'cors'
 import bp from 'body-parser'
+import DbContext from './db/dbconfig'
 
-const server = express()
-
+//CREATES SERVER
+let server = express()
+//FIRES UP DB CONNECTION
+DbContext.connect()
 
 //Sets the port to Heroku's, and the files to the built project 
 var port = process.env.PORT || 3000
