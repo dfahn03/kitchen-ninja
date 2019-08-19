@@ -7,12 +7,13 @@
         <li class="d-flex justify-content:flex-start;"><a href="#sidebar-wrapper" role="button" aria-expanded="false"
             class="btn btn-outline-secondary" data-toggle="#wrapper #page-content-wrapper"
             aria-controls="wrapper page-content-wrapper" id="menu-toggle"><img
-              src="../src/assets/iconFinalLeaf.png"></a></li>
-        <router-link to='/dashboard'><img src="../src/assets/finalLogo2.png" class></router-link>
+              src="../src/assets/ninja-head-35.png"></a></li>
+        <router-link to='/dashboard'><img src="../src/assets/kitchen-ninja.png" style="height: 4.5rem">
+        </router-link>
         <div v-if="user._id" class="dropdown dropleft">
           <button class="btn btn-outline-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <img src="../src/assets/icons8-user-menu-male-35.png" alt="" srcset="">
+            <img src="../src/assets/icons8-user-menu-male-35.png" style="height: 2%;" alt="" srcset="">
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
             <a @click='logout' class="dropdown-item" href="#">Logout</a>
@@ -156,7 +157,6 @@
     border: 5px #42b98385;
     color: rgb(5, 38, 45);
     top: 0;
-
   }
 
   /* wrapper */
