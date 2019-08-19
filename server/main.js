@@ -30,7 +30,7 @@ server.use(bp.urlencoded({
   extended: true
 }))
 
-//REGISTER YOUR SESSION, OTHERWISE YOU WILL NEVER GET LOGGED IN
+//REGISTERING SESSION, OTHERWISE NO ONE WILL EVER GET LOGGED IN
 import Session from "./middlewear/session"
 import AuthController from './controllers/AuthController'
 

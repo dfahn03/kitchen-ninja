@@ -112,7 +112,6 @@
         this.$store.dispatch('selectAdminUser', this.newSite)
       },
       editUser(siteUser) {
-        debugger
         this.$store.dispatch("editUser", siteUser)
       }
     },
