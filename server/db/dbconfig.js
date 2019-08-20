@@ -16,7 +16,7 @@ export default class DbContext {
   static async connect() {
     try {
       let status = await mongoose.connect(connectionString)
-      console.log("CONNECTED")
+      console.log("Connected")
       return status
     } catch (e) {
       console.error(e)
