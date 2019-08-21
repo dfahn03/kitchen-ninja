@@ -1,5 +1,5 @@
 //THIS FILE STAYS BASICALLY THE SAME
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
