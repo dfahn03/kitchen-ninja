@@ -49,6 +49,10 @@
 
   export default {
     name: "EditRecipeForm",
+    mounted() {
+      this.$store.dispatch('getRecipes', this.activeRecipe._id)
+      //TODO  ingredients persist on reload
+    },
     data() {
       return {}
     },

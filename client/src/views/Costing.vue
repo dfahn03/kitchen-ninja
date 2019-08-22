@@ -1,14 +1,6 @@
 <template>
   <div class="costing contianer-fluid">
 
-    <!-- Converter Button -->
-    <!-- <div class="row">
-      <div class="col-12">
-        <button type="button" class="btn btn-secondary float-right my-2" @click="">Converter</button>
-        TODO link this button to the sidebar calculator
-      </div>
-    </div> -->
-
     <!-- Recipe Form Templates -->
     <div class="row">
       <edit-recipe-form v-if="activeRecipe._id" />
@@ -84,7 +76,8 @@
   export default {
     name: "Costing",
     mounted() {
-      //TODO  ingredients persist on reload 
+      this.$store.state.activeRecipe
+      //TODO  ingredients persist on reload
     },
     data() {
       return {
@@ -98,19 +91,19 @@
     },
     watch: {
       itemCost(nv, ov) {
-        console.log("itemCost has changed")
+        // console.log("itemCost has changed")
       },
       recipeCost(nv, ov) {
-        console.log("recipeCost has changed")
+        // console.log("recipeCost has changed")
       },
       foodCost(nv, ov) {
-        console.log("foodCost has changed")
+        // console.log("foodCost has changed")
       },
       profit(nv, ov) {
-        console.log("profit has changed")
+        // console.log("profit has changed")
       },
       profitMargin(nv, ov) {
-        console.log("profitMargin has changed")
+        // console.log("profitMargin has changed")
       },
       // activeRecipe(nv, ov) {
       //   console.log("active recipe has changed")
