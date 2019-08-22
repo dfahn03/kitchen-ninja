@@ -48,7 +48,6 @@
                       <option value="EA">EA</option>
                     </select>
                   </td>
-                  <!-- <p v-model="nIngredient._id" class="ing-id"></p> -->
 
                   <td class="align-middle">
                     <p v-model="nIngredient.itemCost" class="mt-3">{{nIngredient.itemCost}}</p>
@@ -94,7 +93,7 @@
   export default {
     name: "AddIngredients",
     mounted() {
-      // this.$store.state.activeRecipe.recipeIngredients
+      this.$store.state.activeRecipe.recipeIngredients
     },
     data() {
       return {
@@ -110,10 +109,6 @@
       masterIngredients() {
         return this.$store.state.masterIngredients
       },
-      // ingredient() {
-      //   return this.$store.state.activeRecipe.recipeIngredients[this.i]
-      // },
-
     },
     methods: {
       addIngredient() {
@@ -251,7 +246,6 @@
     },
     watch: {
       recipeIngredients(nv, ov) {
-        console.log("recipeIngredients updated")
         this.calculateCost()
       },
       // newIngredients(nv, ov) {
@@ -261,7 +255,6 @@
       //     this.$emit('passThemIngredients', val)
       //   }
       ingredient(nv, ov) {
-        console.log("quantity has changed")
         this.$store.dispatch("editIngredient", this.ingredient)
       },
     }
