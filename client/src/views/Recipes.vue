@@ -63,7 +63,7 @@
   export default {
     name: "Recipes",
     mounted() {
-      this.$store.dispatch('getRecipes')
+      // this.$store.dispatch('getRecipes')
     },
     data() {
       return {

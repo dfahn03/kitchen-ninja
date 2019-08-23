@@ -125,15 +125,14 @@ export default new Vuex.Store({
       try {
         let res = await api.get('sites/' + userId)
         commit('setSites', res.data)
-
-      } catch (error) { console.error(error) }
+      } catch (err) { console.error(err) }
     },
     async getAllSites({ commit, dispatch }) {
       try {
         let res = await api.get('sites')
         console.log(res)
         commit('setSites', res.data)
-      } catch (error) { console.error(error) }
+      } catch (err) { console.error(err) }
     },
     changeSite({ commit, dispatch }) {
       commit('setSiteSelectorStatus', true)
@@ -149,7 +148,7 @@ export default new Vuex.Store({
         if (router.currentRoute.path == '/login') {
           router.push({ name: 'dashboard' })
         }
-      } catch (error) { console.error(error) }
+      } catch (err) { console.error(err) }
     },
     loadLastSite({ dispatch, commit }) {
       let siteId = localStorage.getItem("KM__lastsite")
@@ -160,7 +159,7 @@ export default new Vuex.Store({
     async selectAdminSite({ commit, dispatch }, siteId) {
       try {
         commit('setSite', siteId)
-      } catch (error) { console.error(error) }
+      } catch (err) { console.error(err) }
     },
     //#endregion
 
@@ -169,7 +168,7 @@ export default new Vuex.Store({
       try {
         commit('setSite', siteId._id)
         dispatch('getAllUsersBySite', siteId._id)
-      } catch (error) { console.error(error) }
+      } catch (err) { console.error(err) }
     },
     deleteUser({ commit, dispatch }, userId) {
       api.delete('auth/' + SID + userId)
@@ -182,14 +181,14 @@ export default new Vuex.Store({
         await api.put('auth/' + SID + payload._id, payload)
         commit('setUser', payload.data)
         dispatch('getSiteUsers')
-      } catch (error) { console.error(error) }
+      } catch (err) { console.error(err) }
     },
     async getAllUsersBySite({ commit, dispatch }, siteId) {
       try {
         let res = await api.get('sites/' + siteId + '/users')
         console.log(res)
         commit('setUsers', res.data)
-      } catch (error) { console.error(error) }
+      } catch (err) { console.error(err) }
     },
     //#endregion
 
@@ -198,7 +197,7 @@ export default new Vuex.Store({
       try {
         let res = await api.get("ingredients")
         commit('setMasterIngredients', res.data)
-      } catch (error) { console.error(error) }
+      } catch (err) { console.error(err) }
     },
     //#endregion
 
@@ -207,13 +206,13 @@ export default new Vuex.Store({
       try {
         let res = await api.get('blogs' + SID)
         commit('setBlogs', res.data)
-      } catch (error) { console.error(error) }
+      } catch (err) { console.error(err) }
     },
     async createBlog({ commit, dispatch }, newBlog) {
       try {
         await api.post('blogs' + SID, newBlog)
         dispatch('getBlogs', newBlog)
-      } catch (error) { console.error(error) }
+      } catch (err) { console.error(err) }
     },
     async editBlog({ commit, dispatch }, blogData) {
       try {
@@ -232,14 +231,12 @@ export default new Vuex.Store({
       try {
         let res = await api.get('recipes' + SID)
         commit('setRecipes', res.data)
-      } catch (error) { console.error(error) }
+      } catch (err) { console.error(err) }
     },
     async saveRecipe({ commit, dispatch }, newRecipe) {
       try {
         let res = await api.post('recipes' + SID, newRecipe)
         commit('setActiveRecipe', res.data)
-        // router.push({ name: 'Recipes' })
-        // dispatch('setRecipes')
       } catch (err) { console.error(err) }
     },
     async editRecipe({ commit, dispatch }, payload) {
@@ -247,13 +244,13 @@ export default new Vuex.Store({
         await api.put('recipes/' + payload._id + SID, payload)
         commit("resetRecipe")
         router.push({ name: 'Recipes' })
-      } catch (error) { console.error(error) }
+      } catch (err) { console.error(err) }
     },
     async editRecipeInCosting({ commit, dispatch }, payload) {
       try {
         await api.put('recipes/' + payload._id + SID, payload)
         commit('setActiveRecipe', payload)
-      } catch (error) { console.error(error) }
+      } catch (err) { console.error(err) }
     },
     createActiveRecipe({ commit, dispatch }) {
       commit('resetRecipe')
@@ -277,11 +274,20 @@ export default new Vuex.Store({
     },
     async setActiveRecipe({ commit, dispatch }, Recipe) {
       try {
+        debugger
         let res = await api.put('recipes/' + Recipe.id + SID, Recipe)
+        // localStorage.setItem("KM__activeRecipe", activeRecipe)
         commit('setActiveRecipe', res.data)
         router.push({ name: 'Costing' })
-      } catch (error) { console.error(error) }
+      } catch (err) { console.error(err) }
     },
+    // loadLastRecipe({ dispatch, commit }) {
+    //   debugger
+    //   let activeRecipe = localStorage.getItem("KM__activeRecipe")
+    //   if (activeRecipe) {
+    //     dispatch('setActiveRecipe', activeRecipe)
+    //   }
+    // },
     deleteRecipe({ commit, dispatch }, recipeId) {
       api.delete('recipes/' + recipeId + SID)
         .then(res => { dispatch('getRecipes') })

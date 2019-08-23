@@ -76,11 +76,12 @@
   export default {
     name: "Costing",
     mounted() {
-      this.$store.state.activeRecipe
+      // this.$store.dispatch('loadLastRecipe')
       //TODO  ingredients persist on reload
     },
     data() {
       return {
+        recipe: "",
         storeroom: 0,
         meat: 0,
         dairy: 0,
@@ -108,6 +109,14 @@
       // activeRecipe(nv, ov) {
       //   console.log("active recipe has changed")
       //   this.activeRecipe = nv
+      // }
+      // activeRecipe(nv, ov) {
+      //   debugger
+      //   if (this.activeRecipe._id) {
+      //     this.recipe = nv
+      //   } else {
+      //     this.recipe = ov
+      //   }
       // }
     },
     computed: {
