@@ -77,6 +77,11 @@
         <button type="submit" class="btn btn-primary mb-1">Create Account</button>
         <button type="button" class="btn btn-outline-secondary ml-1 mb-1" data-toggle="modal"
           data-target="#exampleModal">Login</button>
+        <div>
+          <small>Guest/Preview Site: Email: d@d.com , Password: dallin123</small>
+
+        </div>
+
       </form>
     </div>
 
