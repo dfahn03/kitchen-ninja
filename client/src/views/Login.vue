@@ -79,7 +79,6 @@
           data-target="#exampleModal">Login</button>
         <div>
           <small>Guest/Preview Site: Email: d@d.com , Password: dallin123</small>
-
         </div>
 
       </form>
